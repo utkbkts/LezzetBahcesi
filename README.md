@@ -37,3 +37,25 @@ Lezzet Bahçesi, kullanıcıların favori yemeklerini keşfetmelerine ve sipari�
 
 ---
 
+---
+
+## ⚙️ Projeyi Çalıştırmak İçin
+1. **İlk önce repoyu kendinize çekin:**
+```bash
+git clone https://github.com/utkbkts/LezzetBahcesi.git
+```
+2.**Proje dizinine gelin ve gerekli bağımlılıkları yükleyin:**
+ ```bash
+cd LezzetBahcesi
+npm install
+```
+3.**Projeyi çalıştırın:**
+ ```bash
+npm run dev
+```
+4.**Yerel olarak derleyin:**
+ ```bash
+npm run build
+
+
+
