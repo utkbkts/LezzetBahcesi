@@ -24,7 +24,7 @@ function Orders() {
         return (
           <ul>
             {basketItems.map((item) => (
-              <li key={item._id}>{item.name}</li>
+              <li key={item._id}>{item.title}</li>
             ))}
           </ul>
         );
@@ -125,13 +125,15 @@ function Orders() {
       title: "Miktar",
       dataIndex: "basketItems",
       key: "basketItems",
-      render: (basketItems) => (
-        <ul>
-          {basketItems.map((item) => (
-            <li key={item._id}>{`${item.name}-x${item.quantity}`}</li>
-          ))}
-        </ul>
-      ),
+      render: (basketItems) => {
+        return (
+          <ul>
+            {basketItems.map((item) => (
+              <li key={item._id}>{`${item.title}-x${item.quantity}`}</li>
+            ))}
+          </ul>
+        );
+      },
     },
     {
       title: "Durum Güncelle",
