@@ -54,8 +54,35 @@ npm install
 npm run dev
 ```
 4.**Yerel olarak derleyin:**
- ```bash
+```bash
 npm run build
+```
+5.**.env**
+```bash
+JWT_SECRET=""
 
+MONGODB_URI=""
+
+PORT=5000
+
+JWT_EXPIRES_TIME=""
+COOKIE_EXPIRES_TIME=""
+FRONTEND_URL=""
+
+CLOUDINARY_CLOUD_NAME=""
+CLOUDINARY_API_KEY=""
+CLOUDINARY_API_SECRET=""
+
+
+IYZIPAY_API_KEY=""
+IYZIPAY_SECRET_KEY=""
+
+ALPHABET=""
+
+USER=""
+APP_PASSWORD=""
+SMTP_FROM_EMAIL=""
+SMTP_FROM_NAME=""
+```
 
 
