@@ -1,0 +1,70 @@
+import { z } from "zod";
+
+export const updateProfileCreate = z.object({
+  email: z.string().email().optional(),
+  name: z
+    .string()
+    .optional()
+    .refine((value) => !value || /^[a-zA-Z0-9çÇğĞüÜşŞöÖıİ_-]+$/.test(value), {
+      message:
+        "Özel karakterler kullanamazsınız (sadece harf, rakam ve alt çizgi).",
+    }),
+  lastName: z
+    .string()
+    .optional()
+    .refine((value) => !value || /^[a-zA-Z0-9çÇğĞüÜşŞöÖıİ_-]+$/.test(value), {
+      message:
+        "Özel karakterler kullanamazsınız (sadece harf, rakam ve alt çizgi).",
+    }),
+  adress: z
+    .string()
+    .optional()
+    .refine((value) => !value || /^[a-zA-Z0-9çÇğĞüÜşŞöÖıİ_-]+$/.test(value), {
+      message:
+        "Özel karakterler kullanamazsınız (sadece harf, rakam ve alt çizgi).",
+    }),
+  city: z
+    .string()
+    .optional()
+    .refine((value) => !value || /^[a-zA-Z0-9çÇğĞüÜşŞöÖıİ_-]+$/.test(value), {
+      message:
+        "Özel karakterler kullanamazsınız (sadece harf, rakam ve alt çizgi).",
+    }),
+  country: z
+    .string()
+    .optional()
+    .refine((value) => !value || /^[a-zA-Z0-9çÇğĞüÜşŞöÖıİ_-]+$/.test(value), {
+      message:
+        "Özel karakterler kullanamazsınız (sadece harf, rakam ve alt çizgi).",
+    }),
+
+  phoneNumber: z
+    .string()
+    .optional()
+    .refine((value) => !value || /^[0-9_-]+$/.test(value), {
+      message: "özel karakterler kullanamazsınız.(sadece rakam)",
+    }),
+});
+
+export const updatePassword = z.object({
+  OldPassword: z
+    .string()
+    .min(1, "zorunlu alan")
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@./$!%*?&])[A-Za-z\d@@./$!%*?&]{8,}$/,
+      {
+        message:
+          "Büyük ve küçük harf özel karakter (en az 8 karakterli olmak zorunda)",
+      }
+    ),
+  password: z
+    .string()
+    .min(1, "zorunlu alan")
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@./$!%*?&])[A-Za-z\d@@./$!%*?&]{8,}$/,
+      {
+        message:
+          "Büyük ve küçük harf özel karakter (en az 8 karakterli olmak zorunda)",
+      }
+    ),
+});
