@@ -1,8 +1,8 @@
-import catchAsyncError from "../middleware/catchAsyncError.js";
-import Product from "../models/productModel.js";
+import catchAsyncError from "../middleware/catch.middleware.js";
+import Product from "../models/product.models.js";
 import apiFilter from "../utils/apiFilters.js";
 import { delete_file, upload_file } from "../utils/cloudinary.js";
-import errorHandler from "../utils/errorHandler.js";
+import ErrorHandler from "../utils/ErrorHandler.js";
 
 const getAllProduct = catchAsyncError(async (req, res) => {
   const resPerPage = 5;
@@ -36,7 +36,7 @@ const productById = catchAsyncError(async (req, res) => {
   );
 
   if (!product) {
-    return next(new errorHandler("Product not found !", 404));
+    return next(new ErrorHandler("Product not found !", 404));
   }
   return res.status(200).json({
     product,
@@ -47,7 +47,7 @@ const getProductReview = catchAsyncError(async (req, res, next) => {
   const product = await Product.findById(req.query.id).populate("reviews.user");
 
   if (!product) {
-    return next(new errorHandler("Product not found !", 404));
+    return next(new ErrorHandler("Product not found !", 404));
   }
   return res.status(200).json({
     reviews: product.reviews,
@@ -84,7 +84,7 @@ const getProducts = catchAsyncError(async (req, res, next) => {
 const deleteProduct = catchAsyncError(async (req, res) => {
   let product = await Product.findById(req?.params?.id);
   if (!product) {
-    return next(new errorHandler("Product not found", 404));
+    return next(new ErrorHandler("Product not found", 404));
   }
 
   for (let i = 0; i < product.images.length; i++) {
@@ -110,7 +110,7 @@ const createProductReviews = catchAsyncError(async (req, res, next) => {
   const product = await Product.findById(productId);
 
   if (!product) {
-    return next(new errorHandler("Product not found !", 404));
+    return next(new ErrorHandler("Product not found !", 404));
   }
 
   const isReviewed = product?.reviews?.find(
@@ -149,7 +149,7 @@ const getReviews = catchAsyncError(async (req, res, next) => {
   );
 
   if (!products || products.length === 0) {
-    return next(new errorHandler("No products found for this user!", 404));
+    return next(new ErrorHandler("No products found for this user!", 404));
   }
 
   const productReviews = products.map((product) => ({
@@ -167,7 +167,7 @@ const deleteReviews = catchAsyncError(async (req, res, next) => {
   let product = await Product.findById(req.query.productId);
 
   if (!product) {
-    return next(new errorHandler("Product not found !", 404));
+    return next(new ErrorHandler("Product not found !", 404));
   }
 
   const reviews = product?.reviews?.filter(

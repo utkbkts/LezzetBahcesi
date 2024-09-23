@@ -1,7 +1,7 @@
-import catchAsyncError from "../middleware/catchAsyncError.js";
-import Order from "../models/Order.js";
-import Product from "../models/productModel.js";
-import errorHandler from "../utils/errorHandler.js";
+import catchAsyncError from "../middleware/catch.middleware.js";
+import Order from "../models/order.models.js";
+import Product from "../models/product.models.js";
+import ErrorHandler from "../utils/ErrorHandler.js";
 const newOrder = catchAsyncError(async (req, res, next) => {
   const {
     basketItems,
@@ -71,7 +71,7 @@ const orderDelete = catchAsyncError(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
 
   if (!order) {
-    return next(new errorHandler("No Order found with this ID", 404));
+    return next(new ErrorHandler("No Order found with this ID", 404));
   }
 
   await order.deleteOne();
@@ -84,7 +84,7 @@ const getOrderDetail = catchAsyncError(async (req, res, next) => {
   const order = await Order.findById(req.params.id).populate("user");
 
   if (!order) {
-    return next(new errorHandler("No Order found with this ID", 404));
+    return next(new ErrorHandler("No Order found with this ID", 404));
   }
 
   res.status(200).json({
@@ -98,7 +98,7 @@ const getUserOrder = catchAsyncError(async (req, res, next) => {
   const orders = await Order.find({ user: userId }).populate("user");
 
   if (!orders || orders.length === 0) {
-    return next(new errorHandler("No Orders found for this user", 404));
+    return next(new ErrorHandler("No Orders found for this user", 404));
   }
 
   res.status(200).json({
@@ -110,7 +110,7 @@ const updateOrderStatus = catchAsyncError(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
 
   if (order.orderStatus === "Teslim Edilmiştir.") {
-    return next(new errorHandler("bu ürünü zaten teslim ettiniz"));
+    return next(new ErrorHandler("bu ürünü zaten teslim ettiniz"));
   }
 
   let productNotFound = false;
@@ -126,7 +126,7 @@ const updateOrderStatus = catchAsyncError(async (req, res, next) => {
     await product.save();
   }
   if (productNotFound) {
-    return next(new errorHandler("ürün ID bulunamadı", 400));
+    return next(new ErrorHandler("ürün ID bulunamadı", 400));
   }
   order.orderStatus = req.body.status;
   if (req.body.status === "Teslim Edilmiştir.") {

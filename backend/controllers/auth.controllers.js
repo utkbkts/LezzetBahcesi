@@ -1,8 +1,8 @@
-import catchAsyncError from "../middleware/catchAsyncError.js";
-import User from "../models/user.js";
+import catchAsyncError from "../middleware/catch.middleware.js";
+import User from "../models/user.models.js";
 import { delete_file } from "../utils/cloudinary.js";
 import { getResetPasswordTemplate } from "../utils/emailTemplates.js";
-import errorHandler from "../utils/errorHandler.js";
+import ErrorHandler from "../utils/ErrorHandler.js";
 import sendEmail from "../utils/sendEmail.js";
 import sendToken from "../utils/sendToken.js";
 import crypto from "crypto";
@@ -24,15 +24,15 @@ const LoginUser = catchAsyncError(async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return next(new errorHandler("Lütfen Email veya şifrenizi giriniz", 400));
+    return next(new ErrorHandler("Lütfen Email veya şifrenizi giriniz", 400));
   }
   const user = await User.findOne({ email }).select("+password");
   if (!user) {
-    return next(new errorHandler("Invalid email or password", 401));
+    return next(new ErrorHandler("Invalid email or password", 401));
   }
   const isPasswordMatched = await user.comparePassword(password);
   if (!isPasswordMatched) {
-    return next(new errorHandler("Email veya şifre yanlış.", 401));
+    return next(new ErrorHandler("Email veya şifre yanlış.", 401));
   }
   sendToken(user, 200, res);
 });
@@ -104,7 +104,7 @@ const UpdateProfilePassword = catchAsyncError(async (req, res, next) => {
   const isPasswordMatched = await user.comparePassword(req.body.OldPassword);
 
   if (!isPasswordMatched) {
-    return next(new errorHandler("Eski parola yanlış", 400));
+    return next(new ErrorHandler("Eski parola yanlış", 400));
   }
   user.password = req.body.password;
 
@@ -116,7 +116,7 @@ const deleteUser = catchAsyncError(async (req, res, next) => {
 
   if (!user) {
     return next(
-      new errorHandler(`User not found with id:${req.params.id}`, 404)
+      new ErrorHandler(`User not found with id:${req.params.id}`, 404)
     );
   }
 
@@ -139,7 +139,7 @@ const updateUserRole = catchAsyncError(async (req, res, next) => {
 
   if (!user) {
     return next(
-      new errorHandler(`User not found with id:${req.params.id}`, 404)
+      new ErrorHandler(`User not found with id:${req.params.id}`, 404)
     );
   }
   user.role = role;
@@ -155,7 +155,7 @@ const ForgotPassword = catchAsyncError(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    return next(new errorHandler("Email kullanılmıyor", 404));
+    return next(new ErrorHandler("Email kullanılmıyor", 404));
   }
 
   const resetToken = user.getResetPasswordToken();
@@ -179,7 +179,7 @@ const ForgotPassword = catchAsyncError(async (req, res, next) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save();
-    return next(new errorHandler(error.message, 500));
+    return next(new ErrorHandler(error.message, 500));
   }
 });
 const ResetPassword = async (req, res, next) => {
@@ -195,14 +195,14 @@ const ResetPassword = async (req, res, next) => {
 
   if (!user) {
     return next(
-      new errorHandler(
+      new ErrorHandler(
         "Parola sıfırlama jetonu geçersiz veya süresi dolmuş",
         400
       )
     );
   }
   if (req.body.password !== req.body.confirmPassword) {
-    return next(new errorHandler("parolalar eşleşmiyor", 400));
+    return next(new ErrorHandler("parolalar eşleşmiyor", 400));
   }
   user.password = req.body.password;
   user.resetPasswordToken = undefined;

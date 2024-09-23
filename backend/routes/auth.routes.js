@@ -1,9 +1,9 @@
 import express from "express";
-import AuthControllers from "../controllers/AuthControllers.js";
+import AuthControllers from "../controllers/auth.controllers.js";
 import {
   authorizeRoles,
   isAuthenticatedUser,
-} from "../middleware/authenticatedUser.js";
+} from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 

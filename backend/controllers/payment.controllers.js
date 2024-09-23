@@ -1,8 +1,8 @@
 import Iyzipay from "iyzipay";
-import catchAsyncError from "../middleware/catchAsyncError.js";
-import Order from "../models/Order.js";
+import catchAsyncError from "../middleware/catch.middleware.js";
+import Order from "../models/order.models.js";
 import { customAlphabet } from "nanoid";
-import errorHandler from "../utils/errorHandler.js";
+import ErrorHandler from "../utils/ErrorHandler.js";
 import moment from "moment";
 const iyzico = new Iyzipay({
   apiKey: process.env.IYZIPAY_API_KEY,
@@ -102,7 +102,7 @@ const paymentCreate = catchAsyncError(async (req, res, next) => {
 
   iyzico.threedsInitialize.create(request, (err, result) => {
     if (err) {
-      return next(new errorHandler("Ödeme işlemi başarısız", 404));
+      return next(new ErrorHandler("Ödeme işlemi başarısız", 404));
     } else {
       return res.status(200).json({
         result,

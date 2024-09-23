@@ -2,12 +2,13 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import helmet from "helmet";
 import cookieParser from "cookie-parser";
-import AuthRouters from "./routes/authRouter.js";
-import ProductRouters from "./routes/productRouters.js";
-import OrderRouters from "./routes/orderRouter.js";
-import PaymentRouters from "./routes/paymentRouter.js";
-import errorMiddleware from "./middleware/errorMiddleware.js";
+import AuthRouters from "./routes/auth.routes.js";
+import ProductRouters from "./routes/product.routes.js";
+import OrderRouters from "./routes/order.routes.js";
+import PaymentRouters from "./routes/payment.routes.js";
+import errorMiddleware from "./middleware/error.middleware.js";
 import path from "path";
 const app = express();
 app.use(cookieParser());
@@ -19,6 +20,7 @@ app.use(
   })
 );
 const __dirname = path.resolve();
+app.use(helmet());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use("/api", AuthRouters);

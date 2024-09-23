@@ -1,9 +1,6 @@
 import express from "express";
-import {
-  authorizeRoles,
-  isAuthenticatedUser,
-} from "../middleware/authenticatedUser.js";
-import PaymentControllers from "../controllers/PaymentControllers.js";
+import { isAuthenticatedUser } from "../middleware/auth.middleware.js";
+import PaymentControllers from "../controllers/payment.controllers.js";
 
 const router = express.Router();
 

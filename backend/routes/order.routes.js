@@ -1,9 +1,9 @@
 import express from "express";
-import OrderControllers from "../controllers/OrderControllers.js";
+import OrderControllers from "../controllers/order.controllers.js";
 import {
   authorizeRoles,
   isAuthenticatedUser,
-} from "../middleware/authenticatedUser.js";
+} from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
