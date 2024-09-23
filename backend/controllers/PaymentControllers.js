@@ -87,7 +87,6 @@ const paymentCreate = catchAsyncError(async (req, res, next) => {
       itemType: Iyzipay.BASKET_ITEM_TYPE.PHYSICAL,
     })),
   };
-
   const orderData = {
     shippingAddress,
     basketItems,

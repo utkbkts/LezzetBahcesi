@@ -50,8 +50,9 @@ const orderSchema = new mongoose.Schema(
           required: false,
         },
         product: {
-          name: String,
-          price: Number,
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          ref: "Product",
         },
         drinks: {
           names: String,
@@ -70,7 +71,7 @@ const orderSchema = new mongoose.Schema(
     orderStatus: {
       type: String,
       enum: {
-        values: ["Hazırlanıyor", "Gönderildi", "Teslim Edildi"],
+        values: ["Hazırlanıyor", "Kuryemiz Yolda", "Teslim Edilmiştir."],
         message: "Lütfen Statü'yü belirleyiniz.",
       },
       default: "Hazırlanıyor",

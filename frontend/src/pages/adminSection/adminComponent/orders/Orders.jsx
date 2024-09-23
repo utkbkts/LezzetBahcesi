@@ -1,20 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   useDeleteOrdersMutation,
   useGetAdminOrdersQuery,
+  useUpdateOrdersMutation,
 } from "../../../../redux/api/OrderApi";
+import toast from "react-hot-toast";
+
 import { Button, Select, Table } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import moment from "moment";
 function Orders() {
   const { data } = useGetAdminOrdersQuery();
   const [deleteOrder] = useDeleteOrdersMutation();
+  const [updateOrder, { error, isSuccess }] = useUpdateOrdersMutation();
+
   const handleRemoveProduct = (id) => {
     if (window.confirm("ürünü iptal etmek istediğine emin misin ?")) {
       deleteOrder(id);
     }
   };
 
+  useEffect(() => {
+    if (error) {
+      console.log(error);
+
+      toast.success(error.message);
+    }
+    if (isSuccess) {
+      toast.success("Başarılı bir şekilde güncellendi");
+    }
+  }, [error, isSuccess]);
+
+  const handleStatusChange = (status, id) => {
+    updateOrder({ id, body: { status } });
+  };
   const columns = [
     {
       title: "Ürün İsmi",
@@ -142,12 +161,15 @@ function Orders() {
       render: (orderStatus, record) => (
         <Select
           className="w-full"
+          disabled={orderStatus === "Teslim Edilmiştir."}
           defaultValue={orderStatus}
           onChange={(value) => handleStatusChange(value, record._id)}
         >
-          <Select.Option value="hazırlanıyor">Hazırlanıyor</Select.Option>
-          <Select.Option value="yolda">Yolda</Select.Option>
-          <Select.Option value="teslim">Teslim Edildi</Select.Option>
+          <Select.Option value="Hazırlanıyor">Hazırlanıyor</Select.Option>
+          <Select.Option value="Kuryemiz Yolda">Kuryemiz Yolda</Select.Option>
+          <Select.Option value="Teslim Edilmiştir.">
+            Teslim Edilmiştir.
+          </Select.Option>
         </Select>
       ),
     },
@@ -171,9 +193,6 @@ function Orders() {
       ),
     },
   ];
-  const handleStatusChange = (status, id) => {
-    console.log(`Sipariş ID: ${id}, Yeni Durum: ${status}`);
-  };
 
   const dataSource = data?.product?.map((item) => ({
     ...item,

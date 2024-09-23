@@ -25,7 +25,10 @@ export const productApi = createApi({
       },
       providesTags: ["Product"],
     }),
-
+    productGetCategoryAll: builder.query({
+      query: () => `/products/category`,
+      providesTags: ["Product"],
+    }),
     productById: builder.query({
       query(id) {
         return {
@@ -100,4 +103,5 @@ export const {
   useDeleteReviewsMutation,
   useGetUserReviewsQuery,
   useGetUserProductQuery,
+  useProductGetCategoryAllQuery,
 } = productApi;

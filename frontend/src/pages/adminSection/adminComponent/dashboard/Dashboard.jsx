@@ -9,24 +9,22 @@ function Dashboard() {
   const { data: adminOrdersData } = useGetAdminOrdersQuery();
   const { data: todayOrdersData } = useGetTodayOrdersQuery();
   const { data: getAdminProducts } = useGetAdminProductsQuery();
+  console.log("🚀 ~ Dashboard ~ getAdminProducts:", adminOrdersData);
+
+  //toplam satışlar
   const totalAmount = adminOrdersData?.product?.reduce(
     (total, acc) => total + acc.totalAmount,
     0
   );
+  //toplam yorum sayısı
   const totalNumOfReviews = getAdminProducts?.product?.reduce(
     (total, acc) => total + acc.numOfReviews,
     0
   );
-
-  const totalPopular = adminOrdersData?.groupCheck?.reduce((acc, item) => {
-    // acc isimi aldık indeksi verdik value değerini
-    if (acc[item.name]) {
-      acc[item.name] += item.totalQuantity;
-    } else {
-      acc[item.name] = item.totalQuantity;
-    }
-    return acc;
-  }, {});
+  //bir gün içinde yapılan satışlar
+  const topThreePopular = [...(adminOrdersData?.groupCheck || [])]?.sort(
+    (a, b) => b.totalQuantity - a.totalQuantity
+  );
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
@@ -69,14 +67,14 @@ function Dashboard() {
         </h2>
         <hr />
         <ul className="space-y-4">
-          {totalPopular &&
-            Object.keys(totalPopular).map((name, index) => (
+          {topThreePopular &&
+            topThreePopular.map((item, index) => (
               <li key={index} className="flex justify-between items-center">
                 <span className="text-lg font-medium text-gray-700">
-                  {name}
+                  {item.name}
                 </span>
                 <span className="text-lg font-bold text-gray-800">
-                  ({totalPopular[name]}) Adet Satıldı.
+                  ({item.totalQuantity}) Adet Satıldı.
                 </span>
               </li>
             ))}

@@ -33,7 +33,7 @@ const UpdatePassword = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full  mt-10 p-6 bg-white rounded-lg shadow-lg"
+      className="w-full mt-10 p-6 bg-white rounded-lg shadow-lg"
     >
       <h1 className="text-3xl !font-light open-sans mb-6">Parola Değiştir</h1>
       <hr className="mb-6" />

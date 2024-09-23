@@ -1,5 +1,5 @@
 import catchAsyncError from "../middleware/catchAsyncError.js";
-import productModel from "../models/productModel.js";
+import Product from "../models/productModel.js";
 import apiFilter from "../utils/apiFilters.js";
 import { delete_file, upload_file } from "../utils/cloudinary.js";
 import errorHandler from "../utils/errorHandler.js";
@@ -7,9 +7,7 @@ import errorHandler from "../utils/errorHandler.js";
 const getAllProduct = catchAsyncError(async (req, res) => {
   const resPerPage = 5;
 
-  const apiFilters = new apiFilter(productModel, req.query)
-    .searchResult()
-    .filters();
+  const apiFilters = new apiFilter(Product, req.query).searchResult().filters();
 
   let products = await apiFilters.query;
   let FilteredProductCount = products.length;
@@ -24,10 +22,18 @@ const getAllProduct = catchAsyncError(async (req, res) => {
   });
 });
 
+const getCategoryProductAll = catchAsyncError(async (req, res) => {
+  const product = await Product.find({});
+
+  res.status(200).json({
+    product,
+  });
+});
+
 const productById = catchAsyncError(async (req, res) => {
-  const product = await productModel
-    .findById(req?.params?.id)
-    .populate("reviews.user");
+  const product = await Product.findById(req?.params?.id).populate(
+    "reviews.user"
+  );
 
   if (!product) {
     return next(new errorHandler("Product not found !", 404));
@@ -38,9 +44,7 @@ const productById = catchAsyncError(async (req, res) => {
 });
 //user
 const getProductReview = catchAsyncError(async (req, res, next) => {
-  const product = await productModel
-    .findById(req.query.id)
-    .populate("reviews.user");
+  const product = await Product.findById(req.query.id).populate("reviews.user");
 
   if (!product) {
     return next(new errorHandler("Product not found !", 404));
@@ -60,7 +64,7 @@ const createProduct = catchAsyncError(async (req, res, next) => {
   );
   const urls = await Promise.all(uploadPromises);
 
-  const product = await productModel.create({
+  const product = await Product.create({
     ...req.body,
     images: urls,
     user: req.user._id,
@@ -70,7 +74,7 @@ const createProduct = catchAsyncError(async (req, res, next) => {
 });
 
 const getProducts = catchAsyncError(async (req, res, next) => {
-  const product = await productModel.find().populate("reviews.user user");
+  const product = await Product.find().populate("reviews.user user");
 
   res.status(200).json({
     product,
@@ -78,7 +82,7 @@ const getProducts = catchAsyncError(async (req, res, next) => {
 });
 
 const deleteProduct = catchAsyncError(async (req, res) => {
-  let product = await productModel.findById(req?.params?.id);
+  let product = await Product.findById(req?.params?.id);
   if (!product) {
     return next(new errorHandler("Product not found", 404));
   }
@@ -100,9 +104,9 @@ const getUserProduct = catchAsyncError(async (req, res, next) => {
     return next(new errorHandler("User ID is required", 400));
   }
 
-  const products = await productModel
-    .find({ user: userId })
-    .populate("reviews.user");
+  const products = await Product.find({ user: userId }).populate(
+    "reviews.user"
+  );
 
   if (!products || products.length === 0) {
     return next(new errorHandler("No products found for the user", 404));
@@ -124,7 +128,7 @@ const createProductReviews = catchAsyncError(async (req, res, next) => {
     comment,
   };
 
-  const product = await productModel.findById(productId);
+  const product = await Product.findById(productId);
 
   if (!product) {
     return next(new errorHandler("Product not found !", 404));
@@ -160,9 +164,7 @@ const createProductReviews = catchAsyncError(async (req, res, next) => {
 const getReviews = catchAsyncError(async (req, res, next) => {
   const userId = req?.query?.userId;
 
-  const productsWithUserReviews = await productModel
-    .find()
-    .populate("reviews.user");
+  const productsWithUserReviews = await Product.find().populate("reviews.user");
 
   if (!productsWithUserReviews.length) {
     return next(new errorHandler("Reviews not found!", 404));
@@ -178,7 +180,7 @@ const getReviews = catchAsyncError(async (req, res, next) => {
 });
 
 const deleteReviews = catchAsyncError(async (req, res, next) => {
-  let product = await productModel.findById(req.query.productId);
+  let product = await Product.findById(req.query.productId);
 
   if (!product) {
     return next(new errorHandler("Product not found !", 404));
@@ -196,7 +198,7 @@ const deleteReviews = catchAsyncError(async (req, res, next) => {
       : product.reviews.reduce((acc, item) => item.rating + acc, 0) /
         numOfReviews;
 
-  product = await productModel.findByIdAndUpdate(
+  product = await Product.findByIdAndUpdate(
     req.query.productId,
     {
       reviews,
@@ -221,4 +223,5 @@ export default {
   deleteReviews,
   getProductReview,
   getUserProduct,
+  getCategoryProductAll,
 };

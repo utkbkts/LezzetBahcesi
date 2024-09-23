@@ -50,21 +50,24 @@ export const updatePassword = z.object({
   OldPassword: z
     .string()
     .min(1, "zorunlu alan")
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@./$!%*?&])[A-Za-z\d@@./$!%*?&]{8,}$/,
-      {
-        message:
-          "Büyük ve küçük harf özel karakter (en az 8 karakterli olmak zorunda)",
-      }
-    ),
+    .regex(/^[a-zA-Z0-9ğüişçöpşlğıokmjun,.\s]*$/, {
+      message: "Özel karakteler girilemez",
+    }),
   password: z
     .string()
     .min(1, "zorunlu alan")
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@./$!%*?&])[A-Za-z\d@@./$!%*?&]{8,}$/,
-      {
-        message:
-          "Büyük ve küçük harf özel karakter (en az 8 karakterli olmak zorunda)",
-      }
-    ),
+    .regex(/^[a-zA-Z0-9ğüişçöpşlğıokmjun,.\s]*$/, {
+      message: "Özel karakteler girilemez",
+    }),
+});
+
+export const contactPage = z.object({
+  email: z.string().email("Mail adresinizi doğru girdiğinizden emin olunuz."),
+  message: z
+    .string()
+    .min(1, "zorunlu alan")
+    .refine((value) => !value || /^[a-zA-Z0-9çÇğĞüÜşŞöÖıİ_-]+$/.test(value), {
+      message:
+        "Özel karakterler kullanamazsınız (sadece harf, rakam ve alt çizgi).",
+    }),
 });

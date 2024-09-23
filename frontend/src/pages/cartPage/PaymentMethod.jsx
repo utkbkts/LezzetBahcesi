@@ -10,11 +10,13 @@ import {
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import CartModalInput from "../../components/cartModalInput/CartModalInput";
+import { clearCartItem } from "../../redux/features/cartSlice";
 const PaymentMethod = () => {
   const [method, setMethod] = useState("");
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
   const [createNewOrder, { error, isSuccess }] = useCreateOrderMutation();
-  const [iyzipayOrder, { data: checkoutData }] = useIyzipayCheckOutMutation();
+  const [iyzipayOrder, { data: checkoutData, isSuccess: IyzipaySuccess }] =
+    useIyzipayCheckOutMutation();
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -25,8 +27,12 @@ const PaymentMethod = () => {
     }
     if (isSuccess) {
       navigate("/");
+      dispatch(clearCartItem());
+    } else if (IyzipaySuccess) {
+      navigate("/");
+      dispatch(clearCartItem());
     }
-  }, [error, isSuccess, navigate]);
+  }, [error, isSuccess, navigate, IyzipaySuccess]);
   useEffect(() => {
     if (checkoutData?.result?.status === "success") {
       toast.success("Ödeme işlemi başarılı.yönlendirileceksiniz.");
@@ -73,6 +79,7 @@ const PaymentMethod = () => {
         },
       };
       iyzipayOrder(orderData);
+      dispatch(clearCartItem());
     }
   };
   return (

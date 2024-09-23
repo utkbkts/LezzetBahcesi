@@ -39,7 +39,9 @@ const UserLayout = () => {
         )}
         {/* Ana içerik */}
         <div
-          className={`${isUserPath ? "flex-[4]" : "w-full h-full"} text-black`}
+          className={`${
+            isUserPath ? "flex-[4] mt-[100px]" : "w-full h-full"
+          } text-black`}
         >
           <Outlet />
         </div>

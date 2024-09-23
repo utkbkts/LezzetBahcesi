@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Button } from "antd";
-import { useGetAllProductsQuery } from "../../redux/api/ProductApi";
 import Loading from "../loading/Loader";
 import MenuItem from "../menuItem/MenuItem";
 import Title from "../../ui/Title";
+import { useProductGetCategoryAllQuery } from "../../redux/api/ProductApi";
 
 const CatagoriesAndMenu = () => {
   const [category, setCategory] = useState("All");
-  const { data, isLoading } = useGetAllProductsQuery();
+  const { data, isLoading } = useProductGetCategoryAllQuery();
   const categories = [
-    ...new Set(data?.products?.map((product) => product.productDetail.kitchen)),
+    ...new Set(data?.product?.map((product) => product.productDetail.kitchen)),
   ];
+  console.log(data);
+
   if (isLoading) return <Loading />;
   return (
     <React.Fragment>
@@ -42,7 +44,7 @@ const CatagoriesAndMenu = () => {
             ))}
           </div>
           <div className={"grid grid-cols-4 gap-4"}>
-            {data?.products?.map((product) => {
+            {data?.product?.map((product) => {
               if (
                 category === "All" ||
                 category === product.productDetail.kitchen

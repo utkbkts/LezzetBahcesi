@@ -40,4 +40,11 @@ router.delete(
   authorizeRoles("admin"),
   OrderControllers.orderDelete
 );
+router.put(
+  "/admin/orders/:id",
+  isAuthenticatedUser,
+  authorizeRoles("admin"),
+  OrderControllers.updateOrderStatus
+);
+
 export default router;

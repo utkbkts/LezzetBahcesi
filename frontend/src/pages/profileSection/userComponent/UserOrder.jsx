@@ -7,7 +7,7 @@ import Loading from "../../../components/loading/Loader";
 
 const UserOrder = () => {
   const { data, isLoading } = useGetUserOrderQuery();
-  console.log("🚀 ~ UserOrder ~ data:", data);
+
   const columns = [
     {
       title: "Ürün resmi",
@@ -38,7 +38,11 @@ const UserOrder = () => {
       render: (orderStatus) => (
         <span
           className={`animate-pulse ${
-            orderStatus === "Hazırlanıyor" ? "text-red-600" : "text-green-600"
+            orderStatus === "Hazırlanıyor"
+              ? "text-red-600"
+              : orderStatus === "Kuryemiz Yolda"
+              ? "text-blue-600"
+              : "text-green-600"
           }`}
         >
           {orderStatus}

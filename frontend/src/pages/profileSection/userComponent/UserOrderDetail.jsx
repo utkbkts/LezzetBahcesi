@@ -8,14 +8,13 @@ const UserOrderDetail = () => {
   const params = useParams();
   const { id } = params;
   const { data, isLoading } = useGetUserOrderDetailQuery(id);
-  console.log("🚀 ~ UserOrderDetail ~ data:", data);
 
   if (isLoading) {
     return <Loading />;
   }
 
   return (
-    <div className="max-w-5xl mx-auto mt-12">
+    <div className="max-w-5xl mx-auto mt-[100px]">
       <div className="flex flex-col gap-2 w-full">
         <div className="flex items-center justify-between w-full">
           <div>

@@ -55,6 +55,16 @@ export const orderApi = createApi({
       },
       invalidatesTags: ["Order"],
     }),
+    updateOrders: builder.mutation({
+      query({ id, body }) {
+        return {
+          url: `/admin/orders/${id}`,
+          method: "PUT",
+          body,
+        };
+      },
+      invalidatesTags: ["Order"],
+    }),
   }),
 });
 export const {
@@ -65,4 +75,5 @@ export const {
   useDeleteOrdersMutation,
   useGetUserOrderDetailQuery,
   useGetUserOrderQuery,
+  useUpdateOrdersMutation,
 } = orderApi;

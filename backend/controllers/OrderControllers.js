@@ -1,5 +1,6 @@
 import catchAsyncError from "../middleware/catchAsyncError.js";
 import Order from "../models/Order.js";
+import Product from "../models/productModel.js";
 import errorHandler from "../utils/errorHandler.js";
 const newOrder = catchAsyncError(async (req, res, next) => {
   const {
@@ -12,8 +13,11 @@ const newOrder = catchAsyncError(async (req, res, next) => {
     itemsPrice,
     paymentCard,
     phoneNumber,
-    productId,
   } = req.body;
+  console.log(
+    "Product IDs in basket:",
+    req.body.basketItems.map((item) => item)
+  );
 
   const order = await Order.create({
     basketItems,
@@ -26,7 +30,6 @@ const newOrder = catchAsyncError(async (req, res, next) => {
     paymentCard,
     phoneNumber,
     user: req.user._id,
-    productId,
   });
 
   res.status(200).json({
@@ -42,7 +45,7 @@ const orderGetProduct = catchAsyncError(async (req, res, next) => {
       $group: {
         _id: "$basketItems._id",
         totalQuantity: { $sum: "$basketItems.quantity" },
-        name: { $first: "$basketItems.name" },
+        name: { $first: "$basketItems.title" },
       },
     },
     {
@@ -107,6 +110,39 @@ const getUserOrder = catchAsyncError(async (req, res, next) => {
   });
 });
 
+const updateOrderStatus = catchAsyncError(async (req, res, next) => {
+  const order = await Order.findById(req.params.id);
+  console.log("🚀 ~ updateOrderStatus ~ order:", order.orderStatus);
+  console.log("🚀 ~ updateOrderStatus ~ order:", req.body);
+
+  if (order.orderStatus === "Teslim Edilmiştir.") {
+    return next(new errorHandler("bu ürünü zaten teslim ettiniz"));
+  }
+
+  let productNotFound = false;
+
+  for (const item of order.basketItems) {
+    const product = await Product.findById(item.product.toString());
+    if (!product) {
+      productNotFound = true;
+      break;
+    }
+    product.stock = product.stock - item.quantity;
+    await product.save();
+  }
+  if (productNotFound) {
+    return next(new errorHandler("ürün ID bulunamadı", 400));
+  }
+  order.orderStatus = req.body.status;
+  if (req.body.status === "Teslim Edilmiştir.") {
+    order.deliveredAt = Date.now();
+  }
+  await order.save();
+  res.status(200).json({
+    success: true,
+  });
+});
+
 export default {
   newOrder,
   orderGetProduct,
@@ -114,4 +150,5 @@ export default {
   orderDelete,
   getOrderDetail,
   getUserOrder,
+  updateOrderStatus,
 };

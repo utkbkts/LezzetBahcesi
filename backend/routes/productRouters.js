@@ -9,6 +9,7 @@ import {
 const router = express.Router();
 
 router.get("/products", ProductControllers.getAllProduct);
+router.get("/products/category", ProductControllers.getCategoryProductAll);
 router.get("/product/:id", ProductControllers.productById);
 
 router.put(

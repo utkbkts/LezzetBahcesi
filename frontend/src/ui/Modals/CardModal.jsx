@@ -127,7 +127,7 @@ const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
 
   const handleAddToCard = () => {
     const cartItems = {
-      id: _id,
+      product: _id,
       title: productDetail.title,
       price: calculateTotalPrice(),
       selectedOptions: selectedOptions,
