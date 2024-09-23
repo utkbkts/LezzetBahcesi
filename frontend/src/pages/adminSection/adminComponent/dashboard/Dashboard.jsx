@@ -9,7 +9,6 @@ function Dashboard() {
   const { data: adminOrdersData } = useGetAdminOrdersQuery();
   const { data: todayOrdersData } = useGetTodayOrdersQuery();
   const { data: getAdminProducts } = useGetAdminProductsQuery();
-  console.log("🚀 ~ Dashboard ~ getAdminProducts:", adminOrdersData);
 
   //toplam satışlar
   const totalAmount = adminOrdersData?.product?.reduce(

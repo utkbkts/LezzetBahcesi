@@ -4,7 +4,7 @@ export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_REACT_APP_API}/api`,
-    tagTypes: ["Product"],
+    tagTypes: ["Product", "Review"],
     credentials: "include",
   }),
   endpoints: (builder) => ({
@@ -51,10 +51,6 @@ export const productApi = createApi({
       query: (userId) => `/reviews/user?userId=${userId}`,
       providesTags: ["Review"],
     }),
-    getUserProduct: builder.query({
-      query: () => "/product/user/detail",
-      providesTags: ["Product"],
-    }),
 
     //admin yönlendirmeleri
     createProducts: builder.mutation({
@@ -87,13 +83,12 @@ export const productApi = createApi({
           method: "DELETE",
         };
       },
-      invalidatesTags: ["Product"],
+      invalidatesTags: ["Product", "Review"],
     }),
   }),
 });
 
 export const {
-  useGetProductsQuery,
   useCreateProductsMutation,
   useGetAdminProductsQuery,
   useDeleteProductMutation,
@@ -102,6 +97,5 @@ export const {
   useSubmitReviewMutation,
   useDeleteReviewsMutation,
   useGetUserReviewsQuery,
-  useGetUserProductQuery,
   useProductGetCategoryAllQuery,
 } = productApi;

@@ -41,7 +41,6 @@ const inputField = [
 
 const ResetPassword = () => {
   const params = useParams();
-  console.log("🚀 ~ ResetPassword ~ params:", params);
   const [resetPassword, { error, isSuccess, isLoading }] =
     useResetPasswordMutation();
   const { isAuthenticated } = useSelector((state) => state.auth);

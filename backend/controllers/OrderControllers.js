@@ -14,10 +14,6 @@ const newOrder = catchAsyncError(async (req, res, next) => {
     paymentCard,
     phoneNumber,
   } = req.body;
-  console.log(
-    "Product IDs in basket:",
-    req.body.basketItems.map((item) => item)
-  );
 
   const order = await Order.create({
     basketItems,
@@ -112,8 +108,6 @@ const getUserOrder = catchAsyncError(async (req, res, next) => {
 
 const updateOrderStatus = catchAsyncError(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
-  console.log("🚀 ~ updateOrderStatus ~ order:", order.orderStatus);
-  console.log("🚀 ~ updateOrderStatus ~ order:", req.body);
 
   if (order.orderStatus === "Teslim Edilmiştir.") {
     return next(new errorHandler("bu ürünü zaten teslim ettiniz"));
@@ -128,6 +122,7 @@ const updateOrderStatus = catchAsyncError(async (req, res, next) => {
       break;
     }
     product.stock = product.stock - item.quantity;
+
     await product.save();
   }
   if (productNotFound) {
@@ -136,6 +131,7 @@ const updateOrderStatus = catchAsyncError(async (req, res, next) => {
   order.orderStatus = req.body.status;
   if (req.body.status === "Teslim Edilmiştir.") {
     order.deliveredAt = Date.now();
+    order.paymentInfo.status = "Ödendi";
   }
   await order.save();
   res.status(200).json({

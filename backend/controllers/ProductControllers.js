@@ -96,27 +96,6 @@ const deleteProduct = catchAsyncError(async (req, res) => {
     message: "Product Deleted",
   });
 });
-//user
-const getUserProduct = catchAsyncError(async (req, res, next) => {
-  const userId = req.user._id;
-
-  if (!userId) {
-    return next(new errorHandler("User ID is required", 400));
-  }
-
-  const products = await Product.find({ user: userId }).populate(
-    "reviews.user"
-  );
-
-  if (!products || products.length === 0) {
-    return next(new errorHandler("No products found for the user", 404));
-  }
-
-  res.status(200).json({
-    success: true,
-    products,
-  });
-});
 
 const createProductReviews = catchAsyncError(async (req, res, next) => {
   const { rating, comment, productId } = req.body;
@@ -164,18 +143,23 @@ const createProductReviews = catchAsyncError(async (req, res, next) => {
 const getReviews = catchAsyncError(async (req, res, next) => {
   const userId = req?.query?.userId;
 
-  const productsWithUserReviews = await Product.find().populate("reviews.user");
-
-  if (!productsWithUserReviews.length) {
-    return next(new errorHandler("Reviews not found!", 404));
-  }
-
-  const reviews = productsWithUserReviews.flatMap((product) =>
-    product.reviews.filter((review) => review.user._id.toString() === userId)
+  // Kullanıcıya ait ürünleri bul
+  const products = await Product.find({ "reviews.user": userId }).populate(
+    "reviews.user"
   );
 
+  if (!products || products.length === 0) {
+    return next(new errorHandler("No products found for this user!", 404));
+  }
+
+  const productReviews = products.map((product) => ({
+    productId: product._id,
+    productName: product.title,
+    reviews: product.reviews,
+  }));
+
   return res.status(200).json({
-    reviews,
+    reviews: productReviews,
   });
 });
 
@@ -222,6 +206,5 @@ export default {
   getReviews,
   deleteReviews,
   getProductReview,
-  getUserProduct,
   getCategoryProductAll,
 };

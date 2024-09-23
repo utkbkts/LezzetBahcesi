@@ -11,7 +11,6 @@ const CatagoriesAndMenu = () => {
   const categories = [
     ...new Set(data?.product?.map((product) => product.productDetail.kitchen)),
   ];
-  console.log(data);
 
   if (isLoading) return <Loading />;
   return (

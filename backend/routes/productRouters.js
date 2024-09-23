@@ -19,11 +19,6 @@ router.put(
 );
 
 router.get("/reviews/user", isAuthenticatedUser, ProductControllers.getReviews);
-router.get(
-  "/product/user/detail",
-  isAuthenticatedUser,
-  ProductControllers.getUserProduct
-);
 
 //admin
 

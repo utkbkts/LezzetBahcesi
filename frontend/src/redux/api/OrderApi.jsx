@@ -4,7 +4,7 @@ export const orderApi = createApi({
   reducerPath: "orderApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_REACT_APP_API}/api`,
-    tagTypes: ["Order"],
+    tagTypes: ["Order", "UserOrder"],
     credentials: "include",
   }),
   endpoints: (builder) => ({
@@ -34,7 +34,7 @@ export const orderApi = createApi({
     }),
     getUserOrder: builder.query({
       query: () => "/me/user/detail",
-      providesTags: ["Order"],
+      providesTags: ["UserOrder"],
     }),
 
     //admin yönlendirmeleri
@@ -63,7 +63,7 @@ export const orderApi = createApi({
           body,
         };
       },
-      invalidatesTags: ["Order"],
+      invalidatesTags: ["Order", "UserOrder"],
     }),
   }),
 });

@@ -22,7 +22,7 @@ const { Title } = Typography;
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { data } = useProductByIdQuery(id);
+  const { data } = useProductByIdQuery(id); //params urlden alır direk redux query başına ver ama query direk function içinde vereceksin
   const [activeImg, setActiveImg] = useState([]);
   const { user } = useSelector((state) => state.auth);
 
@@ -31,9 +31,11 @@ const ProductDetails = () => {
       setActiveImg(data.product.images[0]);
     }
   }, [data]);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
-    <div className="w-full h-full text-black">
+    <div className="w-full h-full text-black mt-[80px]">
       <div className="flex w-full h-[600px] bg-[#F4EEDC]">
         <div className="w-1/2 flex justify-center ">
           <div className="flex flex-col justify-center items-start gap-2 ">
