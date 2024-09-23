@@ -30,7 +30,7 @@ const Hero = ({ title, titleSub, className }) => {
           )}
         </div>
         {pathname === "/" && (
-          <div className="flex-[2] items-center justify-center flex">
+          <div className="flex-[2] items-center justify-center flex hero-active">
             <img
               src={imgHero}
               alt=""

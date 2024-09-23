@@ -79,7 +79,7 @@ body {
 /* hero finish */
 
 /* animate start */
-.animate-spin {
+.hero-active .animate-spin {
   animation: spin 15s linear infinite !important;
 }
 /* animate finish */
