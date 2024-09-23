@@ -30,6 +30,7 @@ import UserLayout from "./layouts/UserLayout";
 import Invoice from "./components/invoice/Invoice";
 import UserOrderDetail from "./pages/profileSection/userComponent/UserOrderDetail";
 import ResetPassword from "./components/resetPassword/ResetPassword.jsx";
+import ContactPage from "./pages/contact/ContactPage.jsx";
 function App() {
   const { data } = useGetUserQuery();
 
@@ -58,6 +59,10 @@ function App() {
         {
           path: "/cart",
           element: <CartPage />,
+        },
+        {
+          path: "/contact",
+          element: <ContactPage />,
         },
         {
           path: "/shipping",

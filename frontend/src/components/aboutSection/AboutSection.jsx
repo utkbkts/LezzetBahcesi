@@ -78,15 +78,28 @@ const AboutSection = () => {
                 Bahçesi
               </h2>
               <p className="pt-4">
-                Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit.
-                Aliqu diam amet diam et eos erat ipsum et lorem et sit, sed stet
-                lorem sit. Tempor erat elitr rebum at clita.
+                Restoranımız, 2009 yılında kaliteli ve lezzetli yemekler sunma
+                amacıyla kuruldu. Mutfak ekibimiz, taze ve yerel malzemeleri
+                kullanarak sizlere eşsiz bir lezzet deneyimi yaşatmayı
+                hedefliyor.
                 <p className="pt-4">
-                  Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita
-                  erat ipsum et lorem et sit, sed stet lorem sit clita duo justo
-                  magna dolore erat amet
+                  Mutfak anlayışımız, sadece yemek sunmaktan ibaret değil.
+                  Misafirlerimize sıcak, samimi bir ortamda en kaliteli hizmeti
+                  sunmayı ilke edindik. Her bir tabakta sadece lezzet değil,
+                  aynı zamanda tutkuyu da hissedeceksiniz.
+                </p>
+                <p className="pt-4">
+                  Misyonumuz, çevreye duyarlı, sürdürülebilir malzemeler
+                  kullanarak topluma katkı sağlamak ve sağlıklı yemeklerle
+                  misafirlerimizin gönlünde yer edinmektir.
+                </p>
+                <p className="pt-4">
+                  Her gün, siz değerli misafirlerimizi ağırlamak, bize mutluluk
+                  veriyor. Özel günlerinizde yanınızda olmayı ve her anınızı
+                  daha da özel kılmayı arzuluyoruz.
                 </p>
               </p>
+
               <div className="flex items-center justify-between">
                 <span className="relative flex items-center gap-4 ml-4 pt-8">
                   <span className="absolute h-full w-1 -left-3 bg-orange-400"></span>
