@@ -2,7 +2,7 @@ import catchAsyncError from "../middleware/catch.middleware.js";
 import Product from "../models/product.models.js";
 import apiFilter from "../utils/apiFilters.js";
 import { delete_file, upload_file } from "../utils/cloudinary.js";
-import ErrorHandler from "../utils/ErrorHandler.js";
+import ErrorHandler from "../utils/errorHandler.js";
 
 const getAllProduct = catchAsyncError(async (req, res) => {
   const resPerPage = 5;

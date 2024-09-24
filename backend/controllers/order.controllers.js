@@ -1,7 +1,7 @@
 import catchAsyncError from "../middleware/catch.middleware.js";
 import Order from "../models/order.models.js";
 import Product from "../models/product.models.js";
-import ErrorHandler from "../utils/ErrorHandler.js";
+import ErrorHandler from "../utils/errorHandler.js";
 const newOrder = catchAsyncError(async (req, res, next) => {
   const {
     basketItems,

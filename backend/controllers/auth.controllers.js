@@ -2,7 +2,7 @@ import catchAsyncError from "../middleware/catch.middleware.js";
 import User from "../models/user.models.js";
 import { delete_file } from "../utils/cloudinary.js";
 import { getResetPasswordTemplate } from "../utils/emailTemplates.js";
-import ErrorHandler from "../utils/ErrorHandler.js";
+import ErrorHandler from "../utils/errorHandler.js";
 import sendEmail from "../utils/sendEmail.js";
 import sendToken from "../utils/sendToken.js";
 import crypto from "crypto";

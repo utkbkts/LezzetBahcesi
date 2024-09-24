@@ -2,7 +2,7 @@ import Iyzipay from "iyzipay";
 import catchAsyncError from "../middleware/catch.middleware.js";
 import Order from "../models/order.models.js";
 import { customAlphabet } from "nanoid";
-import ErrorHandler from "../utils/ErrorHandler.js";
+import ErrorHandler from "../utils/errorHandler.js";
 import moment from "moment";
 const iyzico = new Iyzipay({
   apiKey: process.env.IYZIPAY_API_KEY,

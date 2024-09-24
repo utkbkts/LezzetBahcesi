@@ -1,4 +1,4 @@
-import ErrorHandler from "../utils/ErrorHandler.js";
+import ErrorHandler from "../utils/errorHandler.js";
 
 export default (err, req, res, next) => {
   let error = {
