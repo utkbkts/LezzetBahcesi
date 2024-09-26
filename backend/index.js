@@ -27,10 +27,10 @@ app.use(
     directives: {
       "default-src": ["'self'"],
       "img-src": ["'self'", "https:", "data:"],
-      "script-src": ["'self'", `${FRONTEND_URL}`],
-      "style-src": ["'self'", `${FRONTEND_URL}`],
-      "frame-ancestors": ["'self'"],
-      "connect-src": ["'self'", `${FRONTEND_URL}`],
+      "script-src": ["'self'", `${process.env.FRONTEND_URL}`],
+      "style-src": ["'self'", `${process.env.FRONTEND_URL}`],
+      "frame-ancestors": ["'self'", `${process.env.FRONTEND_URL}`],
+      "connect-src": ["'self'", `${process.env.FRONTEND_URL}`],
     },
   })
 );

@@ -30,10 +30,7 @@ import Invoice from "./components/invoice/Invoice";
 import UserOrderDetail from "./pages/profileSection/userComponent/UserOrderDetail";
 import ResetPassword from "./components/resetPassword/ResetPassword.jsx";
 import ContactPage from "./pages/contact/ContactPage.jsx";
-import { useGetUserQuery } from "./redux/api/UserApi.jsx";
 function App() {
-  const { data } = useGetUserQuery();
-
   const router = createBrowserRouter([
     {
       path: "/",

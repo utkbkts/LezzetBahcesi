@@ -5,7 +5,10 @@ import { useLoginMutation, useRegisterMutation } from "../../redux/api/AuthApi";
 import toast from "react-hot-toast";
 import Loading from "../../components/loading/Loader";
 import PropTypes from "prop-types";
-import { useForgotPasswordMutation } from "../../redux/api/UserApi";
+import {
+  useForgotPasswordMutation,
+  useGetUserQuery,
+} from "../../redux/api/UserApi";
 import { useNavigate } from "react-router-dom";
 const inputFields = {
   register: [
@@ -124,6 +127,7 @@ const inputFields = {
 
 const AuthModal = ({ setShowLogin, showLogin }) => {
   const [state, setState] = useState("login");
+  const { data } = useGetUserQuery();
   const [forgotPassword, { error: forgotError, isSuccess: forgotSuccess }] =
     useForgotPasswordMutation();
   const navigate = useNavigate();
@@ -154,14 +158,11 @@ const AuthModal = ({ setShowLogin, showLogin }) => {
 
     if (loginSuccess) {
       toast.success("Giriş Başarılı!");
-      navigate(0);
       setShowLogin(false);
     } else if (registerSuccess) {
       toast.success("Kayıt Başarılı!");
-      navigate(0);
       setShowLogin(false);
     } else if (forgotSuccess) {
-      navigate(0);
       toast.success("Parola sıfırlama işlemi Başarılı!");
       setShowLogin(false);
     }
