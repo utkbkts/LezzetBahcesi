@@ -1,6 +1,6 @@
 import Hero from "../../components/hero/Hero";
 import { Button } from "antd";
-import contact from "/public/food/about-img.jpg";
+import contact from "/food/about-img.jpg";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactPage } from "../../utils/validation";

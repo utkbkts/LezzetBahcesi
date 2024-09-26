@@ -20,14 +20,21 @@ app.use(
   })
 );
 const __dirname = path.resolve();
+//CSP settings
 app.use(
   helmet.contentSecurityPolicy({
     useDefaults: true,
     directives: {
-      "img-src": ["'self'", "https: data:"],
+      "default-src": ["'self'"],
+      "img-src": ["'self'", "https:", "data:"],
+      "script-src": ["'self'", `${FRONTEND_URL}`],
+      "style-src": ["'self'", `${FRONTEND_URL}`],
+      "frame-ancestors": ["'self'"],
+      "connect-src": ["'self'", `${FRONTEND_URL}`],
     },
   })
 );
+
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use("/api", AuthRouters);

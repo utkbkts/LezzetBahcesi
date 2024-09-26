@@ -80,23 +80,23 @@ const AboutSection = () => {
                 Restoranımız, 2009 yılında kaliteli ve lezzetli yemekler sunma
                 amacıyla kuruldu. Mutfak ekibimiz, taze ve yerel malzemeleri
                 kullanarak sizlere eşsiz bir lezzet deneyimi yaşatmayı
-                hedefliyor.
-                <p className="pt-4">
-                  Mutfak anlayışımız, sadece yemek sunmaktan ibaret değil.
-                  Misafirlerimize sıcak, samimi bir ortamda en kaliteli hizmeti
-                  sunmayı ilke edindik. Her bir tabakta sadece lezzet değil,
-                  aynı zamanda tutkuyu da hissedeceksiniz.
-                </p>
-                <p className="pt-4">
-                  Misyonumuz, çevreye duyarlı, sürdürülebilir malzemeler
-                  kullanarak topluma katkı sağlamak ve sağlıklı yemeklerle
-                  misafirlerimizin gönlünde yer edinmektir.
-                </p>
-                <p className="pt-4">
-                  Her gün, siz değerli misafirlerimizi ağırlamak, bize mutluluk
-                  veriyor. Özel günlerinizde yanınızda olmayı ve her anınızı
-                  daha da özel kılmayı arzuluyoruz.
-                </p>
+                hedefliyor.{" "}
+              </p>
+              <p className="pt-4">
+                Mutfak anlayışımız, sadece yemek sunmaktan ibaret değil.
+                Misafirlerimize sıcak, samimi bir ortamda en kaliteli hizmeti
+                sunmayı ilke edindik. Her bir tabakta sadece lezzet değil, aynı
+                zamanda tutkuyu da hissedeceksiniz.
+              </p>
+              <p className="pt-4">
+                Misyonumuz, çevreye duyarlı, sürdürülebilir malzemeler
+                kullanarak topluma katkı sağlamak ve sağlıklı yemeklerle
+                misafirlerimizin gönlünde yer edinmektir.
+              </p>
+              <p className="pt-4">
+                Her gün, siz değerli misafirlerimizi ağırlamak, bize mutluluk
+                veriyor. Özel günlerinizde yanınızda olmayı ve her anınızı daha
+                da özel kılmayı arzuluyoruz.
               </p>
 
               <div className="flex items-center justify-between">

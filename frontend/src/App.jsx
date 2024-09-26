@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import NotFound from "./components/notFound/NotFound";
-import { useGetUserQuery } from "./redux/api/UserApi";
 import HomePage from "./pages/homePage/HomePage";
 import AboutPage from "./pages/about/AboutPage";
 import MenuPage from "./pages/menu/MenuPage.jsx";
@@ -31,12 +30,9 @@ import Invoice from "./components/invoice/Invoice";
 import UserOrderDetail from "./pages/profileSection/userComponent/UserOrderDetail";
 import ResetPassword from "./components/resetPassword/ResetPassword.jsx";
 import ContactPage from "./pages/contact/ContactPage.jsx";
+import { useGetUserQuery } from "./redux/api/UserApi.jsx";
 function App() {
   const { data } = useGetUserQuery();
-
-  useEffect(() => {
-    if (data) return data;
-  }, [data]);
 
   const router = createBrowserRouter([
     {
@@ -153,7 +149,6 @@ function App() {
       ],
     },
   ]);
-
   return (
     <React.Fragment>
       <Toaster position="top-right" />
