@@ -8,9 +8,18 @@ import { useProductGetCategoryAllQuery } from "../../redux/api/ProductApi";
 const CatagoriesAndMenu = () => {
   const [category, setCategory] = useState("All");
   const { data, isLoading } = useProductGetCategoryAllQuery();
+  const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(8);
   const categories = [
     ...new Set(data?.product?.map((product) => product.productDetail.kitchen)),
   ];
+  const showMoreItems = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setVisible((prevState) => prevState + 4);
+      setLoading(false);
+    }, 500);
+  };
 
   if (isLoading) return <Loading />;
   return (
@@ -43,7 +52,7 @@ const CatagoriesAndMenu = () => {
             ))}
           </div>
           <div className={"grid grid-cols-4 gap-4"}>
-            {data?.product?.map((product) => {
+            {data?.product?.slice(0, visible).map((product) => {
               if (
                 category === "All" ||
                 category === product.productDetail.kitchen
@@ -52,6 +61,13 @@ const CatagoriesAndMenu = () => {
               }
             })}
           </div>
+          {data?.product?.length > visible && (
+            <div className="pt-4 pb-4">
+              <Button type="primary" onClick={showMoreItems}>
+                {loading ? "yükleniyor." : "Daha Fazla"}
+              </Button>
+            </div>
+          )}
         </div>
       </section>
     </React.Fragment>
