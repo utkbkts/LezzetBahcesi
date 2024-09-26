@@ -28,7 +28,11 @@ app.use(
       "default-src": ["'self'"],
       "img-src": ["'self'", "https:", "data:"],
       "frame-ancestors": ["'self'"],
-      "frame-src": ["'self'", "https://maps.google.com"],
+      "frame-src": [
+        "'self'",
+        "https://maps.google.com",
+        "https://www.google.com",
+      ],
     },
   })
 );

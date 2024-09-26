@@ -123,7 +123,8 @@ const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
     );
 
     return (
-      basePrice + sideProductsTotal + drinksTotal + chipsTotal + sauceTotal
+      (basePrice + sideProductsTotal + drinksTotal + chipsTotal + sauceTotal) *
+      quantity
     );
   };
   const handleAddToCard = () => {
