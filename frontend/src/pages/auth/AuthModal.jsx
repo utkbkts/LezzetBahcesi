@@ -9,7 +9,6 @@ import {
   useForgotPasswordMutation,
   useGetUserQuery,
 } from "../../redux/api/UserApi";
-import { useNavigate } from "react-router-dom";
 const inputFields = {
   register: [
     {
@@ -127,10 +126,10 @@ const inputFields = {
 
 const AuthModal = ({ setShowLogin, showLogin }) => {
   const [state, setState] = useState("login");
+  // eslint-disable-next-line no-unused-vars
   const { data } = useGetUserQuery();
   const [forgotPassword, { error: forgotError, isSuccess: forgotSuccess }] =
     useForgotPasswordMutation();
-  const navigate = useNavigate();
   const [
     register,
     {
