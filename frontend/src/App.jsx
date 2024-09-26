@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import NotFound from "./components/notFound/NotFound";
@@ -33,6 +33,10 @@ import ResetPassword from "./components/resetPassword/ResetPassword.jsx";
 import ContactPage from "./pages/contact/ContactPage.jsx";
 function App() {
   const { data } = useGetUserQuery();
+
+  useEffect(() => {
+    if (data) return data;
+  }, [data]);
 
   const router = createBrowserRouter([
     {

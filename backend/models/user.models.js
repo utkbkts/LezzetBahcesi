@@ -12,6 +12,8 @@ const userSchema = new mongoose.Schema(
     },
     lastName: {
       type: String,
+      required: [true, "Lütfen soyisminizi giriniz."],
+      maxLength: [30, "30 Karakterden az olmalı."],
     },
     email: {
       type: String,
@@ -51,14 +53,20 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    next();
-  }
+  this.name = this.name.replace(/\s+/g, "").toLowerCase();
+  this.lastName = this.lastName.replace(/\s+/g, "").toLowerCase();
+  this.email = this.email.replace(/\s+/g, "").toLowerCase();
 
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
+  if (!this.isModified("password")) return next();
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 userSchema.methods.getJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {

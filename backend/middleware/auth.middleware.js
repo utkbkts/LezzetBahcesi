@@ -4,13 +4,13 @@ import catchAsyncError from "./catch.middleware.js";
 import User from "../models/user.models.js";
 
 export const isAuthenticatedUser = catchAsyncError(async (req, res, next) => {
-  const { token } = req.cookies;
+  const { jwtToken } = req.cookies;
 
-  if (!token) {
+  if (!jwtToken) {
     return next(new ErrorHandler("Lütfen giriş yapınız", 401));
   }
 
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const decoded = jwt.verify(jwtToken, process.env.JWT_SECRET);
 
   req.user = await User.findById(decoded.id);
   next();

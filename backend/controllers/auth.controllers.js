@@ -8,13 +8,22 @@ import sendToken from "../utils/sendToken.js";
 import crypto from "crypto";
 
 const RegisterUser = catchAsyncError(async (req, res, next) => {
-  const { name, email, password, confirmPassword } = req.body;
-
+  const { name, email, lastName, password, confirmPassword } = req.body;
+  if (!name || !lastName || !email || !password || !confirmPassword) {
+    return next(new ErrorHandler("Lütfen boş olan yerleri doldurunuz.", 400));
+  }
+  if (password !== confirmPassword) {
+    return next(new ErrorHandler("Şifreler eşleşmiyor", 400));
+  }
+  const emailExists = await User.findOne({ email });
+  if (emailExists) {
+    return next(new ErrorHandler("Email kullanılıyor", 400));
+  }
   const user = await User.create({
     name,
+    lastName,
     email,
     password,
-    confirmPassword,
   });
 
   sendToken(user, 201, res);
@@ -28,22 +37,21 @@ const LoginUser = catchAsyncError(async (req, res, next) => {
   }
   const user = await User.findOne({ email }).select("+password");
   if (!user) {
-    return next(new ErrorHandler("Invalid email or password", 401));
+    return next(new ErrorHandler("Email veya şifre yanlış.", 401));
   }
   const isPasswordMatched = await user.comparePassword(password);
   if (!isPasswordMatched) {
-    return next(new ErrorHandler("Email veya şifre yanlış.", 401));
+    return next(new ErrorHandler("Şifre yanlış.", 401));
   }
   sendToken(user, 200, res);
 });
 
 const LogoutUser = catchAsyncError(async (req, res, next) => {
-  res.cookie("token", "", {
+  res.cookie("jwtToken", "", {
     expires: new Date(Date.now()),
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
   });
+
   res.status(200).json({
     success: true,
     message: "Logged Out",

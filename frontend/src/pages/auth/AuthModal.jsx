@@ -1,11 +1,12 @@
 import { Form, Input, Modal } from "antd";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingButton from "../../ui/LoadingButton";
 import { useLoginMutation, useRegisterMutation } from "../../redux/api/AuthApi";
 import toast from "react-hot-toast";
 import Loading from "../../components/loading/Loader";
 import PropTypes from "prop-types";
 import { useForgotPasswordMutation } from "../../redux/api/UserApi";
+import { useNavigate } from "react-router-dom";
 const inputFields = {
   register: [
     {
@@ -22,6 +23,18 @@ const inputFields = {
     },
     {
       id: 2,
+      name: "lastName",
+      label: "Soyisim",
+      rules: [
+        { required: true, message: "Lütfen soyismnizi giriniz." },
+        {
+          pattern: /^[a-z ,.şğıiüç'-]+$/i,
+          message: "Özel karakter kullanamazsınız.",
+        },
+      ],
+    },
+    {
+      id: 3,
       name: "email",
       label: "Email",
       type: "email",
@@ -34,7 +47,7 @@ const inputFields = {
       ],
     },
     {
-      id: 3,
+      id: 4,
       name: "password",
       label: "Şifre",
       type: "password",
@@ -47,7 +60,7 @@ const inputFields = {
       ],
     },
     {
-      id: 4,
+      id: 5,
       name: "confirmPassword",
       label: "Şifreyi Doğrulayın",
       type: "password",
@@ -113,6 +126,7 @@ const AuthModal = ({ setShowLogin, showLogin }) => {
   const [state, setState] = useState("login");
   const [forgotPassword, { error: forgotError, isSuccess: forgotSuccess }] =
     useForgotPasswordMutation();
+  const navigate = useNavigate();
   const [
     register,
     {
@@ -140,11 +154,14 @@ const AuthModal = ({ setShowLogin, showLogin }) => {
 
     if (loginSuccess) {
       toast.success("Giriş Başarılı!");
+      navigate(0);
       setShowLogin(false);
     } else if (registerSuccess) {
       toast.success("Kayıt Başarılı!");
+      navigate(0);
       setShowLogin(false);
     } else if (forgotSuccess) {
+      navigate(0);
       toast.success("Parola sıfırlama işlemi Başarılı!");
       setShowLogin(false);
     }
@@ -189,9 +206,9 @@ const AuthModal = ({ setShowLogin, showLogin }) => {
               : "Parola Sıfırlama"}
           </h1>
           <Form className="p-8 w-full" onFinish={onFinish} layout="vertical">
-            {inputFields[state].map((field) => (
+            {inputFields[state].map((field, index) => (
               <Form.Item
-                key={field.id}
+                key={index}
                 rules={field.rules}
                 label={<span className="text-gray-800">{field.label}</span>}
                 name={field.name}
