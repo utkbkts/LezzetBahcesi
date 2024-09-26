@@ -13,6 +13,8 @@ const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
   });
   const dispatch = useDispatch();
 
+  const [quantity, setQuantity] = useState(1);
+
   //sideProduct start
   const handleSideChange = (e) => {
     const { name, checked, value } = e.target;
@@ -124,7 +126,6 @@ const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
       basePrice + sideProductsTotal + drinksTotal + chipsTotal + sauceTotal
     );
   };
-
   const handleAddToCard = () => {
     const cartItems = {
       product: _id,
@@ -132,7 +133,7 @@ const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
       price: calculateTotalPrice(),
       selectedOptions: selectedOptions,
       image: images.length > 0 ? images[0]?.url : "",
-      quantity: 1,
+      quantity: quantity,
     };
     dispatch(addToCart(cartItems));
   };
@@ -245,7 +246,14 @@ const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
         <span className="text-lg font-semibold">{calculateTotalPrice()}₺</span>
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex justify-end gap-2">
+        <div className="flex items-center gap-2">
+          <Button onClick={() => setQuantity((prev) => Math.max(prev - 1, 1))}>
+            -
+          </Button>
+          <span>{quantity}</span>
+          <Button onClick={() => setQuantity((prev) => prev + 1)}>+</Button>
+        </div>
         <Button type="primary" onClick={handleAddToCard} className="mr-2">
           Sepete Ekle
         </Button>
