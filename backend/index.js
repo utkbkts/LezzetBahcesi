@@ -27,6 +27,8 @@ app.use(
     directives: {
       "default-src": ["'self'"],
       "img-src": ["'self'", "https:", "data:"],
+      "frame-ancestors": ["'self'"],
+      "frame-src": ["'self'", "https://maps.google.com"],
     },
   })
 );
