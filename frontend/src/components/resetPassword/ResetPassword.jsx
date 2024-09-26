@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useResetPasswordMutation } from "../../redux/api/UserApi";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";

@@ -1,4 +1,3 @@
-import React from "react";
 import { HandPlatter, ShoppingCart, User, Utensils } from "lucide-react";
 import img from "/hero/about-1.jpg";
 import img2 from "/hero/about-2.jpg";

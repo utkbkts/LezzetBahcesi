@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import videoimg from "/hero/video.jpg";
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import DatePicker from "react-datepicker";

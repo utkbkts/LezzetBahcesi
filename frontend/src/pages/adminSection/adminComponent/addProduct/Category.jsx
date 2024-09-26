@@ -1,4 +1,3 @@
-import React from "react";
 import { Button, Form, Input, Select, Typography, Tag } from "antd";
 import {
   Categoryadd,

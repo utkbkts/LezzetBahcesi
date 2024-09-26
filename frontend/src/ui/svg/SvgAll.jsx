@@ -1,5 +1,3 @@
-import React from "react";
-
 const Star = () => {
   return (
     <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none">

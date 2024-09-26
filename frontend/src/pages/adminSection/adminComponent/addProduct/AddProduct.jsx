@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Button, Form, Input, Typography } from "antd";
 import Category from "./Category";
 import { addProductTitle } from "../../../../constants/data";

@@ -1,4 +1,3 @@
-import React from "react";
 import Loading from "../../../components/loading/Loader";
 import { useGetUserOrderDetailQuery } from "../../../redux/api/OrderApi";
 import { Button } from "antd";

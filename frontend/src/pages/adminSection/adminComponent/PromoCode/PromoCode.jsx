@@ -1,5 +1,3 @@
-import React from "react";
-
 function PromoCodes() {
   return (
     <div className="p-6 bg-white shadow-md rounded-lg">

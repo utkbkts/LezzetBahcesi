@@ -1,4 +1,3 @@
-import React from "react";
 import AboutSection from "../../components/aboutSection/AboutSection";
 import Hero from "../../components/hero/Hero";
 import menu4 from "/food/menu4.png";

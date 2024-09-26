@@ -1,4 +1,3 @@
-import React from "react";
 import { Button, Space, Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { RemoveCartItem } from "../../redux/features/cartSlice";

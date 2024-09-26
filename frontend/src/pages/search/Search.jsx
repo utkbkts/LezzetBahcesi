@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import CuisineFilter from "../../components/cuisineFilter/CuisineFilter";
 import SearchResultCard from "../../components/searchResultCard/SearchResultCard";
 import PaginationPage from "../../components/pagination/Pagination";

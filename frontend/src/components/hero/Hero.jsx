@@ -1,4 +1,3 @@
-import React from "react";
 import imgHero from "/hero/hero.png";
 import { useLocation } from "react-router-dom";
 import { cn } from "../../utils/TailwindMerge";

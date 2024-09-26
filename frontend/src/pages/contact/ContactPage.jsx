@@ -1,4 +1,3 @@
-import React from "react";
 import Hero from "../../components/hero/Hero";
 import { Button } from "antd";
 import contact from "/public/food/about-img.jpg";

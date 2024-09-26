@@ -1,4 +1,3 @@
-import React from "react";
 import { useGetUserOrderDetailQuery } from "../../redux/api/OrderApi";
 import { useParams } from "react-router-dom";
 import moroccan from "/moroccan-flower.png";

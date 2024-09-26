@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Title from "../../ui/Title";
 import menu1 from "/hero/menu-1.jpg";
 import menu2 from "/hero/menu-2.jpg";

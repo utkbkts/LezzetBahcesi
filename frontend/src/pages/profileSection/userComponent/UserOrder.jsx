@@ -1,5 +1,4 @@
 import { Button, Table } from "antd";
-import React from "react";
 import { useGetUserOrderQuery } from "../../../redux/api/OrderApi";
 import { Link } from "react-router-dom";
 import { PrinterFilled } from "@ant-design/icons";

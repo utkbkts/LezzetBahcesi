@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useUpdateProfileMutation } from "../../../redux/api/UserApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateProfileCreate } from "../../../utils/validation";

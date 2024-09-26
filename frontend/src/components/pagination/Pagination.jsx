@@ -1,4 +1,3 @@
-import React from "react";
 import Pagination from "react-js-pagination";
 import PropTypes from "prop-types";
 import { useNavigate, useSearchParams } from "react-router-dom";

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { avatar } from "../../utils/DataIndex";
 import toast from "react-hot-toast";
 import { Button } from "antd";

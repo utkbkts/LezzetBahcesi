@@ -1,6 +1,6 @@
 import { Input } from "antd";
 import PropTypes from "prop-types";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 const UploadImages = ({ images, setImages }) => {
   const FileInputRef = useRef(null);

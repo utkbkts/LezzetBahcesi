@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useGetAllProductsQuery } from "../../redux/api/ProductApi";
 import Loading from "../../components/loading/Loader";
 import MenuItem from "../../components/menuItem/MenuItem";

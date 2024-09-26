@@ -1,4 +1,3 @@
-import React from "react";
 import { Button, Form, Input, Tag } from "antd";
 import { NutriationData } from "../../../../constants/data";
 import { nanoid } from "nanoid";

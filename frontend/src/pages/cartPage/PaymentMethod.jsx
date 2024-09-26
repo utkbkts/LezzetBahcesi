@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CheckOutSteps from "../../components/checkOutSteps/CheckOutSteps";
 import { Button, Form, Radio } from "antd";
 import { calculateOrderCost } from "../../helpers/helpers";
