@@ -2,10 +2,10 @@ import imgHero from "/hero/hero.png";
 import { useLocation } from "react-router-dom";
 import { cn } from "../../utils/TailwindMerge";
 import PropTypes from "prop-types";
-const Hero = ({ title, titleSub, className }) => {
+const Hero = ({ title, titleSub, className, classNameHero }) => {
   const pathname = useLocation().pathname;
   return (
-    <section className="bg-hero">
+    <section className={cn("bg-hero", classNameHero)}>
       <div className="flex items-center justify-center h-full w-full">
         <div
           className={`${
@@ -21,7 +21,9 @@ const Hero = ({ title, titleSub, className }) => {
           >
             {title}
           </h1>
-          <p className="text-[16px] leading-[24px] text-white">{titleSub}</p>
+          <p className="text-[16px] leading-[24px] text-white  text-center">
+            {titleSub}
+          </p>
           {pathname === "/" && (
             <button className="py-3 px-4 rounded-md bg-[#FEA116] text-white hover:bg-[#c47f17] transition-all duration-300">
               Şimdi Rezervasyon Yap
@@ -46,6 +48,7 @@ Hero.propTypes = {
   title: PropTypes.string,
   titleSub: PropTypes.string,
   className: PropTypes.string,
+  classNameHero: PropTypes.string,
 };
 
 export default Hero;

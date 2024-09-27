@@ -28,7 +28,6 @@ const ContactPage = () => {
   }, [isSuccess, error]);
 
   const onSubmit = async (data) => {
-    console.log("🚀 ~ onSubmit ~ data:", data);
     await sendMessages({
       message: data.message,
       email: data.email,

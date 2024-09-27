@@ -8,10 +8,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-
+import PropTypes from "prop-types";
 const SalesData = ({ data }) => {
-  console.log("🚀 ~ SalesData ~ data:", data);
-
   const salesData = data?.dailySalesData?.map((item) => ({
     date: item.date,
     numOrders: item.numOrders,
@@ -48,6 +46,18 @@ const SalesData = ({ data }) => {
       </ResponsiveContainer>
     </div>
   );
+};
+
+SalesData.propTypes = {
+  data: PropTypes.shape({
+    dailySalesData: PropTypes.arrayOf(
+      PropTypes.shape({
+        date: PropTypes.string.isRequired,
+        numOrders: PropTypes.number.isRequired,
+        totalSales: PropTypes.number.isRequired,
+      })
+    ),
+  }),
 };
 
 export default SalesData;

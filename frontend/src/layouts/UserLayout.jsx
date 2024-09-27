@@ -29,7 +29,7 @@ const UserLayout = () => {
         <AuthModal showLogin={showLogin} setShowLogin={setShowLogin} />
       )}
 
-      <div className={isUserPath ? "flex " : "w-full"}>
+      <div className={isUserPath ? "flex " : "w-full min-h-screen"}>
         {/* Kullanıcı sayfası  */}
         {isUserPath && (
           <div className="flex-1 flex items-center flex-col justify-center  min-h-screen bg-gray-800">
