@@ -66,8 +66,11 @@ export const contactPage = z.object({
   message: z
     .string()
     .min(1, "zorunlu alan")
-    .refine((value) => !value || /^[a-zA-Z0-9çÇğĞüÜşŞöÖıİ_-]+$/.test(value), {
-      message:
-        "Özel karakterler kullanamazsınız (sadece harf, rakam ve alt çizgi).",
-    }),
+    .refine(
+      (value) => !value || /^[a-zA-Z0-9çÇğĞüÜşŞöÖıİ,?\s_-]+$/.test(value),
+      {
+        message:
+          "Özel karakterler kullanamazsınız (sadece harf, rakam ve alt çizgi).",
+      }
+    ),
 });

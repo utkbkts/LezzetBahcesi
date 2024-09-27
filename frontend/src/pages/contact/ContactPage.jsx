@@ -4,17 +4,35 @@ import contact from "/food/about-img.jpg";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactPage } from "../../utils/validation";
+import { useSendMessageMutation } from "../../redux/api/ContactApi";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 const ContactPage = () => {
+  const [sendMessages, { isSuccess, isLoading, error }] =
+    useSendMessageMutation();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(contactPage),
   });
 
-  const onSubmit = (data) => {
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Mesaj başarılı bir şekilde gönderildi");
+      reset();
+    }
+    console.log(error);
+  }, [isSuccess, error]);
+
+  const onSubmit = async (data) => {
     console.log("🚀 ~ onSubmit ~ data:", data);
+    await sendMessages({
+      message: data.message,
+      email: data.email,
+    });
   };
   return (
     <div className="h-full">
@@ -56,8 +74,8 @@ const ContactPage = () => {
                   {errors.message.message}
                 </span>
               )}
-              <Button htmlType="submit" type="default">
-                Gönder
+              <Button htmlType="submit" type="default" disabled={isLoading}>
+                {isLoading ? "gönderiliyor.." : "Gönder"}
               </Button>
             </div>
           </form>
