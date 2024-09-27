@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import AuthRouters from "./routes/auth.routes.js";
 import ProductRouters from "./routes/product.routes.js";
 import OrderRouters from "./routes/order.routes.js";
+import AnalyticRouters from "./routes/analytic.route.js";
 import PaymentRouters from "./routes/payment.routes.js";
 import errorMiddleware from "./middleware/error.middleware.js";
 import path from "path";
@@ -43,6 +44,7 @@ app.use("/api", AuthRouters);
 app.use("/api", ProductRouters);
 app.use("/api", OrderRouters);
 app.use("/api", PaymentRouters);
+app.use("/api", AnalyticRouters);
 
 app.use(errorMiddleware);
 

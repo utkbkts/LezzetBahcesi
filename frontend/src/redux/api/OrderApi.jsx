@@ -42,10 +42,6 @@ export const orderApi = createApi({
       query: () => `/admin/orders`,
       providesTags: ["Order"],
     }),
-    getTodayOrders: builder.query({
-      query: () => `/admin/today/orders`,
-      providesTags: ["Order"],
-    }),
     deleteOrders: builder.mutation({
       query(id) {
         return {
@@ -71,7 +67,6 @@ export const {
   useCreateOrderMutation,
   useGetAdminOrdersQuery,
   useIyzipayCheckOutMutation,
-  useGetTodayOrdersQuery,
   useDeleteOrdersMutation,
   useGetUserOrderDetailQuery,
   useGetUserOrderQuery,

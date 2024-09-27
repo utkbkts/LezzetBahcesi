@@ -55,18 +55,6 @@ const orderGetProduct = catchAsyncError(async (req, res, next) => {
   });
 });
 
-const orderTodayGet = catchAsyncError(async (req, res, next) => {
-  const now = new Date();
-  const past24Hours = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-  const count = await Order.countDocuments({
-    createdAt: { $gte: past24Hours, $lte: now },
-  });
-
-  res.status(200).json({
-    count,
-  });
-});
-
 const orderDelete = catchAsyncError(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
 
@@ -142,7 +130,6 @@ const updateOrderStatus = catchAsyncError(async (req, res, next) => {
 export default {
   newOrder,
   orderGetProduct,
-  orderTodayGet,
   orderDelete,
   getOrderDetail,
   getUserOrder,

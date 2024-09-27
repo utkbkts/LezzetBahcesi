@@ -28,12 +28,7 @@ router.get(
   authorizeRoles("admin"),
   OrderControllers.orderGetProduct
 );
-router.get(
-  "/admin/today/orders",
-  isAuthenticatedUser,
-  authorizeRoles("admin"),
-  OrderControllers.orderTodayGet
-);
+
 router.delete(
   "/admin/orders/:id",
   isAuthenticatedUser,
