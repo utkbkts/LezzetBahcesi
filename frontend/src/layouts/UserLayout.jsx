@@ -32,7 +32,7 @@ const UserLayout = () => {
       <div className={isUserPath ? "flex " : "w-full"}>
         {/* Kullanıcı sayfası  */}
         {isUserPath && (
-          <div className="flex-1 flex items-center flex-col justify-center min-h-screen bg-gray-800">
+          <div className="flex-1 flex items-center flex-col justify-center  min-h-screen bg-gray-800">
             <UserSidebar userMenu={userMenu} />
           </div>
         )}
@@ -45,7 +45,7 @@ const UserLayout = () => {
           <Outlet />
         </div>
       </div>
-      <div>
+      <div className="w-full mt-auto">
         <Footer />
       </div>
     </div>

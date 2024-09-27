@@ -38,7 +38,7 @@ const Search = () => {
   };
   if (isLoading) return <Loading />;
   return (
-    <div className="search">
+    <div className="search min-h-screen">
       <div className="cuisines-list">
         <CuisineFilter data={data} />
       </div>

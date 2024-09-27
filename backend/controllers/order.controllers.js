@@ -97,33 +97,46 @@ const getUserOrder = catchAsyncError(async (req, res, next) => {
 const updateOrderStatus = catchAsyncError(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
 
+  if (!order) {
+    return next(new ErrorHandler("Sipariş bulunamadı", 404));
+  }
+
   if (order.orderStatus === "Teslim Edilmiştir.") {
-    return next(new ErrorHandler("bu ürünü zaten teslim ettiniz"));
+    return next(new ErrorHandler("Bu siparişi zaten teslim ettiniz.", 400));
   }
 
-  let productNotFound = false;
-
-  for (const item of order.basketItems) {
-    const product = await Product.findById(item.product.toString());
-    if (!product) {
-      productNotFound = true;
-      break;
-    }
-    product.stock = product.stock - item.quantity;
-
-    await product.save();
-  }
-  if (productNotFound) {
-    return next(new ErrorHandler("ürün ID bulunamadı", 400));
-  }
-  order.orderStatus = req.body.status;
   if (req.body.status === "Teslim Edilmiştir.") {
+    let productNotFound = false;
+
+    for (const item of order.basketItems) {
+      const product = await Product.findById(item.product.toString());
+
+      if (!product) {
+        productNotFound = true;
+        break;
+      }
+
+      // Stok düşüşünü sadece teslimat durumunda yap
+      product.productDetail.stock -= item.quantity;
+      await product.save();
+    }
+
+    if (productNotFound) {
+      return next(new ErrorHandler("Ürün ID bulunamadı", 400));
+    }
+
+    order.orderStatus = "Teslim Edilmiştir.";
     order.deliveredAt = Date.now();
     order.paymentInfo.status = "Ödendi";
+  } else {
+    order.orderStatus = req.body.status;
   }
+
   await order.save();
+
   res.status(200).json({
     success: true,
+    message: "Sipariş durumu başarıyla güncellendi.",
   });
 });
 
