@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RemoveCartItem } from "../../redux/features/cartSlice";
 import { Link } from "react-router-dom";
 import { calculateOrderCost } from "../../helpers/helpers";
+import { useEffect } from "react";
 
 const CartPage = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -10,7 +11,9 @@ const CartPage = () => {
   const handleCartRemove = (id) => {
     dispatch(RemoveCartItem({ id }));
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const columns = [
     {
       title: "Name",

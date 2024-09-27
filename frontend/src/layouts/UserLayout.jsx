@@ -16,13 +16,12 @@ const userMenu = [
 const UserLayout = () => {
   const { pathname } = useLocation();
   const [showLogin, setShowLogin] = useState(false);
-
   const isResetPasswordPage = pathname.startsWith("/password/reset");
 
   const isUserPath = pathname.startsWith("/me/");
 
   return (
-    <div className="w-full text-white h-full">
+    <div className="w-full text-white h-full mt-[120px]">
       {!isResetPasswordPage && <Navigation setShowLogin={setShowLogin} />}
 
       {/* Giriş  */}
@@ -30,23 +29,25 @@ const UserLayout = () => {
         <AuthModal showLogin={showLogin} setShowLogin={setShowLogin} />
       )}
 
-      <div className={isUserPath ? "flex" : "w-full"}>
+      <div className={isUserPath ? "flex " : "w-full"}>
         {/* Kullanıcı sayfası  */}
         {isUserPath && (
-          <div className="flex-1 flex items-center flex-col justify-center max-h-full h-screen bg-gray-800">
+          <div className="flex-1 flex items-center flex-col justify-center min-h-screen bg-gray-800">
             <UserSidebar userMenu={userMenu} />
           </div>
         )}
         {/* Ana içerik */}
         <div
           className={`${
-            isUserPath ? "flex-[4] mt-[100px]" : "w-full h-full"
+            isUserPath ? "flex-[4]  min-h-screen " : "w-full h-full"
           } text-black`}
         >
           <Outlet />
         </div>
       </div>
-      <Footer />
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 };

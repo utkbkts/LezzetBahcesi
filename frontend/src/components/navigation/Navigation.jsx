@@ -69,7 +69,7 @@ const Navigation = ({ setShowLogin }) => {
     }
   };
 
-  const headerClassNames = `fixed w-full bg-white z-50 shadow-xl h-20 transition-all duration-300 ${
+  const headerClassNames = `fixed w-full bg-white z-50 shadow-xl h-32 transition-all duration-300 ${
     isScrollingUp ? "top-0" : "-top-[50%]"
   }`;
 
@@ -85,7 +85,7 @@ const Navigation = ({ setShowLogin }) => {
       <header className={headerClassNames}>
         <div className="open-sans flexCenterBetwen container mx-auto h-full">
           <img
-            className="w-20 h-20 object-cover rounded-full"
+            className="w-32 h-32 object-cover rounded-full"
             src={logo}
             alt="Logo"
           />

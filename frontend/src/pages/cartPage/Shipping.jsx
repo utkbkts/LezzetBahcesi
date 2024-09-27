@@ -127,7 +127,7 @@ const Shipping = () => {
   };
   return (
     <>
-      <div className="flex flex-col items-center justify-center h-full mt-[100px] mb-8 w-full ">
+      <div className="flex flex-col items-center justify-center h-full mt-[200px] mb-8 w-full ">
         <CheckoutSteps currentStep={1} />
         <Form
           initialValues={initialValues}

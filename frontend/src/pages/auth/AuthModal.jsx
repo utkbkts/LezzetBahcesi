@@ -126,8 +126,8 @@ const inputFields = {
 
 const AuthModal = ({ setShowLogin, showLogin }) => {
   const [state, setState] = useState("login");
-  // eslint-disable-next-line no-unused-vars
   const { data } = useGetUserQuery();
+
   const [forgotPassword, { error: forgotError, isSuccess: forgotSuccess }] =
     useForgotPasswordMutation();
   const [

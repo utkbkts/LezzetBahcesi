@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Modal, Button } from "antd";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/features/cartSlice";
+import { useNavigate } from "react-router-dom";
 const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
   const [selectedOptions, setSelectedOptions] = useState({
     drinks: [],
@@ -14,7 +15,7 @@ const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
   const dispatch = useDispatch();
 
   const [quantity, setQuantity] = useState(1);
-
+  const navigate = useNavigate();
   //sideProduct start
   const handleSideChange = (e) => {
     const { name, checked, value } = e.target;
@@ -137,7 +138,9 @@ const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
       quantity: quantity,
     };
     dispatch(addToCart(cartItems));
+    navigate("/cart");
   };
+
   return (
     <Modal
       open={isOpen}

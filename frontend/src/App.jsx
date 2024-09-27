@@ -16,6 +16,8 @@ import UpdatePassword from "./pages/profileSection/userComponent/UpdatePassword"
 import UpdateProfile from "./pages/profileSection/userComponent/UpdateProfile";
 import UserReviews from "./pages/profileSection/userComponent/UserReviews";
 import UserOrder from "./pages/profileSection/userComponent/UserOrder";
+import { useGetUserQuery } from "./redux/api/UserApi.jsx";
+
 //admin
 import AdminLayout from "./layouts/AdminLayout";
 import Dashboard from "./pages/adminSection/adminComponent/dashboard/Dashboard";
@@ -31,6 +33,7 @@ import UserOrderDetail from "./pages/profileSection/userComponent/UserOrderDetai
 import ResetPassword from "./components/resetPassword/ResetPassword.jsx";
 import ContactPage from "./pages/contact/ContactPage.jsx";
 function App() {
+  const { data } = useGetUserQuery();
   const router = createBrowserRouter([
     {
       path: "/",
