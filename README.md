@@ -57,7 +57,7 @@ npm run dev
 ```bash
 npm run build
 ```
-5.**.env**
+5.**.env-Backend**
 ```bash
 JWT_SECRET=""
 
