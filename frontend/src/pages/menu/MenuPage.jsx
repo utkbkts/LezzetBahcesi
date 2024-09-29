@@ -122,9 +122,10 @@ const MenuPage = () => {
       <div className="relative">
         <Hero
           title={"Menüler."}
-          titleSub={"Siz ne isterseniz."}
-          classNameHero={` bg-menu`}
-          className={"berkshire-swash-regular"}
+          subTitle={"Siz ne isterseniz."}
+          classNameHero={`bg-menu`}
+          titleClass={"berkshire-swash-regular"}
+          titleMainClass={"flex items-center justify-center"}
         />
         <div className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <img src={menu7} alt="" className="" />

@@ -29,10 +29,10 @@ const UserLayout = () => {
         <AuthModal showLogin={showLogin} setShowLogin={setShowLogin} />
       )}
 
-      <div className={isUserPath ? "flex " : "w-full min-h-screen"}>
+      <div className={isUserPath ? "flex " : "w-full"}>
         {/* Kullanıcı sayfası  */}
         {isUserPath && (
-          <div className="flex-1 flex items-center flex-col justify-center  min-h-screen bg-gray-800">
+          <div className="flex-1 flex items-center  flex-col justify-center  min-h-screen bg-gray-800">
             <UserSidebar userMenu={userMenu} />
           </div>
         )}

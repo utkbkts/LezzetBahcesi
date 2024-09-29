@@ -13,9 +13,10 @@ const HomePage = () => {
     <React.Fragment>
       <Hero
         title={"Lezzetli Yemeklerin Tadını Çıkarın"}
-        titleSub={
+        subTitle={
           " Gurme şeflerimizin özenle hazırladığı yemeklerle damak zevkinizi şımartın. Taze malzemelerle hazırlanan özgün tariflerimizle her lokmada unutulmaz bir deneyim yaşayın."
         }
+        subTitleClass={"text-start"}
       />
       <AboutSection />
       <PopularMenu />

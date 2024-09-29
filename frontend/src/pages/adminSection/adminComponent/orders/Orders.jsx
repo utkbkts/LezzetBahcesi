@@ -202,22 +202,19 @@ function Orders() {
     console.log("params", pagination, filters, sorter, extra);
   };
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="min-h-screen">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">
         Gelen Siparişler
       </h1>
-      <div className="w-[1400px]">
-        <Table
-          columns={columns}
-          dataSource={dataSource}
-          onChange={onChange}
-          pagination={{ pageSize: 5 }}
-          showSorterTooltip={{
-            target: "sorter-icon",
-          }}
-          scroll={{ x: "max-content" }}
-        />
-      </div>
+      <Table
+        columns={columns}
+        dataSource={dataSource}
+        onChange={onChange}
+        pagination={{ pageSize: 5 }}
+        showSorterTooltip={{
+          target: "sorter-icon",
+        }}
+      />
     </div>
   );
 }

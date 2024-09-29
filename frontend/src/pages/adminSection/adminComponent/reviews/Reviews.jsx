@@ -92,7 +92,8 @@ const Reviews = () => {
   };
 
   return (
-    <div className="h-screen">
+    <div className="min-h-screen">
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">Yorumlar</h1>
       {data?.product?.length > 0 ? (
         <Table
           columns={columns}

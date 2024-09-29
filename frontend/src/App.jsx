@@ -32,6 +32,8 @@ import Invoice from "./components/invoice/Invoice";
 import UserOrderDetail from "./pages/profileSection/userComponent/UserOrderDetail";
 import ResetPassword from "./components/resetPassword/ResetPassword.jsx";
 import ContactPage from "./pages/contact/ContactPage.jsx";
+import Reservation from "./pages/adminSection/adminComponent/reservation/Reservation.jsx";
+import Courier from "./pages/adminSection/adminComponent/courier/Courier.jsx";
 function App() {
   const { data } = useGetUserQuery();
   const router = createBrowserRouter([
@@ -145,6 +147,14 @@ function App() {
         {
           path: "products/:id",
           element: <UpdateProduct />,
+        },
+        {
+          path: "reservation",
+          element: <Reservation />,
+        },
+        {
+          path: "courier",
+          element: <Courier />,
         },
       ],
     },

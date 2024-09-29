@@ -83,7 +83,7 @@ const Products = () => {
       onFilter: (value, record) => record.user?.name.indexOf(value) === 0,
     },
     {
-      title: "Action",
+      title: "Eylemler",
       dataIndex: "action",
       render: (_, record) => (
         <ul>
@@ -108,7 +108,8 @@ const Products = () => {
   }));
 
   return (
-    <div className="h-screen">
+    <div className="min-h-screen">
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">Ürünler</h1>
       <Table
         columns={columns}
         dataSource={dataSource}

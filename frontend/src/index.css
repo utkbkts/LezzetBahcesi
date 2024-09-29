@@ -156,3 +156,39 @@ body {
   background: rgba(0, 0, 0, 0.455);
 }
 /* bgmenu */
+
+/* hamburger */
+
+/* hamburger bar */
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.bar {
+  width: 30px;
+  background-color: white;
+  height: 2px;
+  margin: 2px 0;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.hamburger:hover .bar {
+  background-color: #ccc;
+}
+
+.hamburger.active .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: translateY(-5px) rotate(-45deg);
+}
