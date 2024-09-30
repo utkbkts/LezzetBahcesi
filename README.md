@@ -46,7 +46,7 @@ git clone https://github.com/utkbkts/LezzetBahcesi.git
 ```
 2.**Proje dizinine gelin ve gerekli bağımlılıkları yükleyin:**
  ```bash
-cd LezzetBahcesi
+cd frontend
 npm install
 ```
 3.**Projeyi çalıştırın:**
@@ -57,7 +57,7 @@ npm run dev
 ```bash
 npm run build
 ```
-5.**.env**
+5.**.env-Backend**
 ```bash
 JWT_SECRET=""
 
