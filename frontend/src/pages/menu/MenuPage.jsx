@@ -128,7 +128,7 @@ const MenuPage = () => {
           titleMainClass={"flex items-center justify-center"}
         />
         <div className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <img src={menu7} alt="" className="" />
+          <img src={menu7} alt="image" />
         </div>
         <img src={menu} alt="" className="absolute left-0 z-[-1] top-[100%]" />
       </div>

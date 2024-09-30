@@ -48,6 +48,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "user",
     },
+    isBlocked: {
+      type: Boolean,
+      default: "",
+    },
+    courier: {
+      type: String,
+      default: "normal",
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
   },

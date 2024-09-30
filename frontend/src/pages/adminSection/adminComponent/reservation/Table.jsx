@@ -1,5 +1,18 @@
 import { useState } from "react";
-import { Button, Select, Space, Table } from "antd";
+import {
+  Button,
+  Select,
+  Space,
+  Table,
+  Modal,
+  Form,
+  Input,
+  Row,
+  Col,
+} from "antd";
+import DatePicker from "react-datepicker";
+import { tr } from "date-fns/locale";
+import "react-datepicker/dist/react-datepicker.css";
 
 const data = [
   {
@@ -88,9 +101,12 @@ const data = [
     status: "devam ediyor",
   },
 ];
+
 const TableData = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -101,7 +117,22 @@ const TableData = () => {
     setFilteredInfo({});
     setSortedInfo({});
   };
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
+  const tableInput = Array.from({ length: 150 }, (_, index) => ({
+    id: index + 1,
+    table: `M${index + 1}`,
+  }));
+  const tableInputPeople = Array.from({ length: 4 }, (_, index) => ({
+    id: index + 1,
+    people: `${index + 1 === 4 ? "4+" : index + 1}`,
+  }));
+
+  const onFinish = (values) => {
+    console.log(values);
+  };
   const columns = [
     {
       title: "Saat Aralığı",
@@ -209,8 +240,124 @@ const TableData = () => {
     <>
       <Space style={{ marginBottom: 16 }}>
         <Button onClick={clearAll}>Tüm Filteleri temizle</Button>
+        <Button onClick={showModal}>+Rezervasyon Ekle</Button>
       </Space>
       <Table columns={columns} dataSource={data} onChange={handleChange} />
+      <Modal
+        open={isModalOpen}
+        onCancel={() => setIsModalOpen(false)}
+        footer={null}
+      >
+        <div>
+          <h3 className="text-center text-black ">Rezervasyon</h3>
+          <div>
+            <Form onFinish={onFinish} layout="vertical">
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Form.Item
+                    label="İsim"
+                    name="name"
+                    rules={[
+                      { required: true, message: "Lütfen isim giriniz." },
+                      {
+                        pattern: /^[a-z ,.şğıiüç'-]+$/i,
+                        message: "Özel karakter kullanamazsınız.",
+                      },
+                    ]}
+                  >
+                    <Input />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
+                    label="Soyadı"
+                    name="lastname"
+                    rules={[
+                      { required: true, message: "Lütfen soyadı giriniz." },
+                      {
+                        pattern: /^[a-z ,.şğıiüç'-]+$/i,
+                        message: "Özel karakter kullanamazsınız.",
+                      },
+                    ]}
+                  >
+                    <Input />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Form.Item
+                name="times"
+                label="Tarih Giriniz."
+                className="w-full"
+                rules={[
+                  {
+                    required: true,
+                    message: "Lütfen tarih giriniz!",
+                  },
+                ]}
+              >
+                <DatePicker
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={30}
+                  className="w-full p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 cursor-pointer text-gray-600"
+                  timeCaption="Saat"
+                  dateFormat="Pp"
+                  locale={tr}
+                  selected={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                />
+              </Form.Item>
+              <Form.Item
+                name="table"
+                label="Masa Numarası giriniz."
+                rules={[
+                  { required: true, message: "Lütfen masa numarası seçiniz!" },
+                ]}
+              >
+                <Select placeholder="Masa seçin">
+                  {tableInput.map((item) => (
+                    <Select.Option key={item.id} value={item.table}>
+                      {item.table}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+              <Form.Item
+                name="numberOfPeople"
+                label="Kişi Sayısı"
+                rules={[
+                  { required: true, message: "Lütfen kişi sayısı giriniz" },
+                ]}
+              >
+                <Select placeholder="Kişi sayısını giriniz">
+                  {tableInputPeople.map((item) => (
+                    <Select.Option key={item.id} value={item.people}>
+                      {item.people}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+              <Form.Item
+                label="Özel istek"
+                name="note"
+                rules={[
+                  {
+                    pattern: /^[a-z ,.şğıiüç'-]+$/i,
+                    message: "Özel karakter kullanamazsınız.",
+                  },
+                ]}
+              >
+                <Input placeholder="özel isteğinizi giriniz" />
+              </Form.Item>
+              <Form.Item>
+                <Button type="primary" className="w-full" htmlType="submit">
+                  Kaydet
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };

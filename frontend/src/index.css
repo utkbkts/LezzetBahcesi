@@ -157,7 +157,18 @@ body {
 }
 /* bgmenu */
 
-/* hamburger */
+/* bg-about */
+
+.bg-about {
+  background-position: center !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  background: linear-gradient(rgba(0, 0, 0, 0.12), rgba(15, 23, 43, 0.9)),
+    url("/about/slider_bg3.jpg");
+  width: 100% !important;
+  height: 55vh !important;
+}
 
 /* hamburger bar */
 
