@@ -169,6 +169,17 @@ body {
   width: 100% !important;
   height: 55vh !important;
 }
+/* bg-contact */
+.bg-contact {
+  background-position: center !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  background: linear-gradient(rgba(0, 0, 0, 0.12), rgba(15, 23, 43, 0.9)),
+    url("/hero/contact-1.jpg");
+  width: 100% !important;
+  height: 55vh !important;
+}
 
 /* hamburger bar */
 
