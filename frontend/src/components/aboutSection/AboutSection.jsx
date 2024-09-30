@@ -37,11 +37,11 @@ const sectionField = [
 const AboutSection = () => {
   return (
     <div className="w-full container mx-auto">
-      <div className="mt-12 flex gap-4">
+      <div className="mt-12 grid custom:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
         {sectionField.map((item) => (
           <div
             key={item.id}
-            className="w-[400px] h-[250px] py-4 px-4 bg-white shadow-lg rounded-md flex flex-col gap-2 hover:bg-[#FEA116] transition-all duration-300 group"
+            className="custom:w-[350px] w-full h-[250px] py-4 px-4 bg-white shadow-lg rounded-md flex flex-col gap-2 hover:bg-[#FEA116] transition-all duration-300 group"
           >
             <div className="text-[#FEA116] group-hover:text-white">
               {item.icon}
@@ -54,24 +54,24 @@ const AboutSection = () => {
           </div>
         ))}
       </div>
-      <div className="flex items-start mt-20">
-        <div className="flex-1 ">
-          <div className="flex items-center gap-4">
+      <div className="flex lg:flex-row flex-col items-start mt-20">
+        <div className="lg:flex-1 w-full">
+          <div className="md:flex hidden items-center gap-4">
             <img src={img} alt="" className="w-64" />
             <img src={img2} alt="" className="w-52 mt-24" />
           </div>
-          <div className="flex items-center gap-4 mt-4 ml-12">
+          <div className="md:flex hidden items-center gap-4 mt-4 ml-12">
             <img src={img3} alt="" className="w-52 mb-[5rem]" />
             <img src={img4} alt="" className="w-64" />
           </div>
         </div>
-        <div className="flex-1">
-          <div className="flex flex-col">
-            <span className="relative text-xl leading-4 text-[#FEA116]">
+        <div className="lg:flex-1 w-full">
+          <div className="flex flex-col ">
+            <span className="relative text-xl leading-4 text-[#FEA116] md:block hidden">
               Hakkımızda
               <span className="absolute top-1/2 inset-y-0 left-32 bg-orange-500 h-[1px] w-32"></span>
             </span>
-            <div className="flex mt-4 flex-col">
+            <div className="flex mt-4 flex-col items-center justify-center md:text-start text-center">
               <h2 className="flex items-center gap-2 text-[32px] font-[800]">
                 Lezzet <Utensils size={60} className="text-[#FEA116]" />
                 Bahçesi
@@ -99,7 +99,7 @@ const AboutSection = () => {
                 da özel kılmayı arzuluyoruz.
               </p>
 
-              <div className="flex items-center justify-between">
+              <div className=" items-center justify-between md:flex hidden">
                 <span className="relative flex items-center gap-4 ml-4 pt-8">
                   <span className="absolute h-full w-1 -left-3 bg-orange-400"></span>
                   <strong className="text-[#FEA116] text-[48px]">15</strong>

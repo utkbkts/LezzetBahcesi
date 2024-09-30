@@ -13,7 +13,7 @@ const Hero = ({
   const pathname = useLocation().pathname;
   return (
     <section className={cn("bg-hero", classNameHero)}>
-      <div className="flex items-center justify-center h-full w-full">
+      <div className="flex items-center justify-center h-full w-full custom:flex-row flex-col">
         <div
           className={cn(
             "flex-1 flex flex-col items-start gap-4 justify-center py-4 px-7",
@@ -21,10 +21,7 @@ const Hero = ({
           )}
         >
           <h1
-            className={cn(
-              "text-[64px] font-[800] leading-[77px] text-white",
-              titleClass
-            )}
+            className={cn(" font-[800] leading-[77px] text-white", titleClass)}
           >
             {title}
           </h1>
@@ -43,11 +40,11 @@ const Hero = ({
           )}
         </div>
         {pathname === "/" && (
-          <div className="flex-[2] items-center justify-center flex hero-active">
+          <div className="custom:flex-[2] w-full lg:pb-0 pb-12 items-center justify-center flex hero-active">
             <img
               src={imgHero}
               alt=""
-              className="w-[400px] h-[400px] animate-spin "
+              className="lg:w-[400px] w-[250px] lg:h-[400px] h-full animate-spin "
             />
           </div>
         )}

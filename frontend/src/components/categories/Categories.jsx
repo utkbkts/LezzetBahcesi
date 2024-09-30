@@ -23,7 +23,7 @@ const CatagoriesAndMenu = () => {
           />
         </div>
         <div className="flex flex-col items-center justify-center container mx-auto">
-          <div className="flex gap-2 items-center justify-center mb-12">
+          <div className="flex gap-2 items-center justify-center mb-12 flex-wrap">
             <Button
               color="primary"
               className={category === "All" ? "bg-blue-500 text-white" : ""}
@@ -42,7 +42,11 @@ const CatagoriesAndMenu = () => {
               </Button>
             ))}
           </div>
-          <div className={"grid grid-cols-4 gap-4"}>
+          <div
+            className={
+              "grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"
+            }
+          >
             {data?.product?.map((product) => {
               if (
                 category === "All" ||

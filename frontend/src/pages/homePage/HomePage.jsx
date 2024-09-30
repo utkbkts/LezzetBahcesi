@@ -16,7 +16,13 @@ const HomePage = () => {
         subTitle={
           " Gurme şeflerimizin özenle hazırladığı yemeklerle damak zevkinizi şımartın. Taze malzemelerle hazırlanan özgün tariflerimizle her lokmada unutulmaz bir deneyim yaşayın."
         }
-        subTitleClass={"text-start"}
+        subTitleClass={"custom:text-start text-center"}
+        titleClass={
+          "custom:text-[64px] text-[40px] custom:pt-0 pt-12 custom:text-start text-center"
+        }
+        titleMainClass={
+          "w-full flex flex-col custom:items-start items-center justify-center"
+        }
       />
       <AboutSection />
       <PopularMenu />

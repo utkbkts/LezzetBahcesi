@@ -14,8 +14,8 @@ const Reservation = () => {
   };
   return (
     <div className="container mx-auto min-h-screen">
-      <div className="flex justify-center">
-        <img src={videoimg} alt="" className="object-cover" />
+      <div className="xl:flex justify-center mt-24 xl:mt-0">
+        <img src={videoimg} alt="" className="object-cover xl:block hidden" />
         <div className=" bg-[#0F172B] py-8 px-6 w-full">
           <div className="relative">
             <span className="text-orange-400">Rezervasyon</span>

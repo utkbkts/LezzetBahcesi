@@ -89,11 +89,11 @@ const Navigation = ({ setShowLogin }) => {
             src={logo}
             alt="Logo"
           />
-          <nav className="flexCenter gap-6">
+          <nav className="md:flex hidden items-center gap-6">
             {navbarLink.map((item) => (
               <NavLink
                 key={item.id}
-                className={`active-header  ${
+                className={`active-header   ${
                   location === item.url ? "text-blue-700" : ""
                 }`}
                 to={item.url}

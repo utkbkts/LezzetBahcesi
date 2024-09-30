@@ -14,7 +14,7 @@ const PopularMenu = () => {
     <div className="min-h-screen mt-24">
       <Title title="Popüler Yiyecekler" titleSub={"Öğünlerimiz"} />
       <div className="container mx-auto mt-12">
-        <div className="flex items-center gap-4 justify-center mb-12">
+        <div className="flex items-center lg:flex-row flex-col  gap-4 justify-center mb-12">
           <div
             className={`flex items-center cursor-pointer pb-2  border-b-transparent border-b-2 gap-2 ${
               category === "kahvaltı" ? "!border-b-orange-400 border-b-2" : ""
@@ -49,7 +49,7 @@ const PopularMenu = () => {
             </h6>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 grid-cols-1 gap-12">
           {filteredMenu.map((item) => (
             <div key={item.id} className="flex items-center gap-2 ">
               <img

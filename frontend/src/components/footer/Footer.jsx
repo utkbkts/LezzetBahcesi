@@ -70,12 +70,12 @@ const footer = {
 const Footer = () => {
   return (
     <div className="bg-[#0F172B] w-full h-full">
-      <div className="grid grid-cols-4 py-8 px-8">
-        <div className="flex flex-col">
+      <div className="grid xl:grid-cols-4 mds:grid-cols-3 grid-cols-1 py-8 px-8 mds:gap-0 gap-12">
+        <div className="flex flex-col items-center justify-center">
           <h4 className="pacifico-regular text-[23px] font-[400] text-[#fea116]">
             Şirket Hakkında
           </h4>
-          <ul className="flex flex-col gap-2 pt-6">
+          <ul className="flex flex-col gap-2 pt-6 mds:items-start items-center justify-center">
             {footer.company.map((item) => (
               <li
                 key={item.id}
@@ -87,27 +87,27 @@ const Footer = () => {
             ))}
           </ul>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center justify-center">
           <h4 className="pacifico-regular text-[23px] font-[400] text-[#fea116]">
             İletişim
           </h4>
-          <ul className="flex flex-col gap-3 pt-6">
+          <ul className="flex flex-col gap-3 pt-6 items-center justify-center">
             {footer.contact.map((item) => (
               <li
                 key={item.id}
-                className="font-[400] transition-all duration-400 text-[15px] flex items-center gap-1 hover:scale-105 cursor-pointer "
+                className="font-[400] transition-all duration-400 text-[15px] flex mds:flex-row flex-col mds:text-start text-center items-center gap-1 hover:scale-105 cursor-pointer "
               >
                 {item.icon}
-                <span className="w-[400px]">{item.name}</span>
+                <span className="md:w-[400px] w-full">{item.name}</span>
               </li>
             ))}
           </ul>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center justify-center">
           <h4 className="pacifico-regular text-[23px] font-[400] text-[#fea116]">
             Çalışma Saatlerimiz
           </h4>
-          <ul className="flex flex-col gap-5 pt-6">
+          <ul className="flex mds:flex-col flex-row gap-5 pt-6 mds:items-start items-center justify-center">
             {footer.opening.map((item) => (
               <li
                 key={item.id}
@@ -119,11 +119,11 @@ const Footer = () => {
             ))}
           </ul>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center justify-center">
           <h4 className="pacifico-regular text-[23px] font-[400] text-[#fea116]">
             Sosyal Medya Hesaplarımız
           </h4>
-          <ul className="flex flex-col gap-5 pt-6">
+          <ul className="flex flex-col gap-5 pt-6 items-center justify-center">
             {footer.socialmedia.map((item) => (
               <li
                 key={item.id}
