@@ -36,6 +36,7 @@ import Reservation from "./pages/adminSection/adminComponent/reservation/Reserva
 import Courier from "./pages/adminSection/adminComponent/courier/Courier.jsx";
 function App() {
   const { data } = useGetUserQuery();
+
   const router = createBrowserRouter([
     {
       path: "/",

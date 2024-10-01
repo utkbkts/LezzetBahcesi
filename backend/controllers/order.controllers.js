@@ -1,6 +1,7 @@
 import catchAsyncError from "../middleware/catch.middleware.js";
 import Order from "../models/order.models.js";
 import Product from "../models/product.models.js";
+import { notifyOrderStatusUpdated } from "../socket/socket.js";
 import ErrorHandler from "../utils/errorHandler.js";
 const newOrder = catchAsyncError(async (req, res, next) => {
   const {
@@ -131,7 +132,12 @@ const updateOrderStatus = catchAsyncError(async (req, res, next) => {
   } else {
     order.orderStatus = req.body.status;
   }
+  // Durum güncellenince bildirim gönder
 
+  const orderSocketID = notifyOrderStatusUpdated(order.user.toString(), order);
+  if (orderSocketID) {
+    io.to(orderSocketID).emit("orderStatusUpdated", orderSocketID);
+  }
   await order.save();
 
   res.status(200).json({

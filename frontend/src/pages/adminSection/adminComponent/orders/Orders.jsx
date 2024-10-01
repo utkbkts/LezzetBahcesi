@@ -5,10 +5,10 @@ import {
   useUpdateOrdersMutation,
 } from "../../../../redux/api/OrderApi";
 import toast from "react-hot-toast";
-
 import { Button, Select, Table } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import moment from "moment";
+
 function Orders() {
   const { data } = useGetAdminOrdersQuery();
   const [deleteOrder] = useDeleteOrdersMutation();

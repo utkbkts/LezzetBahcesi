@@ -3,9 +3,11 @@ import { useGetUserOrderQuery } from "../../../redux/api/OrderApi";
 import { Link } from "react-router-dom";
 import { PrinterFilled } from "@ant-design/icons";
 import Loading from "../../../components/loading/Loader";
+import { useSelector } from "react-redux";
 
 const UserOrder = () => {
   const { data, isLoading } = useGetUserOrderQuery();
+  const { orders } = useSelector((state) => state.socket);
 
   const columns = [
     {
@@ -34,19 +36,19 @@ const UserOrder = () => {
       title: "Ürün durumu",
       dataIndex: "orderStatus",
       key: "orderStatus",
-      render: (orderStatus) => (
-        <span
-          className={`animate-pulse ${
-            orderStatus === "Hazırlanıyor"
-              ? "text-red-600"
-              : orderStatus === "Kuryemiz Yolda"
-              ? "text-blue-600"
-              : "text-green-600"
-          }`}
-        >
-          {orderStatus}
-        </span>
-      ),
+      render: (_, record) => {
+        const order = orders.find((o) => o._id === record._id);
+        const orderStatus = order ? order.orderStatus : record.orderStatus;
+        const statusClass =
+          orderStatus === "Kuryemiz Yolda"
+            ? "text-blue-500 animate-pulse transition-all duration-300"
+            : orderStatus === "Hazırlanıyor"
+            ? "text-orange-500 animate-pulse transition-all duration-300"
+            : orderStatus === "Teslim Edilmiştir."
+            ? "text-green-500"
+            : "text-gray-500";
+        return <span className={statusClass}>{orderStatus}</span>;
+      },
     },
     {
       title: "Ödeme şekli",
@@ -61,7 +63,10 @@ const UserOrder = () => {
       render: (_, record) => (
         <ul>
           <Link to={`/me/order/${record._id}`}>
-            <Button type="primary" className="bg-green-700 hover:!bg-green-800">
+            <Button
+              type="primary"
+              className="bg-green-700 hover:!bg-green-800 "
+            >
               <PrinterFilled />
             </Button>
           </Link>
@@ -74,12 +79,15 @@ const UserOrder = () => {
     ...item,
     key: item._id,
   }));
+
   const onChange = (pagination, filters, sorter, extra) => {
     console.log("params", pagination, filters, sorter, extra);
   };
+
   if (isLoading) return <Loading />;
+
   return (
-    <div className="w-full  mt-10 p-6 bg-white rounded-lg shadow-lg">
+    <div className="w-full mt-10 p-6 bg-white rounded-lg shadow-lg">
       <h1 className="text-3xl !font-light open-sans mb-6">Siparişlerim</h1>
       <hr className="mb-6" />
       <Table
@@ -87,9 +95,7 @@ const UserOrder = () => {
         dataSource={dataSource}
         onChange={onChange}
         pagination={{ pageSize: 5 }}
-        showSorterTooltip={{
-          target: "sorter-icon",
-        }}
+        showSorterTooltip={{ target: "sorter-icon" }}
         scroll={{ x: "max-content" }}
       />
     </div>

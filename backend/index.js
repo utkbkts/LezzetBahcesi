@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
+import { app, server } from "./socket/socket.js";
 import AuthRouters from "./routes/auth.routes.js";
 import ProductRouters from "./routes/product.routes.js";
 import OrderRouters from "./routes/order.routes.js";
@@ -12,7 +13,7 @@ import PaymentRouters from "./routes/payment.routes.js";
 import ContactRouters from "./routes/contact.routes.js";
 import errorMiddleware from "./middleware/error.middleware.js";
 import path from "path";
-const app = express();
+import ConnectedDatabase from "./db/mongoDb.js";
 app.use(cookieParser());
 dotenv.config();
 app.use(
@@ -57,12 +58,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log("mongodb is connected");
-    app.listen(process.env.PORT, () =>
-      console.log(`${process.env.PORT} server is running`)
-    );
-  })
-  .catch((error) => console.log("server error", error));
+server.listen(process.env.PORT, () => {
+  ConnectedDatabase();
+  console.log(`server is running PORT:${process.env.PORT}`);
+});
