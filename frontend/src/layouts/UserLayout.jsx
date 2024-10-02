@@ -28,6 +28,7 @@ const UserLayout = () => {
   if (loading) {
     return <Loading />;
   }
+
   return (
     <div className="w-full text-white h-full mt-[120px]">
       {!isResetPasswordPage && <Navigation setShowLogin={setShowLogin} />}
