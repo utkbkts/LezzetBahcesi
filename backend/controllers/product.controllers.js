@@ -8,8 +8,9 @@ const getAllProduct = catchAsyncError(async (req, res) => {
   const resPerPage = 5;
 
   const apiFilters = new apiFilter(Product, req.query).searchResult().filters();
+  const categories = await Product.distinct("category");
 
-  let products = await apiFilters.query.clone();
+  let products = await apiFilters.query;
   let FilteredProductCount = products.length;
 
   apiFilters.pagination(resPerPage);
@@ -19,6 +20,7 @@ const getAllProduct = catchAsyncError(async (req, res) => {
     resPerPage,
     FilteredProductCount,
     products,
+    categories,
   });
 });
 

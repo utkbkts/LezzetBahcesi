@@ -93,10 +93,6 @@ const CuisineFilter = ({ data }) => {
     setSearchParams(searchParams);
   };
 
-  const categories = [
-    ...new Set(data?.products?.map((product) => product.category)),
-  ];
-
   const handleCheck = () => {
     searchParams = new URLSearchParams();
     setSearchParams(searchParams);
@@ -112,7 +108,7 @@ const CuisineFilter = ({ data }) => {
       </div>
       <h5>Kategoriler</h5>
       <hr />
-      {categories?.map((item, index) => (
+      {data.categories?.map((item, index) => (
         <Checkbox
           onClick={(e) => handleCategoryFilter(e.target)}
           key={index}
@@ -188,14 +184,15 @@ const CuisineFilter = ({ data }) => {
 
 CuisineFilter.propTypes = {
   data: PropTypes.shape({
+    categories: PropTypes.array.isRequired,
     FilteredProductCount: PropTypes.number,
     resPerPage: PropTypes.number,
     products: PropTypes.arrayOf(
       PropTypes.shape({
-        category: PropTypes.string,
+        category: PropTypes.string.isRequired,
       })
-    ),
-  }),
+    ).isRequired,
+  }).isRequired,
 };
 
 export default CuisineFilter;

@@ -47,7 +47,7 @@ const Search = () => {
           {data?.products?.length > 0 ? (
             data?.products?.map((product) => (
               <div key={product._id}>
-                <SearchResultCard {...product} />
+                <SearchResultCard product={product} data={data} />
               </div>
             ))
           ) : (
