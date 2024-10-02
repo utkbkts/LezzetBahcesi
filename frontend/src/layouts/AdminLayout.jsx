@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import AdminSidebar from "../pages/adminSection/admin/AdminSidebar";
 import Navigation from "../components/navigation/Navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   CirclePlus,
   ClockArrowDown,
@@ -12,6 +12,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import { useSelector } from "react-redux";
+import Loading from "../components/loading/Loader";
 
 const adminMenu = [
   {
@@ -45,13 +46,14 @@ const adminMenu = [
 
 const AdminLayout = () => {
   const [showBar, setShowBar] = useState(false);
-  const { user } = useSelector((state) => state.auth);
+  const { user, loading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  useEffect(() => {
-    if (user?.role !== "admin") {
-      return navigate("/");
-    }
-  }, [user]);
+  if (user.role !== "admin") {
+    return navigate("/");
+  }
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className="w-full text-white  h-full mt-[120px]">
       <Navigation />
