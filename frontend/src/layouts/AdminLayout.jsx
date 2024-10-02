@@ -1,9 +1,8 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import AdminSidebar from "../pages/adminSection/admin/AdminSidebar";
 import Navigation from "../components/navigation/Navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  Car,
   CirclePlus,
   ClockArrowDown,
   LayoutDashboard,
@@ -12,6 +11,7 @@ import {
   ShoppingCart,
   UsersRound,
 } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const adminMenu = [
   {
@@ -41,15 +41,17 @@ const adminMenu = [
     url: "/admin/reservation",
     icon: <NotebookPen size={25} />,
   },
-  {
-    name: "Kuryeler",
-    url: "/admin/courier",
-    icon: <Car size={25} />,
-  },
 ];
 
 const AdminLayout = () => {
   const [showBar, setShowBar] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user?.role !== "admin") {
+      return navigate("/");
+    }
+  }, [user]);
   return (
     <div className="w-full text-white  h-full mt-[120px]">
       <Navigation />

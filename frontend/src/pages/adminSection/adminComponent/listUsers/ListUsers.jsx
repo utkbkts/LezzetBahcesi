@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import {
-  useDeleteUserMutation,
+  useBlockedUserMutation,
   useGetAdminRoleUsersMutation,
   useGetAdminUsersQuery,
 } from "../../../../redux/api/UserApi";
@@ -12,15 +12,17 @@ function ListUsers() {
   const [roleAdmin, { error: RoleError, isSuccess: RoleSuccess }] =
     useGetAdminRoleUsersMutation();
 
-  const [deleteUser, { error: deleteError, isSuccess }] =
-    useDeleteUserMutation();
+  const [blockedUser, { error: deleteError, isSuccess, data: BlockData }] =
+    useBlockedUserMutation();
 
   useEffect(() => {
     if (deleteError) {
+      console.log(deleteError);
+
       toast.error(deleteError?.data?.message);
     }
     if (isSuccess) {
-      toast.success("Başarıyla silindi");
+      toast.success(BlockData?.message);
     }
   }, [deleteError, isSuccess]);
 
@@ -36,7 +38,7 @@ function ListUsers() {
   return (
     <div className="min-h-screen">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Kullanıcılar</h1>
-      <TableData deleteUser={deleteUser} roleAdmin={roleAdmin} data={data} />
+      <TableData blockedUser={blockedUser} roleAdmin={roleAdmin} data={data} />
     </div>
   );
 }

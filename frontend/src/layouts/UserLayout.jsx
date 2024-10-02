@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import UserSidebar from "../pages/profileSection/user/UserSidebar";
 import Navigation from "../components/navigation/Navigation";
 import AuthModal from "../pages/auth/AuthModal";
 import Footer from "../components/footer/Footer";
+import { useSelector } from "react-redux";
 
 const userMenu = [
   { name: "Profil", url: "/me/profile" },
@@ -17,8 +18,14 @@ const UserLayout = () => {
   const { pathname } = useLocation();
   const [showLogin, setShowLogin] = useState(false);
   const isResetPasswordPage = pathname.startsWith("/password/reset");
-
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   const isUserPath = pathname.startsWith("/me/");
+  useEffect(() => {
+    if (!user) {
+      return navigate("/");
+    }
+  }, [user]);
 
   return (
     <div className="w-full text-white h-full mt-[120px]">

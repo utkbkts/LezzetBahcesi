@@ -106,14 +106,7 @@ const MenuPage = () => {
   let interval = useRef();
 
   useEffect(() => {
-    const savedTime = localStorage.getItem("countDownEnd");
-    const countDownDate = savedTime
-      ? Number(savedTime)
-      : Date.now() + 7 * 24 * 60 * 60 * 1000;
-
-    if (!savedTime) {
-      localStorage.setItem("countDownEnd", countDownDate);
-    }
+    const countDownDate = Date.now() + 7 * 24 * 60 * 60 * 1000;
 
     interval.current = setInterval(() => {
       const now = new Date().getTime();
@@ -121,7 +114,6 @@ const MenuPage = () => {
 
       if (distance < 0) {
         clearInterval(interval.current);
-        localStorage.removeItem("countDownEnd");
         setTimerDays("00");
         setTimerHours("00");
         setTimerMinutes("00");

@@ -219,3 +219,12 @@ body {
 .react-datepicker__navigation {
   right: 0 !important;
 }
+
+/* modal Auth */
+.header .ant-modal-content {
+  padding: 0 !important;
+  width: 60rem !important;
+}
+.header .ant-modal-body {
+  height: 100% !important;
+}

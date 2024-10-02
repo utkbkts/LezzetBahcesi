@@ -43,6 +43,9 @@ const LoginUser = catchAsyncError(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Şifre yanlış.", 401));
   }
+  if (user.isBlocked === true) {
+    return next(new ErrorHandler("Hesabınız engellenmiştir..", 401));
+  }
   sendToken(user, 200, res);
 });
 
@@ -119,23 +122,22 @@ const UpdateProfilePassword = catchAsyncError(async (req, res, next) => {
   await user.save();
   sendToken(user, 200, res);
 });
-const deleteUser = catchAsyncError(async (req, res, next) => {
-  const user = await User.findById(req.params.id);
+const blockedUser = catchAsyncError(async (req, res, next) => {
+  const userId = req.params.id;
 
+  const user = await User.findById(userId);
   if (!user) {
-    return next(
-      new ErrorHandler(`User not found with id:${req.params.id}`, 404)
-    );
+    return next(new ErrorHandler(`User not found with id: ${userId}`, 404));
   }
 
-  if (user?.avatar?.public_id) {
-    await delete_file(user?.avatar?.public_id);
-  }
+  user.isBlocked = !user.isBlocked;
+  await user.save();
 
-  await user.deleteOne();
-
-  res.status(200).json({
-    success: true,
+  res.json({
+    message: user.isBlocked
+      ? "Kullanıcı bloklandı"
+      : "Kullanıcı bloktan çıkarıldı",
+    user,
   });
 });
 
@@ -143,16 +145,17 @@ const updateUserRole = catchAsyncError(async (req, res, next) => {
   const { id } = req.params;
   const { role } = req.body;
 
-  const user = await User.findById(id);
+  const user = await User.findByIdAndUpdate(
+    id,
+    { role },
+    { new: true, runValidators: true }
+  );
 
   if (!user) {
     return next(
       new ErrorHandler(`User not found with id:${req.params.id}`, 404)
     );
   }
-  user.role = role;
-  await user.save();
-
   res.status(200).json({
     success: true,
     user,
@@ -228,7 +231,7 @@ export default {
   updateProfile,
   ResetPassword,
   UpdateProfilePassword,
-  deleteUser,
+  blockedUser,
   updateUserRole,
   ForgotPassword,
 };

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMessage, setOrders } from "../redux/features/socketSlice";
+import notificationSound from "/sounds/not.mp3";
 import io from "socket.io-client";
 import toast from "react-hot-toast";
 import PropTypes from "prop-types";
@@ -25,7 +26,9 @@ const NotificationProvider = ({ children }) => {
       newSocket.on("orderStatusUpdated", (data) => {
         const message = data.message; // Gelen mesaj
         const updatedOrder = data.order; // Güncellenmiş sipariş
-
+        data.shouldShake = true;
+        const sound = new Audio(notificationSound);
+        sound.play();
         // Redux state'ini güncelle
         dispatch(setOrders(updatedOrder));
         dispatch(setMessage(message)); // Mesajı ayarla

@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
-import { Modal, Input, Avatar, Badge, Button } from "antd";
-import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { Modal, Input, Badge } from "antd";
 import { useSelector } from "react-redux";
-import { FaUserAlt } from "react-icons/fa";
-import { GrUserAdmin } from "react-icons/gr";
-import { useLogoutMutation } from "../../redux/api/AuthApi";
+
 import { IoCartOutline } from "react-icons/io5";
 import logo from "/logo.png";
 import PropTypes from "prop-types";
+import ModalUser from "./ModalUser";
 
 const navbarLink = [
   {
@@ -39,12 +37,11 @@ const Navigation = ({ setShowLogin }) => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const { user } = useSelector((state) => state.auth);
+
   const location = useLocation().pathname;
   const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
-  const [logout] = useLogoutMutation();
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -56,13 +53,11 @@ const Navigation = ({ setShowLogin }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  const toggleModal = (isOpen) => setIsModalOpen(isOpen);
-
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchTerm) {
       navigate(`/search?query=${encodeURIComponent(searchTerm).trim()}`);
-      toggleModal(false);
+      setIsModalOpen(false);
       setSearchTerm("");
     } else {
       navigate("/");
@@ -74,11 +69,6 @@ const Navigation = ({ setShowLogin }) => {
   }`;
 
   const shouldShowSearchIcon = location !== "/search";
-
-  const logoutHandler = async () => {
-    await logout();
-    navigate(0);
-  };
 
   return (
     <>
@@ -102,7 +92,7 @@ const Navigation = ({ setShowLogin }) => {
               </NavLink>
             ))}
             {shouldShowSearchIcon && (
-              <span onClick={() => toggleModal(true)}>
+              <span onClick={() => setIsModalOpen(true)}>
                 <CiSearch className=" cursor-pointer" size={25} />
               </span>
             )}
@@ -111,62 +101,7 @@ const Navigation = ({ setShowLogin }) => {
                 <IoCartOutline size={25} className=" cursor-pointer" />
               </Badge>
             </NavLink>
-            <ul className="flexCenter space-x-8">
-              {user ? (
-                <div className="flex items-center gap-2 relative ">
-                  <Avatar
-                    size={30}
-                    icon={<UserOutlined />}
-                    onClick={() => setModalVisible(!modalVisible)}
-                    className="cursor-pointer flex items-center"
-                  />
-                  <li className=" cursor-pointer">{user.name}</li>
-
-                  {modalVisible && (
-                    <div className="absolute top-14 z-[150] right-0 bg-white h-auto w-[180px] shadow-lg rounded-lg p-3 flex flex-col gap-4">
-                      <NavLink
-                        onClick={() => setModalVisible(false)}
-                        to={"/me/profile"}
-                        className="flex items-center gap-2 cursor-pointer text-gray-700 hover:text-blue-600 transition-colors"
-                      >
-                        <FaUserAlt size={20} />
-                        <span>Profil</span>
-                      </NavLink>
-                      {user?.role === "admin" && (
-                        <NavLink
-                          onClick={() => setModalVisible(false)}
-                          to={"/admin/dashboard"}
-                          className="flex items-center gap-2 cursor-pointer text-gray-700 hover:text-green-600 transition-colors"
-                        >
-                          <GrUserAdmin size={20} />
-                          <span>Admin</span>
-                        </NavLink>
-                      )}
-
-                      <NavLink
-                        onClick={logoutHandler}
-                        className="flex items-center gap-2 cursor-pointer text-gray-700 hover:text-green-600 transition-colors"
-                        to="/"
-                      >
-                        <LogoutOutlined />
-                        Logout
-                      </NavLink>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <>
-                  <Button
-                    type="default"
-                    onClick={() => setShowLogin(true)}
-                    className="cursor-pointer mt-1"
-                  >
-                    <UserOutlined />
-                    Giriş Yap
-                  </Button>
-                </>
-              )}
-            </ul>
+            <ModalUser setShowLogin={setShowLogin} />
           </nav>
         </div>
       </header>
@@ -175,7 +110,7 @@ const Navigation = ({ setShowLogin }) => {
         title="Yemek Çeşidi Ara"
         onOk={handleSearchSubmit}
         open={isModalOpen}
-        onCancel={() => toggleModal(false)}
+        onCancel={() => setIsModalOpen(false)}
         okText="Ara"
         cancelText="İptal"
       >

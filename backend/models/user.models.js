@@ -52,10 +52,6 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    courier: {
-      type: String,
-      default: "normal",
-    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
   },

@@ -19,8 +19,6 @@ const io = new Server(server, {
 const userSocketMap = {};
 
 io.on("connection", (socket) => {
-  console.log("ORDER ID:", socket.id);
-
   // Order ID'sini al
   const userId = socket.handshake.query.userId;
 

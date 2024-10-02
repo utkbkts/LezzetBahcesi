@@ -1,9 +1,27 @@
-import { Button, Table } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Table } from "antd";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import createUser from "/create-user.png";
+import removeUser from "/remove-user.png";
+import userLock from "/user-lock.png";
 import PropTypes from "prop-types";
-const TableData = ({ roleAdmin, deleteUser, data }) => {
+import { useState } from "react";
+const TableData = ({ roleAdmin, blockedUser, data }) => {
+  const { user } = useSelector((state) => state.auth);
+  const [tooltipsVisible, setTooltipsVisible] = useState({
+    createUser: false,
+    userLock: false,
+  });
+  const [tooltipContent, setTooltipContent] = useState("");
+
+  const handleBlockedUser = (id) => {
+    blockedUser(id);
+  };
+
+  const handleUserRoleChange = (id, currentRole) => {
+    const newRole = currentRole === "user" ? "admin" : "user";
+    roleAdmin({ id, body: { role: newRole } });
+  };
   const columns = [
     {
       title: "İsim",
@@ -54,27 +72,59 @@ const TableData = ({ roleAdmin, deleteUser, data }) => {
           return null;
         }
         return record?.role === "admin" ? (
-          <Button
+          <img
+            src={removeUser}
+            alt=""
+            className="w-8 h-8 cursor-pointer"
             onClick={() => handleUserRoleChange(record._id, record.role)}
-            type="primary"
-          >
-            <EditOutlined />
-          </Button>
+            onMouseEnter={() => {
+              setTooltipContent("Kullanıcıyı Engelle");
+              setTooltipVisible(true);
+            }}
+            onMouseLeave={() => setTooltipVisible(false)}
+          />
         ) : (
-          <div className="flex gap-4 items-center">
-            <Button
-              onClick={() => handleRemoveProduct(record._id)}
-              type="primary"
-              danger
-            >
-              <DeleteOutlined />
-            </Button>
-            <Button
-              onClick={() => handleUserRoleChange(record._id, record.role)}
-              type="primary"
-            >
-              <EditOutlined />
-            </Button>
+          <div className="flex gap-4 items-center ">
+            <div className="relative">
+              <img
+                src={createUser}
+                alt=""
+                className="w-8 h-8 cursor-pointer"
+                onClick={() => handleUserRoleChange(record._id, record.role)}
+                onMouseEnter={() => {
+                  setTooltipContent("Admin Ekle");
+                  setTooltipsVisible((prev) => ({ ...prev, createUser: true }));
+                }}
+                onMouseLeave={() =>
+                  setTooltipsVisible((prev) => ({ ...prev, createUser: false }))
+                }
+              />
+              {tooltipsVisible.createUser && (
+                <div className="absolute bg-gray-700 text-white p-2 rounded z-[9999] -left-24 top-0 ml-2">
+                  {tooltipContent}
+                </div>
+              )}
+            </div>
+            <div className="relative">
+              <img
+                src={userLock}
+                alt=""
+                className="w-8 h-8 cursor-pointer"
+                onClick={() => handleBlockedUser(record._id)}
+                onMouseEnter={() => {
+                  setTooltipContent("Kullanıcıyı engelle");
+                  setTooltipsVisible((prev) => ({ ...prev, userLock: true }));
+                }}
+                onMouseLeave={() =>
+                  setTooltipsVisible((prev) => ({ ...prev, userLock: false }))
+                }
+              />
+              {tooltipsVisible.userLock && (
+                <div className="absolute bg-gray-700 text-white p-2 rounded z-[9999] left-9 -top-2 whitespace-nowrap">
+                  {tooltipContent}
+                </div>
+              )}
+            </div>
           </div>
         );
       },
@@ -84,25 +134,12 @@ const TableData = ({ roleAdmin, deleteUser, data }) => {
     ...item,
     key: item._id,
   }));
-  const { user } = useSelector((state) => state.auth);
 
-  const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
-  };
-  const handleRemoveProduct = (id) => {
-    deleteUser(id);
-  };
-
-  const handleUserRoleChange = (id, currentRole) => {
-    const newRole = currentRole === "user" ? "admin" : "user";
-    roleAdmin({ id, body: { role: newRole } });
-  };
   return (
     <div>
       <Table
         columns={columns}
         dataSource={dataSource}
-        onChange={onChange}
         pagination={{ pageSize: 5 }}
         showSorterTooltip={{
           target: "sorter-icon",
@@ -115,10 +152,10 @@ const TableData = ({ roleAdmin, deleteUser, data }) => {
 
 TableData.propTypes = {
   roleAdmin: PropTypes.func.isRequired,
-  deleteUser: PropTypes.func.isRequired,
+  blockedUser: PropTypes.func.isRequired,
   data: PropTypes.shape({
     users: PropTypes.array.isRequired,
-  }).isRequired,
+  }),
 };
 
 export default TableData;

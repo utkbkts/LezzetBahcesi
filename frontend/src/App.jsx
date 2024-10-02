@@ -33,7 +33,6 @@ import UserOrderDetail from "./pages/profileSection/userComponent/UserOrderDetai
 import ResetPassword from "./components/resetPassword/ResetPassword.jsx";
 import ContactPage from "./pages/contact/ContactPage.jsx";
 import Reservation from "./pages/adminSection/adminComponent/reservation/Reservation.jsx";
-import Courier from "./pages/adminSection/adminComponent/courier/Courier.jsx";
 function App() {
   const { data } = useGetUserQuery();
 
@@ -152,10 +151,6 @@ function App() {
         {
           path: "reservation",
           element: <Reservation />,
-        },
-        {
-          path: "courier",
-          element: <Courier />,
         },
       ],
     },

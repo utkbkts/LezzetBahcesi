@@ -32,11 +32,11 @@ router.put(
   authorizeRoles("admin"),
   AuthControllers.updateUserRole
 );
-router.delete(
+router.put(
   "/admin/users/:id",
   isAuthenticatedUser,
   authorizeRoles("admin"),
-  AuthControllers.deleteUser
+  AuthControllers.blockedUser
 );
 
 export default router;
