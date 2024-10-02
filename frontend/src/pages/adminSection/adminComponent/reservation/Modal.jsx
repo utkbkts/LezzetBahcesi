@@ -137,7 +137,6 @@ const ModalPage = ({ setIsModalOpen, isModalOpen, getData }) => {
   ];
 
   const onFinish = (values) => {
-    console.log(values);
     createReservation(values);
   };
   return (
@@ -149,7 +148,7 @@ const ModalPage = ({ setIsModalOpen, isModalOpen, getData }) => {
       <div>
         <h3 className="text-center text-black ">Rezervasyon</h3>
         <div>
-          <Form onFinish={onFinish} layout="vertical">
+          <Form form={form} onFinish={onFinish} layout="vertical">
             <Row gutter={16}>
               {formItems.map((item) => (
                 <Col span={12} key={item.name}>

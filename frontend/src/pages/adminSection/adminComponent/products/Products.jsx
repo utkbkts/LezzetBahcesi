@@ -1,124 +1,26 @@
-import { Button, Table } from "antd";
+import { useEffect } from "react";
 import {
   useDeleteProductMutation,
   useGetAdminProductsQuery,
 } from "../../../../redux/api/ProductApi";
-
+import TableData from "./Table";
+import toast from "react-hot-toast";
+import Loading from "../../../../components/loading/Loader";
 const Products = () => {
   const { data } = useGetAdminProductsQuery();
-  const [deleteProduct] = useDeleteProductMutation();
-  const users = Array.from(
-    new Set(data?.product?.map((item) => item.user?.name))
-  );
-  const categories = Array.from(
-    new Set(data?.product?.map((item) => item.category))
-  );
+  const [deleteProduct, { isSuccess, isLoading }] = useDeleteProductMutation();
 
-  const handleRemoveProduct = (id) => {
-    deleteProduct(id);
-  };
-  const columns = [
-    {
-      title: "Ürün İsmi",
-      dataIndex: "productDetail",
-      showSorterTooltip: {
-        target: "full-header",
-      },
-      filters: data?.product?.map((option) => ({
-        text: option.productDetail.title,
-        value: option.productDetail.title,
-      })),
-      onFilter: (value, record) =>
-        record.productDetail.title.indexOf(value) === 0,
-      sorter: (a, b) =>
-        a.productDetail.title.length - b.productDetail.title.length,
-      sortDirections: ["descend"],
-      render: (productDetail) => productDetail.title,
-    },
-    {
-      title: "Ürün Açıklaması",
-      dataIndex: "productDetail",
-      onFilter: (value, record) =>
-        record.productDetail.description.indexOf(value) === 0,
-      render: (record) => (
-        <ul>
-          <li>{record?.description?.slice(0, 50)}</li>
-        </ul>
-      ),
-    },
-    {
-      title: "Ürün Kategorisi",
-      dataIndex: "category",
-      filters: categories.map((category) => ({
-        text: category,
-        value: category,
-      })),
-      onFilter: (value, record) => record.category.indexOf(value) === 0,
-    },
-    {
-      title: "Yan ürünler",
-      dataIndex: "tags",
-      render: (record) => {
-        return (
-          <ul>
-            {record.sideProductValue.map((item) => (
-              <li key={item._id}>{item.sideProduct}</li>
-            ))}
-          </ul>
-        );
-      },
-    },
-    {
-      title: "Ürünü oluşturan kişi",
-      dataIndex: "user",
-      filters: users.map((userName) => ({
-        text: userName,
-        value: userName,
-      })),
-      render: (user) => (
-        <ul>
-          <li>{user?.name}</li>
-        </ul>
-      ),
-      onFilter: (value, record) => record.user?.name.indexOf(value) === 0,
-    },
-    {
-      title: "Eylemler",
-      dataIndex: "action",
-      render: (_, record) => (
-        <ul>
-          <Button
-            onClick={() => handleRemoveProduct(record._id)}
-            type="primary"
-          >
-            Sil
-          </Button>
-        </ul>
-      ),
-    },
-  ];
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Ürün silme işlemi başarılı");
+    }
+  }, [isSuccess, isLoading]);
 
-  const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
-  };
-
-  const dataSource = data?.product?.map((item) => ({
-    ...item,
-    key: item._id,
-  }));
-
+  if (isLoading) return <Loading />;
   return (
     <div className="min-h-screen">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Ürünler</h1>
-      <Table
-        columns={columns}
-        dataSource={dataSource}
-        onChange={onChange}
-        pagination={{ pageSize: 5 }}
-        showSorterTooltip={{
-          target: "sorter-icon",
-        }}
-      />
+      <TableData deleteProduct={deleteProduct} data={data} />
     </div>
   );
 };

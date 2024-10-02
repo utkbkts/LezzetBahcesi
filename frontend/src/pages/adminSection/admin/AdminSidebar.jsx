@@ -45,7 +45,7 @@ AdminSidebar.propTypes = {
       url: PropTypes.string.isRequired,
     })
   ).isRequired,
-  showBar: PropTypes.string,
+  showBar: PropTypes.bool,
 };
 
 export default AdminSidebar;

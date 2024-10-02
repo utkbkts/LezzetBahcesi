@@ -8,7 +8,7 @@ import menu7 from "/menuPage/img-def.png";
 import menu8 from "/menuPage/divider-free-img.png";
 import menu9 from "/menuPage/hamburger.jpg";
 import menu10 from "/menuPage/menu-footer.png";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 const pasta = [
   {
     id: 1,
@@ -98,46 +98,53 @@ const hamburger = [
   },
 ];
 const MenuPage = () => {
-  const [timeLeft, setTimeLeft] = useState("");
+  const [timerDays, setTimerDays] = useState("00");
+  const [timerHours, setTimerHours] = useState("00");
+  const [timerMinutes, setTimerMinutes] = useState("00");
+  const [timerSeconds, setTimerSeconds] = useState("00");
 
-  const targetDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-
-  function msToTime(duration) {
-    let seconds = Math.floor((duration / 1000) % 60);
-    let minutes = Math.floor((duration / (1000 * 60)) % 60);
-    let hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-    let days = Math.floor(duration / (1000 * 60 * 60 * 24));
-
-    hours = hours.toString().padStart(2, "0");
-    minutes = minutes.toString().padStart(2, "0");
-    seconds = seconds.toString().padStart(2, "0");
-    days = days.toString().padStart(2, "0");
-
-    return {
-      hours,
-      minutes,
-      seconds,
-      days,
-    };
-  }
+  let interval = useRef();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date();
-      const distance = targetDate - now;
+    const savedTime = localStorage.getItem("countDownEnd");
+    const countDownDate = savedTime
+      ? Number(savedTime)
+      : Date.now() + 7 * 24 * 60 * 60 * 1000;
+
+    if (!savedTime) {
+      localStorage.setItem("countDownEnd", countDownDate);
+    }
+
+    interval.current = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
 
       if (distance < 0) {
-        clearInterval(interval);
-        setTimeLeft("Zaman Doldu!");
+        clearInterval(interval.current);
+        localStorage.removeItem("countDownEnd");
+        setTimerDays("00");
+        setTimerHours("00");
+        setTimerMinutes("00");
+        setTimerSeconds("00");
       } else {
-        const { days, hours, minutes, seconds } = msToTime(distance);
-        setTimeLeft(
-          `${days} gün ${hours} saat ${minutes} dakika ${seconds} saniye`
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
         );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        setTimerDays(days.toString().padStart(2, "0"));
+        setTimerHours(hours.toString().padStart(2, "0"));
+        setTimerMinutes(minutes.toString().padStart(2, "0"));
+        setTimerSeconds(seconds.toString().padStart(2, "0"));
       }
     }, 1000);
-    return () => clearInterval(interval);
-  }, [targetDate]);
+
+    return () => {
+      clearInterval(interval.current);
+    };
+  }, []);
 
   return (
     <div>
@@ -284,7 +291,7 @@ const MenuPage = () => {
             <h4 className="text-[#eba83c] text-[35px] font-bold mb-2 berkshire-swash-regular">
               Büyük indirimler sizi bekliyor! %50 fırsatını kaçırmayın!
             </h4>
-            <h2 className="text-white text-4xl font-bold">{timeLeft}</h2>
+            <h2 className="text-white text-4xl font-bold">{`${timerDays}:${timerHours}:${timerMinutes}:${timerSeconds}`}</h2>
             <button className="py-4 px-9 rounded-full text-white bg-orange-500">
               Şimdi Randevu al
             </button>
