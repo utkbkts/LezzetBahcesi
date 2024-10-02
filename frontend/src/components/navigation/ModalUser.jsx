@@ -2,19 +2,18 @@ import { FaUserAlt } from "react-icons/fa";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { GrUserAdmin } from "react-icons/gr";
 import { useLogoutMutation } from "../../redux/api/AuthApi";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import { Avatar, Button } from "antd";
-import { NavLink } from "react-router-dom";
-import { setLogout } from "../../redux/features/userSlice";
+import { NavLink, useNavigate } from "react-router-dom";
 const ModalUser = ({ setShowLogin }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const [logout] = useLogoutMutation();
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const logoutHandler = async () => {
     await logout();
-    dispatch(setLogout());
+    navigate(0);
   };
   return (
     <ul className="flexCenter space-x-8">
