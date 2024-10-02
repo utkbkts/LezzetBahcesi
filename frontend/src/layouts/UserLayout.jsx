@@ -19,14 +19,19 @@ const UserLayout = () => {
   const [showLogin, setShowLogin] = useState(false);
   const isResetPasswordPage = pathname.startsWith("/password/reset");
   const { user } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const isUserPath = pathname.startsWith("/me/");
   useEffect(() => {
-    if (!user) {
-      return navigate("/");
+    if (user !== null) {
+      setLoading(false);
+    } else {
+      navigate("/"); 
     }
   }, [user]);
-
+if (loading) {
+    return <div>Loading...</div>; 
+  }
   return (
     <div className="w-full text-white h-full mt-[120px]">
       {!isResetPasswordPage && <Navigation setShowLogin={setShowLogin} />}
