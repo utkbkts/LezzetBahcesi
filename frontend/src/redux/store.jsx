@@ -8,6 +8,7 @@ import { productApi } from "./api/ProductApi";
 import { orderApi } from "./api/OrderApi";
 import { analyticApi } from "./api/AnalyticApi";
 import { contactApi } from "./api/ContactApi";
+import { reservationApi } from "./api/ReservationApi";
 export const store = configureStore({
   reducer: {
     auth: userReducer,
@@ -19,6 +20,7 @@ export const store = configureStore({
     [orderApi.reducerPath]: orderApi.reducer,
     [analyticApi.reducerPath]: analyticApi.reducer,
     [contactApi.reducerPath]: contactApi.reducer,
+    [reservationApi.reducerPath]: reservationApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
@@ -28,5 +30,6 @@ export const store = configureStore({
       orderApi.middleware,
       analyticApi.middleware,
       contactApi.middleware,
+      reservationApi.middleware,
     ]),
 });

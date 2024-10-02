@@ -1,4 +1,3 @@
-import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { tr } from "date-fns/locale";
@@ -9,31 +8,31 @@ import {
   Clock9,
   TableCellsSplit,
 } from "lucide-react";
-const DatePickerData = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
-  const onChange = (dates) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-  };
+import PropTypes from "prop-types";
 
+const DatePickerData = ({ getData }) => {
+  const reservedDates =
+    getData?.reserver?.map((reservation) => new Date(reservation.times)) || [];
+
+  console.log("🚀 ~ DatePickerData ~ reservedDates:", getData);
+  const isDateDisabled = (date) => {
+    return reservedDates.some(
+      (reservedDate) =>
+        date.getFullYear() === reservedDate.getFullYear() &&
+        date.getMonth() === reservedDate.getMonth() &&
+        date.getDate() === reservedDate.getDate()
+    );
+  };
   return (
     <div className="w-full">
       <DatePicker
-        selected={startDate}
-        onChange={onChange}
-        minDate={new Date()}
-        maxDate={new Date(new Date().setDate(new Date().getDate() + 30))}
-        startDate={startDate}
-        endDate={endDate}
-        selectsRange
         inline
+        readOnly
         dateFormat="Pp"
         locale={tr}
         timeCaption="Saat"
         timeFormat="HH:mm"
-        showDisabledMonthNavigation
+        filterDate={(date) => !isDateDisabled(date)}
       />
       <div className="pt-2">
         <h5>Zaman Dilimleri</h5>
@@ -80,6 +79,21 @@ const DatePickerData = () => {
       </div>
     </div>
   );
+};
+DatePickerData.propTypes = {
+  getData: PropTypes.shape({
+    reserver: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        times: PropTypes.string.isRequired,
+        numberOfPeople: PropTypes.number.isRequired,
+        table: PropTypes.string.isRequired,
+        note: PropTypes.string.isRequired,
+        status: PropTypes.string.isRequired,
+        lastname: PropTypes.string.isRequired,
+      })
+    ),
+  }),
 };
 
 export default DatePickerData;

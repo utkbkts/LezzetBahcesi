@@ -214,3 +214,8 @@ body {
 .hamburger.active .bar:nth-child(3) {
   transform: translateY(-5px) rotate(-45deg);
 }
+
+/* datepicker */
+.react-datepicker__navigation {
+  right: 0 !important;
+}

@@ -98,24 +98,46 @@ const hamburger = [
   },
 ];
 const MenuPage = () => {
-  const [timeLeft, setTimeLeft] = useState(7 * 24 * 60 * 60);
+  const [timeLeft, setTimeLeft] = useState("");
+
+  const targetDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+  function msToTime(duration) {
+    let seconds = Math.floor((duration / 1000) % 60);
+    let minutes = Math.floor((duration / (1000 * 60)) % 60);
+    let hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+    let days = Math.floor(duration / (1000 * 60 * 60 * 24));
+
+    hours = hours.toString().padStart(2, "0");
+    minutes = minutes.toString().padStart(2, "0");
+    seconds = seconds.toString().padStart(2, "0");
+    days = days.toString().padStart(2, "0");
+
+    return {
+      hours,
+      minutes,
+      seconds,
+      days,
+    };
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeLeft((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+      const now = new Date();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        clearInterval(interval);
+        setTimeLeft("Zaman Doldu!");
+      } else {
+        const { days, hours, minutes, seconds } = msToTime(distance);
+        setTimeLeft(
+          `${days} gün ${hours} saat ${minutes} dakika ${seconds} saniye`
+        );
+      }
     }, 1000);
-
     return () => clearInterval(interval);
-  }, []);
-
-  const formatTime = (seconds) => {
-    const days = Math.floor(seconds / (24 * 60 * 60));
-    const hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
-    const minutes = Math.floor((seconds % (60 * 60)) / 60);
-    const secs = seconds % 60;
-
-    return `${days}d ${hours}h ${minutes}m ${secs}s`;
-  };
+  }, [targetDate]);
 
   return (
     <div>
@@ -258,13 +280,11 @@ const MenuPage = () => {
       </div>
       <div className="mt-[10%] min-h-screen relative">
         <div className="bg-friends">
-          <div className="flex flex-col items-center justify-center absolute z-[50] top-1/2 left-1/2 gap-5">
+          <div className="flex flex-col items-center justify-center absolute z-[50] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-5">
             <h4 className="text-[#eba83c] text-[35px] font-bold mb-2 berkshire-swash-regular">
               Büyük indirimler sizi bekliyor! %50 fırsatını kaçırmayın!
             </h4>
-            <h2 className="text-white text-4xl font-bold">
-              {formatTime(timeLeft)}
-            </h2>
+            <h2 className="text-white text-4xl font-bold">{timeLeft}</h2>
             <button className="py-4 px-9 rounded-full text-white bg-orange-500">
               Şimdi Randevu al
             </button>

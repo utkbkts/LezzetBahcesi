@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const calculateOrderCost = (cartItems) => {
   const itemsPrice = cartItems.reduce((acc, item) => acc + item.price, 0);
 
@@ -23,4 +25,8 @@ export const getPriceQuery = (searchParams, key, value) => {
   }
 
   return searchParams;
+};
+
+export const getDateLocal = (date) => {
+  return moment(date).format("DD MMMM YYYY HH:mm:ss");
 };

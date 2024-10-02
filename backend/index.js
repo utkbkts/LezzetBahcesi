@@ -11,6 +11,7 @@ import OrderRouters from "./routes/order.routes.js";
 import AnalyticRouters from "./routes/analytic.route.js";
 import PaymentRouters from "./routes/payment.routes.js";
 import ContactRouters from "./routes/contact.routes.js";
+import ReservationRouters from "./routes/reservation.route.js";
 import errorMiddleware from "./middleware/error.middleware.js";
 import path from "path";
 import ConnectedDatabase from "./db/mongoDb.js";
@@ -29,7 +30,7 @@ app.use(
     useDefaults: true,
     directives: {
       "default-src": ["'self'"],
-      "img-src": ["'self'", "https:", "data:"],
+      "img-src": ["'self'", "https:", "data:", "https://res.cloudinary.com"],
       "frame-ancestors": ["'self'"],
       "frame-src": [
         "'self'",
@@ -48,6 +49,7 @@ app.use("/api", OrderRouters);
 app.use("/api", PaymentRouters);
 app.use("/api", AnalyticRouters);
 app.use("/api", ContactRouters);
+app.use("/api", ReservationRouters);
 
 app.use(errorMiddleware);
 

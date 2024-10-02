@@ -1,13 +1,11 @@
 import { useEffect } from "react";
-import { avatar } from "../../utils/DataIndex";
+import avatar from "/avatar.png";
 import toast from "react-hot-toast";
 import { Button } from "antd";
 import PropTypes from "prop-types";
-import moment from "moment";
-import "moment/dist/locale/tr";
-import "moment/min/locales";
 import { useDeleteReviewsMutation } from "../../redux/api/ProductApi";
 import { useSelector } from "react-redux";
+import { getDateLocal } from "../../helpers/helpers";
 const AllReviews = ({ review, data }) => {
   const role = review?.user?.role === "admin" ? "(admin)" : "";
   const productId = data.product._id;
@@ -62,7 +60,7 @@ const AllReviews = ({ review, data }) => {
           {"★".repeat(review?.rating) + "☆".repeat(5 - review?.rating)}
         </div>
         <p className="text-sm text-gray-500">
-          {moment(review?.createdAt).format("DD MMMM YYYY HH:mm:ss")}
+          {getDateLocal(review?.createdAt)}
         </p>
       </div>
     </>
