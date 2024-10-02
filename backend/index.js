@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { app, server } from "./socket/socket.js";

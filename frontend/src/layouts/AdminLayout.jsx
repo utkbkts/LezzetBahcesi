@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import AdminSidebar from "../pages/adminSection/admin/AdminSidebar";
 import Navigation from "../components/navigation/Navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CirclePlus,
   ClockArrowDown,
@@ -48,9 +48,11 @@ const AdminLayout = () => {
   const [showBar, setShowBar] = useState(false);
   const { user, loading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  if (user.role !== "admin") {
-    return navigate("/");
-  }
+  useEffect(() => {
+    if (user.role !== "admin") {
+      return navigate("/");
+    }
+  }, [user]);
   if (loading) {
     return <Loading />;
   }

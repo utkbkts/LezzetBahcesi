@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import UserSidebar from "../pages/profileSection/user/UserSidebar";
 import Navigation from "../components/navigation/Navigation";
@@ -22,9 +22,11 @@ const UserLayout = () => {
   const { user, loading } = useSelector((state) => state.auth);
   const isUserPath = pathname.startsWith("/me/");
   const navigate = useNavigate();
-  if (!user) {
-    return navigate("/");
-  }
+  useEffect(() => {
+    if (!user) {
+      return navigate("/");
+    }
+  }, [user]);
   if (loading) {
     return <Loading />;
   }
