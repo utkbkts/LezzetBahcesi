@@ -6,7 +6,7 @@ import {
 } from "../../../../redux/api/OrderApi";
 import toast from "react-hot-toast";
 import { Button, Select, Table } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 import moment from "moment";
 
 function Orders() {
@@ -174,14 +174,11 @@ function Orders() {
       ),
     },
     {
-      title: "Action",
+      title: "Eylemler",
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
         <div className="flex gap-2">
-          <Button type="primary">
-            <EditOutlined />
-          </Button>{" "}
           <Button
             onClick={() => handleRemoveProduct(record._id)}
             type="primary"

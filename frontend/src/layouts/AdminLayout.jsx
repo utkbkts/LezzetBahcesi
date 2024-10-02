@@ -49,7 +49,7 @@ const AdminLayout = () => {
   const { user, loading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {
-    if (user.role !== "admin") {
+    if (user?.role !== "admin") {
       return navigate("/");
     }
   }, [user]);

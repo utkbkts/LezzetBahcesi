@@ -14,12 +14,14 @@ export const userApi = createApi({
       query: () => "/me",
       transformResponse: (response) => response.user,
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        dispatch(setLoading(true));
         try {
           const { data } = await queryFulfilled;
           dispatch(setUser(data));
           dispatch(setisAuthenticated(true));
-          dispatch(setLoading(false));
         } catch (error) {
+          console.error(error);
+        } finally {
           dispatch(setLoading(false));
         }
       },

@@ -18,6 +18,7 @@ import UpdateProfile from "../pages/profileSection/userComponent/UpdateProfile";
 import UserReviews from "../pages/profileSection/userComponent/UserReviews";
 import UserOrder from "../pages/profileSection/userComponent/UserOrder";
 import UserLayout from "../layouts/UserLayout.jsx";
+
 export const UserRoutes = {
   path: "/",
   element: <UserLayout />,

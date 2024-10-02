@@ -4,6 +4,7 @@ import UserSidebar from "../pages/profileSection/user/UserSidebar";
 import Navigation from "../components/navigation/Navigation";
 import AuthModal from "../pages/auth/AuthModal";
 import Footer from "../components/footer/Footer";
+import { useGetUserQuery } from "../redux/api/UserApi";
 import { useSelector } from "react-redux";
 import Loading from "../components/loading/Loader";
 
@@ -19,18 +20,19 @@ const UserLayout = () => {
   const { pathname } = useLocation();
   const [showLogin, setShowLogin] = useState(false);
   const isResetPasswordPage = pathname.startsWith("/password/reset");
-  const { user, loading } = useSelector((state) => state.auth);
   const isUserPath = pathname.startsWith("/me/");
+  const { data, isLoading } = useGetUserQuery();
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!user) {
+    if (!user && !isAuthenticated) {
       return navigate("/");
     }
-  }, [user]);
-  if (loading) {
+  }, [user, isAuthenticated, data]);
+
+  if (isLoading) {
     return <Loading />;
   }
-
   return (
     <div className="w-full text-white h-full mt-[120px]">
       {!isResetPasswordPage && <Navigation setShowLogin={setShowLogin} />}
