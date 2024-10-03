@@ -64,7 +64,7 @@ const Navigation = ({ setShowLogin }) => {
     }
   };
 
-  const headerClassNames = `fixed w-full bg-white z-50 shadow-xl h-32 transition-all duration-300 ${
+  const headerClassNames = `fixed w-full bg-white z-[999] shadow-xl h-32 transition-all duration-300 ${
     isScrollingUp ? "top-0" : "-top-[50%]"
   }`;
 

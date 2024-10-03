@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);
+  console.log("🚀 ~ Profile ~ user:", user);
 
   return (
     <div className="w-full  mt-10 p-6 bg-white rounded-lg shadow-lg">

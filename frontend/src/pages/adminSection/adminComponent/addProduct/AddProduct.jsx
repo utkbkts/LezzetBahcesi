@@ -20,7 +20,7 @@ const AddProduct = () => {
     nutriationValue: [],
   });
   const [createProduct, { isSuccess, error }] = useCreateProductsMutation();
-  const [categoryAdd, setCategoryAdd] = useState("");
+  const [category, setCategory] = useState("");
   const [images, setImages] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -36,13 +36,16 @@ const AddProduct = () => {
   }, [error, isSuccess]);
 
   const onFinish = (values) => {
+    console.log("🚀 ~ onFinish ~ values:", values);
+    console.log("Selected Category ID:", category);
     const dataAll = {
       productDetail: values,
-      category: categoryAdd,
+      category: category,
       tags,
       nutriation,
       images,
     };
+    console.log("🚀 ~ onFinish ~ dataAll:", dataAll);
     createProduct(dataAll);
   };
 
@@ -51,8 +54,8 @@ const AddProduct = () => {
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Ürün Ekle</h1>
       <div>
         <Category
-          category={categoryAdd}
-          setCategory={setCategoryAdd}
+          category={category}
+          setCategory={setCategory}
           tags={tags}
           setTags={setTags}
         />

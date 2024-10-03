@@ -64,7 +64,7 @@ function Dashboard() {
           {data?.analyticsData?.popularData?.map((item, index) => (
             <li key={index} className="flex justify-between items-center">
               <span className="text-lg font-medium text-gray-700">
-                {item.title}
+                {item._id}
               </span>
               <span className="text-lg font-bold text-gray-800">
                 ({item.totalSales}) Adet Satıldı.

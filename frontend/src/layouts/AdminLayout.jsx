@@ -25,6 +25,11 @@ const adminMenu = [
     url: "/admin/addproduct",
     icon: <CirclePlus size={25} />,
   },
+  {
+    name: "Yeni Kategori Ekle",
+    url: "/admin/newcategory",
+    icon: <CirclePlus size={25} />,
+  },
   { name: "Ürünler", url: "/admin/products", icon: <ShoppingCart size={25} /> },
   {
     name: "Siparişler",

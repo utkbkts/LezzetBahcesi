@@ -8,7 +8,7 @@ const UploadImages = ({ images, setImages }) => {
 
   const onChange = (e) => {
     const files = Array.from(e.target.files);
-    if (images.length >= 6) {
+    if (images.length + files.length > 6) {
       return alert("En fazla 6 resim yükleyebilirsin.");
     }
     files.forEach((file) => {

@@ -13,6 +13,7 @@ const UpdatePassword = () => {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(updatePassword),
+    mode: "onChange",
   });
   const [passwordUpdate, { isLoading, isSuccess, error }] =
     useUpdateProfilePasswordMutation();

@@ -49,7 +49,7 @@ export const productApi = createApi({
     }),
     getUserReviews: builder.query({
       query: (userId) => `/reviews/user?userId=${userId}`,
-      providesTags: ["Review"],
+      providesTags: ["Product", "Review"],
     }),
 
     //admin yönlendirmeleri

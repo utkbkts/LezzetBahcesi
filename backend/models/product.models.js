@@ -124,7 +124,8 @@ const productSchema = new mongoose.Schema(
       default: 0,
     },
     category: {
-      type: String,
+      type: mongoose.Types.ObjectId,
+      ref: "Category",
       required: [true, "Lütfen ürün kategorisini giriniz."],
     },
 

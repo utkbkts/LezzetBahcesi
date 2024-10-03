@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   useDeleteReviewsMutation,
@@ -10,18 +10,28 @@ import { Button, Table } from "antd";
 import StarRatings from "react-star-ratings";
 import Loading from "../../../components/loading/Loader";
 import TextArea from "antd/es/input/TextArea";
+import toast from "react-hot-toast";
 
 const UserReviews = () => {
   const { user } = useSelector((state) => state.auth);
   const userId = user?._id;
-  const [deleteReview] = useDeleteReviewsMutation();
+  const [deleteReview, { isSuccess: SuccessDelete }] =
+    useDeleteReviewsMutation();
 
   const { data, isLoading } = useGetUserReviewsQuery(userId);
-  const [updateReview] = useSubmitReviewMutation();
+  const [updateReview, { isSuccess: UpdateSucces }] = useSubmitReviewMutation();
 
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [currentReview, setCurrentReview] = useState(null);
+
+  useEffect(() => {
+    if (SuccessDelete) {
+      toast.success("Başarıyla Silindi.");
+    } else if (UpdateSucces) {
+      toast.success("Başarıyla Güncellendi");
+    }
+  }, [SuccessDelete, UpdateSucces]);
 
   const deleteHandler = async (review) => {
     try {

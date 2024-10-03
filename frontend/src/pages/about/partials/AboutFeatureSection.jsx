@@ -3,6 +3,7 @@ import img from "/hero/about-1.jpg";
 import img2 from "/hero/about-2.jpg";
 import img3 from "/hero/about-3.jpg";
 import img4 from "/hero/about-4.jpg";
+import React from "react";
 const sectionField = [
   {
     id: 1,
@@ -34,10 +35,10 @@ const sectionField = [
   },
 ];
 
-const AboutSection = () => {
+const AboutFeatureSection = () => {
   return (
-    <div className="w-full container mx-auto">
-      <div className="mt-12 grid custom:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
+    <React.Fragment>
+      <div className="mt-12 grid custom:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 ">
         {sectionField.map((item) => (
           <div
             key={item.id}
@@ -129,8 +130,8 @@ const AboutSection = () => {
           </div>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
-export default AboutSection;
+export default AboutFeatureSection;

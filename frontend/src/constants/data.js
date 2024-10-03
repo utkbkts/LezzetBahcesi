@@ -78,7 +78,7 @@ export const PotatoProducts = [
             message: "Lütfen cips adını giriniz.",
           },
           {
-            pattern: /^[0-9a-zA-ZşğüöçıİĞŞ%\-:\s]+$/,
+            pattern: /^[0-9a-zA-ZşğüöçıİĞŞ%()\-:\s]+$/,
             message:
               "Sadece rakamlar ve harfler (büyük ve küçük) kullanabilirsiniz.",
           },
@@ -201,7 +201,7 @@ export const addProductTitle = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     placeholder: "Ürün Fiyatı giriniz.",
     type: "text",
     name: "price",
@@ -294,59 +294,5 @@ export const updateProfileData = [
     name: "address",
     type: "text",
     label: "Adres",
-  },
-];
-export const Categoryadd = [
-  {
-    id: 1,
-    name: "Pizza",
-  },
-  {
-    id: 2,
-    name: "Hamburger",
-  },
-  {
-    id: 3,
-    name: "Döner",
-  },
-  {
-    id: 4,
-    name: "Kebap",
-  },
-  {
-    id: 5,
-    name: "Sandviç",
-  },
-  {
-    id: 6,
-    name: "Salata",
-  },
-  {
-    id: 7,
-    name: "Tatlılar",
-  },
-  {
-    id: 8,
-    name: "İçecekler",
-  },
-  {
-    id: 9,
-    name: "Çorba",
-  },
-  {
-    id: 10,
-    name: "Makarna",
-  },
-  {
-    id: 11,
-    name: "Kahvaltı",
-  },
-  {
-    id: 12,
-    name: "Öğle yemeği",
-  },
-  {
-    id: 13,
-    name: "Akşam yemeği",
   },
 ];

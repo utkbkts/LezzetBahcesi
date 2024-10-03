@@ -33,9 +33,8 @@ const getAnalyticsData = async () => {
     },
     {
       $group: {
-        _id: "$basketItems._id",
+        _id: "$basketItems.title",
         totalSales: { $sum: "$basketItems.quantity" },
-        title: { $first: "$basketItems.title" },
       },
     },
     {

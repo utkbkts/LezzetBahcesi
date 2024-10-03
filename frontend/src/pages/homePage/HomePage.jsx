@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import Categories from "../../components/categories/Categories";
-import AboutSection from "../../components/aboutSection/AboutSection";
 import PopularMenu from "../../components/popularMenu/PopularMenu";
 import Reservation from "../../components/reservation/Reservation";
 import Hero from "../../components/hero/Hero";
+import AboutFeatureSection from "../about/partials/AboutFeatureSection";
 
 const HomePage = () => {
   useEffect(() => {
@@ -24,10 +24,12 @@ const HomePage = () => {
           "w-full flex flex-col custom:items-start items-center justify-center"
         }
       />
-      <AboutSection />
-      <PopularMenu />
-      <Reservation />
-      <Categories />
+      <div className="container mx-auto text-black">
+        <AboutFeatureSection />
+        <PopularMenu />
+        <Reservation />
+        <Categories />
+      </div>
     </React.Fragment>
   );
 };

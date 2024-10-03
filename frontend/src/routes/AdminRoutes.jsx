@@ -8,6 +8,7 @@ import ListUsers from "../pages/adminSection/adminComponent/listUsers/ListUsers"
 import UpdateProduct from "../pages/adminSection/adminComponent/updateProduct/UpdateProduct";
 
 import Reservation from "../pages/adminSection/adminComponent/reservation/Reservation.jsx";
+import CategoryProducts from "../pages/adminSection/adminComponent/newCategory/CategoryProducts.jsx";
 export const AdminRoutes = {
   path: "/admin",
   element: <AdminLayout />,
@@ -43,6 +44,10 @@ export const AdminRoutes = {
     {
       path: "reservation",
       element: <Reservation />,
+    },
+    {
+      path: "newcategory",
+      element: <CategoryProducts />,
     },
   ],
 };

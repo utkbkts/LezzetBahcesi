@@ -25,7 +25,7 @@ const getAllProduct = catchAsyncError(async (req, res) => {
 });
 
 const getCategoryProductAll = catchAsyncError(async (req, res) => {
-  const product = await Product.find({});
+  const product = await Product.find({}).populate("category").lean();
 
   res.status(200).json({
     product,
@@ -76,7 +76,7 @@ const createProduct = catchAsyncError(async (req, res, next) => {
 });
 
 const getProducts = catchAsyncError(async (req, res, next) => {
-  const product = await Product.find().populate("reviews.user user");
+  const product = await Product.find().populate("reviews.user user category");
 
   res.status(200).json({
     product,

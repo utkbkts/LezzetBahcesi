@@ -207,7 +207,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "salata",
+    category: "66fe6b2a62635e7f7112e0d7",
     numOfReviews: 0,
     images: [
       {
@@ -434,7 +434,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "salata",
+    category: "66fe6b2a62635e7f7112e0d7",
     numOfReviews: 0,
     images: [
       {
@@ -660,7 +660,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "pizza",
+    category: "66fe6a0562635e7f7112e0c8",
     numOfReviews: 0,
     images: [
       {
@@ -887,7 +887,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "pizza",
+    category: "66fe6a0562635e7f7112e0c8",
     numOfReviews: 0,
     images: [
       {
@@ -1114,7 +1114,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "pizza",
+    category: "66fe6a0562635e7f7112e0c8",
     images: [
       {
         public_id: "shopit/products/xj4cdo56oidoiu2zsfqo",
@@ -1340,7 +1340,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "döner",
+    category: "66fe6a8162635e7f7112e0ce",
     numOfReviews: 0,
     images: [
       {
@@ -1567,7 +1567,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "döner",
+    category: "66fe6a8162635e7f7112e0ce",
     numOfReviews: 0,
     images: [
       {
@@ -1794,7 +1794,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "döner",
+    category: "66fe6a8162635e7f7112e0ce",
     numOfReviews: 0,
     images: [
       {
@@ -2021,7 +2021,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "hamburger",
+    category: "66fe6a5662635e7f7112e0cb",
     numOfReviews: 0,
     images: [
       {
@@ -2249,7 +2249,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "hamburger",
+    category: "66fe6a5662635e7f7112e0cb",
     numOfReviews: 0,
     images: [
       {
@@ -2476,7 +2476,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "hamburger",
+    category: "66fe6a5662635e7f7112e0cb",
     numOfReviews: 0,
     images: [
       {
@@ -2702,7 +2702,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "makarna",
+    category: "66fe6abf62635e7f7112e0d1",
     numOfReviews: 0,
     images: [
       {
@@ -2928,7 +2928,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "makarna",
+    category: "66fe6abf62635e7f7112e0d1",
     numOfReviews: 0,
     images: [
       {
@@ -3151,7 +3151,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "atıştırmalık",
+    category: "66fe6a8162635e7f7112e0ce",
     numOfReviews: 0,
     images: [
       {
@@ -3377,7 +3377,7 @@ export const Products = [
       ],
     },
     ratings: 0,
-    category: "pizza",
+    category: "66fe6a0562635e7f7112e0c8",
     numOfReviews: 0,
     images: [
       {

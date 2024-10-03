@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import Loading from "../../../../components/loading/Loader";
 const Products = () => {
   const { data } = useGetAdminProductsQuery();
+  console.log("🚀 ~ Products ~ data:", data);
   const [deleteProduct, { isSuccess, isLoading }] = useDeleteProductMutation();
 
   useEffect(() => {

@@ -5,7 +5,7 @@ const TableData = ({ data, deleteProduct }) => {
     new Set(data?.product?.map((item) => item.user?.name))
   );
   const categories = Array.from(
-    new Set(data?.product?.map((item) => item.category))
+    new Set(data?.product?.map((item) => item.category.name))
   );
 
   const handleRemoveProduct = (id) => {
@@ -41,7 +41,10 @@ const TableData = ({ data, deleteProduct }) => {
         text: category,
         value: category,
       })),
-      onFilter: (value, record) => record.category === value,
+      onFilter: (value, record) => record.category.name === value,
+      render: (record) => {
+        return <span>{record.name}</span>;
+      },
     },
     {
       title: "Yan ürünler",
