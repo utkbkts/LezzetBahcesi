@@ -34,6 +34,7 @@ function Orders() {
   const handleStatusChange = (status, id) => {
     updateOrder({ id, body: { status } });
   };
+
   const columns = [
     {
       title: "Ürün İsmi",

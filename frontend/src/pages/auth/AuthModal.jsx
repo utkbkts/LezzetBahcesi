@@ -175,7 +175,7 @@ const AuthModal = ({ setShowLogin, showLogin }) => {
       toast.success("Kayıt Başarılı!");
       setShowLogin(false);
     } else if (forgotSuccess) {
-      toast.success("Parola sıfırlama işlemi Başarılı!");
+      toast.success("Lütfen mail hesabınızı kontrol ediniz.");
       setShowLogin(false);
     }
   }, [
