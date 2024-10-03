@@ -3,7 +3,7 @@ import Loading from "../loading/Loader";
 import MenuItem from "../menuItem/MenuItem";
 import Title from "../../ui/Title";
 import { useProductGetCategoryAllQuery } from "../../redux/api/ProductApi";
-
+import pngwing from "/pngwing.com.png";
 const CatagoriesAndMenu = () => {
   const [category, setCategory] = useState("All");
   console.log("🚀 ~ CatagoriesAndMenu ~ category:", category);
@@ -28,12 +28,31 @@ const CatagoriesAndMenu = () => {
         <div className="flex flex-col items-center justify-center container mx-auto">
           <div className="flex gap-2 items-center justify-center mb-12 flex-wrap">
             {/* Benzersiz kategorileri gösteriyoruz */}
+            <div
+              className={`flex flex-col items-center gap-2 border-b-2 cursor-pointer overflow-hidden transition-all duration-300 transform ${
+                category === "All"
+                  ? "border-b-black bg-white shadow-lg scale-105"
+                  : "border-b-transparent hover:border-b-gray-300 hover:bg-gray-50"
+              } rounded-lg p-4`}
+              onClick={() => setCategory("All")}
+            >
+              <img
+                src={pngwing}
+                alt="Hepsi"
+                className="w-40 h-40 object-cover transition-transform duration-500 rounded-lg shadow-md hover:shadow-xl"
+              />
+              <h1 className="uppercase text-black font-semibold text-lg text-center tracking-wider">
+                Hepsi
+              </h1>
+            </div>
             {uniqueCategories.map((categoryName) => (
               <div
                 key={categoryName}
-                className={`flex flex-col items-center gap-2  border-b-transparent border-b-2 cursor-pointer overflow-hidden ${
-                  category === categoryName ? " border-b-2 border-b-black" : ""
-                }`}
+                className={`flex flex-col items-center gap-2 border-b-2 cursor-pointer overflow-hidden transition-all duration-300 transform ${
+                  category === categoryName
+                    ? "border-b-black bg-white shadow-lg scale-105"
+                    : "border-b-transparent hover:border-b-gray-300 hover:bg-gray-50"
+                } rounded-lg p-4`}
                 onClick={() => setCategory(categoryName)}
               >
                 <img
@@ -43,9 +62,9 @@ const CatagoriesAndMenu = () => {
                     )?.category.image
                   }
                   alt={categoryName}
-                  className="w-40 h-40 object-cover transition-all duration-500 hover:scale-110 "
+                  className="w-40 h-40 object-cover transition-transform duration-500 rounded-lg shadow-md hover:shadow-xl"
                 />
-                <h1 className="uppercase text-black open-sans">
+                <h1 className="uppercase text-black font-semibold text-lg text-center tracking-wider">
                   {categoryName}
                 </h1>
               </div>
