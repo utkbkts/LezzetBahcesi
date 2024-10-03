@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 const AdminSidebar = ({ adminMenu, showBar }) => {
   const location = useLocation();
   const [activeMenuActive, setActiveMenuActive] = useState(location.pathname);
-
   const handleMenuItemClick = (menuItemUrl) => {
     setActiveMenuActive(menuItemUrl);
   };
@@ -22,7 +21,9 @@ const AdminSidebar = ({ adminMenu, showBar }) => {
           <li key={index}>
             <Link
               to={item.url}
-              onClick={() => handleMenuItemClick(item.url)}
+              onClick={() => {
+                handleMenuItemClick(item.url);
+              }}
               className={`block py-2 px-4 rounded-lg transition-colors duration-200 ${
                 activeMenuActive === item.url
                   ? "bg-blue-600 text-white "

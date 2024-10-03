@@ -17,8 +17,6 @@ function ListUsers() {
 
   useEffect(() => {
     if (deleteError) {
-      console.log(deleteError);
-
       toast.error(deleteError?.data?.message);
     }
     if (isSuccess) {

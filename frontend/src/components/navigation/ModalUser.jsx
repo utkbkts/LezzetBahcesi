@@ -4,27 +4,35 @@ import { GrUserAdmin } from "react-icons/gr";
 import { useLogoutMutation } from "../../redux/api/AuthApi";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { Avatar, Button } from "antd";
+import { Avatar, Badge, Button } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 const ModalUser = ({ setShowLogin }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { user } = useSelector((state) => state.auth);
+  const { message } = useSelector((state) => state.socket);
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
   const logoutHandler = async () => {
     await logout();
     navigate(0);
   };
+
   return (
     <ul className="flexCenter space-x-8">
       {user ? (
-        <div className="flex items-center gap-2  relative">
-          <Avatar
-            size={30}
-            icon={<UserOutlined />}
-            onClick={() => setModalVisible(!modalVisible)}
-            className="cursor-pointer flex items-center"
-          />
+        <div className="flex items-center gap-2  ">
+          <div className="relative">
+            <Avatar
+              size={30}
+              icon={<UserOutlined />}
+              onClick={() => setModalVisible(!modalVisible)}
+              className="cursor-pointer flex items-center"
+            />
+            {message && (
+              <Badge count={1} className="absolute -top-4 -right-2" />
+            )}
+          </div>
           <li className=" cursor-pointer">{user.name}</li>
 
           {modalVisible && (
@@ -73,6 +81,10 @@ const ModalUser = ({ setShowLogin }) => {
       )}
     </ul>
   );
+};
+
+ModalUser.propTypes = {
+  setShowLogin: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
 };
 
 export default ModalUser;

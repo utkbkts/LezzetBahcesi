@@ -17,20 +17,22 @@ const io = new Server(server, {
 
 // Kullanıcı soket haritasını tutacak nesne
 const userSocketMap = {};
-
+let userCount = 0;
 io.on("connection", (socket) => {
-  // Order ID'sini al
+  console.log("Yeni kullanıcı bağlandı:", socket.id);
   const userId = socket.handshake.query.userId;
-
+  userCount++;
   // Kullanıcı ID'sini soket ile eşleştir
   if (userId) {
     userSocketMap[userId] = socket.id;
   }
-
-  // Kullanıcı bağlantısı kesince
+  io.emit("userCountUpdated", userCount);
+  console.log("Bağlı kullanıcı sayısı:", userCount);
   socket.on("disconnect", () => {
-    // Kullanıcıyı soket haritasından çıkar
     delete userSocketMap[userId];
+    userCount--;
+    io.emit("userCountUpdated", userCount);
+    console.log("Bağlı kullanıcı sayısı:", userCount);
   });
 });
 

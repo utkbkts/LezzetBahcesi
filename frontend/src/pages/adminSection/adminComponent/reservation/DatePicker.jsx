@@ -14,7 +14,6 @@ const DatePickerData = ({ getData }) => {
   const reservedDates =
     getData?.reserver?.map((reservation) => new Date(reservation.times)) || [];
 
-  console.log("🚀 ~ DatePickerData ~ reservedDates:", getData);
   const isDateDisabled = (date) => {
     return reservedDates.some(
       (reservedDate) =>

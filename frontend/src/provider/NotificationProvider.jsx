@@ -21,7 +21,6 @@ const NotificationProvider = ({ children }) => {
       });
 
       setSocket(newSocket); // Socket durumunu güncelle
-
       // Sipariş durumu güncelleme olayını dinle
       newSocket.on("orderStatusUpdated", (data) => {
         const message = data.message; // Gelen mesaj
@@ -31,7 +30,7 @@ const NotificationProvider = ({ children }) => {
         sound.play();
         // Redux state'ini güncelle
         dispatch(setOrders(updatedOrder));
-        dispatch(setMessage(message)); // Mesajı ayarla
+        dispatch(setMessage(data.message)); // Mesajı ayarla
 
         // Bildirim göster
         toast.success(message);
