@@ -3,8 +3,6 @@ import { Outlet } from "react-router-dom";
 import UserSidebar from "../pages/profileSection/user/UserSidebar";
 import Navigation from "../components/navigation/Navigation";
 import Footer from "../components/footer/Footer";
-import { useGetUserQuery } from "../redux/api/UserApi";
-import Loading from "../components/loading/Loader";
 
 const userMenu = [
   { name: "Profil", url: "/me/profile" },
@@ -15,12 +13,8 @@ const userMenu = [
 ];
 
 const UserLayout = () => {
-  const [showLogin, setShowLogin] = useState(false);
-  const { data, isLoading } = useGetUserQuery();
+  const [setShowLogin] = useState(false);
 
-  if (isLoading) {
-    return <Loading />;
-  }
   return (
     <div className="w-full text-white h-full mt-[120px]">
       <Navigation setShowLogin={setShowLogin} />

@@ -14,7 +14,6 @@ const socketSlice = createSlice({
       const existingOrderIndex = state.orders.findIndex(
         (order) => order._id === updatedOrder._id
       );
-      console.log("🚀 ~ existingOrderIndex:", updatedOrder);
 
       if (existingOrderIndex > -1) {
         state.orders[existingOrderIndex] = updatedOrder;

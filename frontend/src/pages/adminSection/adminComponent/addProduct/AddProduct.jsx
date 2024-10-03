@@ -36,8 +36,6 @@ const AddProduct = () => {
   }, [error, isSuccess]);
 
   const onFinish = (values) => {
-    console.log("🚀 ~ onFinish ~ values:", values);
-    console.log("Selected Category ID:", category);
     const dataAll = {
       productDetail: values,
       category: category,
@@ -45,7 +43,6 @@ const AddProduct = () => {
       nutriation,
       images,
     };
-    console.log("🚀 ~ onFinish ~ dataAll:", dataAll);
     createProduct(dataAll);
   };
 

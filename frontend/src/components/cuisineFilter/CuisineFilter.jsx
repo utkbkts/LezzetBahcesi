@@ -108,17 +108,19 @@ const CuisineFilter = ({ data }) => {
       </div>
       <h5>Kategoriler</h5>
       <hr />
-      {data.categories?.map((item, index) => (
-        <Checkbox
-          onClick={(e) => handleCategoryFilter(e.target)}
-          key={index}
-          value={item}
-          checked={defaultCheckHandler("category", item)}
-          name="category"
-        >
-          {item}
-        </Checkbox>
-      ))}
+      {data?.category?.map((item) => {
+        return (
+          <Checkbox
+            onClick={(e) => handleCategoryFilter(e.target)}
+            key={item._id}
+            value={item._id}
+            checked={defaultCheckHandler("category", item._id)}
+            name="category"
+          >
+            {item.name}
+          </Checkbox>
+        );
+      })}
       <hr />
       <h5>Değerlendirmeler</h5>
       {[5, 4, 3, 2, 1, 0]?.map((item, index) => {

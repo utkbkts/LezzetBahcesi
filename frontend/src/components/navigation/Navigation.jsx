@@ -125,6 +125,6 @@ const Navigation = ({ setShowLogin }) => {
   );
 };
 Navigation.propTypes = {
-  setShowLogin: PropTypes.func,
+  setShowLogin: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
 };
 export default Navigation;

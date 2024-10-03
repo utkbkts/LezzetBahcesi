@@ -196,9 +196,7 @@ function Orders() {
     ...item,
     key: item._id,
   }));
-  const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
-  };
+
   return (
     <div className="min-h-screen">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">
@@ -207,7 +205,6 @@ function Orders() {
       <Table
         columns={columns}
         dataSource={dataSource}
-        onChange={onChange}
         pagination={{ pageSize: 5 }}
         showSorterTooltip={{
           target: "sorter-icon",

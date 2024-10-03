@@ -12,7 +12,7 @@ const AboutPage = () => {
   return (
     <div>
       {/* Hero Section */}
-      <div className="relative">
+      <div className="relative ">
         <Hero
           classNameHero={"bg-about"}
           title={"Hakkımızda."}
@@ -24,22 +24,22 @@ const AboutPage = () => {
           <img src={menu7} alt="image" />
         </div>
       </div>
-      <div className="w-full container mx-auto">
+      <div className="w-full container mx-auto text-black">
         <AboutFeatureSection />
       </div>
-      <div className="container min-h-screen mx-auto mt-16 flex flex-col md:flex-row items-start">
+      <div className="container min-h-screen mx-auto mt-16 flex flex-col md:flex-row items-start text-black">
         <AboutMissionSection />
       </div>
 
-      <div className="container mx-auto py-16 px-4 md:px-0 min-h-screen">
+      <div className="container mx-auto py-16 px-4 md:px-0 min-h-screen text-black">
         <AboutChefSection />
       </div>
 
-      <div className="container mx-auto py-16 px-4 md:px-0 min-h-screen">
+      <div className="container mx-auto py-16 px-4 md:px-0 min-h-screen text-black">
         <AboutSocialMediaSection />
       </div>
 
-      <div className="container mx-auto mt-16 flex flex-col md:flex-row items-start">
+      <div className="container mx-auto mt-16 flex flex-col md:flex-row items-start text-black">
         <div className="md:w-1/2 p-6">
           <h2 className="text-4xl font-bold text-gray-800 mb-6">
             Restoranımızın Misyonu

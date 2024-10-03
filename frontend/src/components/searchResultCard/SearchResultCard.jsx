@@ -6,7 +6,7 @@ const SearchResultCard = ({ product }) => {
     <div className="search-result-card">
       <div className="h-[350px] overflow-hidden relative">
         <div className="absolute top-0 left-0 p-4 bg-black bg-opacity-50 rounded-t-2xl text-white">
-          <h3 className="text-xl font-semibold">{product.category}</h3>
+          <h3 className="text-xl font-semibold">{product.category.name}</h3>
         </div>
         {product.images.map((img, index) => (
           <img

@@ -1,4 +1,5 @@
 import catchAsyncError from "../middleware/catch.middleware.js";
+import Category from "../models/category.models.js";
 import Product from "../models/product.models.js";
 import apiFilter from "../utils/apiFilters.js";
 import { delete_file, upload_file } from "../utils/cloudinary.js";
@@ -8,19 +9,24 @@ const getAllProduct = catchAsyncError(async (req, res) => {
   const resPerPage = 5;
 
   const apiFilters = new apiFilter(Product, req.query).searchResult().filters();
-  const categories = await Product.distinct("category");
 
-  let products = await apiFilters.query;
+  const categoryIds = await Product.distinct("category");
+
+  let products = await apiFilters.query.populate("category");
+
   let FilteredProductCount = products.length;
 
+  const category = await Category.find({ _id: { $in: categoryIds } });
+
   apiFilters.pagination(resPerPage);
+
   products = await apiFilters.query.clone();
 
   res.status(200).json({
     resPerPage,
     FilteredProductCount,
     products,
-    categories,
+    category,
   });
 });
 

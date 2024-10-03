@@ -6,7 +6,6 @@ import { useProductGetCategoryAllQuery } from "../../redux/api/ProductApi";
 import pngwing from "/pngwing.com.png";
 const CatagoriesAndMenu = () => {
   const [category, setCategory] = useState("All");
-  console.log("🚀 ~ CatagoriesAndMenu ~ category:", category);
   const { data, isLoading } = useProductGetCategoryAllQuery();
 
   if (isLoading) return <Loading />;

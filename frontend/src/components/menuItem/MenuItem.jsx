@@ -152,7 +152,7 @@ MenuItem.propTypes = {
       url: PropTypes.string,
     })
   ),
-  category: PropTypes.string,
+  category: PropTypes.object,
   tags: PropTypes.shape({
     drinksValue: PropTypes.arrayOf(
       PropTypes.shape({

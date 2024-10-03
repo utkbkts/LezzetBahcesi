@@ -9,9 +9,11 @@ import UpdateProduct from "../pages/adminSection/adminComponent/updateProduct/Up
 
 import Reservation from "../pages/adminSection/adminComponent/reservation/Reservation.jsx";
 import CategoryProducts from "../pages/adminSection/adminComponent/newCategory/CategoryProducts.jsx";
+import { AdminLoaders } from "../loaders/AdminLoaders.jsx";
 export const AdminRoutes = {
   path: "/admin",
   element: <AdminLayout />,
+  loader: () => AdminLoaders("admin"),
   children: [
     {
       path: "dashboard",

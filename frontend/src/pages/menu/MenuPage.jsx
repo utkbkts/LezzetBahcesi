@@ -140,7 +140,7 @@ const MenuPage = () => {
 
   return (
     <div>
-      <div className="relative">
+      <div className="relative ">
         <Hero
           title={"Menüler."}
           subTitle={"Siz ne isterseniz."}
@@ -148,12 +148,12 @@ const MenuPage = () => {
           titleClass={"berkshire-swash-regular"}
           titleMainClass={"flex items-center justify-center"}
         />
-        <div className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
           <img src={menu7} alt="image" />
         </div>
         <img src={menu} alt="" className="absolute left-0 z-[-1] top-[100%]" />
       </div>
-      <div className="min-h-screen mt-[100px] relative">
+      <div className="min-h-screen mt-[100px] relative text-black">
         <img src={menu2} alt="" className="absolute right-0 z-[-10]" />
         <div className="max-w-5xl mx-auto ">
           <div className="flex gap-12 min-h-screen">
@@ -193,7 +193,7 @@ const MenuPage = () => {
           </div>
         </div>
       </div>
-      <div className=" mt-[10%] min-h-screen relative">
+      <div className=" mt-[10%] min-h-screen relative text-black">
         <img src={menu2} alt="" className="absolute right-0 z-[-50]" />
         <div className="max-w-5xl mx-auto ">
           <div className="flex gap-12 min-h-screen">
@@ -233,7 +233,7 @@ const MenuPage = () => {
           </div>
         </div>
       </div>
-      <div className=" mt-[10%] min-h-screen relative">
+      <div className=" mt-[10%] min-h-screen relative text-black">
         <img
           src={menu1}
           alt=""
@@ -277,7 +277,7 @@ const MenuPage = () => {
           </div>
         </div>
       </div>
-      <div className="mt-[10%] min-h-screen relative">
+      <div className="mt-[10%] min-h-screen relative text-black">
         <div className="bg-friends">
           <div className="flex flex-col items-center justify-center absolute z-[50] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-5">
             <h4 className="text-[#eba83c] text-[35px] font-bold mb-2 berkshire-swash-regular">

@@ -20,7 +20,7 @@ export const userApi = createApi({
           dispatch(setUser(data));
           dispatch(setisAuthenticated(true));
         } catch (error) {
-          console.error(error);
+          //
         } finally {
           dispatch(setLoading(false));
         }

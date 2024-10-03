@@ -80,10 +80,6 @@ const UserOrder = () => {
     key: item._id,
   }));
 
-  const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
-  };
-
   if (isLoading) return <Loading />;
 
   return (
@@ -93,7 +89,6 @@ const UserOrder = () => {
       <Table
         columns={columns}
         dataSource={dataSource}
-        onChange={onChange}
         pagination={{ pageSize: 5 }}
         showSorterTooltip={{ target: "sorter-icon" }}
         scroll={{ x: "max-content" }}
