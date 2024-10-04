@@ -74,7 +74,7 @@ function Dashboard() {
         </ul>
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow">
+      <div className="bg-white mds:p-6 p-0  rounded-lg shadow">
         <div>
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             Haftalık Satışlar
@@ -83,7 +83,7 @@ function Dashboard() {
             <SalesData data={data} />
           </div>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow">
+        <div className="bg-white mds:p-6 p-0 mt-8 rounded-lg shadow">
           <h2>Tarihlere göre sıralama</h2>
           <div className="h-full w-full  rounded-lg flex items-center justify-center">
             <AllSalesData />

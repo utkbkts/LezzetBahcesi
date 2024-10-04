@@ -39,8 +39,8 @@ const AllSalesData = () => {
     });
   };
   return (
-    <div className=" rounded-lg p-6 shadow-lg w-full">
-      <div className="flex items-center gap-2 justify-center pb-4 ">
+    <div className=" rounded-lg mds:p-6 p-0 shadow-lg w-full">
+      <div className="flex items-center gap-2 justify-center pb-4 mds:flex-row flex-col">
         <div className="flex flex-col">
           <label className="">Başlangıç Tarihi</label>
           <DatePicker

@@ -169,6 +169,7 @@ const TableData = ({ getData }) => {
         pagination={{
           pageSize: 5,
         }}
+        scroll={{ x: 800 }}
       />
       <ModalPage
         isModalOpen={isModalOpen}

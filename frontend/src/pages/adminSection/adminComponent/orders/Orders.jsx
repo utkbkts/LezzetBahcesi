@@ -209,6 +209,7 @@ function Orders() {
         showSorterTooltip={{
           target: "sorter-icon",
         }}
+        scroll={{ x: 800 }}
       />
     </div>
   );

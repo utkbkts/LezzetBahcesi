@@ -2,48 +2,34 @@ import { Outlet } from "react-router-dom";
 import AdminSidebar from "../pages/adminSection/admin/AdminSidebar";
 import Navigation from "../components/navigation/Navigation";
 import { useState } from "react";
-import {
-  CirclePlus,
-  ClockArrowDown,
-  LayoutDashboard,
-  MessageSquareDiff,
-  NotebookPen,
-  ShoppingCart,
-  UsersRound,
-} from "lucide-react";
+import { ShoppingCart, UsersRound } from "lucide-react";
 
 const adminMenu = [
   {
     name: "Ana Sayfa",
     url: "/admin/dashboard",
-    icon: <LayoutDashboard size={25} />,
   },
   {
     name: "Yeni Ürün Ekle",
     url: "/admin/addproduct",
-    icon: <CirclePlus size={25} />,
   },
   {
     name: "Yeni Kategori Ekle",
     url: "/admin/newcategory",
-    icon: <CirclePlus size={25} />,
   },
   { name: "Ürünler", url: "/admin/products", icon: <ShoppingCart size={25} /> },
   {
     name: "Siparişler",
     url: "/admin/orders",
-    icon: <ClockArrowDown size={25} />,
   },
   { name: "Kullanıcılar", url: "/admin/users", icon: <UsersRound size={25} /> },
   {
     name: "Yorumlar",
     url: "/admin/reviews",
-    icon: <MessageSquareDiff size={25} />,
   },
   {
     name: "Rezervasyon",
     url: "/admin/reservation",
-    icon: <NotebookPen size={25} />,
   },
 ];
 
@@ -51,17 +37,19 @@ const AdminLayout = () => {
   const [showBar, setShowBar] = useState(false);
 
   return (
-    <div className="w-full text-white  h-full mt-[120px]">
+    <div className="w-full text-white h-full mt-[120px]">
       <Navigation />
-      <div className="flex">
-        <div
-          className={`${
-            showBar ? "w-16" : "w-1/3"
-          } flex items-center overflow-hidden flex-col justify-center min-h-screen bg-gray-800 relative`}
-        >
-          <AdminSidebar adminMenu={adminMenu} showBar={showBar} />
+      <div className="flex mds:flex-row flex-col">
+        <div className={`relative mds:min-h-screen w-full mds:w-1/3`}>
           <div
-            className={`hamburger absolute top-4 right-4 ${
+            className={`${
+              showBar ? "" : " hidden"
+            } bg-gray-800 mds:flex flex-col items-center min-h-screen`}
+          >
+            <AdminSidebar adminMenu={adminMenu} showBar={showBar} />
+          </div>
+          <div
+            className={`hamburger absolute top-4 mds:hidden block right-4 z-50 ${
               showBar ? "active" : ""
             }`}
             onClick={() => setShowBar(!showBar)}

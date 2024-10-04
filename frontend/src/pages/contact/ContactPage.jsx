@@ -54,10 +54,10 @@ const ContactPage = () => {
         <div className="flex items-center justify-center w-full">
           <img src={contact} alt="" />
         </div>
-        <div className="flex items-start justify-center py-16 px-8  ">
+        <div className="flex mds:items-start justify-center mds:flex-row flex-col items-center py-16 px-8  ">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="w-1/2 border border-gray-400 p-4 h-[500px] flex flex-col justify-center"
+            className="mds:w-1/2 w-full border border-gray-400 p-4 h-[500px] flex flex-col justify-center"
           >
             <h2 className="open-sans leading-relaxed py-4 px-4 text-center uppercase">
               İletişim kur
@@ -92,7 +92,7 @@ const ContactPage = () => {
               </Button>
             </div>
           </form>
-          <div className="w-1/2 border border-gray-400  h-[500px] flex flex-col justify-center">
+          <div className="mds:w-1/2 w-full border border-gray-400  h-[500px] flex flex-col justify-center">
             <iframe
               width="100%"
               height="100%"

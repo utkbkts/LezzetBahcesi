@@ -6,14 +6,14 @@ const AboutChefSection = () => {
     <>
       {" "}
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-[#005C53]">
+        <h2 className="text-4xl font-bold text-[#005C53]  text-center">
           Şeflerimizin Sanatı
         </h2>
-        <p className="text-lg text-[#44615e] mt-4">
+        <p className="text-lg text-[#44615e] mt-4  text-center">
           En kaliteli malzemelerle, ustalıkla hazırlanan lezzetler.
         </p>
       </div>
-      <div className="flex flex-col md:flex-row items-start gap-12">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
         {/* İlk Şef Görseli ve İçerik */}
         <div className="relative w-full md:w-1/2 group">
           <img

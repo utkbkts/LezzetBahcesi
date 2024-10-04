@@ -8,7 +8,7 @@ import Loading from "../components/loading/Loader";
 import UserCountDisplay from "../components/userCount/UserCount";
 const MainLayout = () => {
   const [showLogin, setShowLogin] = useState(false);
-  const { data, isLoading } = useGetUserQuery();
+  const { isLoading } = useGetUserQuery();
 
   if (isLoading) {
     return <Loading />;

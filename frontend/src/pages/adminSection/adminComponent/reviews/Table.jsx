@@ -77,6 +77,7 @@ const TableData = ({ data, handleRemoveReview }) => {
           columns={columns}
           dataSource={setReviews()}
           pagination={{ pageSize: 5 }}
+          scroll={{ x: 800 }}
         />
       ) : (
         <p className="mt-5 text-center">Yorum bulunamadı</p>

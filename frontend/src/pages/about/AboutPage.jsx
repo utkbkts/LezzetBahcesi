@@ -20,14 +20,14 @@ const AboutPage = () => {
           subTitle={"15 yıldır hizmetinizde"}
           titleMainClass={"items-center"}
         />
-        <div className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute md:top-2/3 top-[75%] left-1/2 -translate-x-1/2 -translate-y-1/2">
           <img src={menu7} alt="image" />
         </div>
       </div>
       <div className="w-full container mx-auto text-black">
         <AboutFeatureSection />
       </div>
-      <div className="container min-h-screen mx-auto mt-16 flex flex-col md:flex-row items-start text-black">
+      <div className="container min-h-screen mx-auto mt-16  text-black">
         <AboutMissionSection />
       </div>
 
@@ -35,34 +35,42 @@ const AboutPage = () => {
         <AboutChefSection />
       </div>
 
-      <div className="container mx-auto py-16 px-4 md:px-0 min-h-screen text-black">
+      <div className="container mx-auto py-16 px-4 md:px-0 lg:min-h-screen h-full text-black">
         <AboutSocialMediaSection />
       </div>
 
-      <div className="container mx-auto mt-16 flex flex-col md:flex-row items-start text-black">
-        <div className="md:w-1/2 p-6">
-          <h2 className="text-4xl font-bold text-gray-800 mb-6">
+      <div className="container mx-auto mt-16 flex flex-col lg:flex-row  text-black">
+        <div className="lg:w-1/2 p-6 ">
+          <h2 className="text-4xl font-bold text-gray-800 mb-6 lg:text-start text-center">
             Restoranımızın Misyonu
           </h2>
-          <p className="text-lg text-gray-600 leading-relaxed mb-4">
+          <p className="text-lg text-gray-600 leading-relaxed mb-4 lg:text-start text-center">
             Müşterilerimize sadece yemek değil, aynı zamanda unutulmaz bir
             deneyim sunuyoruz. Güler yüzlü hizmet ve şık ambiyans ile her detay
             sizin konforunuz için tasarlandı.
           </p>
-          <p className="text-lg text-gray-600 leading-relaxed mb-4">
+          <p className="text-lg text-gray-600 leading-relaxed mb-4 lg:text-start text-center">
             Vizyonumuz, gastronomi dünyasına yenilik katmak ve sürdürülebilir
             mutfak anlayışımızla topluma katkıda bulunmaktır. Sizlere her zaman
             en taze, en kaliteli yemekleri sunmaya devam edeceğiz.
           </p>
         </div>
 
-        <div className="md:w-1/2 p-6">
-          <div className="flex items-center justify-between">
+        <div className="lg:w-1/2 p-6 w-full">
+          <div className="flex items-center lg:justify-between justify-center">
             {" "}
             <img className="rounded-lg " src={menu4} alt="Restoran Menü" />
-            <img className="rounded-lg " src={about} alt="Restoran Menü" />
+            <img
+              className="rounded-lg lg:block hidden"
+              src={about}
+              alt="Restoran Menü"
+            />
           </div>
-          <img className="rounded-lg " src={offer} alt="Restoran Menü" />
+          <img
+            className="rounded-lg lg:block hidden"
+            src={offer}
+            alt="Restoran Menü"
+          />
         </div>
       </div>
 

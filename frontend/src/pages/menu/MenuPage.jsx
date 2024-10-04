@@ -151,13 +151,17 @@ const MenuPage = () => {
         <div className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
           <img src={menu7} alt="image" />
         </div>
-        <img src={menu} alt="" className="absolute left-0 z-[-1] top-[100%]" />
+        <img
+          src={menu}
+          alt=""
+          className="absolute left-0 z-[-1] top-[100%] mds:block hidden"
+        />
       </div>
       <div className="min-h-screen mt-[100px] relative text-black">
         <img src={menu2} alt="" className="absolute right-0 z-[-10]" />
         <div className="max-w-5xl mx-auto ">
-          <div className="flex gap-12 min-h-screen">
-            <div className="w-1/2 h-full">
+          <div className="flex mds:flex-row flex-col items-center justify-center gap-12 min-h-screen ">
+            <div className="w-1/2 h-full sm:block hidden">
               <div className="bg-pasta w-full h-full">
                 <div className="img-wrapper">
                   <img
@@ -168,16 +172,16 @@ const MenuPage = () => {
                 </div>
               </div>
             </div>
-            <div className="w-1/2">
+            <div className="mds:w-1/2 w-full">
               <div className="flex flex-col items-center justify-center">
-                <h1 className="berkshire-swash-regular ">Makarna</h1>
+                <h1 className="berkshire-swash-regular">Makarna</h1>
                 <img src={menu8} alt="" />
               </div>
               <div>
                 {pasta.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center justify-between gap-2 mt-12"
+                    className="flex items-center justify-between gap-2 mt-12 mds:flex-row flex-col mds:text-start text-center"
                   >
                     <div className="flex flex-col gap-2">
                       <span>{item.title}</span>
@@ -194,19 +198,19 @@ const MenuPage = () => {
         </div>
       </div>
       <div className=" mt-[10%] min-h-screen relative text-black">
-        <img src={menu2} alt="" className="absolute right-0 z-[-50]" />
+        <img src={menu2} alt="" className="absolute right-0 z-[-50] " />
         <div className="max-w-5xl mx-auto ">
-          <div className="flex gap-12 min-h-screen">
-            <div className="w-1/2">
+          <div className="flex gap-12 min-h-screen mds:flex-row  flex-col-reverse items-center justify-center">
+            <div className="w-1/2 ">
               <div className="flex flex-col items-center justify-center">
                 <h1 className="berkshire-swash-regular ">Pizza</h1>
                 <img src={menu8} alt="" />
               </div>
-              <div>
+              <div className="mds:text-start text-center">
                 {pizza.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center justify-between gap-2 mt-12"
+                    className="flex items-center justify-between gap-2 mt-12 mds:flex-row flex-col"
                   >
                     <div className="flex flex-col gap-2">
                       <span>{item.title}</span>
@@ -219,7 +223,7 @@ const MenuPage = () => {
                 ))}
               </div>
             </div>
-            <div className="w-1/2 h-full">
+            <div className="w-1/2 h-full sm:block hidden">
               <div className="bg-pasta w-full h-full">
                 <div className="img-wrapper">
                   <img
@@ -240,8 +244,8 @@ const MenuPage = () => {
           className="absolute right-0 opacity-20 z-[-50] "
         />
         <div className="max-w-5xl mx-auto ">
-          <div className="flex gap-12 min-h-screen">
-            <div className="w-1/2 h-full">
+          <div className="flex gap-12 min-h-screen mds:flex-row flex-col items-center justify-center">
+            <div className="w-1/2 h-full sm:block hidden">
               <div className="bg-pasta w-full h-full">
                 <div className="img-wrapper">
                   <img
@@ -257,11 +261,11 @@ const MenuPage = () => {
                 <h1 className="berkshire-swash-regular ">Hamburger</h1>
                 <img src={menu8} alt="" />
               </div>
-              <div>
+              <div className="mds:text-start text-center">
                 {hamburger.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center justify-between gap-2 mt-12"
+                    className="flex items-center justify-between gap-2 mt-12 mds:flex-row flex-col"
                   >
                     <div className="flex flex-col gap-2">
                       <span>{item.title}</span>
@@ -277,20 +281,20 @@ const MenuPage = () => {
           </div>
         </div>
       </div>
-      <div className="mt-[10%] min-h-screen relative text-black">
+      <div className="mt-[10%] min-h-screen relative text-black mds:block hidden">
         <div className="bg-friends">
           <div className="flex flex-col items-center justify-center absolute z-[50] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-5">
-            <h4 className="text-[#eba83c] text-[35px] font-bold mb-2 berkshire-swash-regular">
+            <h4 className="text-[#eba83c] mds:text-[35px] text-[20px] mds:text-start text-center font-bold mb-2 berkshire-swash-regular">
               Büyük indirimler sizi bekliyor! %50 fırsatını kaçırmayın!
             </h4>
             <h2 className="text-white text-4xl font-bold">{`${timerDays}:${timerHours}:${timerMinutes}:${timerSeconds}`}</h2>
-            <button className="py-4 px-9 rounded-full text-white bg-orange-500">
+            <button className="mds:py-4 mds:px-9 py-1 px-2 rounded-full text-white bg-orange-500">
               Şimdi Randevu al
             </button>
           </div>
         </div>
       </div>
-      <div className="mt-[10%] min-h-screen relative">
+      <div className="mt-[10%] mds:min-h-screen h-full pb-4 relative">
         <div className="flex items-center justify-center">
           <img src={menu10} alt="" />
         </div>

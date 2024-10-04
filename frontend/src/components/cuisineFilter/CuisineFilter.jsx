@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from "antd";
 import StarRatings from "react-star-ratings";
 import { getPriceQuery } from "../../helpers/helpers";
+import { TextQuote, X } from "lucide-react";
 const fixedPriceRanges = [
   { label: "0-30 TL", min: 0, max: 30 },
   { label: "30-50 TL", min: 30, max: 50 },
@@ -22,6 +23,7 @@ const CuisineFilter = ({ data }) => {
   let [searchParams, setSearchParams] = useSearchParams();
   const [minPrice, setMinPrice] = useState(searchParams.get("min") || "");
   const [maxPrice, setMaxPrice] = useState(searchParams.get("max") || "");
+  const [open, setOpen] = useState(false);
 
   //kategori filterlama fonksiyonu
   const handleCategoryFilter = (checkbox) => {
@@ -102,83 +104,103 @@ const CuisineFilter = ({ data }) => {
   };
 
   return (
-    <div className="cuisine">
-      <div>
-        <Button onClick={handleCheck}>Aramayı Sıfırla</Button>
-      </div>
-      <h5>Kategoriler</h5>
-      <hr />
-      {data?.category?.map((item) => {
-        return (
-          <Checkbox
-            onClick={(e) => handleCategoryFilter(e.target)}
-            key={item._id}
-            value={item._id}
-            checked={defaultCheckHandler("category", item._id)}
-            name="category"
+    <div className=" relative pb-12">
+      <span
+        className="absolute top-3 left-[80%] text-black w-full md:hidden flex"
+        onClick={() => setOpen(!open)}
+      >
+        {open ? (
+          <X className="cursor-pointer" />
+        ) : (
+          <>
+            <TextQuote className="cursor-pointer" />
+            <span>Filtreler</span>
+          </>
+        )}
+      </span>
+      <div className={`flex flex-col gap-2 ${open ? "" : "hidden md:flex"}`}>
+        <div>
+          <Button
+            onClick={handleCheck}
+            className="mt-2 bg-blue-500 text-white rounded p-2 hover:bg-blue-600 transition"
           >
-            {item.name}
-          </Checkbox>
-        );
-      })}
-      <hr />
-      <h5>Değerlendirmeler</h5>
-      {[5, 4, 3, 2, 1, 0]?.map((item, index) => {
-        return (
-          <div key={index}>
-            <Checkbox
-              name="ratings"
-              value={item}
-              checked={defaultCheckHandler("ratings", item?.toString())}
-              onClick={(e) => handleCategoryFilter(e.target)}
-            >
-              <StarRatings
-                rating={parseFloat(item)}
-                starRatedColor="#ffb829"
-                numberOfStars={5}
-                name="ratings"
-                starDimension="14px"
-                starSpacing="1px"
-              />
-            </Checkbox>
-          </div>
-        );
-      })}
-      <hr />
-      <h5>Fiyat Listesi</h5>
-      <div className="flex flex-col gap-2">
-        {fixedPriceRanges.map((item, index) => (
-          <Checkbox
-            name="productDetail"
-            onClick={() => handlePrice(item)}
-            key={index}
-            checked={defaultCheckHandler("min", item.min.toString())}
-          >
-            {item.label}
-          </Checkbox>
-        ))}
-        <Form
-          onFinish={handleButtonOnclick}
-          className="flex items-center gap-4"
-        >
-          <Input
-            name="min"
-            placeholder="min"
-            type="number"
-            value={minPrice}
-            onChange={(e) => setMinPrice(e.target.value)}
-          />
-          <Input
-            name="max"
-            placeholder="max"
-            type="number"
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(e.target.value)}
-          />
-          <Button type="primary" htmlType="submit">
-            Ara
+            Aramayı Sıfırla
           </Button>
-        </Form>
+        </div>
+        <h5>Kategoriler</h5>
+        <hr />
+        {data?.category?.map((item) => {
+          return (
+            <Checkbox
+              onClick={(e) => handleCategoryFilter(e.target)}
+              key={item._id}
+              value={item._id}
+              checked={defaultCheckHandler("category", item._id)}
+              name="category"
+            >
+              {item.name}
+            </Checkbox>
+          );
+        })}
+        <hr />
+        <h5>Değerlendirmeler</h5>
+        {[5, 4, 3, 2, 1, 0]?.map((item, index) => {
+          return (
+            <div key={index}>
+              <Checkbox
+                name="ratings"
+                value={item}
+                checked={defaultCheckHandler("ratings", item?.toString())}
+                onClick={(e) => handleCategoryFilter(e.target)}
+              >
+                <StarRatings
+                  rating={parseFloat(item)}
+                  starRatedColor="#ffb829"
+                  numberOfStars={5}
+                  name="ratings"
+                  starDimension="14px"
+                  starSpacing="1px"
+                />
+              </Checkbox>
+            </div>
+          );
+        })}
+        <hr />
+        <h5>Fiyat Listesi</h5>
+        <div className="flex flex-col gap-2">
+          {fixedPriceRanges.map((item, index) => (
+            <Checkbox
+              name="productDetail"
+              onClick={() => handlePrice(item)}
+              key={index}
+              checked={defaultCheckHandler("min", item.min.toString())}
+            >
+              {item.label}
+            </Checkbox>
+          ))}
+          <Form
+            onFinish={handleButtonOnclick}
+            className="flex items-center gap-4"
+          >
+            <Input
+              name="min"
+              placeholder="min"
+              type="number"
+              value={minPrice}
+              onChange={(e) => setMinPrice(e.target.value)}
+            />
+            <Input
+              name="max"
+              placeholder="max"
+              type="number"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+            />
+            <Button type="primary" htmlType="submit">
+              Ara
+            </Button>
+          </Form>
+        </div>
       </div>
     </div>
   );

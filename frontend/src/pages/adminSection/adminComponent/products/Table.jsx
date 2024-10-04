@@ -98,6 +98,7 @@ const TableData = ({ data, deleteProduct }) => {
       showSorterTooltip={{
         target: "sorter-icon",
       }}
+      scroll={{ x: 800 }}
     />
   );
 };

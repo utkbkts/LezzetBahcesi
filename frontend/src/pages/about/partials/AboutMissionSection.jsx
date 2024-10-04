@@ -32,7 +32,7 @@ const aboutSection = [
 
 const AboutMissionSection = () => {
   return (
-    <div className="flex w-full relative">
+    <div className="flex w-full relative lg:flex-row flex-col items-center justify-center">
       <div className="w-1/2">
         <div>
           <img src={hamburger} alt="" className="rounded-full" />
@@ -44,17 +44,20 @@ const AboutMissionSection = () => {
           alt=""
           className="absolute z-[-50] opacity-35 -top-[25%] right-0"
         />
-        <h1 className="text-[#005C53] text-[50px] font-extrabold">
+        <h1 className="text-[#005C53] md:text-[36px] text-lg font-extrabold lg:text-start text-center ">
           Geleneksel Tatlar, Modern Dokunuşlar
         </h1>
-        <p className="text-[#44615e] text-[18px]">
+        <p className="text-[#44615e] text-[18px] lg:text-start text-center">
           Sıcak ve davetkar bir atmosferde eşsiz mutfak lezzetlerini
           deneyimleyin. Lezzet Bahçesi&apos;nin unutulmaz yemekler için neden
           mükemmel bir yer olduğunu keşfedin.
         </p>
         <div className="flex flex-col gap-8 mt-12">
           {aboutSection.map((item) => (
-            <div key={item.id} className="flex items-center gap-3">
+            <div
+              key={item.id}
+              className="flex items-center md:flex-row flex-col md:text-start text-center gap-3"
+            >
               <img src={item.image} alt="" className="w-8 h-8 " />
               <span className="text-[#44615e] text-[18px]">{item.title}</span>
             </div>

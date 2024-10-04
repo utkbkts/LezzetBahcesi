@@ -144,7 +144,7 @@ const TableData = ({ roleAdmin, blockedUser, data }) => {
         showSorterTooltip={{
           target: "sorter-icon",
         }}
-        scroll={{ x: "max-content" }}
+        scroll={{ x: 800 }}
       />
     </div>
   );
