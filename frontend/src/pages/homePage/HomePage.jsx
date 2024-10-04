@@ -4,7 +4,6 @@ import PopularMenu from "../../components/popularMenu/PopularMenu";
 import Reservation from "../../components/reservation/Reservation";
 import Hero from "../../components/hero/Hero";
 import AboutFeatureSection from "../about/partials/AboutFeatureSection";
-import UserCount from "../../components/userCount/UserCount";
 
 const HomePage = () => {
   useEffect(() => {
@@ -27,7 +26,6 @@ const HomePage = () => {
       />
       <div className="container mx-auto text-black">
         <AboutFeatureSection />
-        <UserCount />
         <PopularMenu />
         <Reservation />
         <Categories />

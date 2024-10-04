@@ -5,7 +5,7 @@ import { useState } from "react";
 import AuthModal from "../pages/auth/AuthModal";
 import { useGetUserQuery } from "../redux/api/UserApi";
 import Loading from "../components/loading/Loader";
-
+import UserCountDisplay from "../components/userCount/UserCount";
 const MainLayout = () => {
   const [showLogin, setShowLogin] = useState(false);
   const { data, isLoading } = useGetUserQuery();
@@ -24,6 +24,7 @@ const MainLayout = () => {
       </div>
       <div className="w-full mt-auto">
         <Footer />
+        <UserCountDisplay />
       </div>
     </div>
   );
