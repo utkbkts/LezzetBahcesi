@@ -8,27 +8,38 @@ import { IoCartOutline } from "react-icons/io5";
 import logo from "/logo.png";
 import PropTypes from "prop-types";
 import ModalUser from "./ModalUser";
+import MobileHeader from "./MobileHeader";
+import {
+  CircleEllipsis,
+  Contact,
+  Cylinder,
+  LayoutDashboard,
+} from "lucide-react";
 
-const navbarLink = [
+export const navbarLink = [
   {
     id: 1,
     url: "/",
     label: "Ana Sayfa",
+    icon: <LayoutDashboard />,
   },
   {
     id: 2,
     url: "/about",
     label: "Hakkımızda",
+    icon: <Cylinder />,
   },
   {
     id: 3,
     url: "/menu",
     label: "Menüler",
+    icon: <CircleEllipsis />,
   },
   {
     id: 4,
     url: "/contact",
     label: "İletişim",
+    icon: <Contact />,
   },
 ];
 
@@ -41,6 +52,7 @@ const Navigation = ({ setShowLogin }) => {
   const location = useLocation().pathname;
   const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
+  const [showBar, setShowBar] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,7 +85,7 @@ const Navigation = ({ setShowLogin }) => {
   return (
     <>
       <header className={headerClassNames}>
-        <div className="open-sans flexCenterBetwen container mx-auto h-full">
+        <div className="open-sans flexCenterBetwen container mx-auto h-full relative">
           <img
             className="w-32 h-32 object-cover rounded-full"
             src={logo}
@@ -104,7 +116,24 @@ const Navigation = ({ setShowLogin }) => {
             <ModalUser setShowLogin={setShowLogin} />
           </nav>
         </div>
+        <div
+          className={`hamburger absolute top-[4rem] md:hidden block right-4 z-50 ${
+            showBar ? "active" : ""
+          }`}
+          onClick={() => setShowBar(!showBar)}
+        >
+          <div className="bar"></div>
+          <div className="bar"></div>
+          <div className="bar"></div>
+        </div>
       </header>
+      {showBar && (
+        <MobileHeader
+          showBar={showBar}
+          setShowBar={setShowBar}
+          setShowLogin={setShowLogin}
+        />
+      )}
 
       <Modal
         title="Yemek Çeşidi Ara"

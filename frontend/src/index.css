@@ -233,3 +233,9 @@ body {
 .header .ant-modal-body {
   height: 100% !important;
 }
+@media (max-width: 768px) {
+  .header .ant-modal-content {
+    width: 100% !important;
+    right: -13rem !important;
+  }
+}

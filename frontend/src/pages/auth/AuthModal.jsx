@@ -211,7 +211,7 @@ const AuthModal = ({ setShowLogin, showLogin }) => {
         className="relative top-44 right-56 header"
       >
         <div className="flex w-full h-[650px]">
-          <div className="w-1/2 h-full">
+          <div className="md:w-1/2 md:flex hidden h-full">
             <img src={heroAuth} alt="" className="h-full object-cover w-full" />
             <img
               src={logo}
@@ -219,7 +219,7 @@ const AuthModal = ({ setShowLogin, showLogin }) => {
               className="absolute -top-10 opacity-30 w-80 left-24"
             />
           </div>
-          <div className="w-1/2 flex items-center justify-center flex-col">
+          <div className="md:w-1/2 w-full flex items-center justify-center flex-col">
             <h1 className="text-2xl font-semibold mb-6 text-black text-center">
               {state === "login"
                 ? "Giriş yap"
