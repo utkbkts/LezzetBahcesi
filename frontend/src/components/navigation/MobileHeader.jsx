@@ -1,19 +1,27 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { navbarLink } from "./Navigation";
 import { cn } from "../../utils/TailwindMerge";
-import { Avatar, Badge } from "antd";
+import { Avatar, Badge, Button } from "antd";
 import { IoCartOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import { UserOutlined } from "@ant-design/icons";
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import { GrUserAdmin } from "react-icons/gr";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { useLogoutMutation } from "../../redux/api/AuthApi";
 
 const MobileHeader = ({ setShowBar, showBar, setShowLogin }) => {
   const { cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
   const [openModal, setOpenModal] = useState(false);
+  const [logout] = useLogoutMutation();
+  const navigate = useNavigate();
+
+  const logoutHandler = async () => {
+    await logout();
+    navigate(0);
+  };
 
   return (
     <div className="relative  md:hidden ">
@@ -36,45 +44,69 @@ const MobileHeader = ({ setShowBar, showBar, setShowLogin }) => {
             </NavLink>
           ))}
           <div className="flex items-center justify-center w-full flex-col gap-6 p-6   transition duration-300 ease-in-out">
-            <div className="flex items-center gap-4">
-              <Avatar
-                size={40}
-                icon={<UserOutlined />}
-                className="cursor-pointer transition-transform transform hover:scale-125 border-2 border-blue-500 rounded-full shadow-sm"
-                onClick={() => setOpenModal(!openModal)}
-              />
-              <button className="flex items-center justify-center text-black">
-                {openModal ? (
-                  <ChevronDown size={20} />
-                ) : (
-                  <ChevronUp size={20} />
-                )}
-              </button>
-            </div>
-
-            {openModal && (
-              <div className="flex flex-col gap-4 w-full  rounded-lg shadow-lg p-4 transition-all duration-300 ease-in-out">
-                <NavLink
-                  onClick={() => setShowBar(false)}
-                  to={"/me/profile"}
-                  className="flex items-center gap-3 cursor-pointer text-gray-800 hover:text-blue-600 transition-colors py-2 px-3  hover:bg-gray-100"
-                >
-                  <FaUserAlt size={22} className="text-gray-600" />
-                  <span className="font-semibold">Profil</span>
-                </NavLink>
-                {user?.role === "admin" && (
-                  <NavLink
-                    onClick={() => setShowBar(false)}
-                    to={"/admin/dashboard"}
-                    className="flex items-center gap-3 cursor-pointer text-gray-800 hover:text-green-600 transition-colors py-2 px-3  hover:bg-gray-100"
-                  >
-                    <GrUserAdmin size={22} className="text-gray-600" />
-                    <span className="font-semibold">Admin</span>
-                  </NavLink>
-                )}
+            {user && (
+              <div className="flex items-center gap-4">
+                <Avatar
+                  size={40}
+                  icon={<UserOutlined />}
+                  className="cursor-pointer transition-transform transform hover:scale-125 border-2 border-blue-500 rounded-full shadow-sm"
+                  onClick={() => setOpenModal(!openModal)}
+                />
+                <button className="flex items-center justify-center text-black">
+                  {openModal ? (
+                    <ChevronDown size={20} />
+                  ) : (
+                    <ChevronUp size={20} />
+                  )}
+                </button>
               </div>
             )}
 
+            {openModal && user && (
+              <div className="flex flex-col gap-4 w-full rounded-lg shadow-lg p-4 transition-all duration-300 ease-in-out">
+                <div className="flex flex-col items-start gap-2">
+                  <NavLink
+                    onClick={() => setShowBar(false)}
+                    to={"/me/profile"}
+                    className="flex items-center gap-3 cursor-pointer text-gray-800 hover:text-blue-600 transition-colors py-2 px-3 hover:bg-gray-100"
+                  >
+                    <FaUserAlt size={22} className="text-gray-600" />
+                    <span className="font-semibold">Profil</span>
+                  </NavLink>
+                  {user?.role === "admin" && (
+                    <NavLink
+                      onClick={() => setShowBar(false)}
+                      to={"/admin/dashboard"}
+                      className="flex items-center gap-3 cursor-pointer text-gray-800 hover:text-green-600 transition-colors py-2 px-3 hover:bg-gray-100"
+                    >
+                      <GrUserAdmin size={22} className="text-gray-600" />
+                      <span className="font-semibold">Admin</span>
+                    </NavLink>
+                  )}
+                  <NavLink
+                    onClick={logoutHandler}
+                    className="flex items-center gap-2 cursor-pointer text-gray-700 hover:text-green-600 py-2 px-3 transition-colors"
+                    to="/"
+                  >
+                    <LogoutOutlined size={22} />
+                    Logout
+                  </NavLink>
+                </div>
+              </div>
+            )}
+            {!user && (
+              <Button
+                type="default"
+                onClick={() => {
+                  setShowLogin(true);
+                  setShowBar(false);
+                }}
+                className="cursor-pointer mt-1"
+              >
+                <UserOutlined />
+                Giriş Yap
+              </Button>
+            )}
             <NavLink
               onClick={() => setShowBar(false)}
               to={"/cart"}
@@ -93,7 +125,7 @@ const MobileHeader = ({ setShowBar, showBar, setShowLogin }) => {
           </div>
         </div>
         <div
-          className={`hamburger absolute top-[4rem] md:hidden  block right-4 z-50 ${
+          className={`hamburger absolute top-[4rem] md:hidden  block right-6 z-50 ${
             showBar ? "active " : ""
           }`}
           onClick={() => setShowBar(!showBar)}

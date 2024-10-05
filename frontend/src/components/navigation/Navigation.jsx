@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import { Modal, Input, Badge } from "antd";
 import { useSelector } from "react-redux";
@@ -85,11 +85,13 @@ const Navigation = ({ setShowLogin }) => {
     <>
       <header className={headerClassNames}>
         <div className="open-sans flexCenterBetwen container mx-auto h-full relative">
-          <img
-            className="w-32 h-32 object-cover rounded-full"
-            src={logo}
-            alt="Logo"
-          />
+          <Link to={"/"} className="cursor-pointer">
+            <img
+              className="w-32 h-32 object-cover rounded-full"
+              src={logo}
+              alt="Logo"
+            />
+          </Link>
           <nav className="md:flex hidden items-center gap-6">
             {navbarLink.map((item) => (
               <NavLink
@@ -116,7 +118,7 @@ const Navigation = ({ setShowLogin }) => {
           </nav>
         </div>
         <div
-          className={`hamburger absolute top-[4rem] md:hidden block right-4 z-50 ${
+          className={`hamburger absolute top-[4rem] md:hidden block right-6 z-50 ${
             showBar ? "active" : ""
           }`}
           onClick={() => setShowBar(!showBar)}
