@@ -84,5 +84,13 @@ APP_PASSWORD=""
 SMTP_FROM_EMAIL=""
 SMTP_FROM_NAME=""
 ```
+5.**Docker'ı çalıştırmak için**
 
-
+1-**Ana dizine gidin /** - build
+```bash
+docker compose build
+```
+2-**Ana dizine gidin /** - run
+```bash
+docker compose up -d
+```
