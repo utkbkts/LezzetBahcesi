@@ -4,7 +4,6 @@ import {
   authorizeRoles,
   isAuthenticatedUser,
 } from "../middleware/auth.middleware.js";
-
 const router = express.Router();
 
 router.post("/register", AuthControllers.RegisterUser);

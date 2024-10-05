@@ -133,7 +133,7 @@ const Shipping = () => {
           initialValues={initialValues}
           onFinish={onFinish}
           layout="vertical"
-          className="w-[500px] shadow-xl p-2 rounded-md mt-8 mb-8"
+          className="md:w-[500px] w-full shadow-xl p-2 rounded-md mt-8 mb-8"
         >
           <h2 className="mb-4 text-black text-center uppercase text-[25px]">
             Adres Bilgileri

@@ -83,9 +83,9 @@ const PaymentMethod = () => {
     }
   };
   return (
-    <div className="w-full h-screen bg-gray-100 flex items-center justify-center p-6 flex-col ">
+    <div className="w-full h-screen bg-gray-100 flex items-center justify-center md:p-6 flex-col ">
       <CheckOutSteps currentStep={3} />
-      <div className="bg-white shadow-xl mt-4 rounded-md w-[500px] p-2">
+      <div className="bg-white shadow-xl mt-4 rounded-md md:w-[500px] w-full p-2">
         <h1 className="text-center">Ödeme Yöntemi Seç</h1>
         <Form
           onFinish={submitHandler}

@@ -12,7 +12,7 @@ const CatagoriesAndMenu = () => {
 
   // Kategorileri benzersiz hale getirmek için Set kullanıyoruz
   const uniqueCategories = Array.from(
-    new Set(data.product.map((item) => item.category.name))
+    new Set(data?.product?.map((item) => item.category.name))
   );
 
   return (

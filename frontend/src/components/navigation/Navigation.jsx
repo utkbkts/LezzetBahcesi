@@ -45,10 +45,9 @@ export const navbarLink = [
 
 const Navigation = ({ setShowLogin }) => {
   const [isScrollingUp, setIsScrollingUp] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [lastScrollY, setLastScrollY] = useState(100);
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const location = useLocation().pathname;
   const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);

@@ -19,7 +19,6 @@ const io = new Server(server, {
 const userSocketMap = {};
 let userCount = 0;
 io.on("connection", (socket) => {
-  console.log("Yeni kullanıcı bağlandı:", socket.id);
   const userId = socket.handshake.query.userId;
   userCount++;
   // Kullanıcı ID'sini soket ile eşleştir
@@ -27,12 +26,10 @@ io.on("connection", (socket) => {
     userSocketMap[userId] = socket.id;
   }
   io.emit("userCountUpdated", userCount);
-  console.log("Bağlı kullanıcı sayısı:", userCount);
   socket.on("disconnect", () => {
     delete userSocketMap[userId];
     userCount--;
     io.emit("userCountUpdated", userCount);
-    console.log("Bağlı kullanıcı sayısı:", userCount);
   });
 });
 

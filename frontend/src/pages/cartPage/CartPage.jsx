@@ -130,6 +130,7 @@ const CartPage = () => {
           <Table
             columns={columns}
             dataSource={dataSource}
+            scroll={{ x: 800 }}
             className="mb-8 shadow-md"
           />
           <div className="flex gap-6 mb-8 text-black">

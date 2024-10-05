@@ -6,7 +6,6 @@ import ErrorHandler from "../utils/errorHandler.js";
 import sendEmail from "../utils/sendEmail.js";
 import sendToken from "../utils/sendToken.js";
 import crypto from "crypto";
-
 const RegisterUser = catchAsyncError(async (req, res, next) => {
   const { name, email, lastName, password, confirmPassword } = req.body;
   if (!name || !lastName || !email || !password || !confirmPassword) {
@@ -43,6 +42,16 @@ const LoginUser = catchAsyncError(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Şifre yanlış.", 401));
   }
+  if (user.isBlocked === true) {
+    return next(new ErrorHandler("Hesabınız engellenmiştir..", 401));
+  }
+  sendToken(user, 200, res);
+});
+
+//google login
+const googleLogin = catchAsyncError(async (req, res, next) => {
+  const user = await User.findOne({ email }).select("+password");
+
   if (user.isBlocked === true) {
     return next(new ErrorHandler("Hesabınız engellenmiştir..", 401));
   }

@@ -52,7 +52,7 @@ const ModalUser = ({ setShowLogin }) => {
           {modalVisible && (
             <div
               ref={outSideRef}
-              className="absolute top-32 z-[150] right-32 bg-white h-auto w-[180px] shadow-lg  p-3 flex flex-col gap-4"
+              className="absolute top-32 z-[150] -right-12 bg-white h-auto w-[180px] shadow-lg  p-3 flex flex-col gap-4"
             >
               <NavLink
                 onClick={() => setModalVisible(false)}

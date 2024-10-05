@@ -13,35 +13,30 @@ const NotificationProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      // Socket bağlantısını oluştur
       const newSocket = io(import.meta.env.VITE_REACT_APP_API, {
         query: {
           userId: user._id,
         },
       });
 
-      setSocket(newSocket); // Socket durumunu güncelle
-      // Sipariş durumu güncelleme olayını dinle
+      setSocket(newSocket);
       newSocket.on("orderStatusUpdated", (data) => {
-        const message = data.message; // Gelen mesaj
-        const updatedOrder = data.order; // Güncellenmiş sipariş
+        const message = data.message;
+        const updatedOrder = data.order;
         data.shouldShake = true;
         const sound = new Audio(notificationSound);
         sound.play();
-        // Redux state'ini güncelle
         dispatch(setOrders(updatedOrder));
-        dispatch(setMessage(data.message)); // Mesajı ayarla
+        dispatch(setMessage(data.message));
 
-        // Bildirim göster
         toast.success(message);
       });
 
-      // Cleanup fonksiyonu
       return () => {
-        newSocket.disconnect(); // Socket bağlantısını kapat
+        newSocket.disconnect();
       };
     }
-  }, [user, dispatch]); // user ve dispatch bağımlılık dizisine eklenmeli
+  }, [user, dispatch]);
 
   return <>{children}</>; // İçerikleri döndür
 };
