@@ -3,10 +3,13 @@ import { useGetUserOrderDetailQuery } from "../../../redux/api/OrderApi";
 import { Button } from "antd";
 import { Link, useParams } from "react-router-dom";
 import moment from "moment";
+import { useSelector } from "react-redux";
 const UserOrderDetail = () => {
   const params = useParams();
   const { id } = params;
   const { data, isLoading } = useGetUserOrderDetailQuery(id);
+  const { orders } = useSelector((state) => state.socket);
+  const findOrder = orders.find((item) => item._id === id);
 
   if (isLoading) {
     return <Loading />;
@@ -42,7 +45,7 @@ const UserOrderDetail = () => {
                     {data?.order?._id}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {data?.order?.orderStatus}
+                    {findOrder?.orderStatus}
                   </td>
                   <td className="border border-gray-300 p-2">
                     {moment(data?.order?.updatedAt).format(
@@ -98,7 +101,7 @@ const UserOrderDetail = () => {
               <tbody className="w-full">
                 <tr className="bg-gray-50 flex flex-col">
                   <td className="border border-gray-300 p-2">
-                    {data?.order?.paymentInfo?.status}
+                    {findOrder?.paymentInfo?.status}
                   </td>
                   <td className="border border-gray-300 p-2">
                     {data?.order?.paymentMethod}

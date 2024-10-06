@@ -21,16 +21,24 @@ const adminSocketMap = {};
 let userCount = 0;
 io.on("connection", (socket) => {
   const userId = socket.handshake.query.userId;
+  console.log("🚀 ~ io.on ~ userId:", userId);
   const role = socket.handshake.query.role;
   const adminId = role === "admin" ? userId : null;
-  userCount++;
-  // Kullanıcı ID'sini soket ile eşleştir
   if (role === "user") {
     userSocketMap[userId] = socket.id;
   } else if (role === "admin") {
     adminSocketMap[adminId] = socket.id;
   }
+  const find =
+    socket.id !== userSocketMap[userId] &&
+    socket.id !== adminSocketMap[adminId];
+  if (find) {
+    userCount++;
+  } else {
+    return;
+  }
   io.emit("userCountUpdated", userCount);
+  console.log("userCountUpdated", userCount);
   socket.on("disconnect", () => {
     delete userSocketMap[userId];
     delete adminSocketMap[adminId];
