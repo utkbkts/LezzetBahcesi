@@ -1,7 +1,7 @@
 import catchAsyncError from "../middleware/catch.middleware.js";
 import Order from "../models/order.models.js";
 import Product from "../models/product.models.js";
-import { notifyOrderStatusUpdated } from "../socket/socket.js";
+import { io, notifyOrderStatusUpdated } from "../socket/socket.js";
 import ErrorHandler from "../utils/errorHandler.js";
 const newOrder = catchAsyncError(async (req, res, next) => {
   const {
@@ -28,7 +28,7 @@ const newOrder = catchAsyncError(async (req, res, next) => {
     phoneNumber,
     user: req.user._id,
   });
-
+  io.emit("new-order", order);
   res.status(200).json({
     order,
   });
@@ -49,7 +49,6 @@ const orderGetProduct = catchAsyncError(async (req, res, next) => {
       $limit: 3,
     },
   ]);
-
   res.status(200).json({
     product,
     groupCheck,

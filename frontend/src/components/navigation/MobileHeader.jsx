@@ -10,7 +10,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { GrUserAdmin } from "react-icons/gr";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useLogoutMutation } from "../../redux/api/AuthApi";
-
+import PropTypes from "prop-types";
 const MobileHeader = ({ setShowBar, showBar, setShowLogin }) => {
   const { cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
@@ -138,5 +138,9 @@ const MobileHeader = ({ setShowBar, showBar, setShowLogin }) => {
     </div>
   );
 };
-
+MobileHeader.propTypes = {
+  setShowBar: PropTypes.func.isRequired,
+  showBar: PropTypes.bool.isRequired,
+  setShowLogin: PropTypes.func.isRequired,
+};
 export default MobileHeader;

@@ -79,9 +79,9 @@ const TableData = ({ roleAdmin, blockedUser, data }) => {
             onClick={() => handleUserRoleChange(record._id, record.role)}
             onMouseEnter={() => {
               setTooltipContent("Kullanıcıyı Engelle");
-              setTooltipVisible(true);
+              setTooltipsVisible(true);
             }}
-            onMouseLeave={() => setTooltipVisible(false)}
+            onMouseLeave={() => setTooltipsVisible(false)}
           />
         ) : (
           <div className="flex gap-4 items-center ">

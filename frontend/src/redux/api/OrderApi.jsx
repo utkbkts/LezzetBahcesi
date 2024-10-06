@@ -40,7 +40,7 @@ export const orderApi = createApi({
     //admin yönlendirmeleri
     getAdminOrders: builder.query({
       query: () => `/admin/orders`,
-      providesTags: ["Order"],
+      providesTags: ["Order", "UserOrder"],
     }),
     deleteOrders: builder.mutation({
       query(id) {

@@ -208,15 +208,15 @@ const CuisineFilter = ({ data }) => {
 
 CuisineFilter.propTypes = {
   data: PropTypes.shape({
-    categories: PropTypes.array.isRequired,
+    category: PropTypes.array.isRequired,
     FilteredProductCount: PropTypes.number,
     resPerPage: PropTypes.number,
     products: PropTypes.arrayOf(
       PropTypes.shape({
         category: PropTypes.string.isRequired,
       })
-    ).isRequired,
-  }).isRequired,
+    ),
+  }),
 };
 
 export default CuisineFilter;

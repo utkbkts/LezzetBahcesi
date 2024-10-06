@@ -86,11 +86,11 @@ const TableData = ({ data, handleRemoveReview }) => {
   );
 };
 TableData.propTypes = {
-  roleAdmin: PropTypes.func.isRequired,
+  roleAdmin: PropTypes.func,
   data: PropTypes.shape({
-    product: PropTypes.array.isRequired,
-  }).isRequired,
-  handleRemoveReview: PropTypes.func.isRequired,
+    product: PropTypes.array,
+  }),
+  handleRemoveReview: PropTypes.func,
 };
 
 export default TableData;

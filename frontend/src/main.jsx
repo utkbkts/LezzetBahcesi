@@ -7,14 +7,13 @@ import "./index.css";
 import "./variants/Typography.css";
 import "moment/dist/locale/tr";
 import "moment/min/locales";
-import NotificationProvider from "./provider/NotificationProvider.jsx";
+import { SocketProvider } from "./context/SocketContext.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <NotificationProvider>
-        {" "}
+      <SocketProvider>
         <App />
-      </NotificationProvider>
+      </SocketProvider>
     </Provider>
   </StrictMode>
 );

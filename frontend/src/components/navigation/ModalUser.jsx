@@ -44,8 +44,10 @@ const ModalUser = ({ setShowLogin }) => {
               onClick={() => setModalVisible(!modalVisible)}
               className="cursor-pointer flex items-center"
             />
-            {message && (
-              <Badge count={1} className="absolute -top-4 -right-2" />
+            {user?.role === "user" && message && (
+              <div>
+                <Badge count={1} className="absolute -top-4 -right-2" />
+              </div>
             )}
           </div>
           <li className="cursor-pointer">{user.name}</li>
