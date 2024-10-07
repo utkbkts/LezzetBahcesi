@@ -12,7 +12,14 @@ export const upload_file = (file, folder) => {
   return new Promise((resolve, reject) => {
     cloudinary.v2.uploader.upload(
       file,
-      { folder, resource_type: "auto" },
+      {
+        folder,
+        resource_type: "auto",
+        transformation: [
+          { width: 1024, quality: "auto:good", fetch_format: "auto" },
+        ],
+      },
+
       (error, result) => {
         if (error) {
           reject(error);

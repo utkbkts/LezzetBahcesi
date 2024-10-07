@@ -13,6 +13,9 @@ import ContactRouters from "./routes/contact.routes.js";
 import ReservationRouters from "./routes/reservation.route.js";
 import CategoryRouters from "./routes/category.route.js";
 import errorMiddleware from "./middleware/error.middleware.js";
+import AboutRouters from "./routes/about.route.js";
+import MenuRouters from "./routes/menu.route.js";
+import FooterRouters from "./routes/footer.route.js";
 import path from "path";
 import ConnectedDatabase from "./db/mongoDb.js";
 app.use(cookieParser());
@@ -53,6 +56,9 @@ app.use("/api", AnalyticRouters);
 app.use("/api", ContactRouters);
 app.use("/api", ReservationRouters);
 app.use("/api", CategoryRouters);
+app.use("/api", AboutRouters);
+app.use("/api", MenuRouters);
+app.use("/api", FooterRouters);
 
 app.use(errorMiddleware);
 

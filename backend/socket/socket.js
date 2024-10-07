@@ -21,7 +21,6 @@ const adminSocketMap = {};
 let userCount = 0;
 io.on("connection", (socket) => {
   const userId = socket.handshake.query.userId;
-  console.log("🚀 ~ io.on ~ userId:", userId);
   const role = socket.handshake.query.role;
   const adminId = role === "admin" ? userId : null;
   if (role === "user") {
@@ -38,7 +37,6 @@ io.on("connection", (socket) => {
     return;
   }
   io.emit("userCountUpdated", userCount);
-  console.log("userCountUpdated", userCount);
   socket.on("disconnect", () => {
     delete userSocketMap[userId];
     delete adminSocketMap[adminId];

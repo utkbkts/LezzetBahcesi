@@ -67,33 +67,35 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="h-screen overflow-hidden flex items-center justify-center bg-gray-700">
-      <div className="w-full max-w-xl bg-gray-800 py-16 px-4 rounded-lg shadow-lg">
-        <Form onFinish={handleSubmit} className="space-y-6" layout="vertical">
-          <h1 className="text-white text-center text-2xl font-semibold">
-            Parola Sıfırlama
-          </h1>
-          <div className="flex flex-col gap-2">
-            {inputField.map((item) => (
-              <Form.Item
-                rules={item.rules}
-                key={item.id}
-                name={item.name}
-                type={item.type}
-                hasFeedback
-                label={<span className="text-white">{item.label}</span>}
-              >
-                <Input className="p-3 rounded-lg !bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-gray-500" />
-              </Form.Item>
-            ))}
+    <div className="min-h-screen overflow-hidden absolute top-0 right-0 w-full bottom-0  bg-gray-700">
+      <div className="flex items-center justify-center h-full">
+        <div className="w-full max-w-xl bg-gray-800 py-16 px-4 rounded-lg shadow-lg ">
+          <Form onFinish={handleSubmit} className="space-y-6" layout="vertical">
+            <h1 className="text-white text-center text-2xl font-semibold">
+              Parola Sıfırlama
+            </h1>
+            <div className="flex flex-col gap-2">
+              {inputField.map((item) => (
+                <Form.Item
+                  rules={item.rules}
+                  key={item.id}
+                  name={item.name}
+                  type={item.type}
+                  hasFeedback
+                  label={<span className="text-white">{item.label}</span>}
+                >
+                  <Input className="p-3 rounded-lg !bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-gray-500" />
+                </Form.Item>
+              ))}
 
-            <div className="mt-6">
-              <Button htmlType="submit" type="primary" className="w-full">
-                Sıfırla
-              </Button>
+              <div className="mt-6">
+                <Button htmlType="submit" type="primary" className="w-full">
+                  Sıfırla
+                </Button>
+              </div>
             </div>
-          </div>
-        </Form>
+          </Form>
+        </div>
       </div>
     </div>
   );

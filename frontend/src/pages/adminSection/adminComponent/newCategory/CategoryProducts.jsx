@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import Loading from "../../../../components/loading/Loader";
 const CategoryProducts = () => {
   const [tagsCategory, setTagsCategory] = useState([]);
+  console.log("🚀 ~ CategoryProducts ~ tagsCategory:", tagsCategory);
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState("");
@@ -30,19 +31,20 @@ const CategoryProducts = () => {
       FileInputRef.current.value = "";
     }
   };
-  const removePriview = () => {
+  const removePreview = () => {
     setImage(null);
     setImagePreview(undefined);
   };
   const handleKeyDown = (e) => {
     const code = e.keyCode || e.which;
+    const trimmedCategory = category.toLowerCase().trim();
 
     if ((code !== 13 && code !== 188) || category.trim().length === 0) {
       return;
     }
 
-    if (!tagsCategory.includes(category.toLowerCase().trim())) {
-      setTagsCategory(category.toLowerCase().trim());
+    if (!tagsCategory.includes(trimmedCategory)) {
+      setTagsCategory(trimmedCategory);
       setCategory("");
     }
 
@@ -54,11 +56,9 @@ const CategoryProducts = () => {
   };
 
   const addTag = () => {
-    if (
-      category.trim().length > 0 &&
-      !tagsCategory.includes(category.toLowerCase().trim())
-    ) {
-      setTagsCategory(category.toLowerCase().trim());
+    const trimmedCategory = category.toLowerCase().trim();
+    if (trimmedCategory.length > 0 && !tagsCategory.includes(trimmedCategory)) {
+      setTagsCategory(trimmedCategory);
       setCategory("");
     }
   };
@@ -98,7 +98,7 @@ const CategoryProducts = () => {
             <Image width={200} src={imagePreview} className="rounded-lg" />
             <span
               className="cursor-pointer absolute right-0 top-0 bg-gray-700 text-white rounded-full p-1"
-              onClick={removePriview}
+              onClick={removePreview}
             >
               <X />
             </span>
@@ -118,7 +118,7 @@ const CategoryProducts = () => {
           Tag Ekle
         </Button>
 
-        {tagsCategory && (
+        {tagsCategory.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-4">
             <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm flex items-center space-x-2">
               <span>{tagsCategory}</span>

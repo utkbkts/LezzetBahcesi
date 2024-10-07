@@ -44,7 +44,7 @@ const AdminLayout = () => {
           <div
             className={`${
               showBar ? "" : " hidden"
-            } bg-gray-800 mds:flex flex-col items-center min-h-screen`}
+            } bg-gray-800 mds:flex flex-col items-center h-full`}
           >
             <AdminSidebar adminMenu={adminMenu} showBar={showBar} />
           </div>

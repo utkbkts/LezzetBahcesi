@@ -77,6 +77,10 @@ const inputFields = {
         { required: true, message: "Lütfen şifrenizi doğrulayın." },
         ({ getFieldValue }) => ({
           validator(_, value) {
+            const password = getFieldValue("password");
+            if (!value || password === value) {
+              return Promise.resolve();
+            }
             if (!value || getFieldValue("password") === value) {
               return Promise.resolve();
             }

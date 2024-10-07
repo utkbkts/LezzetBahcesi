@@ -6,20 +6,23 @@ import AuthModal from "../pages/auth/AuthModal";
 import { useGetUserQuery } from "../redux/api/UserApi";
 import Loading from "../components/loading/Loader";
 import UserCountDisplay from "../components/userCount/UserCount";
+import { useLocation } from "react-router-dom";
 const MainLayout = () => {
   const [showLogin, setShowLogin] = useState(false);
   const { isLoading } = useGetUserQuery();
-
+  const pathname = useLocation().pathname;
   if (isLoading) {
     return <Loading />;
   }
+  const starts = pathname.startsWith("/password/reset");
+
   return (
     <div className="w-full text-white h-full mt-[120px]">
-      <Navigation setShowLogin={setShowLogin} />
+      {!starts && <Navigation setShowLogin={setShowLogin} />}
       {showLogin && (
         <AuthModal showLogin={showLogin} setShowLogin={setShowLogin} />
       )}
-      <div className={"w-full  min-h-screen "}>
+      <div className={""}>
         <Outlet />
       </div>
       <div className="w-full mt-auto">

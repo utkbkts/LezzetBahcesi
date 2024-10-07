@@ -19,9 +19,9 @@ const RegisterUser = catchAsyncError(async (req, res, next) => {
     return next(new ErrorHandler("Email kullanılıyor", 400));
   }
   const user = await User.create({
-    name,
-    lastName,
-    email,
+    name: name.trim().toLowerCase(),
+    lastName: lastName.trim().toLowerCase(),
+    email: email.trim().toLowerCase(),
     password,
   });
 
@@ -42,16 +42,6 @@ const LoginUser = catchAsyncError(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Şifre yanlış.", 401));
   }
-  if (user.isBlocked === true) {
-    return next(new ErrorHandler("Hesabınız engellenmiştir..", 401));
-  }
-  sendToken(user, 200, res);
-});
-
-//google login
-const googleLogin = catchAsyncError(async (req, res, next) => {
-  const user = await User.findOne({ email }).select("+password");
-
   if (user.isBlocked === true) {
     return next(new ErrorHandler("Hesabınız engellenmiştir..", 401));
   }
