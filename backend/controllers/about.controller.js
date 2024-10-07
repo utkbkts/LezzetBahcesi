@@ -1,31 +1,52 @@
 import catchAsyncError from "../middleware/catch.middleware.js";
 import About from "../models/about.models.js";
 import { delete_file, upload_file } from "../utils/cloudinary.js";
-const aboutCreate = catchAsyncError(async (req, res, next) => {
-  req.body.user = req.user._id;
+
+const aboutCreate = catchAsyncError(async (req, res) => {
+  const { staticModal, introduction, chefs } = req.body;
 
   const aboutFind = await About.findOne().lean();
 
-  for (let i = 0; i < aboutFind.images.length; i++) {
-    await delete_file(aboutFind.images[i].public_id);
-  }
-  const uploadPromises = req.body.images.map(async (image) => {
-    const result = await upload_file(image.url, "shopit/about");
+  //staticModalImages
+  const staticModalData = staticModal[0];
+  const staticModalImages = await Promise.all(
+    staticModalData.images.map((image) => {
+      return upload_file(image.url, "shopit/about");
+    })
+  );
 
-    return {
-      public_id: result.public_id,
-      url: result.url,
-    };
-  });
-
-  const urls = await Promise.all(uploadPromises);
+  // Chef Images
+  const chefsModalData = chefs[0];
+  const chefImages = await Promise.all(
+    chefs.map((chef) => {
+      if (chef.images && chef.images.url) {
+        return upload_file(chef.images.url, "shopit/about");
+      }
+      return null;
+    })
+  );
+  //introductionimages
+  const introductionImages = await upload_file(
+    introduction[0].images.url,
+    "shopit/about"
+  );
 
   if (aboutFind) {
+    //delete image
+    for (let i = 0; i < staticModalData.images.length; i++) {
+      await delete_file(staticModalImages[i].public_id);
+    }
+    for (let i = 0; i < chefsModalData.images.length; i++) {
+      await delete_file(chefImages[i].public_id);
+    }
+
     const updated = await About.findByIdAndUpdate(
       aboutFind._id,
       {
         ...req.body,
-        images: urls,
+        staticModal: { ...staticModal, images: staticModalImages },
+        introduction: { ...introduction, images: introductionImages },
+        chefs: { ...chefs, images: chefImages },
       },
       { new: true }
     );
@@ -34,8 +55,9 @@ const aboutCreate = catchAsyncError(async (req, res, next) => {
   } else {
     const about = await About.create({
       ...req.body,
-      images: urls,
-      user: req.user._id,
+      staticModal: { ...staticModal, images: staticModalImages },
+      introduction: { ...introduction, images: introductionImages },
+      chefs: { ...chefs, images: chefImages },
     });
 
     return res.status(201).json({ about });

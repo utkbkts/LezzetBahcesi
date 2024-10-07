@@ -14,7 +14,7 @@ export const upload_file = (file, folder) => {
       file,
       {
         folder,
-        resource_type: "auto",
+        resource_type: "image",
         transformation: [
           { width: 1024, quality: "auto:good", fetch_format: "auto" },
         ],
@@ -23,6 +23,7 @@ export const upload_file = (file, folder) => {
       (error, result) => {
         if (error) {
           reject(error);
+          console.error("Error uploading file:", error);
         } else {
           resolve({
             public_id: result.public_id,
