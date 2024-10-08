@@ -10,6 +10,8 @@ import UpdateProduct from "../pages/adminSection/adminComponent/updateProduct/Up
 import Reservation from "../pages/adminSection/adminComponent/reservation/Reservation.jsx";
 import CategoryProducts from "../pages/adminSection/adminComponent/newCategory/CategoryProducts.jsx";
 import { AdminLoaders } from "../loaders/AdminLoaders.jsx";
+import MenuPage from "../pages/adminSection/adminComponent/menus/MenuPage.jsx";
+import AboutPage from "../pages/adminSection/adminComponent/abouts/AboutPage.jsx";
 export const AdminRoutes = {
   path: "/admin",
   element: <AdminLayout />,
@@ -50,6 +52,14 @@ export const AdminRoutes = {
     {
       path: "newcategory",
       element: <CategoryProducts />,
+    },
+    {
+      path: "menu",
+      element: <MenuPage />,
+    },
+    {
+      path: "about",
+      element: <AboutPage />,
     },
   ],
 };

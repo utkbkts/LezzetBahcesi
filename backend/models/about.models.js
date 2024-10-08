@@ -4,23 +4,23 @@ const aboutSchema = new mongoose.Schema(
   {
     FeaturesModal: [
       {
-        title: { type: String },
-        description: { type: String },
+        titleFeatures: { type: String },
+        descriptionFeatures: { type: String },
         icon: { type: String },
       },
     ],
     staticModal: [
       {
-        images: [
+        staticImages: [
           {
             public_id: { type: String },
             url: { type: String },
           },
         ],
-        description: { type: String },
-        title: { type: String },
+        descriptionStatic: { type: String },
+        titleStatic: { type: String },
         experience: {
-          years: { type: Number },
+          years: { type: String },
           description: { type: String },
         },
         customers: {
@@ -35,39 +35,34 @@ const aboutSchema = new mongoose.Schema(
     ],
     introduction: [
       {
-        title: { type: String },
-        description: { type: String },
+        titleIntro: { type: String },
+        descriptionIntro: { type: String },
         content: { type: String },
-        images: {
-          public_id: {
-            type: String,
-          },
-          url: {
-            type: String,
-          },
+        imagesIntro: {
+          public_id: { type: String },
+          url: { type: String },
         },
       },
     ],
     chefs: [
       {
-        title: { type: String },
-        description: { type: String },
-        images: {
-          public_id: {
-            type: String,
-          },
-          url: {
-            type: String,
-          },
+        titleChefs: { type: String },
+        descriptionChefs: { type: String },
+        content: { type: String },
+        imagesChefs: {
+          public_id: { type: String },
+          url: { type: String },
         },
       },
     ],
-    mission: [
-      {
-        title: { type: String },
-        description: { type: String },
-      },
-    ],
+    mission: {
+      titleMission: { type: String },
+      descriptionMission: { type: String },
+    },
+    whoImChoose: {
+      titleWhoChoose: { type: String },
+      descriptionWhoChoose: { type: String },
+    },
   },
   { timestamps: true }
 );

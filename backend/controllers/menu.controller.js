@@ -1,31 +1,47 @@
 import catchAsyncError from "../middleware/catch.middleware.js";
 import Menu from "../models/menu.models.js";
 import { delete_file, upload_file } from "../utils/cloudinary.js";
-const menuCreate = catchAsyncError(async (req, res, next) => {
-  req.body.user = req.user._id;
 
+const menuCreate = catchAsyncError(async (req, res) => {
+  const { sectionOne, sectionTwo, sectionThree, sectionFour, sectionFive } =
+    req.body;
   const menuFind = await Menu.findOne().lean();
 
-  for (let i = 0; i < menuFind.images.length; i++) {
-    await delete_file(menuFind.images[i].public_id);
-  }
-  const uploadPromises = req.body.images.map(async (image) => {
-    const result = await upload_file(image.url, "shopit/menu");
-
-    return {
-      public_id: result.public_id,
-      url: result.url,
-    };
-  });
-
-  const urls = await Promise.all(uploadPromises);
+  //sectionOne
+  const sectionOneImages = await upload_file(
+    sectionOne[0].images.url,
+    "shopit/menu"
+  );
+  //sectionTwo
+  const sectionTwoImages = await upload_file(
+    sectionTwo[0].images.url,
+    "shopit/menu"
+  );
+  //sectionThree
+  const sectionThreeImages = await upload_file(
+    sectionThree[0].images.url,
+    "shopit/menu"
+  );
+  //sectionFive
+  const sectionFiveImages = await upload_file(
+    sectionFive[0].images.url,
+    "shopit/menu"
+  );
 
   if (menuFind) {
+    await delete_file(sectionOneImages.public_id);
+    await delete_file(sectionTwoImages.public_id);
+    await delete_file(sectionThreeImages.public_id);
+    await delete_file(sectionFiveImages.public_id);
+
     const updated = await Menu.findByIdAndUpdate(
       menuFind._id,
       {
-        ...req.body,
-        images: urls,
+        sectionFour,
+        sectionOne: { ...sectionOne, images: sectionOneImages },
+        sectionTwo: { ...sectionTwo, images: sectionTwoImages },
+        sectionThree: { ...sectionThree, images: sectionThreeImages },
+        sectionFive: { ...sectionFive, images: sectionFiveImages },
       },
       { new: true }
     );
@@ -33,9 +49,11 @@ const menuCreate = catchAsyncError(async (req, res, next) => {
     return res.status(200).json({ menu: updated });
   } else {
     const menu = await Menu.create({
-      ...req.body,
-      images: urls,
-      user: req.user._id,
+      sectionFour,
+      sectionOne: { ...sectionOne, images: sectionOneImages },
+      sectionTwo: { ...sectionTwo, images: sectionTwoImages },
+      sectionThree: { ...sectionThree, images: sectionThreeImages },
+      sectionFive: { ...sectionFive, images: sectionFiveImages },
     });
 
     return res.status(201).json({ menu });

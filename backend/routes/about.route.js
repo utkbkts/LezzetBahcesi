@@ -8,10 +8,15 @@ import {
 const router = express.Router();
 
 router.post(
-  "/about",
+  "/about/create",
   isAuthenticatedUser,
   authorizeRoles("admin"),
   aboutController.aboutCreate
 );
-
+router.get(
+  "/about/get",
+  isAuthenticatedUser,
+  authorizeRoles("admin"),
+  aboutController.aboutGet
+);
 export default router;

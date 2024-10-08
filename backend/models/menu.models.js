@@ -1,63 +1,91 @@
 import mongoose from "mongoose";
 
 const menuSchema = new mongoose.Schema({
-  headerMainOne: {
-    type: String,
-  },
-  contentMainOne: [
+  sectionOne: [
     {
-      type: String,
-    },
-  ],
-  descriptionMainOne: [
-    {
-      type: String,
-    },
-  ],
-  images: [
-    {
-      public_id: {
+      images: {
+        public_id: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
+      },
+      title: {
         type: String,
       },
-      url: {
+      description: {
+        type: String,
+      },
+      price: {
         type: String,
       },
     },
   ],
-
-  headerSectionTwo: {
-    type: String,
-  },
-  contentSectionTwo: [
+  sectionTwo: [
     {
-      type: String,
+      images: {
+        public_id: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
+      },
+      title: {
+        type: String,
+      },
+      description: {
+        type: String,
+      },
+      price: {
+        type: String,
+      },
     },
   ],
-  descriptionSectionTwo: [
+  sectionThree: [
     {
-      type: String,
+      images: {
+        public_id: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
+      },
+      title: {
+        type: String,
+      },
+      description: {
+        type: String,
+      },
+      price: {
+        type: String,
+      },
     },
   ],
-  headerSectionThree: {
-    type: String,
-  },
-  contentSectionThree: [
+  sectionFour: [
     {
-      type: String,
+      title: {
+        type: String,
+      },
+      description: {
+        type: String,
+      },
     },
   ],
-  descriptionSectionThree: [
+  sectionFive: [
     {
-      type: String,
+      images: {
+        public_id: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
+      },
     },
   ],
-  //section 4
-  headerSectionFour: {
-    type: String,
-  },
-  contentSectionFour: {
-    type: String,
-  },
 });
 
 const Menu = mongoose.model("Menu", menuSchema);

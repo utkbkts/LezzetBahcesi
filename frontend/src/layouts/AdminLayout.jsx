@@ -1,8 +1,7 @@
 import { Outlet } from "react-router-dom";
 import AdminSidebar from "../pages/adminSection/admin/AdminSidebar";
 import Navigation from "../components/navigation/Navigation";
-import { useState } from "react";
-import { ShoppingCart, UsersRound } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const adminMenu = [
   {
@@ -17,12 +16,12 @@ const adminMenu = [
     name: "Yeni Kategori Ekle",
     url: "/admin/newcategory",
   },
-  { name: "Ürünler", url: "/admin/products", icon: <ShoppingCart size={25} /> },
+  { name: "Ürünler", url: "/admin/products" },
   {
     name: "Siparişler",
     url: "/admin/orders",
   },
-  { name: "Kullanıcılar", url: "/admin/users", icon: <UsersRound size={25} /> },
+  { name: "Kullanıcılar", url: "/admin/users" },
   {
     name: "Yorumlar",
     url: "/admin/reviews",
@@ -31,11 +30,21 @@ const adminMenu = [
     name: "Rezervasyon",
     url: "/admin/reservation",
   },
+  {
+    name: "Hakkımızda",
+    url: "/admin/about",
+  },
+  {
+    name: "Menüler",
+    url: "/admin/menu",
+  },
 ];
 
 const AdminLayout = () => {
   const [showBar, setShowBar] = useState(false);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="w-full text-white h-full mt-[120px]">
       <Navigation />
