@@ -4,16 +4,10 @@ import {
   authorizeRoles,
   isAuthenticatedUser,
 } from "../middleware/auth.middleware.js";
-import validateRequestBody from "../middleware/validate.middleware.js";
-import reservationSchema from "../validation/reservationValidation.js";
 
 const router = express.Router();
 
-router.post(
-  "/reservation",
-  validateRequestBody(reservationSchema),
-  reservationController.reservationSave
-);
+router.post("/reservation", reservationController.reservationSave);
 router.get(
   "/reservation/get",
   isAuthenticatedUser,
@@ -25,5 +19,11 @@ router.put(
   isAuthenticatedUser,
   authorizeRoles("admin"),
   reservationController.reservationUpdate
+);
+router.delete(
+  "/reservation/delete/:id",
+  isAuthenticatedUser,
+  authorizeRoles("admin"),
+  reservationController.resetvationDelete
 );
 export default router;

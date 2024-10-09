@@ -4,12 +4,16 @@ import Title from "../../ui/Title";
 import hamburger from "/hamburger.png";
 import fork from "/fork.png";
 import coffe from "/coffe.png";
-import { Meals } from "../../contentData/ContentData";
+import { useProductGetCategoryAllQuery } from "../../redux/api/ProductApi";
+import Loading from "../loading/Loader";
 
 const PopularMenu = () => {
   const [category, setCategory] = useState("kahvaltı");
+  const { data, isLoading } = useProductGetCategoryAllQuery();
+  if (isLoading) return <Loading />;
 
-  const filteredMenu = Meals.filter((item) => item.category === category);
+  const filteredMenu =
+    data?.product.filter((item) => item.category.name === category) || [];
   return (
     <div className="min-h-screen mt-24">
       <Title title="Popüler Yiyecekler" titleSub={"Öğünlerimiz"} />
@@ -28,9 +32,11 @@ const PopularMenu = () => {
           </div>
           <div
             className={`flex items-center gap-2 cursor-pointer border-b-transparent pb-2 border-b-2 ${
-              category === "öğle" ? "!border-b-orange-400 border-b-2" : ""
+              category === "öğle yemeği"
+                ? "!border-b-orange-400 border-b-2"
+                : ""
             }`}
-            onClick={() => setCategory("öğle")}
+            onClick={() => setCategory("öğle yemeği")}
           >
             <img src={fork} alt="" className="w-12" />
             <h6 className="flex flex-col">
@@ -39,9 +45,11 @@ const PopularMenu = () => {
           </div>
           <div
             className={`flex items-center gap-2 cursor-pointer border-b-transparent pb-2 border-b-2 ${
-              category === "dinner" ? "!border-b-orange-400 border-b-2" : ""
+              category === "akşam yemeği"
+                ? "!border-b-orange-400 border-b-2"
+                : ""
             }`}
-            onClick={() => setCategory("dinner")}
+            onClick={() => setCategory("akşam yemeği")}
           >
             <img src={hamburger} alt="" className="w-12" />
             <h6 className="flex flex-col">
@@ -53,18 +61,20 @@ const PopularMenu = () => {
           {filteredMenu.map((item) => (
             <div key={item.id} className="flex items-center gap-2 ">
               <img
-                src={item.imgSrc}
-                alt={item.title}
+                src={item.images[0].url}
+                alt={item.productDetail.title}
                 className="w-24 object-cover h-12"
               />
               <div className="flex flex-col gap-2 w-full">
                 <div className="flex items-center justify-between border-b border-gray-400 ">
-                  <h5 className="font-bold">{item.title}</h5>
+                  <h5 className="font-bold">{item.productDetail.title}</h5>
                   <span className="text-orange-400 font-bold text-[20px]">
-                    {item.price}
+                    {item.productDetail.price.toFixed(2)}₺
                   </span>
                 </div>
-                <p className="text-[14px] text-gray-600">{item.description}</p>
+                <p className="text-[14px] text-gray-600">
+                  {item.productDetail.description}
+                </p>
               </div>
             </div>
           ))}

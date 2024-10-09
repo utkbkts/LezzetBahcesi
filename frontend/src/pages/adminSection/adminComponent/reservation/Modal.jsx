@@ -13,7 +13,6 @@ const ModalPage = ({ setIsModalOpen, isModalOpen, getData }) => {
   const [form] = Form.useForm();
   useEffect(() => {
     if (isError) {
-      console.log(error);
       toast.error(error.message);
     }
     if (isSuccess) {

@@ -5,8 +5,6 @@ import {
   authorizeRoles,
   isAuthenticatedUser,
 } from "../middleware/auth.middleware.js";
-import validateRequestBody from "../middleware/validate.middleware.js";
-import productSchema from "../validation/productValidation.js";
 
 const router = express.Router();
 
@@ -26,7 +24,6 @@ router.get("/reviews/user", isAuthenticatedUser, ProductControllers.getReviews);
 
 router.post(
   "/admin/products",
-  validateRequestBody(productSchema),
   isAuthenticatedUser,
   authorizeRoles("admin"),
   ProductControllers.createProduct

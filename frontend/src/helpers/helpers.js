@@ -28,5 +28,15 @@ export const getPriceQuery = (searchParams, key, value) => {
 };
 
 export const getDateLocal = (date) => {
-  return moment(date).format("DD MMMM YYYY HH:mm:ss");
+  return moment(date).format("DD MMMM YY HH:mm");
+};
+
+export const currencyMask = (value) => {
+  value = value.replace(/\D/g, "");
+
+  value = value.replace(/(\d)(\d{2})$/, "$1,$2");
+
+  value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+  return value;
 };

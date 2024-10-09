@@ -3,7 +3,10 @@ import { Button, Select, Space, Table } from "antd";
 import ModalPage from "./Modal";
 import { getDateLocal } from "../../../../helpers/helpers";
 import PropTypes from "prop-types";
-import { useUpdateReservationMutation } from "../../../../redux/api/ReservationApi";
+import {
+  useDeleteReservationMutation,
+  useUpdateReservationMutation,
+} from "../../../../redux/api/ReservationApi";
 
 import "react-datepicker/dist/react-datepicker.css";
 import {
@@ -12,16 +15,20 @@ import {
   CircleX,
   Clock9,
   TableCellsSplit,
+  Trash,
 } from "lucide-react";
 const TableData = ({ getData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateReservation] = useUpdateReservationMutation();
-
+  const [deleteReservation] = useDeleteReservationMutation();
   const showModal = () => {
     setIsModalOpen(true);
   };
   const handleStatus = (id, newStatus) => {
     updateReservation({ id, body: { status: newStatus } });
+  };
+  const handlerDelete = (id) => {
+    deleteReservation(id);
   };
   const columns = [
     {
@@ -50,7 +57,6 @@ const TableData = ({ getData }) => {
         }
         return (
           <span className={color}>
-            {" "}
             {times ? getDateLocal(times) : "Çıkış Yapıldı."}
           </span>
         );
@@ -149,6 +155,24 @@ const TableData = ({ getData }) => {
             <Select.Option value="İptal">İptal</Select.Option>
             <Select.Option value="Çıkış Yaptı">Çıkış Yaptı</Select.Option>
           </Select>
+        );
+      },
+    },
+    {
+      title: "Eylemler",
+      dataIndex: "actions",
+      key: "actions",
+      render: (_, record) => {
+        return (
+          <Button
+            onClick={() => handlerDelete(record._id)}
+            danger
+            type="primary"
+            size="small"
+            className="p-1"
+          >
+            <Trash size={15} />
+          </Button>
         );
       },
     },

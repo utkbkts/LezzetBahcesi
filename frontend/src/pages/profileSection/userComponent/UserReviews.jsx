@@ -57,9 +57,7 @@ const UserReviews = () => {
       setRating(0);
       setComment("");
       setCurrentReview(null);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleShow = (record) => {

@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import Loading from "../../../../components/loading/Loader";
 const CategoryProducts = () => {
   const [tagsCategory, setTagsCategory] = useState([]);
-  console.log("🚀 ~ CategoryProducts ~ tagsCategory:", tagsCategory);
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState("");

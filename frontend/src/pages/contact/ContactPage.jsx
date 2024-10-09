@@ -26,7 +26,6 @@ const ContactPage = () => {
       toast.success("Mesaj başarılı bir şekilde gönderildi");
       reset();
     }
-    console.log(error);
   }, [isSuccess, error]);
 
   const onSubmit = async (data) => {

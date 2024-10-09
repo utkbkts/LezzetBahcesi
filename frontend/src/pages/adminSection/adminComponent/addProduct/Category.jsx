@@ -7,7 +7,7 @@ import DrinksProducts from "./partials/DrinksProducts";
 import PotatosProducts from "./partials/PotatosProducts";
 
 import SaucesProducts from "./partials/SauceProducts";
-const Category = ({ tags, setTags, category, setCategory }) => {
+const Category = ({ tags, setTags, category, setCategory, isLoading }) => {
   const { data: getData } = useCategoryGetQuery();
 
   const handleFinish = (values, type) => {
@@ -134,6 +134,7 @@ const Category = ({ tags, setTags, category, setCategory }) => {
         value={category || "kategori seçiniz"}
         onChange={(value) => setCategory(value)}
         className="w-full mb-4"
+        disabled={isLoading}
       >
         {getData?.category?.map((item) => (
           <Select.Option key={item._id} value={item._id}>
@@ -149,6 +150,7 @@ const Category = ({ tags, setTags, category, setCategory }) => {
           handleFinish={handleFinish}
           handleDeleteTag={handleDeleteTag}
           tags={tags}
+          isLoading={isLoading}
         />
 
         {/* İçecek Seçimi */}
@@ -156,6 +158,7 @@ const Category = ({ tags, setTags, category, setCategory }) => {
           handleFinish={handleFinish}
           handleDeleteTag={handleDeleteTag}
           tags={tags}
+          isLoading={isLoading}
         />
 
         {/* Patates Kızartması */}
@@ -163,6 +166,7 @@ const Category = ({ tags, setTags, category, setCategory }) => {
           handleFinish={handleFinish}
           handleDeleteTag={handleDeleteTag}
           tags={tags}
+          isLoading={isLoading}
         />
 
         {/* Soslar */}
@@ -170,6 +174,7 @@ const Category = ({ tags, setTags, category, setCategory }) => {
           handleFinish={handleFinish}
           handleDeleteTag={handleDeleteTag}
           tags={tags}
+          isLoading={isLoading}
         />
       </div>
     </div>

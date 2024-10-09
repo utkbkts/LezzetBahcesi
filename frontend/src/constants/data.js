@@ -9,7 +9,7 @@ export const SideProducts = [
         rules: [
           { required: true, message: "Lütfen yan ürün adını giriniz" },
           {
-            pattern: /^[0-9a-zA-ZşğüöçıİĞŞ()%:\s]+$/,
+            pattern: /^[0-9a-zA-ZşğüöçıİĞŞ()%.:\s]+$/,
             message:
               "Sadece rakamlar ve harfler (büyük ve küçük) kullanabilirsiniz.",
           },
@@ -22,7 +22,7 @@ export const SideProducts = [
         rules: [
           { required: true, message: "Lütfen yan ürün fiyatını giriniz" },
           {
-            pattern: /^[0-9\s]+$/,
+            pattern: /^[0-9a-zA-ZşğüöçıİĞŞ()%.:\s]+$/,
             message: "Sadece rakam kullanabilirsiniz.",
           },
         ],
@@ -168,7 +168,7 @@ export const addProductTitle = [
     rules: [
       { required: true, message: "Lütfen Açıklamasını giriniz" },
       {
-        pattern: /^[0-9a-zA-ZşğüöçıİĞŞ()%:\s]+$/,
+        pattern: /^[0-9a-zA-ZşğüöçıİĞŞ()%:.,\s]+$/,
         message:
           "Sadece rakamlar ve harfler (büyük ve küçük) kullanabilirsiniz.",
       },

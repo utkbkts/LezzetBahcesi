@@ -12,7 +12,6 @@ export const AdminLoaders = async (requiredRole) => {
     }
     return response;
   } catch (error) {
-    console.log(error);
     return redirect("/");
   } finally {
     p.unsubscribe();

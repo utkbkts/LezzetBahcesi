@@ -2,7 +2,7 @@ import { Button, Form, Input, Tag } from "antd";
 import { NutriationData } from "../../../../constants/data";
 import { nanoid } from "nanoid";
 import PropTypes from "prop-types";
-const Nutriation = ({ nutriation, setNutriation }) => {
+const Nutriation = ({ nutriation, setNutriation, isLoading }) => {
   const onFinishNutriation = (values) => {
     if (
       values.nutriation &&
@@ -45,13 +45,14 @@ const Nutriation = ({ nutriation, setNutriation }) => {
                 name={field.name}
                 rules={field.rules}
               >
-                <Input placeholder={field.label} />
+                <Input placeholder={field.label} disabled={isLoading} />
               </Form.Item>
             ))}
           </div>
         ))}
-        <Button htmlType="submit" type="primary">
-          Ekle
+
+        <Button htmlType="submit" type="primary" disabled={isLoading}>
+          {isLoading ? "Yükleniyor" : "Ekle"}
         </Button>
       </Form>
       <div className="mt-4">
@@ -81,5 +82,6 @@ Nutriation.propTypes = {
     ).isRequired,
   }).isRequired,
   setNutriation: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
 };
 export default Nutriation;

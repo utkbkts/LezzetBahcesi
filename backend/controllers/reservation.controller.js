@@ -3,25 +3,26 @@ import Reservation from "../models/reservation.models.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
 const reservationSave = catchAsyncError(async (req, res, next) => {
-  const { name, lastname, times, table, numberOfPeople, note, status } =
+  const { name, times, table, numberOfPeople, note, status, lastname, email } =
     req.body;
 
-  if (Object.values(req.body).every((value) => !value)) {
+  if (!name || !times || !table || !numberOfPeople || !note) {
     return next(new ErrorHandler("Hepsini doldurunuz", 400));
   }
+
   const reserver = await Reservation.create({
     name,
-    lastname,
     times,
     table,
     numberOfPeople,
     note,
     status,
+    email,
+    lastname,
   });
 
   res.status(200).json({ reserver });
 });
-
 const reservationGet = catchAsyncError(async (req, res, next) => {
   const reserver = await Reservation.find();
 
@@ -30,7 +31,6 @@ const reservationGet = catchAsyncError(async (req, res, next) => {
 
 const reservationUpdate = catchAsyncError(async (req, res, next) => {
   const reserver = await Reservation.findById(req?.params?.id);
-  console.log("🚀 ~ reservationUpdate ~ reserver:", reserver);
 
   if (!reserver) {
     return next(new ErrorHandler("Reserver bulunamadı !", 404));
@@ -39,7 +39,6 @@ const reservationUpdate = catchAsyncError(async (req, res, next) => {
   if (reserver.status === "Çıkış Yaptı") {
     return next(new ErrorHandler("Bu kişi zaten çıkış yaptı. !", 404));
   }
-  console.log(req.body.status);
   if (req.body.status === "Çıkış Yaptı") {
     reserver.status = "Çıkış Yaptı";
     reserver.times = "";
@@ -52,5 +51,21 @@ const reservationUpdate = catchAsyncError(async (req, res, next) => {
     message: "Rezervasyon durumu başarıyla güncellendi.",
   });
 });
+const resetvationDelete = catchAsyncError(async (req, res, next) => {
+  const reservation = await Reservation.findById(req.params.id);
+  if (!reservation) {
+    return next(new ErrorHandler("Rezervasyon bulunamadı", 404));
+  }
+  await reservation.deleteOne();
+  return res.status(200).json({
+    success: true,
+    message: "Silme işlemi başarılı",
+  });
+});
 
-export default { reservationSave, reservationGet, reservationUpdate };
+export default {
+  reservationSave,
+  reservationGet,
+  reservationUpdate,
+  resetvationDelete,
+};

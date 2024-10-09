@@ -2,17 +2,21 @@ import { Input } from "antd";
 import PropTypes from "prop-types";
 import { useRef, useState } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
+import toast from "react-hot-toast";
 const UploadImages = ({ images, setImages }) => {
   const FileInputRef = useRef(null);
   const [imagePreview, setimagePreview] = useState([]);
-
+  const maxSize = 2 * 1024 * 1024;
   const onChange = (e) => {
     const files = Array.from(e.target.files);
-    if (images.length + files.length > 6) {
-      return alert("En fazla 6 resim yükleyebilirsin.");
+    if (images.length + files.length > 3) {
+      return alert("En fazla 3 resim yükleyebilirsin.");
     }
     files.forEach((file) => {
       const reader = new FileReader();
+      if (file.size > maxSize) {
+        return toast.error("2MB'dan büyük resimler yükleyemezsiniz.");
+      }
       reader.onload = () => {
         if (reader.readyState === 2) {
           setimagePreview((oldArray) => [...oldArray, reader.result]);

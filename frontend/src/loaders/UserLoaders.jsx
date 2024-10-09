@@ -8,7 +8,6 @@ export const UserLoaders = async () => {
     //dispatch içini açıyoruz hata durumunu ele alıyoruz
     return response;
   } catch (err) {
-    console.log(err);
     return redirect("/");
   } finally {
     p.unsubscribe();

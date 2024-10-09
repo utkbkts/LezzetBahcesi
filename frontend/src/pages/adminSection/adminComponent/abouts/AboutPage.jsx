@@ -99,7 +99,6 @@ const AboutPage = () => {
       });
     }
   }, [data]);
-  console.log(chefs);
 
   const onChange = (e) => {
     const files = Array.from(e.target.files);

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const { Text } = Typography;
 
-const DrinksProducts = ({ handleFinish, tags, handleDeleteTag }) => {
+const DrinksProducts = ({ handleFinish, tags, handleDeleteTag, isLoading }) => {
   return (
     <div>
       <div className="mb-4">
@@ -23,13 +23,13 @@ const DrinksProducts = ({ handleFinish, tags, handleDeleteTag }) => {
                 label={field.label}
                 rules={field.rules}
               >
-                <Input placeholder={field.label} />
+                <Input placeholder={field.label} disabled={isLoading} />
               </Form.Item>
             ))
           )}
         </div>
-        <Button htmlType="submit" type="primary">
-          Ekle
+        <Button htmlType="submit" type="primary" disabled={isLoading}>
+          {isLoading ? "Loading" : "Ekle"}
         </Button>
       </Form>
       <div className="mt-4">

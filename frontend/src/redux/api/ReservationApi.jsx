@@ -32,6 +32,15 @@ export const reservationApi = createApi({
       },
       invalidatesTags: ["Reservation"],
     }),
+    deleteReservation: builder.mutation({
+      query(id) {
+        return {
+          url: `/reservation/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["Reservation"],
+    }),
   }),
 });
 
@@ -39,4 +48,5 @@ export const {
   useSaveReservationMutation,
   useGetReservationQuery,
   useUpdateReservationMutation,
+  useDeleteReservationMutation,
 } = reservationApi;

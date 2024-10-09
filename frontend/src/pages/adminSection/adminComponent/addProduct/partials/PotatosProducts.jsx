@@ -4,7 +4,12 @@ import PropTypes from "prop-types";
 
 const { Text } = Typography;
 
-const PotatosProducts = ({ handleFinish, tags, handleDeleteTag }) => {
+const PotatosProducts = ({
+  handleFinish,
+  tags,
+  handleDeleteTag,
+  isLoading,
+}) => {
   return (
     <div>
       <div className="mb-4">
@@ -28,8 +33,8 @@ const PotatosProducts = ({ handleFinish, tags, handleDeleteTag }) => {
             ))
           )}
         </div>
-        <Button htmlType="submit" type="primary">
-          Ekle
+        <Button htmlType="submit" type="primary" disabled={isLoading}>
+          {isLoading ? "Loading" : "Ekle"}
         </Button>
       </Form>
       <div className="mt-4">

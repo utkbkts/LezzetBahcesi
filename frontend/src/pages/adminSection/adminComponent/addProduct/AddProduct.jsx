@@ -19,16 +19,17 @@ const AddProduct = () => {
   const [nutriation, setNutriation] = useState({
     nutriationValue: [],
   });
-  const [createProduct, { isSuccess, error }] = useCreateProductsMutation();
+  const [createProduct, { isSuccess, error, isLoading }] =
+    useCreateProductsMutation();
   const [category, setCategory] = useState("");
   const [images, setImages] = useState([]);
+
   const navigate = useNavigate();
+
   useEffect(() => {
     if (isSuccess) {
       toast.success("Ürün başarıyla eklendi");
-      setTimeout(() => {
-        navigate("/admin/products");
-      }, 1000);
+      navigate("/admin/products");
     }
     if (error) {
       toast.error(error?.data?.message);
@@ -55,6 +56,7 @@ const AddProduct = () => {
           setCategory={setCategory}
           tags={tags}
           setTags={setTags}
+          isLoading={isLoading}
         />
       </div>
       <div>
@@ -64,7 +66,11 @@ const AddProduct = () => {
         </div>
         <div className="mt-4">
           <Title>Ürünün Besin İçerik bilgileri.</Title>
-          <Nutriation nutriation={nutriation} setNutriation={setNutriation} />
+          <Nutriation
+            nutriation={nutriation}
+            setNutriation={setNutriation}
+            isLoading={isLoading}
+          />
         </div>
         <Title>Ürün Detayları</Title>
         <Form onFinish={onFinish} layout="vertical">
@@ -76,7 +82,7 @@ const AddProduct = () => {
                 name={item.name}
                 rules={item.rules}
               >
-                <TextArea placeholder={item.placeholder} />
+                <TextArea placeholder={item.placeholder} disabled={isLoading} />
               </Form.Item>
             ) : (
               <Form.Item
@@ -85,13 +91,13 @@ const AddProduct = () => {
                 name={item.name}
                 rules={item.rules}
               >
-                <Input placeholder={item.placeholder} />
+                <Input placeholder={item.placeholder} disabled={isLoading} />
               </Form.Item>
             );
           })}
 
-          <Button htmlType="submit" type="primary">
-            Kaydet
+          <Button disabled={isLoading} htmlType="submit" type="primary">
+            {isLoading ? "yükleniyor" : "Kaydet"}
           </Button>
         </Form>
       </div>

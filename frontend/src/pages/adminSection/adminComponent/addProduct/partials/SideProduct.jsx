@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const { Text } = Typography;
 
-const SideProduct = ({ handleFinish, tags, handleDeleteTag }) => {
+const SideProduct = ({ handleFinish, tags, handleDeleteTag, isLoading }) => {
   return (
     <div>
       <div className="mb-4">
@@ -23,13 +23,13 @@ const SideProduct = ({ handleFinish, tags, handleDeleteTag }) => {
                 label={field.label}
                 rules={field.rules}
               >
-                <Input placeholder={field.label} />
+                <Input placeholder={field.label} disabled={isLoading} />
               </Form.Item>
             ))
           )}
         </div>
-        <Button htmlType="submit" type="primary">
-          Ekle
+        <Button htmlType="submit" type="primary" disabled={isLoading}>
+          {isLoading ? "Yükleniyor" : "Ekle"}
         </Button>
       </Form>
       <div className="mt-4">

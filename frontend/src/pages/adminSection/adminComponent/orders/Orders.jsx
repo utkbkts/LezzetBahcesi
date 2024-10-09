@@ -21,7 +21,6 @@ function Orders() {
 
   useEffect(() => {
     if (error) {
-      console.log(error);
 
       toast.success(error.message);
     }
