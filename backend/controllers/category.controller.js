@@ -21,7 +21,7 @@ const CategoryAdd = catchAsyncError(async (req, res, next) => {
     cloudinaryResponse = await upload_file(image, "shopit/category");
   }
   const category = await Category.create({
-    name,
+    name: name.trim().toLowerCase(),
     image: cloudinaryResponse?.url ? cloudinaryResponse.url : "",
   });
   res.status(200).json({ category });

@@ -2,21 +2,31 @@ import Joi from "joi";
 
 const registerSchema = Joi.object({
   name: Joi.string()
-    .pattern(new RegExp("^[a-zA-ZğüşİĞŞÇÖÇÜı]*$"))
+    .pattern(
+      new RegExp(
+        "^(?!.*(eval|function|console|document|window|alert|var|let|const|for|if|else|try|catch|throw|import|export|class|async|await|=>|;|{|}|[()]).*$)[a-zA-ZğüşİĞŞÇÖÇÜı ]*$"
+      )
+    )
     .min(3)
     .max(50)
     .messages({
-      "string.pattern.base": "özel karakter kullanamazsın",
+      "string.pattern.base":
+        "Özel karakter kullanamazsınız. (JavaScript kodu içermemelidir)",
       "string.min": "İsim en az 3 karakter olmalıdır.",
       "string.max": "İsim en fazla 50 karakter olmalıdır.",
       "string.empty": "İsim alanı boş bırakılamaz.",
     }),
   lastName: Joi.string()
-    .pattern(new RegExp("^[a-zA-ZğüşİĞŞÇÖÇÜı]*$"))
+    .pattern(
+      new RegExp(
+        "^(?!.*(eval|function|console|document|window|alert|var|let|const|for|if|else|try|catch|throw|import|export|class|async|await|=>|;|{|}|[()]).*$)[a-zA-ZğüşİĞŞÇÖÇÜı ]*$"
+      )
+    )
     .min(3)
     .max(50)
     .messages({
-      "string.pattern.base": "özel karakter kullanamazsın",
+      "string.pattern.base":
+        "Özel karakter kullanamazsınız. (JavaScript kodu içermemelidir)",
       "string.min": "Soyisim en az 3 karakter olmalıdır.",
       "string.max": "Soyisim en fazla 50 karakter olmalıdır.",
       "string.empty": "Soyisim alanı boş bırakılamaz.",
@@ -31,12 +41,18 @@ const registerSchema = Joi.object({
       "string.empty": "E-posta alanı boş olamaz.",
       "string.base": "E-posta alanı metin olmalıdır.",
     }),
-  password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{6,30}$")).messages({
-    "string.password": "Lütfen şifrenizi giriniz.",
-    "string.empty": "Şifre alanı boş bırakılamaz",
-    "string.pattern.base":
-      "Şifreniz 6 ile 30 karakter arasında harf ve rakam içermelidir.",
-  }),
+  password: Joi.string()
+    .pattern(
+      new RegExp(
+        "^(?!.*(eval|function|console|document|window|alert|var|let|const|for|if|else|try|catch|throw|import|export|class|async|await|=>|;|{|}|[()]).*$)[a-zA-Z0-9]{6,30}$"
+      )
+    )
+    .messages({
+      "string.password": "Lütfen şifrenizi giriniz.",
+      "string.empty": "Şifre alanı boş bırakılamaz",
+      "string.pattern.base":
+        "Şifreniz 6 ile 30 karakter arasında harf ve rakam içermelidir.",
+    }),
   confirmPassword: Joi.string().valid(Joi.ref("password")).messages({
     "any.only": "Şifreler eşleşmiyor.",
     "string.empty": "Şifre onayı boş bırakılamaz.",
