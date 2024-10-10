@@ -26,19 +26,16 @@ const paymentCreate = catchAsyncError(async (req, res, next) => {
     expireYear,
     cvc,
   } = req.body;
-
   const request = {
     locale: Iyzipay.LOCALE.TR,
     conversationId: nanoid(),
-    price: parseFloat(itemsPrice),
-    paidPrice: parseFloat(totalAmount),
+    price: itemsPrice,
+    paidPrice: totalAmount,
     currency: Iyzipay.CURRENCY.TRY,
-    paymentId: nanoid(),
     installment: "1",
     basketId: nanoid(),
     paymentChannel: Iyzipay.PAYMENT_CHANNEL.WEB,
     paymentGroup: Iyzipay.PAYMENT_GROUP.PRODUCT,
-    callbackUrl: `${process.env.FRONTEND_URL}/admin/orders`,
     paymentCard: {
       cardHolderName: cardHolderName,
       cardNumber: cardNumber,
@@ -79,14 +76,15 @@ const paymentCreate = catchAsyncError(async (req, res, next) => {
       zipCode: shippingAddress.zipCode,
     },
     basketItems: basketItems.map((item) => ({
-      id: String(item.id),
+      id: item.product,
       name: item.title,
       category1: item.title[0],
       category2: item.title[1],
-      price: parseFloat(item.price).toFixed(2),
       itemType: Iyzipay.BASKET_ITEM_TYPE.PHYSICAL,
+      price: item.price,
     })),
   };
+  console.log(request);
   const orderData = {
     shippingAddress,
     basketItems,
@@ -97,10 +95,9 @@ const paymentCreate = catchAsyncError(async (req, res, next) => {
     paymentMethod: "Kart",
     user: req.user._id,
   };
-
   await Order.create(orderData);
 
-  iyzico.threedsInitialize.create(request, (err, result) => {
+  iyzico.payment.create(request, (err, result) => {
     if (err) {
       return next(new ErrorHandler("Ödeme işlemi başarısız", 404));
     } else {

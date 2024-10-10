@@ -26,10 +26,8 @@ const PaymentMethod = () => {
       toast.error(error?.data?.message);
     }
     if (isSuccess) {
-      navigate("/");
       dispatch(clearCartItem());
     } else if (IyzipaySuccess) {
-      navigate("/");
       dispatch(clearCartItem());
     }
   }, [error, isSuccess, navigate, IyzipaySuccess]);
@@ -41,7 +39,10 @@ const PaymentMethod = () => {
       }, 2000);
     }
     if (checkoutData?.result?.status === "failure") {
-      toast.error(checkoutData.result.errorMessage);
+      toast.error(
+        checkoutData.result.errorMessage ||
+          "ödeme esnasında bir hata oldu yeniden deneyiniz."
+      );
     }
   }, [checkoutData]);
 
@@ -79,7 +80,6 @@ const PaymentMethod = () => {
         },
       };
       iyzipayOrder(orderData);
-      dispatch(clearCartItem());
     }
   };
   return (
