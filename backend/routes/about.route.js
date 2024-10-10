@@ -7,7 +7,7 @@ import {
 
 const router = express.Router();
 
-router.post(
+router.put(
   "/about/create",
   isAuthenticatedUser,
   authorizeRoles("admin"),

@@ -12,7 +12,7 @@ export const aboutApi = createApi({
       query: (body) => {
         return {
           url: `/about/create`,
-          method: "POST",
+          method: "PUT",
           body,
         };
       },
