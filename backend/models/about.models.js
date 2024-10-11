@@ -47,6 +47,23 @@ const aboutSchema = new mongoose.Schema(
         },
       ],
     },
+    secondsModal: {
+      secondsImage: {
+        public_id: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
+      },
+      header: {
+        type: String,
+      },
+      content: {
+        type: String,
+      },
+      paragraph: [{ type: String }],
+    },
   },
   { timestamps: true }
 );

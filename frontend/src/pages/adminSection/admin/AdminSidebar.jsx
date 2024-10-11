@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const AdminSidebar = ({ adminMenu }) => {
+const AdminSidebar = ({ adminMenu, setShowBar }) => {
   const location = useLocation();
   const [activeMenuActive, setActiveMenuActive] = useState(location.pathname);
   const handleMenuItemClick = (menuItemUrl) => {
@@ -21,6 +21,7 @@ const AdminSidebar = ({ adminMenu }) => {
               to={item.url}
               onClick={() => {
                 handleMenuItemClick(item.url);
+                setShowBar(false);
               }}
               className={`block py-2 px-4 rounded-lg transition-colors duration-200 ${
                 activeMenuActive === item.url
@@ -45,6 +46,7 @@ AdminSidebar.propTypes = {
     })
   ).isRequired,
   showBar: PropTypes.bool,
+  setShowBar: PropTypes.func,
 };
 
 export default AdminSidebar;

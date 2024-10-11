@@ -49,13 +49,17 @@ const AdminLayout = () => {
     <div className="w-full text-white h-full mt-[120px]">
       <Navigation />
       <div className="flex mds:flex-row flex-col">
-        <div className={`relative mds:min-h-screen w-full mds:w-1/3`}>
+        <div className={`relative mds:min-h-screen w-full mds:w-1/5`}>
           <div
             className={`${
-              showBar ? "" : " hidden"
+              showBar ? "" : "hidden"
             } bg-gray-800 mds:flex flex-col items-center h-full`}
           >
-            <AdminSidebar adminMenu={adminMenu} showBar={showBar} />
+            <AdminSidebar
+              adminMenu={adminMenu}
+              showBar={showBar}
+              setShowBar={setShowBar}
+            />
           </div>
           <div
             className={`hamburger absolute top-4 mds:hidden block right-4 z-50 ${

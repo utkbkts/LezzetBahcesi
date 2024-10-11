@@ -4,6 +4,7 @@ import {
   useCreateAboutMutation,
   useGetAboutQuery,
 } from "../../../../redux/api/AboutApi";
+import SecondsModalForm from "./partials/SecondsModalForm";
 
 const AboutPage = () => {
   const initialState = {
@@ -14,7 +15,14 @@ const AboutPage = () => {
     dishes: { count: "", description: "" },
     staticImages: [{ url: "" }],
   };
+  const secondsInitialState = {
+    header: "",
+    content: "",
+    paragraph: [""],
+    secondsImage: [{ url: "" }],
+  };
   const [staticModal, setStaticModal] = useState(initialState);
+  const [secondsModal, setSecondsModal] = useState(secondsInitialState);
   const [createAbout] = useCreateAboutMutation();
   const { data: getAbout } = useGetAboutQuery();
   useEffect(() => {
@@ -39,20 +47,31 @@ const AboutPage = () => {
         },
         staticImages: getAbout?.about?.staticModal?.staticImages || [],
       });
+      setSecondsModal({
+        header: getAbout?.about?.secondsModal?.header || "",
+        content: getAbout?.about?.secondsModal?.content || "",
+        paragraph: getAbout?.about?.secondsModal?.paragraph || "",
+        secondsImage: getAbout?.about?.secondsModal?.secondsImage || "",
+      });
     }
   }, [getAbout]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createAbout({ staticModal });
+    createAbout({ staticModal, secondsModal });
   };
   return (
     <div className="mt-[100px]">
       <form onSubmit={onSubmit} className="space-y-4">
+        <h1>İlk alan</h1>
         <StaticModalForm
-          initialState={initialState}
           setStaticModal={setStaticModal}
           staticModal={staticModal}
+        />
+        <h1>İkinci alan</h1>
+        <SecondsModalForm
+          setSecondsModal={setSecondsModal}
+          secondsModal={secondsModal}
         />
         <button
           type="submit"

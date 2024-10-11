@@ -49,22 +49,22 @@ export const inputFields = {
   introduction: [
     {
       id: 10,
-      name: "descriptionIntro",
+      name: "content",
       label: "Açıklama",
     },
     {
       id: 11,
-      name: "titleIntro",
+      name: "header",
       label: "Başlık",
     },
     {
       id: 12,
-      name: "content",
+      name: "paragraph",
       label: "Paragraf",
     },
     {
       id: 13,
-      name: ["introduction", "imagesIntro"],
+      name: "secondsImage",
       label: "Resim",
     },
   ],

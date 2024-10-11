@@ -3,12 +3,17 @@ import About from "../models/about.models.js";
 import { delete_file, upload_file } from "../utils/cloudinary.js";
 
 const aboutCreate = catchAsyncError(async (req, res) => {
-  const { staticModal } = req.body;
+  const { staticModal, secondsModal } = req.body;
+  console.log("🚀 ~ aboutCreate ~ secondsModal:", secondsModal);
 
   const staticImages = await Promise.all(
     staticModal?.staticImages?.map((item) =>
       upload_file(item.url, "shopit/about")
     )
+  );
+  const secondsImage = await upload_file(
+    secondsModal?.secondsImage?.url,
+    "shopit/about"
   );
   const aboutFind = await About.findOne().lean();
 
@@ -24,6 +29,12 @@ const aboutCreate = catchAsyncError(async (req, res) => {
           dishes: staticModal.dishes,
           staticImages: staticImages,
         },
+        secondsModal: {
+          secondsImage: secondsImage,
+          header: secondsModal.header,
+          content: secondsModal.content,
+          paragraph: secondsModal.paragraph,
+        },
       },
       { new: true }
     );
@@ -38,6 +49,12 @@ const aboutCreate = catchAsyncError(async (req, res) => {
         customers: staticModal.customers,
         dishes: staticModal.dishes,
         staticImages: staticImages,
+      },
+      secondsModal: {
+        secondsImage: secondsImage,
+        header: secondsModal.header,
+        content: secondsModal.content,
+        paragraph: secondsModal.paragraph,
       },
     });
 

@@ -23,7 +23,7 @@ const { Title } = Typography;
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { data } = useProductByIdQuery(id); //params urlden alır direk redux query başına ver ama query direk function içinde vereceksin
+  const { data } = useProductByIdQuery(id);
   const [isModalOpen, setModalOpen] = useState(false);
   const [activeImg, setActiveImg] = useState([]);
   const { user } = useSelector((state) => state.auth);
@@ -32,15 +32,15 @@ const ProductDetails = () => {
       setActiveImg(data.product.images[0]);
     }
   }, [data]);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
   return (
     <>
       <div className="w-full h-full text-black mt-[80px]">
-        <div className="flex w-full h-[600px] bg-[#F4EEDC]">
+        <div className="flex w-full md:h-[600px] h-full bg-[#F4EEDC] md:flex-row flex-col items-center justify-center md:items-start">
           <div className="w-1/2 flex justify-center ">
-            <div className="flex flex-col justify-center items-start gap-2 ">
+            <div className="flex flex-col justify-center md:items-start gap-2 items-center">
               <>
                 <img
                   src={activeImg.url}
@@ -64,7 +64,7 @@ const ProductDetails = () => {
               </>
             </div>
           </div>
-          <div className="flex flex-col mt-12 p-6   rounded-lg">
+          <div className="flex flex-col mt-12 p-6   rounded-lg text-center md:text-start">
             <h3 className="text-2xl font-bold text-red-600 mb-4 animate-pulse">
               En Çok Satanlar da bu ürün var.
             </h3>
@@ -122,14 +122,14 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[#351E30] text-white p-6 rounded-lg shadow-md w-full flex h-[500px]">
-          <div className="mb-6 w-1/2 flex justify-center flex-col">
+        <div className="bg-[#351E30] text-white p-6 rounded-lg shadow-md w-full flex md:h-[500px] h-full md:flex-row flex-col items-center justify-center">
+          <div className="mb-6 md:w-1/2 w-full flex justify-center flex-col">
             <span className="text-lg font-semibold">İçerik:</span>
             <p className="mt-2 text-[16px] leading-relaxed">
               {data?.product?.productDetail?.details}
             </p>
           </div>
-          <div className=" w-1/2 h-full flex items-center">
+          <div className=" md:w-1/2 w-full h-full flex items-center">
             <div className="grid grid-cols-4 gap-4  ">
               <div className="flex items-center flex-col gap-2">
                 <PlantBase className="w-6 h-6" />

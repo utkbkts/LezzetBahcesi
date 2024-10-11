@@ -4,7 +4,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { inputFields } from "../InputFields";
 import { useGetAboutQuery } from "../../../../../redux/api/AboutApi";
 
-const StaticModalForm = ({ initialState, setStaticModal, staticModal }) => {
+const StaticModalForm = ({ setStaticModal, staticModal }) => {
   const FileInputRef = useRef(null);
   const [imagePreview, setImagePreview] = useState([]); // Yüklenmek üzere seçilen resimler
   const maxSize = 2 * 1024 * 1024;

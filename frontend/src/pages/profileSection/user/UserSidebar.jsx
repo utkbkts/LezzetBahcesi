@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { setMessage } from "../../../redux/features/socketSlice";
 
-const UserSidebar = ({ userMenu }) => {
+const UserSidebar = ({ userMenu, setShowBar }) => {
   const location = useLocation();
   const [activeMenuActive, setActiveMenuActive] = useState(location.pathname);
   const { message } = useSelector((state) => state.socket);
@@ -28,6 +28,7 @@ const UserSidebar = ({ userMenu }) => {
                 to={item.url}
                 onClick={() => {
                   handleMenuItemClick(item.url), handleClick();
+                  setShowBar(false);
                 }}
                 className={`block relative py-2 px-4 rounded-lg transition-colors duration-200 ${
                   activeMenuActive === item.url
@@ -43,7 +44,9 @@ const UserSidebar = ({ userMenu }) => {
             ) : (
               <Link
                 to={item.url}
-                onClick={() => handleMenuItemClick(item.url)}
+                onClick={() => {
+                  handleMenuItemClick(item.url), setShowBar(false);
+                }}
                 className={`block py-2 px-4 rounded-lg transition-colors duration-200 ${
                   activeMenuActive === item.url
                     ? "bg-blue-600 text-white"
@@ -67,6 +70,7 @@ UserSidebar.propTypes = {
       url: PropTypes.string.isRequired,
     })
   ).isRequired,
+  setShowBar: PropTypes.func,
 };
 
 export default UserSidebar;
