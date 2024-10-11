@@ -37,7 +37,7 @@ const UserReviews = () => {
     try {
       await deleteReview({
         productId: review.productId,
-        id: review.reviews[0]._id,
+        id: review.reviews[0]?._id,
       });
     } catch (error) {
       console.error("Silme işlemi başarısız:", error);
@@ -62,8 +62,8 @@ const UserReviews = () => {
 
   const handleShow = (record) => {
     setCurrentReview(record);
-    setRating(record.reviews[0].rating);
-    setComment(record.reviews[0].comment);
+    setRating(record.reviews[0]?.rating);
+    setComment(record.reviews[0]?.comment);
   };
 
   const columns = [
@@ -71,26 +71,26 @@ const UserReviews = () => {
       title: "ID",
       dataIndex: "reviews",
       key: "reviews",
-      render: (reviews) => <li>{reviews[0]._id}</li>,
+      render: (reviews) => <li>{reviews[0]?._id}</li>,
     },
     {
       title: "Oy",
       dataIndex: "rating",
       key: "rating",
-      render: (text, record) => record.reviews[0].rating,
+      render: (text, record) => record.reviews[0]?.rating,
     },
     {
       title: "Yorum",
       dataIndex: "comment",
       key: "comment",
-      render: (text, record) => record.reviews[0].comment,
+      render: (text, record) => record.reviews[0]?.comment,
     },
     {
       title: "Yorum Tarihi",
       dataIndex: "createdAt",
       key: "createdAt",
       render: (text, record) =>
-        new Date(record.reviews[0].createdAt).toLocaleDateString(),
+        new Date(record.reviews[0]?.createdAt).toLocaleDateString(),
     },
     {
       title: "Aksiyonlar",

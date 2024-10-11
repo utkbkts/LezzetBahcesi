@@ -61,7 +61,7 @@ const PopularMenu = () => {
           {filteredMenu.map((item) => (
             <div key={item.id} className="flex items-center gap-2 ">
               <img
-                src={item.images[0].url}
+                src={item.images[0]?.url}
                 alt={item.productDetail.title}
                 className="w-24 object-cover h-12"
               />
