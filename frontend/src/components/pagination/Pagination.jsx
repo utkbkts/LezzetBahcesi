@@ -2,7 +2,7 @@ import Pagination from "react-js-pagination";
 import PropTypes from "prop-types";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import "./Pagination.css";
 const PaginationPage = ({ resPerPage, filteredProductsCount }) => {
   let [searchParams] = useSearchParams();
   const navigate = useNavigate();

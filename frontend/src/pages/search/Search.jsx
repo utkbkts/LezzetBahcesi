@@ -24,6 +24,7 @@ const Search = () => {
   ratings !== null && (params.ratings = ratings);
 
   const { data, isError, error, isLoading } = useGetAllProductsQuery(params);
+  console.log("🚀 ~ Search ~ data:", data);
 
   useEffect(() => {
     if (isError) {
@@ -37,13 +38,13 @@ const Search = () => {
   };
   if (isLoading) return <Loading />;
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen w-full overflow-hidden">
       <div className="flex md:flex-row flex-col p-3 ">
-        <div className="cuisines-list md:w-1/4 w-full">
+        <div className="md:w-1/4 w-full">
           <CuisineFilter data={data} />
         </div>
-        <div className=" w-full">
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-2">
+        <div className="w-full">
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 w-full gap-4 ">
             {data?.products?.length > 0 ? (
               data?.products?.map((product) => (
                 <div key={product._id}>
@@ -68,12 +69,14 @@ const Search = () => {
               </div>
             )}
           </div>
-          {data?.products?.length > 0 && (
-            <PaginationPage
-              resPerPage={data?.resPerPage}
-              filteredProductsCount={data?.FilteredProductCount}
-            />
-          )}
+          <div className="w-full ">
+            {data?.products?.length > 0 && (
+              <PaginationPage
+                resPerPage={data?.resPerPage}
+                filteredProductsCount={data?.FilteredProductCount}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

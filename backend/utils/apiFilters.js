@@ -15,7 +15,7 @@ class apiFilter {
               },
             },
             {
-              category: {
+              "category.name": {
                 $regex: this.queryStr.search,
                 $options: "i",
               },
