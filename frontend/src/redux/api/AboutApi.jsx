@@ -22,7 +22,20 @@ export const aboutApi = createApi({
       query: () => `/about/get`,
       providesTags: ["about"],
     }),
+    deleteAbout: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/about/delete/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["about"],
+    }),
   }),
 });
 
-export const { useCreateAboutMutation, useGetAboutQuery } = aboutApi;
+export const {
+  useCreateAboutMutation,
+  useGetAboutQuery,
+  useDeleteAboutMutation,
+} = aboutApi;

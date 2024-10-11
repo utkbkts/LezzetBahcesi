@@ -2,14 +2,17 @@ import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { DeleteOutlined } from "@ant-design/icons";
 import { inputFields } from "../InputFields";
-import { useGetAboutQuery } from "../../../../../redux/api/AboutApi";
+import {
+  useDeleteAboutMutation,
+  useGetAboutQuery,
+} from "../../../../../redux/api/AboutApi";
 
 const StaticModalForm = ({ setStaticModal, staticModal }) => {
   const FileInputRef = useRef(null);
   const [imagePreview, setImagePreview] = useState([]); // Yüklenmek üzere seçilen resimler
   const maxSize = 2 * 1024 * 1024;
   const { data: getAbout } = useGetAboutQuery();
-
+  const [deleteAbout] = useDeleteAboutMutation();
   const handleStaticChange = (e) => {
     const { name, value } = e.target;
     const keys = name.split(".");
@@ -29,9 +32,9 @@ const StaticModalForm = ({ setStaticModal, staticModal }) => {
     const files = Array.from(e.target.files);
     if (
       staticModal?.staticImages?.length + imagePreview.length + files.length >
-      3
+      4
     ) {
-      return toast.error("En fazla 3 resim yükleyebilirsin.");
+      return toast.error("En fazla 4 resim yükleyebilirsin.");
     }
 
     files.forEach((file) => {
@@ -65,6 +68,11 @@ const StaticModalForm = ({ setStaticModal, staticModal }) => {
   const getValueFromState = (name) => {
     const keys = name.split(".");
     return keys.reduce((acc, key) => acc && acc[key], staticModal);
+  };
+
+  const handleDeleteClick = (id) => {
+    console.log(id);
+    deleteAbout(id);
   };
 
   return (
@@ -139,6 +147,12 @@ const StaticModalForm = ({ setStaticModal, staticModal }) => {
                   className="border object-cover border-gray-400 w-32 h-32 rounded-md"
                   alt="Yüklü"
                 />
+                <span
+                  className="cursor-pointer"
+                  onClick={() => handleDeleteClick(item._id)}
+                >
+                  X
+                </span>
               </div>
             ))}
           </div>

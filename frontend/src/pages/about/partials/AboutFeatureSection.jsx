@@ -1,9 +1,7 @@
 import { HandPlatter, ShoppingCart, User, Utensils } from "lucide-react";
-import img from "/hero/about-1.jpg";
-import img2 from "/hero/about-2.jpg";
-import img3 from "/hero/about-3.jpg";
-import img4 from "/hero/about-4.jpg";
 import React from "react";
+import { useGetAboutQuery } from "../../../redux/api/AboutApi";
+import Loading from "../../../components/loading/Loader";
 const sectionField = [
   {
     id: 1,
@@ -36,6 +34,13 @@ const sectionField = [
 ];
 
 const AboutFeatureSection = () => {
+  const { data: getAbout, isLoading } = useGetAboutQuery();
+  const staticModal = getAbout?.about?.staticModal;
+  const staticDesc = staticModal?.descriptionStatic?.split(".");
+  const staticImages = staticModal?.staticImages;
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <React.Fragment>
       <div className="mt-12 grid custom:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 ">
@@ -58,12 +63,12 @@ const AboutFeatureSection = () => {
       <div className="flex lg:flex-row flex-col items-start mt-20">
         <div className="lg:flex-1 w-full">
           <div className="md:flex hidden items-center gap-4">
-            <img src={img} alt="" className="w-64" />
-            <img src={img2} alt="" className="w-52 mt-24" />
+            <img src={staticImages[0]?.url} alt="" className="w-64" />
+            <img src={staticImages[1]?.url} alt="" className="w-52 mt-24" />
           </div>
           <div className="md:flex hidden items-center gap-4 mt-4 ml-12">
-            <img src={img3} alt="" className="w-52 mb-[5rem]" />
-            <img src={img4} alt="" className="w-64" />
+            <img src={staticImages[2]?.url} alt="" className="w-52 mb-[5rem]" />
+            <img src={staticImages[3]?.url} alt="" className="w-64" />
           </div>
         </div>
         <div className="lg:flex-1 w-full">
@@ -73,37 +78,18 @@ const AboutFeatureSection = () => {
               <span className="absolute top-1/2 inset-y-0 left-32 bg-orange-500 h-[1px] w-32"></span>
             </span>
             <div className="flex mt-4 flex-col items-center justify-center md:text-start text-center">
-              <h2 className="flex items-center gap-2 text-[32px] font-[800]">
-                Lezzet <Utensils size={60} className="text-[#FEA116]" />
-                Bahçesi
-              </h2>
-              <p className="pt-4">
-                Restoranımız, 2009 yılında kaliteli ve lezzetli yemekler sunma
-                amacıyla kuruldu. Mutfak ekibimiz, taze ve yerel malzemeleri
-                kullanarak sizlere eşsiz bir lezzet deneyimi yaşatmayı
-                hedefliyor.{" "}
-              </p>
-              <p className="pt-4">
-                Mutfak anlayışımız, sadece yemek sunmaktan ibaret değil.
-                Misafirlerimize sıcak, samimi bir ortamda en kaliteli hizmeti
-                sunmayı ilke edindik. Her bir tabakta sadece lezzet değil, aynı
-                zamanda tutkuyu da hissedeceksiniz.
-              </p>
-              <p className="pt-4">
-                Misyonumuz, çevreye duyarlı, sürdürülebilir malzemeler
-                kullanarak topluma katkı sağlamak ve sağlıklı yemeklerle
-                misafirlerimizin gönlünde yer edinmektir.
-              </p>
-              <p className="pt-4">
-                Her gün, siz değerli misafirlerimizi ağırlamak, bize mutluluk
-                veriyor. Özel günlerinizde yanınızda olmayı ve her anınızı daha
-                da özel kılmayı arzuluyoruz.
-              </p>
+              {staticDesc?.map((sentence, index) => (
+                <p key={index} className="pt-4 ">
+                  {sentence?.trim()}
+                </p>
+              ))}
 
               <div className=" items-center justify-between md:flex hidden">
                 <span className="relative flex items-center gap-4 ml-4 pt-8">
                   <span className="absolute h-full w-1 -left-3 bg-orange-400"></span>
-                  <strong className="text-[#FEA116] text-[48px]">15</strong>
+                  <strong className="text-[#FEA116] text-[48px]">
+                    {staticModal?.experience?.years}
+                  </strong>
                   <span className="flex flex-col">
                     Yıllık <strong className="text-[16px]">Deneyim</strong>
                   </span>
@@ -111,7 +97,9 @@ const AboutFeatureSection = () => {
 
                 <span className="relative flex items-center gap-4 ml-4 pt-8">
                   <span className="absolute h-full w-1 -left-3 bg-orange-400"></span>
-                  <strong className="text-[#FEA116] text-[48px]">500+</strong>
+                  <strong className="text-[#FEA116] text-[48px]">
+                    {staticModal?.customers?.count}
+                  </strong>
                   <span className="flex flex-col">
                     Memnun<strong className="text-[16px]"> Müşteri</strong>
                   </span>
@@ -119,7 +107,9 @@ const AboutFeatureSection = () => {
 
                 <span className="relative flex items-center gap-4 ml-4 pt-8">
                   <span className="absolute h-full w-1 -left-3 bg-orange-400"></span>
-                  <strong className="text-[#FEA116] text-[48px]">100+</strong>
+                  <strong className="text-[#FEA116] text-[48px]">
+                    {staticModal?.dishes?.count}
+                  </strong>
                   <span className="flex flex-col">
                     Lezzetli{" "}
                     <strong className="text-[16px]">Yemek Çeşidi</strong>

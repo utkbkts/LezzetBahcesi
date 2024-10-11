@@ -64,6 +64,40 @@ const aboutSchema = new mongoose.Schema(
       },
       paragraph: [{ type: String }],
     },
+    chefs1: {
+      title: {
+        type: String,
+      },
+      paragraph: {
+        type: String,
+      },
+      imageChef: {
+        public_id: { type: String },
+        url: { type: String },
+      },
+      header: {
+        type: String,
+      },
+      content: {
+        type: String,
+      },
+    },
+    mission: {
+      header: {
+        type: String,
+      },
+      paragraph: {
+        type: String,
+      },
+    },
+    whoChoose: {
+      header: {
+        type: String,
+      },
+      paragraph: {
+        type: String,
+      },
+    },
   },
   { timestamps: true }
 );

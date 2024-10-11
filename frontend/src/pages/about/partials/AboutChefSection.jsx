@@ -1,32 +1,36 @@
-import chef from "/about/chef.jpg";
+import Loading from "../../../components/loading/Loader";
+import { useGetAboutQuery } from "../../../redux/api/AboutApi";
 import chef2 from "/about/chef2.jpg";
 
 const AboutChefSection = () => {
+  const { data, isLoading } = useGetAboutQuery();
+  const secondsModal = data?.about?.chefs1;
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <>
       {" "}
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold text-[#005C53]  text-center">
-          Şeflerimizin Sanatı
+          {secondsModal?.title}
         </h2>
         <p className="text-lg text-[#44615e] mt-4  text-center">
-          En kaliteli malzemelerle, ustalıkla hazırlanan lezzetler.
+          {secondsModal?.paragraph}
         </p>
       </div>
       <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
         {/* İlk Şef Görseli ve İçerik */}
         <div className="relative w-full md:w-1/2 group">
           <img
-            src={chef}
+            src={secondsModal?.imageChef?.url}
             alt="Chef preparing a meal"
             className="w-full h-[500px] object-cover rounded-lg shadow-lg transform transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 rounded-lg group-hover:scale-105 transform transition-transform duration-500"></div>
           <div className="absolute bottom-8 left-8 text-white">
-            <h3 className="text-3xl font-semibold">Baş Aşçı Mehmet</h3>
-            <p className="text-md mt-2">
-              Geleneksel lezzetleri modern dokunuşlarla buluşturan usta şefimiz.
-            </p>
+            <h3 className="text-3xl font-semibold">{secondsModal?.header}</h3>
+            <p className="text-md mt-2">{secondsModal?.content}</p>
           </div>
         </div>
 

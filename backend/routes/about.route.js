@@ -19,4 +19,11 @@ router.get(
   authorizeRoles("admin"),
   aboutController.aboutGet
 );
+router.delete(
+  "/about/delete/:id",
+  isAuthenticatedUser,
+  authorizeRoles("admin"),
+  aboutController.aboutDelete
+);
+
 export default router;

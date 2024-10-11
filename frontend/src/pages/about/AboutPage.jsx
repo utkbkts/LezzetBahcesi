@@ -7,8 +7,16 @@ import AboutFeatureSection from "./partials/AboutFeatureSection";
 import AboutMissionSection from "./partials/AboutMissionSection";
 import AboutChefSection from "./partials/AboutChefSection";
 import AboutSocialMediaSection from "./partials/AboutSocialMediaSection";
+import Loading from "../../components/loading/Loader";
+import { useGetAboutQuery } from "../../redux/api/AboutApi";
 
 const AboutPage = () => {
+  const { data, isLoading } = useGetAboutQuery();
+  const secondsModal = data?.about;
+  console.log(secondsModal);
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div>
       {/* Hero Section */}
@@ -42,17 +50,10 @@ const AboutPage = () => {
       <div className="container mx-auto mt-16 flex flex-col lg:flex-row  text-black">
         <div className="lg:w-1/2 p-6 ">
           <h2 className="text-4xl font-bold text-gray-800 mb-6 lg:text-start text-center">
-            Restoranımızın Misyonu
+            {secondsModal?.mission?.header}
           </h2>
           <p className="text-lg text-gray-600 leading-relaxed mb-4 lg:text-start text-center">
-            Müşterilerimize sadece yemek değil, aynı zamanda unutulmaz bir
-            deneyim sunuyoruz. Güler yüzlü hizmet ve şık ambiyans ile her detay
-            sizin konforunuz için tasarlandı.
-          </p>
-          <p className="text-lg text-gray-600 leading-relaxed mb-4 lg:text-start text-center">
-            Vizyonumuz, gastronomi dünyasına yenilik katmak ve sürdürülebilir
-            mutfak anlayışımızla topluma katkıda bulunmaktır. Sizlere her zaman
-            en taze, en kaliteli yemekleri sunmaya devam edeceğiz.
+            {secondsModal?.mission?.paragraph}
           </p>
         </div>
 
@@ -76,13 +77,10 @@ const AboutPage = () => {
 
       <div className="container mx-auto my-16 p-6 bg-white rounded-lg shadow-md text-center">
         <h3 className="text-3xl font-bold text-gray-800 mb-4">
-          Neden Bizi Seçmelisiniz?
+          {secondsModal?.whoChoose?.header}
         </h3>
         <p className="text-lg text-gray-600 leading-relaxed">
-          Biz, yalnızca yemek değil; dostlarınızla ve ailenizle
-          paylaşabileceğiniz unutulmaz anılar sunuyoruz. Özel tariflerimiz ve
-          her damak zevkine hitap eden menümüz ile sizleri ağırlamaktan mutluluk
-          duyuyoruz.
+          {secondsModal?.whoChoose?.paragraph}
         </p>
       </div>
     </div>

@@ -16,16 +16,6 @@ export const inputFields = {
       label: "Deneyim yılı",
     },
     {
-      id: 4,
-      name: "experience.description",
-      label: "Deneyim açıklaması",
-    },
-    {
-      id: 5,
-      name: "customers.description",
-      label: "Müşteri açıklaması",
-    },
-    {
       id: 6,
       name: "customers.count",
       label: "Müşteri Sayısı",
@@ -34,11 +24,6 @@ export const inputFields = {
       id: 7,
       name: "dishes.count",
       label: "Yemek Sayısı",
-    },
-    {
-      id: 8,
-      name: "dishes.description",
-      label: "Yemek Çeşidi Açıklaması",
     },
     {
       id: 9,
@@ -71,22 +56,27 @@ export const inputFields = {
   chefs: [
     {
       id: 14,
-      name: "descriptionChefs",
-      label: "Açıklama",
+      name: "paragraph",
+      label: "Ana Açıklama",
     },
     {
       id: 15,
-      name: "titleChefs",
-      label: "Başlık",
+      name: "title",
+      label: "Ana Başlık",
     },
     {
       id: 16,
       name: "content",
-      label: "Açıklama content",
+      label: "açıklama şef",
+    },
+    {
+      id: 17,
+      name: "header",
+      label: "başlık şef",
     },
     {
       id: 18,
-      name: ["chefs", "imagesChefs"],
+      name: "imagesChefs",
       label: "Resim",
     },
   ],
