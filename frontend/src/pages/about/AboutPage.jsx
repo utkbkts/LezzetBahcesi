@@ -13,7 +13,6 @@ import { useGetAboutQuery } from "../../redux/api/AboutApi";
 const AboutPage = () => {
   const { data, isLoading } = useGetAboutQuery();
   const secondsModal = data?.about;
-  console.log(secondsModal);
   if (isLoading) {
     return <Loading />;
   }

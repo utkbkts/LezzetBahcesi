@@ -140,7 +140,7 @@ const StaticModalForm = ({ setStaticModal, staticModal }) => {
         <div className="flex flex-col">
           <h1 className="text-sm">Yüklü Resimler</h1>
           <div className="flex gap-2">
-            {getAbout?.about?.staticModal?.staticImages.map((item, index) => (
+            {getAbout?.about?.staticModal?.staticImages?.map((item, index) => (
               <div key={index}>
                 <img
                   src={item.url}

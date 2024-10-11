@@ -13,12 +13,7 @@ router.put(
   authorizeRoles("admin"),
   aboutController.aboutCreate
 );
-router.get(
-  "/about/get",
-  isAuthenticatedUser,
-  authorizeRoles("admin"),
-  aboutController.aboutGet
-);
+router.get("/about/get", aboutController.aboutGet);
 router.delete(
   "/about/delete/:id",
   isAuthenticatedUser,

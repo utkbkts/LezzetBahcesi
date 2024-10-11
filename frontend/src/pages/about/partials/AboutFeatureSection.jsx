@@ -38,6 +38,7 @@ const AboutFeatureSection = () => {
   const staticModal = getAbout?.about?.staticModal;
   const staticDesc = staticModal?.descriptionStatic?.split(".");
   const staticImages = staticModal?.staticImages;
+  console.log("🚀 ~ AboutFeatureSection ~ staticImages:", getAbout);
   if (isLoading) {
     return <Loading />;
   }
