@@ -6,6 +6,7 @@ import {
   useDeleteAboutMutation,
   useGetAboutQuery,
 } from "../../../../../redux/api/AboutApi";
+import { PropTypes } from "prop-types";
 
 const StaticModalForm = ({ setStaticModal, staticModal }) => {
   const FileInputRef = useRef(null);
@@ -161,5 +162,8 @@ const StaticModalForm = ({ setStaticModal, staticModal }) => {
     </>
   );
 };
-
+StaticModalForm.propTypes = {
+  setStaticModal: PropTypes.func,
+  staticModal: PropTypes.string,
+};
 export default StaticModalForm;

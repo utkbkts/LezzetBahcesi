@@ -13,6 +13,7 @@ import {
   CircleEllipsis,
   Contact,
   Cylinder,
+  Heart,
   LayoutDashboard,
 } from "lucide-react";
 
@@ -50,7 +51,7 @@ const Navigation = ({ setShowLogin }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation().pathname;
   const navigate = useNavigate();
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems, favoriteItems } = useSelector((state) => state.cart);
   const [showBar, setShowBar] = useState(false);
 
   useEffect(() => {
@@ -75,9 +76,9 @@ const Navigation = ({ setShowLogin }) => {
     }
   };
 
-  const headerClassNames = `fixed w-full bg-white z-[999] shadow-xl h-32 transition-all duration-300 ${
+  const headerClassNames = `fixed w-full bg-white z-[999] shadow-xl h-20 md:h-32 transition-all duration-300 ${
     isScrollingUp ? "top-0" : "-top-[50%]"
-  }`;
+  } ${showBar ? "top-0" : ""} md:top-0`;
 
   const shouldShowSearchIcon = location !== "/search";
 
@@ -114,11 +115,16 @@ const Navigation = ({ setShowLogin }) => {
                 <IoCartOutline size={25} className=" cursor-pointer" />
               </Badge>
             </NavLink>
+            <NavLink to={"/favorite"} className="mt-2">
+              <Badge count={favoriteItems?.length}>
+                <Heart size={25} className=" cursor-pointer" />
+              </Badge>
+            </NavLink>
             <ModalUser setShowLogin={setShowLogin} />
           </nav>
         </div>
         <div
-          className={`hamburger absolute top-[4rem] md:hidden block right-6 z-50 ${
+          className={`hamburger absolute md:top-[4rem] top-8 md:hidden block right-6 z-50 ${
             showBar ? "active" : ""
           }`}
           onClick={() => setShowBar(!showBar)}

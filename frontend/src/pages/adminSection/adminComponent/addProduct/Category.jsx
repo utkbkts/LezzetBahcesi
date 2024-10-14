@@ -215,5 +215,6 @@ Category.propTypes = {
   setTags: PropTypes.func.isRequired,
   category: PropTypes.string.isRequired,
   setCategory: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
 };
 export default Category;

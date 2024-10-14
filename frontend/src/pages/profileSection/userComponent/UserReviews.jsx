@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -57,7 +58,9 @@ const UserReviews = () => {
       setRating(0);
       setComment("");
       setCurrentReview(null);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleShow = (record) => {

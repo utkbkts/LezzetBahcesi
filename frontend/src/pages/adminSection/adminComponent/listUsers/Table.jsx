@@ -1,19 +1,15 @@
-import { Table } from "antd";
+/* eslint-disable no-unused-vars */
+import { Table, Tooltip } from "antd";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import createUser from "/create-user.png";
 import removeUser from "/remove-user.png";
 import userLock from "/user-lock.png";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 const TableData = ({ roleAdmin, blockedUser, data }) => {
   const { user } = useSelector((state) => state.auth);
-  const [tooltipsVisible, setTooltipsVisible] = useState({
-    createUser: false,
-    userLock: false,
-  });
-  const [tooltipContent, setTooltipContent] = useState("");
-
+  const [arrow, setArrow] = useState("Show");
   const handleBlockedUser = (id) => {
     blockedUser(id);
   };
@@ -22,6 +18,17 @@ const TableData = ({ roleAdmin, blockedUser, data }) => {
     const newRole = currentRole === "user" ? "admin" : "user";
     roleAdmin({ id, body: { role: newRole } });
   };
+  const mergedArrow = useMemo(() => {
+    if (arrow === "Hide") {
+      return false;
+    }
+    if (arrow === "Show") {
+      return true;
+    }
+    return {
+      pointAtCenter: true,
+    };
+  }, [arrow]);
   const columns = [
     {
       title: "İsim",
@@ -72,58 +79,47 @@ const TableData = ({ roleAdmin, blockedUser, data }) => {
           return null;
         }
         return record?.role === "admin" ? (
-          <img
-            src={removeUser}
-            alt=""
-            className="w-8 h-8 cursor-pointer"
-            onClick={() => handleUserRoleChange(record._id, record.role)}
-            onMouseEnter={() => {
-              setTooltipContent("Kullanıcıyı Engelle");
-              setTooltipsVisible(true);
-            }}
-            onMouseLeave={() => setTooltipsVisible(false)}
-          />
+          <Tooltip
+            placement="topRight"
+            title={"adminlikten çıkar"}
+            arrow={mergedArrow}
+          >
+            <img
+              src={removeUser}
+              alt=""
+              className="w-8 h-8 cursor-pointer"
+              onClick={() => handleUserRoleChange(record._id, record.role)}
+            />
+          </Tooltip>
         ) : (
           <div className="flex gap-4 items-center ">
             <div className="relative">
-              <img
-                src={createUser}
-                alt=""
-                className="w-8 h-8 cursor-pointer"
-                onClick={() => handleUserRoleChange(record._id, record.role)}
-                onMouseEnter={() => {
-                  setTooltipContent("Admin Ekle");
-                  setTooltipsVisible((prev) => ({ ...prev, createUser: true }));
-                }}
-                onMouseLeave={() =>
-                  setTooltipsVisible((prev) => ({ ...prev, createUser: false }))
-                }
-              />
-              {tooltipsVisible.createUser && (
-                <div className="absolute bg-gray-700 text-white p-2 rounded z-[9999] -left-24 top-0 ml-2">
-                  {tooltipContent}
-                </div>
-              )}
+              <Tooltip
+                placement="topRight"
+                title={" admin yap"}
+                arrow={mergedArrow}
+              >
+                <img
+                  src={createUser}
+                  alt=""
+                  className="w-8 h-8 cursor-pointer"
+                  onClick={() => handleUserRoleChange(record._id, record.role)}
+                />
+              </Tooltip>
             </div>
             <div className="relative">
-              <img
-                src={userLock}
-                alt=""
-                className="w-8 h-8 cursor-pointer"
-                onClick={() => handleBlockedUser(record._id)}
-                onMouseEnter={() => {
-                  setTooltipContent("Kullanıcıyı engelle");
-                  setTooltipsVisible((prev) => ({ ...prev, userLock: true }));
-                }}
-                onMouseLeave={() =>
-                  setTooltipsVisible((prev) => ({ ...prev, userLock: false }))
-                }
-              />
-              {tooltipsVisible.userLock && (
-                <div className="absolute bg-gray-700 text-white p-2 rounded z-[9999] left-9 -top-2 whitespace-nowrap">
-                  {tooltipContent}
-                </div>
-              )}
+              <Tooltip
+                placement="topRight"
+                title={"kullanıcıyı engelle"}
+                arrow={mergedArrow}
+              >
+                <img
+                  src={userLock}
+                  alt=""
+                  className="w-8 h-8 cursor-pointer"
+                  onClick={() => handleBlockedUser(record._id)}
+                />
+              </Tooltip>
             </div>
           </div>
         );

@@ -59,7 +59,7 @@ const PopularMenu = () => {
         </div>
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-12">
           {filteredMenu.map((item) => (
-            <div key={item.id} className="flex items-center gap-2 ">
+            <div key={item._id} className="flex items-center gap-2 ">
               <img
                 src={item.images[0]?.url}
                 alt={item.productDetail.title}

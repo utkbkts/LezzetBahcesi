@@ -11,6 +11,7 @@ import PaymentMethod from "../pages/cartPage/PaymentMethod";
 import ProductDetails from "../pages/productDetail/ProductDetails";
 import ResetPassword from "../components/resetPassword/ResetPassword.jsx";
 import ContactPage from "../pages/contact/ContactPage.jsx";
+import FavoritePage from "../pages/favoritePage/FavoritePage.jsx";
 export const MainRoutes = {
   path: "/",
   element: <MainLayout />,
@@ -35,6 +36,10 @@ export const MainRoutes = {
     {
       path: "cart",
       element: <CartPage />,
+    },
+    {
+      path: "favorite",
+      element: <FavoritePage />,
     },
     {
       path: "contact",

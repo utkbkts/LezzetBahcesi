@@ -32,14 +32,14 @@ const ProductDetails = () => {
       setActiveImg(data.product.images[0]);
     }
   }, [data]);
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div className="w-full h-full text-black mt-[80px]">
-        <div className="flex w-full md:h-[600px] h-full bg-[#F4EEDC] md:flex-row flex-col items-center justify-center md:items-start">
-          <div className="w-1/2 flex justify-center ">
+        <div className="flex w-full md:h-[600px]  h-full bg-[#F4EEDC] md:flex-row flex-col  justify-center items-center">
+          <div className="w-1/2 flex justify-end mt-12">
             <div className="flex flex-col justify-center md:items-start gap-2 items-center">
               <>
                 <img
@@ -64,7 +64,7 @@ const ProductDetails = () => {
               </>
             </div>
           </div>
-          <div className="flex flex-col mt-12 p-6   rounded-lg text-center md:text-start">
+          <div className="flex flex-col p-6 rounded-lg text-center md:text-start w-2/3">
             <h3 className="text-2xl font-bold text-red-600 mb-4 animate-pulse">
               En Çok Satanlar da bu ürün var.
             </h3>

@@ -14,6 +14,8 @@ import { clearCartItem } from "../../redux/features/cartSlice";
 const PaymentMethod = () => {
   const [method, setMethod] = useState("");
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
+
   const [createNewOrder, { error, isSuccess }] = useCreateOrderMutation();
   const [iyzipayOrder, { data: checkoutData, isSuccess: IyzipaySuccess }] =
     useIyzipayCheckOutMutation();
@@ -82,6 +84,11 @@ const PaymentMethod = () => {
       iyzipayOrder(orderData);
     }
   };
+  useEffect(() => {
+    if (!user) {
+      return navigate("/");
+    }
+  }, [user]);
   return (
     <div className="w-full h-screen bg-gray-100 flex items-center justify-center md:p-6 flex-col ">
       <CheckOutSteps currentStep={3} />

@@ -59,5 +59,6 @@ DrinksProducts.propTypes = {
       })
     ).isRequired,
   }).isRequired,
+  isLoading: PropTypes.bool,
 };
 export default DrinksProducts;

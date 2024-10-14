@@ -22,7 +22,7 @@ const MainLayout = () => {
       {showLogin && (
         <AuthModal showLogin={showLogin} setShowLogin={setShowLogin} />
       )}
-      <div className={"w-full"}>
+      <div className={"w-full flex-grow min-h-screen"}>
         <Outlet />
       </div>
       <div className="w-full mt-auto">

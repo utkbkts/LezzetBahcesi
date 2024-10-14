@@ -2,6 +2,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { inputFields } from "../InputFields";
 import { useGetAboutQuery } from "../../../../../redux/api/AboutApi";
 import { useRef, useState } from "react";
+import { PropTypes } from "prop-types";
 
 const ThirdModalForm = ({ setChefsModal1, chefs1 }) => {
   const { data: getAbout } = useGetAboutQuery();
@@ -121,5 +122,8 @@ const ThirdModalForm = ({ setChefsModal1, chefs1 }) => {
     </>
   );
 };
-
+ThirdModalForm.propTypes = {
+  setChefsModal1: PropTypes.func,
+  chefs1: PropTypes.string,
+};
 export default ThirdModalForm;

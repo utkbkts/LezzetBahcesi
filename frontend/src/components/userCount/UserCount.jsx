@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { User } from "lucide-react";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";

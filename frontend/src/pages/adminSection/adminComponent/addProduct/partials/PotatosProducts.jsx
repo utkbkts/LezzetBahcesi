@@ -64,6 +64,7 @@ PotatosProducts.propTypes = {
       })
     ).isRequired,
   }).isRequired,
+  isLoading: PropTypes.bool,
 };
 
 export default PotatosProducts;

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { redirect } from "react-router-dom";
 import { userApi } from "../redux/api/UserApi";
 import { store } from "../redux/store";

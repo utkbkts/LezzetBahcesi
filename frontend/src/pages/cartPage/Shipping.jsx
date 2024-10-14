@@ -6,6 +6,7 @@ import { saveShippingInfo } from "../../redux/features/cartSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "../../components/checkOutSteps/CheckOutSteps";
+import { useEffect } from "react";
 const phoneRegex =
   /^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})?([0-9]{4})$/;
 const formData = [
@@ -109,6 +110,8 @@ const formData = [
 const Shipping = () => {
   const dispatch = useDispatch();
   const { shippingInfo } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
+
   const countriesList = Object.values(countries);
   const navigate = useNavigate();
   const onFinish = (values) => {
@@ -125,6 +128,11 @@ const Shipping = () => {
     zipCode: shippingInfo?.zipCode,
     identityNumber: shippingInfo?.identityNumber,
   };
+  useEffect(() => {
+    if (!user) {
+      return navigate("/");
+    }
+  }, [user]);
   return (
     <>
       <div className="flex flex-col items-center justify-center h-full mt-[200px] mb-8 w-full ">

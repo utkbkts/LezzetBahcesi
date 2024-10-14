@@ -4,21 +4,10 @@ import {
   authorizeRoles,
   isAuthenticatedUser,
 } from "../middleware/auth.middleware.js";
-import validateRequestBody from "../middleware/validate.middleware.js";
-import registerSchema from "../validation/registerValidation.js";
-import loginSchema from "../validation/loginValidation.js";
 const router = express.Router();
 
-router.post(
-  "/register",
-  validateRequestBody(registerSchema),
-  AuthControllers.RegisterUser
-);
-router.post(
-  "/login",
-  validateRequestBody(loginSchema),
-  AuthControllers.LoginUser
-);
+router.post("/register", AuthControllers.RegisterUser);
+router.post("/login", AuthControllers.LoginUser);
 router.post("/logout", isAuthenticatedUser, AuthControllers.LogoutUser);
 router.get("/me", isAuthenticatedUser, AuthControllers.GetUserProfile);
 router.put("/me/update", isAuthenticatedUser, AuthControllers.updateProfile);

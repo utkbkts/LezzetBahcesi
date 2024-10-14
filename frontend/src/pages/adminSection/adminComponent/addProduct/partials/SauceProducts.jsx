@@ -58,5 +58,6 @@ SaucesProducts.propTypes = {
       })
     ).isRequired,
   }).isRequired,
+  isLoading: PropTypes.bool,
 };
 export default SaucesProducts;

@@ -8,7 +8,6 @@ const CatagoriesAndMenu = () => {
   const [category, setCategory] = useState("All");
   const { data, isLoading } = useProductGetCategoryAllQuery();
 
-  // Kategorileri benzersiz hale getirmek için Set kullanıyoruz
   const uniqueCategories = Array.from(
     new Set(data?.product?.map((item) => item.category.name))
   );

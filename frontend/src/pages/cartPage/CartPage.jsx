@@ -7,6 +7,7 @@ import { useEffect } from "react";
 
 const CartPage = () => {
   const { cartItems } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const handleCartRemove = (id) => {
     dispatch(RemoveCartItem({ id }));
@@ -84,7 +85,7 @@ const CartPage = () => {
         return (
           <Space size="middle">
             <Button
-              onClick={() => handleCartRemove(record.id)}
+              onClick={() => handleCartRemove(record.product)}
               type="primary"
               className="bg-red-400 hover:!bg-red-500"
             >
@@ -162,7 +163,11 @@ const CartPage = () => {
                   type="primary"
                   className=" bg-green-500 hover:bg-green-600"
                 >
-                  <Link to={"/shipping"}>Devam et</Link>
+                  {user ? (
+                    <Link to={"/shipping"}>Devam et</Link>
+                  ) : (
+                    <span>Ödeme işlemleri için giriş yapınız.</span>
+                  )}
                 </Button>
               </div>
             </div>

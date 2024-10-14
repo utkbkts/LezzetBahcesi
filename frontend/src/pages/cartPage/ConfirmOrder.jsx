@@ -1,14 +1,20 @@
 import { Button, Divider, Card } from "antd";
 import { useSelector } from "react-redux";
 import { calculateOrderCost } from "../../helpers/helpers";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CheckoutSteps from "../../components/checkOutSteps/CheckOutSteps";
+import { useEffect } from "react";
 
 const ConfirmOrder = () => {
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
   const { itemsPrice, taxPrice, totalPrice } = calculateOrderCost(cartItems);
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!user) {
+      return navigate("/");
+    }
+  }, [user]);
   return (
     <div className="w-full h-full bg-gray-100 !text-black flex justify-center p-6 flex-col ">
       <div className="mt-24 w-full justify-center flex flex-col items-center">

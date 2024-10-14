@@ -95,7 +95,7 @@ const Footer = () => {
             {footer.contact.map((item) => (
               <li
                 key={item.id}
-                className="font-[400] transition-all duration-400 text-[15px] flex mds:flex-row flex-col mds:text-start text-center items-center gap-1 hover:scale-105 cursor-pointer "
+                className="font-[400] transition-all duration-400 text-[15px] flex mds:flex-row flex-col mds:text-start text-center items-center gap-1  "
               >
                 {item.icon}
                 <span className="md:w-[400px] w-full">{item.name}</span>
@@ -111,7 +111,7 @@ const Footer = () => {
             {footer.opening.map((item) => (
               <li
                 key={item.id}
-                className="font-[400] transition-all duration-400 text-[15px] flex items-start flex-col gap-2 hover:scale-105 cursor-pointer"
+                className="font-[400] transition-all duration-400 text-[15px] flex items-start flex-col gap-2 "
               >
                 <span>{item.name}</span>
                 <span> {item.nameSub}</span>

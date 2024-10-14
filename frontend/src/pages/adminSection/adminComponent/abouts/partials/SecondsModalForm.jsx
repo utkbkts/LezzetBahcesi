@@ -1,6 +1,7 @@
 import { DeleteOutlined } from "@ant-design/icons";
 import { inputFields } from "../InputFields";
 import { useGetAboutQuery } from "../../../../../redux/api/AboutApi";
+import { PropTypes } from "prop-types";
 import { useRef, useState } from "react";
 
 const SecondsModalForm = ({ setSecondsModal, secondsModal }) => {
@@ -195,5 +196,8 @@ const SecondsModalForm = ({ setSecondsModal, secondsModal }) => {
     </>
   );
 };
-
+SecondsModalForm.propTypes = {
+  setSecondsModal: PropTypes.func,
+  secondsModal: PropTypes.string,
+};
 export default SecondsModalForm;

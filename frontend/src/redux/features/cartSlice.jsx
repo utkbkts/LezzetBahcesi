@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
   shippingInfo: JSON.parse(localStorage.getItem("shippingInfo")) || {},
+  favoriteItems: JSON.parse(localStorage.getItem("favoriteItems")) || [],
 };
 
 const cartSlice = createSlice({
@@ -11,7 +12,7 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const existingItem = state.cartItems.find(
-        (item) => item.id === action.payload.id
+        (item) => item.product === action.payload.product
       );
       if (existingItem) {
         existingItem.quantity += action.payload.quantity || 1;
@@ -25,16 +26,12 @@ const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     RemoveCartItem: (state, action) => {
-      const existingItem = state.cartItems.find(
-        (item) => item.id === action.payload.id
+      state.cartItems = state.cartItems.filter(
+        (item) => item.product !== action.payload.id
       );
-      if (existingItem) {
-        state.cartItems = state.cartItems.filter(
-          (item) => item.id !== action.payload.id
-        );
-        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-      }
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
+
     saveShippingInfo: (state, action) => {
       state.shippingInfo = action.payload;
       localStorage.setItem("shippingInfo", JSON.stringify(state.shippingInfo));
@@ -43,9 +40,32 @@ const cartSlice = createSlice({
       state.cartItems = [];
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
+    setFavorite: (state, action) => {
+      const existingItem = state.favoriteItems.find(
+        (item) => item.product === action.payload.product
+      );
+      if (existingItem) {
+        existingItem.quantity += action.payload.quantity || 1;
+        existingItem.price = existingItem.price * existingItem.quantity;
+      } else {
+        state.favoriteItems.push({
+          ...action.payload,
+          quantity: action.payload.quantity || 1,
+        });
+      }
+      localStorage.setItem(
+        "favoriteItems",
+        JSON.stringify(state.favoriteItems)
+      );
+    },
   },
 });
 
-export const { addToCart, RemoveCartItem, saveShippingInfo, clearCartItem } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  RemoveCartItem,
+  saveShippingInfo,
+  clearCartItem,
+  setFavorite,
+} = cartSlice.actions;
 export default cartSlice.reducer;

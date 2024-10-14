@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { Modal, Button } from "antd";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/features/cartSlice";
+import { addToCart, setFavorite } from "../../redux/features/cartSlice";
 import { useNavigate } from "react-router-dom";
 const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
   const [selectedOptions, setSelectedOptions] = useState({
@@ -141,6 +141,19 @@ const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
     navigate("/cart");
   };
 
+  const handleFavoriteCard = () => {
+    const cartItems = {
+      product: _id,
+      title: productDetail.title,
+      price: calculateTotalPrice(),
+      selectedOptions: selectedOptions,
+      image: images.length > 0 ? images[0]?.url : "",
+      quantity: quantity,
+    };
+
+    dispatch(setFavorite(cartItems));
+  };
+
   return (
     <Modal
       open={isOpen}
@@ -261,7 +274,7 @@ const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
         <Button type="primary" onClick={handleAddToCard} className="mr-2">
           Sepete Ekle
         </Button>
-        <Button onClick={""}>Favorilere Ekle</Button>
+        <Button onClick={handleFavoriteCard}>Favorilere Ekle</Button>
       </div>
     </Modal>
   );
