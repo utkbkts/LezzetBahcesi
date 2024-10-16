@@ -76,9 +76,9 @@ const Navigation = ({ setShowLogin }) => {
     }
   };
 
-  const headerClassNames = `fixed w-full bg-white z-[999] shadow-xl h-20 md:h-32 transition-all duration-300 ${
-    isScrollingUp ? "top-0" : "-top-[50%]"
-  } ${showBar ? "top-0" : ""} md:top-0`;
+  const headerClassNames = `fixed w-full bg-white z-[999] shadow-xl h-20 md:h-32 transition-transform duration-300 ${
+    isScrollingUp ? "navbar-visible" : "navbar-hidden"
+  } ${showBar ? "navbar-visible" : ""} md:top-0`;
 
   const shouldShowSearchIcon = location !== "/search";
 

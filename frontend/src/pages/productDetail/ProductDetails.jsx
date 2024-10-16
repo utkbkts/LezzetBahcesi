@@ -39,7 +39,7 @@ const ProductDetails = () => {
     <>
       <div className="w-full h-full text-black mt-[80px]">
         <div className="flex w-full md:h-[600px]  h-full bg-[#F4EEDC] md:flex-row flex-col  justify-center items-center">
-          <div className="w-1/2 flex justify-end mt-12">
+          <div className="md:w-1/2 w-full flex md:justify-end justify-center mt-12">
             <div className="flex flex-col justify-center md:items-start gap-2 items-center">
               <>
                 <img
@@ -48,7 +48,7 @@ const ProductDetails = () => {
                   className="w-full h-[300px] object-cover rounded-md mb-4"
                 />
 
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid sm:grid-cols-4 grid-cols-2 gap-3">
                   {data?.product?.images?.map((img, index) => {
                     return (
                       <img
@@ -64,7 +64,7 @@ const ProductDetails = () => {
               </>
             </div>
           </div>
-          <div className="flex flex-col p-6 rounded-lg text-center md:text-start w-2/3">
+          <div className="flex flex-col p-6 rounded-lg text-center md:text-start md:w-2/3 w-full">
             <h3 className="text-2xl font-bold text-red-600 mb-4 animate-pulse">
               En Çok Satanlar da bu ürün var.
             </h3>
@@ -94,9 +94,9 @@ const ProductDetails = () => {
                 Sepete Ekle
               </button>
               <div className="space-y-2">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center md:justify-start gap-2">
                   <Star className="text-yellow-400" />
-                  <div className="flex items-center gap-1">
+                  <div className="flex sm:flex-row flex-col items-center gap-1">
                     Değerlendirmeler:
                     <StarRatings
                       rating={data?.product?.ratings}
