@@ -16,12 +16,13 @@
 
 ## 📦 Teknolojiler
 
-| Katman      | Teknolojiler                |
-|-------------|-----------------------------|
-| **Frontend**| React, Ant Design           |
-| **Backend** | Node.js,Express,Socket.IO  |
-| **Veritabanı**| MongoDB                   |
-| **Konteyner**| Docker                     |
+| Katman      | Teknolojiler                  |
+|-------------|-------------------------------|
+| **Frontend**  | React, Ant Design           |
+| **Backend**   | Node.js,Express,Socket.IO   |
+| **Veritabanı**| MongoDB                     |
+| **Konteyner** | Docker                      |
+| **Ödeme**     | Iyzico                      |
 
 ---
 
