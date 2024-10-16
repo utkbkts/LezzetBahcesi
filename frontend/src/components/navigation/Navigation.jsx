@@ -16,6 +16,7 @@ import {
   Heart,
   LayoutDashboard,
 } from "lucide-react";
+import Reservation from "../../pages/reservation/ReservationPage";
 
 export const navbarLink = [
   {
@@ -41,6 +42,12 @@ export const navbarLink = [
     url: "/contact",
     label: "İletişim",
     icon: <Contact />,
+  },
+  {
+    id: 5,
+    url: "/reservation",
+    label: "Rezervasyon",
+    icon: <Reservation />,
   },
 ];
 
@@ -78,7 +85,7 @@ const Navigation = ({ setShowLogin }) => {
 
   const headerClassNames = `fixed w-full bg-white z-[999] shadow-xl h-20 md:h-32 transition-transform duration-300 ${
     isScrollingUp ? "navbar-visible" : "navbar-hidden"
-  } ${showBar ? "navbar-visible" : ""} md:top-0`;
+  } ${showBar ? "navbar-visible" : ""} top-0`;
 
   const shouldShowSearchIcon = location !== "/search";
 

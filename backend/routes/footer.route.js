@@ -8,10 +8,15 @@ import footerController from "../controllers/footer.controller.js";
 const router = express.Router();
 
 router.post(
-  "/footer",
+  "/footer/create",
   isAuthenticatedUser,
   authorizeRoles("admin"),
   footerController.footerCreate
 );
-
+router.get(
+  "/footer/get",
+  isAuthenticatedUser,
+  authorizeRoles("admin"),
+  footerController.footerGet
+);
 export default router;

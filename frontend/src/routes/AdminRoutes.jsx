@@ -12,6 +12,7 @@ import CategoryProducts from "../pages/adminSection/adminComponent/newCategory/C
 import { AdminLoaders } from "../loaders/AdminLoaders.jsx";
 import MenuPage from "../pages/adminSection/adminComponent/menus/MenuPage.jsx";
 import AboutPage from "../pages/adminSection/adminComponent/abouts/AboutPage.jsx";
+import FooterPage from "../pages/adminSection/adminComponent/footer/FooterPage.jsx";
 export const AdminRoutes = {
   path: "/admin",
   element: <AdminLayout />,
@@ -60,6 +61,10 @@ export const AdminRoutes = {
     {
       path: "about",
       element: <AboutPage />,
+    },
+    {
+      path: "footer",
+      element: <FooterPage />,
     },
   ],
 };

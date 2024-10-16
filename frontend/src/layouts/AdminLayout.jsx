@@ -38,6 +38,10 @@ const adminMenu = [
     name: "Menüler",
     url: "/admin/menu",
   },
+  {
+    name: "Footer",
+    url: "/admin/footer",
+  },
 ];
 
 const AdminLayout = () => {

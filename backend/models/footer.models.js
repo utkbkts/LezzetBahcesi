@@ -16,45 +16,26 @@ const footerSchema = new mongoose.Schema({
     {
       day: {
         type: String,
+        required: true,
       },
-
       hours: {
         type: String,
+        required: true,
       },
     },
   ],
   socialMedia: {
     facebook: {
-      url: {
-        type: String,
-      },
-      icon: {
-        type: String,
-      },
+      type: String,
     },
     twitter: {
-      url: {
-        type: String,
-      },
-      icon: {
-        type: String,
-      },
+      type: String,
     },
     instagram: {
-      url: {
-        type: String,
-      },
-      icon: {
-        type: String,
-      },
+      type: String,
     },
     linkedin: {
-      url: {
-        type: String,
-      },
-      icon: {
-        type: String,
-      },
+      type: String,
     },
   },
   createdAt: {

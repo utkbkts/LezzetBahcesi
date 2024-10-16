@@ -12,6 +12,7 @@ import ProductDetails from "../pages/productDetail/ProductDetails";
 import ResetPassword from "../components/resetPassword/ResetPassword.jsx";
 import ContactPage from "../pages/contact/ContactPage.jsx";
 import FavoritePage from "../pages/favoritePage/FavoritePage.jsx";
+import ReservationPage from "../pages/reservation/ReservationPage.jsx";
 export const MainRoutes = {
   path: "/",
   element: <MainLayout />,
@@ -44,6 +45,10 @@ export const MainRoutes = {
     {
       path: "contact",
       element: <ContactPage />,
+    },
+    {
+      path: "reservation",
+      element: <ReservationPage />,
     },
     {
       path: "shipping",

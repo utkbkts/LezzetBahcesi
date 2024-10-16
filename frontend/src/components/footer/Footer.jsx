@@ -4,10 +4,11 @@ import {
   MapPinHouse,
   Phone,
   Facebook,
-  Twitter,
   Instagram,
   Linkedin,
 } from "lucide-react";
+import { useGetFooterQuery } from "../../redux/api/FooterApi";
+import { Link } from "react-router-dom";
 const footer = {
   company: [
     {
@@ -31,43 +32,10 @@ const footer = {
       icon: <ArrowRight size={15} />,
     },
   ],
-  contact: [
-    {
-      id: 1,
-      name: "Emin Sinan, Kadırga Limanı Cd. No:85, 34130 Fatih/İstanbul",
-      icon: <MapPinHouse size={15} />,
-    },
-    {
-      id: 2,
-      name: "0454 345 454 54 54",
-      icon: <Mail size={15} />,
-    },
-    {
-      id: 3,
-      name: "lezzetbahcesi@gmail.com",
-      icon: <Phone size={15} />,
-    },
-  ],
-  opening: [
-    {
-      id: 1,
-      name: "Pazartesi - Cumartesi",
-      nameSub: "07.00 - 00.00",
-    },
-    {
-      id: 2,
-      name: "Pazar",
-      nameSub: "07.00 - 23.00",
-    },
-  ],
-  socialmedia: [
-    { id: 1, name: "Facebook", icon: <Facebook size={15} /> },
-    { id: 2, name: "Twitter", icon: <Twitter size={15} /> },
-    { id: 3, name: "Instagram", icon: <Instagram size={15} /> },
-    { id: 4, name: "LinkedIn", icon: <Linkedin size={15} /> },
-  ],
 };
 const Footer = () => {
+  const { data: footerGetData } = useGetFooterQuery();
+  console.log("🚀 ~ FooterPage ~ footerGetData:", footerGetData);
   return (
     <div className="bg-[#0F172B] w-full h-full">
       <div className="grid xl:grid-cols-4 mds:grid-cols-3 grid-cols-1 py-8 px-8 mds:gap-0 gap-12">
@@ -92,15 +60,24 @@ const Footer = () => {
             İletişim
           </h4>
           <ul className="flex flex-col gap-3 pt-6 items-center justify-center">
-            {footer.contact.map((item) => (
-              <li
-                key={item.id}
-                className="font-[400] transition-all duration-400 text-[15px] flex mds:flex-row flex-col mds:text-start text-center items-center gap-1  "
-              >
-                {item.icon}
-                <span className="md:w-[400px] w-full">{item.name}</span>
-              </li>
-            ))}
+            <li className="font-[400] transition-all duration-400 text-[15px] flex mds:flex-row flex-col mds:text-start text-center items-center gap-1  ">
+              <MapPinHouse size={15} />
+              <span className="md:w-[400px] w-full">
+                {footerGetData?.footer[0]?.contact?.address}
+              </span>
+            </li>
+            <li className="font-[400] transition-all duration-400 text-[15px] flex mds:flex-row flex-col mds:text-start text-center items-center gap-1  ">
+              <Mail size={15} />
+              <span className="md:w-[400px] w-full">
+                {footerGetData?.footer[0]?.contact?.email}
+              </span>
+            </li>
+            <li className="font-[400] transition-all duration-400 text-[15px] flex mds:flex-row flex-col mds:text-start text-center items-center gap-1  ">
+              <Phone size={15} />
+              <span className="md:w-[400px] w-full">
+                {footerGetData?.footer[0]?.contact?.phone}
+              </span>
+            </li>
           </ul>
         </div>
         <div className="flex flex-col items-center justify-center">
@@ -108,31 +85,61 @@ const Footer = () => {
             Çalışma Saatlerimiz
           </h4>
           <ul className="flex mds:flex-col flex-row gap-5 pt-6 mds:items-start items-center justify-center">
-            {footer.opening.map((item) => (
-              <li
-                key={item.id}
-                className="font-[400] transition-all duration-400 text-[15px] flex items-start flex-col gap-2 "
-              >
-                <span>{item.name}</span>
-                <span> {item.nameSub}</span>
-              </li>
-            ))}
+            <li className="font-[400] transition-all duration-400 text-[15px] flex items-start flex-col gap-2 ">
+              {footerGetData?.footer[0]?.workingHours?.map((item) => (
+                <>
+                  <span>{item.day}</span>
+                  <span>{item.hours}</span>
+                </>
+              ))}
+            </li>
           </ul>
         </div>
         <div className="flex flex-col items-center justify-center">
           <h4 className="pacifico-regular text-[23px] font-[400] text-[#fea116]">
             Sosyal Medya Hesaplarımız
           </h4>
-          <ul className="flex flex-col gap-5 pt-6 items-center justify-center">
-            {footer.socialmedia.map((item) => (
-              <li
-                key={item.id}
-                className="font-[400] transition-all duration-400 text-[15px] flex items-center gap-1 hover:scale-105 cursor-pointer"
-              >
-                {item.icon}
-                {item.name}
+          <ul className="flex flex-col gap-2 pt-6 items-center justify-center">
+            <Link
+              to={footerGetData?.footer[0]?.socialMedia?.facebook}
+              target="_blank"
+            >
+              <li className="font-[400] transition-all duration-400 text-[15px] flex items-center gap-1 hover:scale-105 cursor-pointer">
+                <Facebook size={15} />
+                Facebook
               </li>
-            ))}
+            </Link>
+            <Link
+              to={footerGetData?.footer[0]?.socialMedia?.twitter}
+              target="_blank"
+            >
+              <li className="font-[400] transition-all duration-400 text-[15px] flex items-center gap-1 hover:scale-105 cursor-pointer">
+                <img
+                  src="/x.png"
+                  className="w-5 h-5 bg-white rounded-full"
+                  alt=""
+                />
+                X(twitter)
+              </li>
+            </Link>
+            <Link
+              to={footerGetData?.footer[0]?.socialMedia?.linkedin}
+              target="_blank"
+            >
+              <li className="font-[400] transition-all duration-400 text-[15px] flex items-center gap-1 hover:scale-105 cursor-pointer">
+                <Linkedin size={15} />
+                Linkedin
+              </li>
+            </Link>
+            <Link
+              to={footerGetData?.footer[0]?.socialMedia?.instagram}
+              target="_blank"
+            >
+              <li className="font-[400] transition-all duration-400 text-[15px] flex items-center gap-1 hover:scale-105 cursor-pointer">
+                <Instagram size={15} />
+                Instagram
+              </li>
+            </Link>
           </ul>
         </div>
       </div>

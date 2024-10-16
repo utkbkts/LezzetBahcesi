@@ -23,4 +23,11 @@ const footerCreate = catchAsyncError(async (req, res, next) => {
   }
 });
 
-export default { footerCreate };
+const footerGet = catchAsyncError(async (req, res, next) => {
+  const footer = await Footer.find({}).lean();
+  return res.status(201).json({
+    footer,
+  });
+});
+
+export default { footerCreate, footerGet };

@@ -176,7 +176,11 @@ const Reservation = () => {
                   filterTime={(time) => !isTimeDisabled(time)}
                 />
               </Form.Item>
-              <Form.Item name={"table"}>
+              <Form.Item
+                name={"table"}
+                label={<span className="text-white">{"Masa seçiniz"}</span>}
+                rules={[{ required: true, message: "Lütfen masa belirtiniz." }]}
+              >
                 <Select placeholder="Masa seçin">
                   {tableInput.map((item) => (
                     <Select.Option key={item.id} value={item.table}>
