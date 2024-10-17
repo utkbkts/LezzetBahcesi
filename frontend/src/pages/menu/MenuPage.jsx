@@ -5,7 +5,7 @@ import menu2 from "/menuPage/menu-before.jpg";
 import menu7 from "/menuPage/img-def.png";
 
 import menu10 from "/menuPage/menu-footer.png";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import SectionOne from "./partials/SectionOne";
 import SectionTwo from "./partials/SectionTwo";
 import SectionThree from "./partials/SectionThree";
@@ -17,39 +17,39 @@ const MenuPage = () => {
   const [timerSeconds, setTimerSeconds] = useState("00");
 
   let interval = useRef();
+  const countDownDate = Date.now() + 7 * 24 * 60 * 60 * 1000;
+  const updateTimer = useCallback(() => {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+
+    if (distance < 0) {
+      clearInterval(interval.current);
+      setTimerDays("00");
+      setTimerHours("00");
+      setTimerMinutes("00");
+      setTimerSeconds("00");
+    } else {
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      setTimerDays(days.toString().padStart(2, "0"));
+      setTimerHours(hours.toString().padStart(2, "0"));
+      setTimerMinutes(minutes.toString().padStart(2, "0"));
+      setTimerSeconds(seconds.toString().padStart(2, "0"));
+    }
+  }, [countDownDate]);
 
   useEffect(() => {
-    const countDownDate = Date.now() + 7 * 24 * 60 * 60 * 1000;
-
-    interval.current = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = countDownDate - now;
-
-      if (distance < 0) {
-        clearInterval(interval.current);
-        setTimerDays("00");
-        setTimerHours("00");
-        setTimerMinutes("00");
-        setTimerSeconds("00");
-      } else {
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        setTimerDays(days.toString().padStart(2, "0"));
-        setTimerHours(hours.toString().padStart(2, "0"));
-        setTimerMinutes(minutes.toString().padStart(2, "0"));
-        setTimerSeconds(seconds.toString().padStart(2, "0"));
-      }
-    }, 1000);
+    interval.current = setInterval(updateTimer, 1000);
 
     return () => {
       clearInterval(interval.current);
     };
-  }, []);
+  }, [updateTimer]);
 
   return (
     <div>

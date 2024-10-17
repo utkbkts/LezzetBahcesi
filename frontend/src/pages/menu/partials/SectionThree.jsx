@@ -21,20 +21,20 @@ const SectionThree = () => {
       <div className="w-1/2">
         <div className="flex flex-col items-center justify-center">
           <h1 className="berkshire-swash-regular ">
-            {data.menu[0].titleThree}
+            {data?.menu[0]?.titleThree}
           </h1>
           <img src={menu8} alt="" />
         </div>
-        {data?.menu[0].contentThree.map((item) => (
+        {data?.menu[0]?.contentThree?.map((item) => (
           <>
             <div className="mds:text-start text-center">
               <div className="flex items-center justify-between gap-2 mt-12 mds:flex-row flex-col">
                 <div className="flex flex-col gap-2">
-                  <span>{item.contentTitle}</span>
-                  <p className="text-gray-500 pb-2 ">{item.contentDesc}</p>
+                  <span>{item?.contentTitle}</span>
+                  <p className="text-gray-500 pb-2 ">{item?.contentDesc}</p>
                 </div>
                 <div>
-                  <span>{item.price}₺</span>
+                  <span>{item?.price}₺</span>
                 </div>
               </div>
             </div>
