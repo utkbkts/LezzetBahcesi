@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import PropTypes from "prop-types";
 const Nutriation = ({ nutriation, setNutriation, isLoading }) => {
   const onFinishNutriation = (values) => {
+    //mevcut veriler için geçerli map değil obje
     if (
       values.nutriation &&
       values.nutriationGram &&

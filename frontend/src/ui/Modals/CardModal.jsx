@@ -4,7 +4,16 @@ import { Modal, Button } from "antd";
 import { useDispatch } from "react-redux";
 import { addToCart, setFavorite } from "../../redux/features/cartSlice";
 import { useNavigate } from "react-router-dom";
-const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
+import toast from "react-hot-toast";
+const CardModal = ({
+  isOpen,
+  onClose,
+  productDetail,
+  images,
+  tags,
+  _id,
+  ratings,
+}) => {
   const [selectedOptions, setSelectedOptions] = useState({
     drinks: [],
     sideProducts: [],
@@ -147,11 +156,12 @@ const CardModal = ({ isOpen, onClose, productDetail, images, tags, _id }) => {
       title: productDetail.title,
       price: calculateTotalPrice(),
       selectedOptions: selectedOptions,
-      image: images.length > 0 ? images[0]?.url : "",
+      images: images.length > 0 ? images[0]?.url : "",
       quantity: quantity,
+      ratings,
     };
-
     dispatch(setFavorite(cartItems));
+    toast.success("Başarıyla eklendi");
   };
 
   return (
@@ -287,6 +297,7 @@ CardModal.propTypes = {
   images: PropTypes.array,
   tags: PropTypes.object,
   _id: PropTypes.string,
+  ratings: PropTypes.number,
 };
 
 export default CardModal;

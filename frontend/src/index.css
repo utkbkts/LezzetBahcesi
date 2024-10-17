@@ -181,6 +181,18 @@ body {
   height: 55vh !important;
 }
 
+/* bg-favorite */
+.bg-favorite {
+  background-position: center !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  background: linear-gradient(rgba(0, 0, 0, 0.12), rgba(15, 23, 43, 0.9)),
+    url("/overlapping-circles.svg");
+  width: 100% !important;
+  height: 45vh !important;
+}
+
 /* hamburger bar */
 
 .hamburger {

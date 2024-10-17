@@ -17,7 +17,6 @@ const FooterPage = () => {
   const [form] = useForm();
   const [createFooter] = useCreateFooterMutation();
   const { data: footerGetData } = useGetFooterQuery();
-  console.log("🚀 ~ FooterPage ~ footerGetData:", footerGetData);
 
   useEffect(() => {
     if (footerGetData) {

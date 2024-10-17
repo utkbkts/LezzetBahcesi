@@ -12,6 +12,7 @@ import { reservationApi } from "./api/ReservationApi";
 import { categoryApi } from "./api/CategoryApi";
 import { aboutApi } from "./api/AboutApi";
 import { footerApi } from "./api/FooterApi";
+import { menuApi } from "./api/MenuApi";
 export const store = configureStore({
   reducer: {
     auth: userReducer,
@@ -27,6 +28,7 @@ export const store = configureStore({
     [categoryApi.reducerPath]: categoryApi.reducer,
     [aboutApi.reducerPath]: aboutApi.reducer,
     [footerApi.reducerPath]: footerApi.reducer,
+    [menuApi.reducerPath]: menuApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
@@ -40,5 +42,6 @@ export const store = configureStore({
       categoryApi.middleware,
       aboutApi.middleware,
       footerApi.middleware,
+      menuApi.middleware,
     ]),
 });

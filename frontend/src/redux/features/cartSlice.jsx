@@ -58,6 +58,17 @@ const cartSlice = createSlice({
         JSON.stringify(state.favoriteItems)
       );
     },
+    removeFavorite: (state, action) => {
+      state.favoriteItems = state.favoriteItems.filter((item) => {
+        console.log(action.payload);
+        return item.product !== action.payload;
+      });
+
+      localStorage.setItem(
+        "favoriteItems",
+        JSON.stringify(state.favoriteItems)
+      );
+    },
   },
 });
 
@@ -67,5 +78,6 @@ export const {
   saveShippingInfo,
   clearCartItem,
   setFavorite,
+  removeFavorite,
 } = cartSlice.actions;
 export default cartSlice.reducer;

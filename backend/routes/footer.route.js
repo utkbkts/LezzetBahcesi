@@ -13,10 +13,5 @@ router.post(
   authorizeRoles("admin"),
   footerController.footerCreate
 );
-router.get(
-  "/footer/get",
-  isAuthenticatedUser,
-  authorizeRoles("admin"),
-  footerController.footerGet
-);
+router.get("/footer/get", footerController.footerGet);
 export default router;

@@ -1,20 +1,15 @@
 import mongoose from "mongoose";
 
 const menuSchema = new mongoose.Schema({
-  sectionOne: [
+  titleOne: {
+    type: String,
+  },
+  contentOne: [
     {
-      images: {
-        public_id: {
-          type: String,
-        },
-        url: {
-          type: String,
-        },
-      },
-      title: {
+      contentTitle: {
         type: String,
       },
-      description: {
+      contentDesc: {
         type: String,
       },
       price: {
@@ -22,20 +17,15 @@ const menuSchema = new mongoose.Schema({
       },
     },
   ],
-  sectionTwo: [
+  titleTwo: {
+    type: String,
+  },
+  contentTwo: [
     {
-      images: {
-        public_id: {
-          type: String,
-        },
-        url: {
-          type: String,
-        },
-      },
-      title: {
+      contentTitle: {
         type: String,
       },
-      description: {
+      contentDesc: {
         type: String,
       },
       price: {
@@ -43,46 +33,19 @@ const menuSchema = new mongoose.Schema({
       },
     },
   ],
-  sectionThree: [
+  titleThree: {
+    type: String,
+  },
+  contentThree: [
     {
-      images: {
-        public_id: {
-          type: String,
-        },
-        url: {
-          type: String,
-        },
-      },
-      title: {
+      contentTitle: {
         type: String,
       },
-      description: {
+      contentDesc: {
         type: String,
       },
       price: {
         type: String,
-      },
-    },
-  ],
-  sectionFour: [
-    {
-      title: {
-        type: String,
-      },
-      description: {
-        type: String,
-      },
-    },
-  ],
-  sectionFive: [
-    {
-      images: {
-        public_id: {
-          type: String,
-        },
-        url: {
-          type: String,
-        },
       },
     },
   ],

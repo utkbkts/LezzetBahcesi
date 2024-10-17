@@ -7,6 +7,7 @@ import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import CardModal from "../../ui/Modals/CardModal";
 const MenuItem = (props) => {
+  console.log("🚀 ~ MenuItem ~ props:", props);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const { productDetail, nutriation, images, category, tags, ratings, _id } =
@@ -15,14 +16,19 @@ const MenuItem = (props) => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const prevImageState = () => {
-    const firstSlide = currentIndex === 0;
-    const newIndex = firstSlide ? images.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
+    if (images && images.length > 0) {
+      const firstSlide = currentIndex === 0;
+      const newIndex = firstSlide ? images.length - 1 : currentIndex - 1;
+      setCurrentIndex(newIndex);
+    }
   };
+
   const nextImageState = () => {
-    const isLastSlide = currentIndex === images.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
+    if (images && images.length > 0) {
+      const isLastSlide = currentIndex === images.length - 1;
+      const newIndex = isLastSlide ? 0 : currentIndex + 1;
+      setCurrentIndex(newIndex);
+    }
   };
 
   return (
@@ -48,12 +54,14 @@ const MenuItem = (props) => {
               <MdArrowRight size={40} className="text-white" />
             </div>
             <div className="absolute top-0 left-0 p-4 bg-black bg-opacity-50 rounded-t-2xl text-white">
-              <h3 className="text-xl font-semibold">{productDetail.kitchen}</h3>
+              <h3 className="text-xl font-semibold">
+                {productDetail?.kitchen}
+              </h3>
             </div>
           </div>
           <div className="menu-content p-6 space-y-4">
             <h4 className="text-2xl font-bold text-gray-800">
-              {productDetail.title}
+              {productDetail?.title}
             </h4>
             <p className="text-gray-600 text-sm">
               {productDetail?.description?.slice(0, 50)}
@@ -76,7 +84,7 @@ const MenuItem = (props) => {
               </div>
 
               <span className="text-lg font-bold text-gray-900">
-                {parseFloat(productDetail.price).toLocaleString("tr-TR", {
+                {parseFloat(productDetail?.price).toLocaleString("tr-TR", {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}{" "}
@@ -101,10 +109,10 @@ const MenuItem = (props) => {
                   Detay
                 </Button>
               </Link>
-              {productDetail.stock <= 10 && (
+              {productDetail?.stock <= 10 && (
                 <div className="absolute top-0 right-0 p-4 bg-black bg-opacity-50 rounded-t-2xl text-white">
                   <p className="text-red-500 font-bold animate-pulse w-32 text-center text-[10px]">
-                    Bu ürün den son {productDetail.stock} adet kalmıştır.Acele
+                    Bu ürün den son {productDetail?.stock} adet kalmıştır.Acele
                     Et
                   </p>
                 </div>

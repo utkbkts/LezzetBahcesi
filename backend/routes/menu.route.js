@@ -8,10 +8,12 @@ import menuController from "../controllers/menu.controller.js";
 const router = express.Router();
 
 router.post(
-  "/menu",
+  "/menu/create",
   isAuthenticatedUser,
   authorizeRoles("admin"),
   menuController.menuCreate
 );
+
+router.get("/menu/get", menuController.menuGet);
 
 export default router;
