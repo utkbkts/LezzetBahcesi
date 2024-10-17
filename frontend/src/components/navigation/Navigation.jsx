@@ -15,8 +15,8 @@ import {
   Cylinder,
   Heart,
   LayoutDashboard,
+  User,
 } from "lucide-react";
-import Reservation from "../../pages/reservation/ReservationPage";
 
 export const navbarLink = [
   {
@@ -47,7 +47,7 @@ export const navbarLink = [
     id: 5,
     url: "/reservation",
     label: "Rezervasyon",
-    icon: <Reservation />,
+    icon: <User />,
   },
 ];
 
@@ -100,7 +100,7 @@ const Navigation = ({ setShowLogin }) => {
               alt="Logo"
             />
           </Link>
-          <nav className="md:flex hidden items-center gap-6">
+          <nav className="mds:flex hidden items-center gap-6">
             {navbarLink.map((item) => (
               <NavLink
                 key={item.id}
@@ -131,7 +131,7 @@ const Navigation = ({ setShowLogin }) => {
           </nav>
         </div>
         <div
-          className={`hamburger absolute md:top-[4rem] top-8 md:hidden block right-6 z-50 ${
+          className={`hamburger absolute  top-14 mds:hidden block right-6 z-50 ${
             showBar ? "active" : ""
           }`}
           onClick={() => setShowBar(!showBar)}

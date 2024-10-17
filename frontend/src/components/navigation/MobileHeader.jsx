@@ -24,11 +24,11 @@ const MobileHeader = ({ setShowBar, showBar, setShowLogin }) => {
   };
 
   return (
-    <div className="relative  md:hidden ">
+    <div className="relative  mds:hidden ">
       <div className="bg-black/50 backdrop-blur-sm fixed top-0 left-0 w-full h-full z-[999]"></div>
       <div
         className={cn(
-          "fixed h-full w-[250px] md:hidden transition-all duration-500 ease-in-out  top-0 right-0 translate-x-full  z-[9999] bg-white",
+          "fixed h-full w-[250px] mds:hidden transition-all duration-500 ease-in-out  top-0 right-0 translate-x-full  z-[9999] bg-white",
           showBar && "-translate-x-0"
         )}
       >
@@ -125,7 +125,7 @@ const MobileHeader = ({ setShowBar, showBar, setShowLogin }) => {
           </div>
         </div>
         <div
-          className={`hamburger absolute top-[4rem] md:hidden  block right-6 z-50 ${
+          className={`hamburger absolute top-[4rem] mds:hidden  block right-6 z-50 ${
             showBar ? "active " : ""
           }`}
           onClick={() => setShowBar(!showBar)}
