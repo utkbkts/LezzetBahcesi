@@ -69,6 +69,20 @@ const Profile = () => {
             readOnly
           />
         </div>
+        {/* telefon */}
+        <div className="flex flex-col">
+          <label className="text-gray-700 mb-1 text-sm font-medium">
+            Telefon
+          </label>
+          <input
+            className="border-b-2 border-gray-300 focus:border-blue-500 p-2 outline-none transition-all"
+            type="text"
+            value={`${
+              user?.userAddress?.phoneNumber || "telefon bilgisi girilmemiştir."
+            }`}
+            readOnly
+          />
+        </div>
         {/* ülke */}
         <div className="flex flex-col">
           <label className="text-gray-700 mb-1 text-sm font-medium">Ülke</label>

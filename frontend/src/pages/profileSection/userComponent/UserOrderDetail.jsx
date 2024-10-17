@@ -9,7 +9,8 @@ const UserOrderDetail = () => {
   const { id } = params;
   const { data, isLoading } = useGetUserOrderDetailQuery(id);
   const { orders } = useSelector((state) => state.socket);
-  const findOrder = orders.find((item) => item._id === id);
+  const findOrder = orders?.order?.find((item) => item._id === id);
+  console.log("🚀 ~ UserOrderDetail ~ findOrder:", data);
 
   if (isLoading) {
     return <Loading />;
@@ -45,7 +46,7 @@ const UserOrderDetail = () => {
                     {data?.order?._id}
                   </td>
                   <td className="border border-gray-300 p-2">
-                    {findOrder?.orderStatus}
+                    {findOrder?.orderStatus || data?.order?.orderStatus}
                   </td>
                   <td className="border border-gray-300 p-2">
                     {moment(data?.order?.updatedAt).format(
@@ -101,7 +102,8 @@ const UserOrderDetail = () => {
               <tbody className="w-full">
                 <tr className="bg-gray-50 flex flex-col">
                   <td className="border border-gray-300 p-2">
-                    {findOrder?.paymentInfo?.status}
+                    {findOrder?.paymentInfo?.status ||
+                      data?.order?.paymentInfo?.status}
                   </td>
                   <td className="border border-gray-300 p-2">
                     {data?.order?.paymentMethod}
