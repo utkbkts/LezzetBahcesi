@@ -2,101 +2,14 @@ import Hero from "../../components/hero/Hero";
 import menu from "/menuPage/left-menu.png";
 import menu1 from "/menuPage/menu-before-2.jpg";
 import menu2 from "/menuPage/menu-before.jpg";
-import menu5 from "/menuPage/pasta-menu.jpg";
-import menu6 from "/menuPage/pizza-menu.jpg";
 import menu7 from "/menuPage/img-def.png";
-import menu8 from "/menuPage/divider-free-img.png";
-import menu9 from "/menuPage/hamburger.jpg";
+
 import menu10 from "/menuPage/menu-footer.png";
 import { useEffect, useRef, useState } from "react";
-const pasta = [
-  {
-    id: 1,
-    title: "Tam Tahıllı Makarna",
-    description:
-      "Közlenmiş patlıcan püresi, sarımsaklı marine domatesler ve taze fesleğen",
-    price: 120.0,
-  },
-  {
-    id: 2,
-    title: "Tortellini Gorgonzola",
-    description:
-      "Közlenmiş patlıcan püresi, sarımsaklı marine domatesler ve taze fesleğen",
-    price: 80.5,
-  },
-  {
-    id: 3,
-    title: "Rigatoni Zuccati",
-    description:
-      "Közlenmiş patlıcan püresi, sarımsaklı marine domatesler ve taze fesleğen",
-    price: 100.5,
-  },
-  {
-    id: 4,
-    title: "Spaghetti Marinara",
-    description:
-      "Közlenmiş patlıcan püresi, sarımsaklı marine domatesler ve taze fesleğen",
-    price: 130.5,
-  },
-];
-const pizza = [
-  {
-    id: 1,
-    title: "Margherita Pizza",
-    description: "Domates sosu, mozzarella peyniri ve taze fesleğen",
-    price: 120.0,
-  },
-  {
-    id: 2,
-    title: "Pepperoni Pizza",
-    description: "Domates sosu, mozzarella peyniri ve pepperoni dilimleri",
-    price: 80.5,
-  },
-  {
-    id: 3,
-    title: "Vegetarian Pizza",
-    description:
-      "Domates sosu, mozzarella peyniri, biber, mantar, zeytin ve soğan",
-    price: 100.5,
-  },
-  {
-    id: 4,
-    title: "BBQ Chicken Pizza",
-    description:
-      "BBQ sosu, mozzarella peyniri, tavuk parçaları ve kırmızı soğan",
-    price: 130.5,
-  },
-];
-const hamburger = [
-  {
-    id: 1,
-    title: "Cheeseburger",
-    description:
-      "Dana köftesi, cheddar peyniri, marul, domates, turşu ve özel sos",
-    price: 75.0,
-  },
-  {
-    id: 2,
-    title: "Bacon Burger",
-    description:
-      "Dana köftesi, çıtır bacon, marul, domates, karamelize soğan ve barbekü sos",
-    price: 85.5,
-  },
-  {
-    id: 3,
-    title: "Mushroom Swiss Burger",
-    description:
-      "Dana köftesi, İsviçre peyniri, sotelenmiş mantar, marul ve mayonez",
-    price: 90.0,
-  },
-  {
-    id: 4,
-    title: "Veggie Burger",
-    description:
-      "Sebze köftesi, marul, domates, avokado dilimleri ve vegan mayonez",
-    price: 70.0,
-  },
-];
+import SectionOne from "./partials/SectionOne";
+import SectionTwo from "./partials/SectionTwo";
+import SectionThree from "./partials/SectionThree";
+
 const MenuPage = () => {
   const [timerDays, setTimerDays] = useState("00");
   const [timerHours, setTimerHours] = useState("00");
@@ -157,85 +70,10 @@ const MenuPage = () => {
           className="absolute left-0 z-[-1] top-[100%] mds:block hidden"
         />
       </div>
-      <div className="min-h-screen mt-[100px] relative text-black">
-        <img src={menu2} alt="" className="absolute right-0 z-[-10]" />
-        <div className="max-w-5xl mx-auto ">
-          <div className="flex mds:flex-row flex-col items-center justify-center gap-12 min-h-screen ">
-            <div className="w-1/2 h-full sm:block hidden">
-              <div className="bg-pasta w-full h-full">
-                <div className="img-wrapper">
-                  <img
-                    src={menu5}
-                    alt="image"
-                    className="w-full h-full rounded-md shadow-xl hover:scale-105 duration-300 transition-all"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="mds:w-1/2 w-full">
-              <div className="flex flex-col items-center justify-center">
-                <h1 className="berkshire-swash-regular">Makarna</h1>
-                <img src={menu8} alt="" />
-              </div>
-              <div>
-                {pasta.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex items-center justify-between gap-2 mt-12 mds:flex-row flex-col mds:text-start text-center"
-                  >
-                    <div className="flex flex-col gap-2">
-                      <span>{item.title}</span>
-                      <p className="text-gray-500 pb-2 ">{item.description}</p>
-                    </div>
-                    <div>
-                      <span>{item.price.toFixed(2)}₺</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <SectionOne />
       <div className=" mt-[10%] min-h-screen relative text-black">
         <img src={menu2} alt="" className="absolute right-0 z-[-50] " />
-        <div className="max-w-5xl mx-auto ">
-          <div className="flex gap-12 min-h-screen mds:flex-row  flex-col-reverse items-center justify-center">
-            <div className="w-1/2 ">
-              <div className="flex flex-col items-center justify-center">
-                <h1 className="berkshire-swash-regular ">Pizza</h1>
-                <img src={menu8} alt="" />
-              </div>
-              <div className="mds:text-start text-center">
-                {pizza.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex items-center justify-between gap-2 mt-12 mds:flex-row flex-col"
-                  >
-                    <div className="flex flex-col gap-2">
-                      <span>{item.title}</span>
-                      <p className="text-gray-500 pb-2 ">{item.description}</p>
-                    </div>
-                    <div>
-                      <span>{item.price.toFixed(2)}₺</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="w-1/2 h-full sm:block hidden">
-              <div className="bg-pasta w-full h-full">
-                <div className="img-wrapper">
-                  <img
-                    src={menu6}
-                    alt="image"
-                    className="w-full h-full rounded-md shadow-xl hover:scale-105 duration-300 transition-all"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <SectionTwo />
       </div>
       <div className=" mt-[10%] min-h-screen relative text-black">
         <img
@@ -244,41 +82,7 @@ const MenuPage = () => {
           className="absolute right-0 opacity-20 z-[-50] "
         />
         <div className="max-w-5xl mx-auto ">
-          <div className="flex gap-12 min-h-screen mds:flex-row flex-col items-center justify-center">
-            <div className="w-1/2 h-full sm:block hidden">
-              <div className="bg-pasta w-full h-full">
-                <div className="img-wrapper">
-                  <img
-                    src={menu9}
-                    alt="image"
-                    className="w-full h-full rounded-md shadow-xl hover:scale-105 duration-300 transition-all"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="w-1/2">
-              <div className="flex flex-col items-center justify-center">
-                <h1 className="berkshire-swash-regular ">Hamburger</h1>
-                <img src={menu8} alt="" />
-              </div>
-              <div className="mds:text-start text-center">
-                {hamburger.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex items-center justify-between gap-2 mt-12 mds:flex-row flex-col"
-                  >
-                    <div className="flex flex-col gap-2">
-                      <span>{item.title}</span>
-                      <p className="text-gray-500 pb-2 ">{item.description}</p>
-                    </div>
-                    <div>
-                      <span>{item.price.toFixed(2)}₺</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <SectionThree />
         </div>
       </div>
       <div className="mt-[10%] min-h-screen relative text-black mds:block hidden">
