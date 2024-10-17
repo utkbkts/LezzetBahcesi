@@ -7,7 +7,6 @@ import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import CardModal from "../../ui/Modals/CardModal";
 const MenuItem = (props) => {
-  console.log("🚀 ~ MenuItem ~ props:", props);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const { productDetail, nutriation, images, category, tags, ratings, _id } =

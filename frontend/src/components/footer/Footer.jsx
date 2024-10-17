@@ -35,7 +35,6 @@ const footer = {
 };
 const Footer = () => {
   const { data: footerGetData } = useGetFooterQuery();
-  console.log("🚀 ~ FooterPage ~ footerGetData:", footerGetData);
   return (
     <div className="bg-[#0F172B] w-full h-full">
       <div className="grid xl:grid-cols-4 mds:grid-cols-3 grid-cols-1 py-8 px-8 mds:gap-0 gap-12">

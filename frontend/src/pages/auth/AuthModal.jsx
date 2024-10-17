@@ -165,7 +165,6 @@ const AuthModal = ({ setShowLogin, showLogin }) => {
     if (loginError) {
       toast.error(loginError?.data?.message || "Giriş işlemi başarısız!");
     } else if (registerError) {
-      console.log("🚀 ~ useEffect ~ registerError:", registerError);
       toast.error(registerError?.data?.message || "Kayıt işlemi başarısız!");
     } else if (forgotError) {
       toast.error(

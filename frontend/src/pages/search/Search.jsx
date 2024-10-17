@@ -24,7 +24,6 @@ const Search = () => {
   ratings !== null && (params.ratings = ratings);
 
   const { data, isError, error, isLoading } = useGetAllProductsQuery(params);
-  console.log("🚀 ~ Search ~ data:", data);
 
   useEffect(() => {
     if (isError) {

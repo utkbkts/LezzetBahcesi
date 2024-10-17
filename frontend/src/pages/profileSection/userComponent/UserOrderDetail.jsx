@@ -10,7 +10,6 @@ const UserOrderDetail = () => {
   const { data, isLoading } = useGetUserOrderDetailQuery(id);
   const { orders } = useSelector((state) => state.socket);
   const findOrder = orders?.order?.find((item) => item._id === id);
-  console.log("🚀 ~ UserOrderDetail ~ findOrder:", data);
 
   if (isLoading) {
     return <Loading />;
