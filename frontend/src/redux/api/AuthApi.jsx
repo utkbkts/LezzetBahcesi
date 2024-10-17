@@ -6,6 +6,7 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_REACT_APP_API}/api`,
     credentials: "include",
+    tagTypes: ["User"],
   }),
   endpoints: (builder) => ({
     register: builder.mutation({
@@ -16,6 +17,7 @@ export const authApi = createApi({
           body,
         };
       },
+      invalidatesTags: ["User"],
     }),
     login: builder.mutation({
       query(body) {
@@ -25,6 +27,7 @@ export const authApi = createApi({
           body,
         };
       },
+      invalidatesTags: ["User"],
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;

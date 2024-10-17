@@ -35,7 +35,7 @@ export const userApi = createApi({
           body,
         };
       },
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "AdminUser"],
     }),
     resetPassword: builder.mutation({
       query({ token, body }) {
@@ -66,7 +66,7 @@ export const userApi = createApi({
     }),
     getAdminUsers: builder.query({
       query: () => `/admin/users`,
-      providesTags: ["AdminUser"],
+      providesTags: ["User", "AdminUser"],
     }),
     getAdminRoleUsers: builder.mutation({
       query: ({ id, body }) => {
@@ -76,7 +76,7 @@ export const userApi = createApi({
           body,
         };
       },
-      invalidatesTags: ["AdminUser"],
+      invalidatesTags: ["User", "AdminUser"],
     }),
     BlockedUser: builder.mutation({
       query(id) {
