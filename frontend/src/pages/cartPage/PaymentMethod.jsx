@@ -28,6 +28,10 @@ const PaymentMethod = () => {
       toast.error(error?.data?.message);
     }
     if (isSuccess) {
+      toast.success("Ödeme işlemi başarılı.yönlendirileceksiniz.");
+      setTimeout(() => {
+        navigate("/payment/success");
+      }, 2000);
       dispatch(clearCartItem());
     } else if (IyzipaySuccess) {
       dispatch(clearCartItem());
@@ -37,7 +41,7 @@ const PaymentMethod = () => {
     if (checkoutData?.result?.status === "success") {
       toast.success("Ödeme işlemi başarılı.yönlendirileceksiniz.");
       setTimeout(() => {
-        navigate("/");
+        navigate("/payment/success");
       }, 2000);
     }
     if (checkoutData?.result?.status === "failure") {

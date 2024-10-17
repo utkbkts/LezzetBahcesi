@@ -18,6 +18,14 @@ export const authApi = createApi({
         };
       },
       invalidatesTags: ["User"],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          await dispatch(userApi.endpoints.getUser.initiate());
+        } catch (error) {
+          console.error("Register failed:", error);
+        }
+      },
     }),
     login: builder.mutation({
       query(body) {

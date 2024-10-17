@@ -13,6 +13,7 @@ import ResetPassword from "../components/resetPassword/ResetPassword.jsx";
 import ContactPage from "../pages/contact/ContactPage.jsx";
 import FavoritePage from "../pages/favoritePage/FavoritePage.jsx";
 import ReservationPage from "../pages/reservation/ReservationPage.jsx";
+import SuccessPage from "../pages/payment/success/SuccessPage.jsx";
 export const MainRoutes = {
   path: "/",
   element: <MainLayout />,
@@ -69,6 +70,10 @@ export const MainRoutes = {
     {
       path: "product/:id",
       element: <ProductDetails />,
+    },
+    {
+      path: "payment/success",
+      element: <SuccessPage />,
     },
   ],
 };

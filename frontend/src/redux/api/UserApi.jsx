@@ -25,7 +25,7 @@ export const userApi = createApi({
           dispatch(setLoading(false));
         }
       },
-      providesTags: ["User"],
+      providesTags: ["User", "AdminUser"],
     }),
     updateProfile: builder.mutation({
       query(body) {
@@ -35,7 +35,7 @@ export const userApi = createApi({
           body,
         };
       },
-      invalidatesTags: ["User", "AdminUser"],
+      invalidatesTags: ["AdminUser", "User"],
     }),
     resetPassword: builder.mutation({
       query({ token, body }) {
