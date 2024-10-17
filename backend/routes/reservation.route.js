@@ -8,12 +8,7 @@ import {
 const router = express.Router();
 
 router.post("/reservation", reservationController.reservationSave);
-router.get(
-  "/reservation/get",
-  isAuthenticatedUser,
-  authorizeRoles("admin"),
-  reservationController.reservationGet
-);
+router.get("/reservation/get", reservationController.reservationGet);
 router.put(
   "/reservation/:id",
   isAuthenticatedUser,
