@@ -86,10 +86,10 @@ const Footer = () => {
           <ul className="flex mds:flex-col flex-row gap-5 pt-6 mds:items-start items-center justify-center">
             <li className="font-[400] transition-all duration-400 text-[15px] flex items-start flex-col gap-2 ">
               {footerGetData?.footer[0]?.workingHours?.map((item) => (
-                <>
+                <div key={item._id}>
                   <span>{item.day}</span>
                   <span>{item.hours}</span>
-                </>
+                </div>
               ))}
             </li>
           </ul>

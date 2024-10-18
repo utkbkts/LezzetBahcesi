@@ -15,12 +15,10 @@ const PaymentMethod = () => {
   const [method, setMethod] = useState("");
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
-
   const [createNewOrder, { error, isSuccess }] = useCreateOrderMutation();
   const [iyzipayOrder, { data: checkoutData, isSuccess: IyzipaySuccess }] =
     useIyzipayCheckOutMutation();
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,12 +29,14 @@ const PaymentMethod = () => {
       toast.success("Ödeme işlemi başarılı.yönlendirileceksiniz.");
       setTimeout(() => {
         navigate("/payment/success");
+        navigate(0);
       }, 2000);
       dispatch(clearCartItem());
     } else if (IyzipaySuccess) {
       dispatch(clearCartItem());
     }
   }, [error, isSuccess, navigate, IyzipaySuccess]);
+
   useEffect(() => {
     if (checkoutData?.result?.status === "success") {
       toast.success("Ödeme işlemi başarılı.yönlendirileceksiniz.");
@@ -92,6 +92,7 @@ const PaymentMethod = () => {
     if (!user) {
       return navigate("/");
     }
+    window.scrollTo(0, 0);
   }, [user]);
   return (
     <div className="w-full h-screen bg-gray-100 flex items-center justify-center md:p-6 flex-col ">

@@ -29,6 +29,11 @@ const socketSlice = createSlice({
     setNewOrder: (state, action) => {
       state.message = action.payload;
     },
+    removeOrder: (state, action) => {
+      state.orders = state.orders.filter(
+        (order) => order._id !== action.payload.id
+      );
+    },
   },
 });
 
@@ -38,5 +43,6 @@ export const {
   setAdminOrders,
   setAdminMessage,
   setNewOrder,
+  removeOrder,
 } = socketSlice.actions;
 export default socketSlice.reducer;

@@ -25,7 +25,6 @@ router.get(
 router.get(
   "/admin/orders",
   isAuthenticatedUser,
-  authorizeRoles("admin"),
   OrderControllers.orderGetProduct
 );
 

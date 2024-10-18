@@ -11,7 +11,6 @@ const CatagoriesAndMenu = () => {
   const uniqueCategories = Array.from(
     new Set(data?.product?.map((item) => item.category.name))
   );
-
   if (isLoading) return <Loading />;
   return (
     <React.Fragment>

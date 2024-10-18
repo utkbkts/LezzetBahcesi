@@ -5,6 +5,7 @@ import {
   setNewOrder,
   setOrders,
   setMessage,
+  removeOrder,
 } from "../redux/features/socketSlice";
 import io from "socket.io-client";
 import toast from "react-hot-toast";
@@ -56,6 +57,10 @@ export const SocketProvider = ({ children }) => {
           toast.success(message);
         });
       }
+      newSocket.on("order-deleted", (orderId) => {
+        console.log("🚀 ~ newSocket.on ~ orderId:", orderId);
+        dispatch(removeOrder(orderId));
+      });
 
       return () => {
         newSocket.disconnect();

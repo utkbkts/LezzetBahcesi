@@ -13,6 +13,7 @@ const iyzico = new Iyzipay({
 
 const alphabet = process.env.ALPHABET;
 const nanoid = customAlphabet(alphabet, 9);
+
 const paymentCreate = catchAsyncError(async (req, res, next) => {
   const {
     shippingAddress,
@@ -85,7 +86,7 @@ const paymentCreate = catchAsyncError(async (req, res, next) => {
       price: item.price,
     })),
   };
-  const orderData = {
+  const order = {
     shippingAddress,
     basketItems,
     itemsPrice,
@@ -95,7 +96,8 @@ const paymentCreate = catchAsyncError(async (req, res, next) => {
     paymentMethod: "Kart",
     user: req.user._id,
   };
-  await Order.create(orderData);
+  await Order.create(order);
+  io.emit("new-order", order);
 
   iyzico.payment.create(request, (err, result) => {
     if (err) {
@@ -106,7 +108,6 @@ const paymentCreate = catchAsyncError(async (req, res, next) => {
       });
     }
   });
-  io.emit("new-order", orderData);
 });
 
 export default {

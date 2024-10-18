@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   useDeleteOrdersMutation,
   useGetAdminOrdersQuery,
@@ -15,16 +15,37 @@ function Orders() {
   const [deleteOrder] = useDeleteOrdersMutation();
   const [updateOrder, { error, isSuccess }] = useUpdateOrdersMutation();
   const { orders } = useSelector((state) => state.socket);
-  const dataSource2 = [...(data?.product || []), ...orders];
-  const handleRemoveProduct = (id) => {
-    if (window.confirm("ürünü iptal etmek istediğine emin misin ?")) {
-      deleteOrder(id);
+  const [localOrders, setLocalOrders] = useState([]);
+  console.log("🚀 ~ Orders ~ localOrders:", data);
+
+  useEffect(() => {
+    const dataFilter = [
+      ...(data?.product || []),
+      ...orders.filter(
+        (item) => !data?.product?.some((prod) => prod?._id === item?._id)
+      ),
+    ];
+    setLocalOrders(dataFilter);
+  }, [data, orders]);
+
+  const handleRemoveProduct = async (id) => {
+    if (window.confirm("Ürünü iptal etmek istediğine emin misin ?")) {
+      try {
+        await deleteOrder(id);
+        setLocalOrders((prevOrders) =>
+          prevOrders.filter((order) => order._id !== id)
+        );
+        toast.success("Sipariş başarıyla silindi.");
+      } catch (err) {
+        console.log(err);
+        toast.error("Sipariş silinemedi.");
+      }
     }
   };
 
   useEffect(() => {
     if (error) {
-      toast.success(error.message);
+      toast.error(error.message);
     }
     if (isSuccess) {
       toast.success("Başarılı bir şekilde güncellendi");
@@ -32,6 +53,7 @@ function Orders() {
   }, [error, isSuccess]);
 
   const handleStatusChange = (status, id) => {
+    console.log("🚀 ~ handleStatusChange ~ id:", id);
     updateOrder({ id, body: { status } });
   };
 
@@ -84,7 +106,7 @@ function Orders() {
       render: (shippingAddress) => (
         <ul>
           <li>
-            {shippingAddress.address},{shippingAddress.city},
+            {shippingAddress.address}, {shippingAddress.city},
             {shippingAddress.country}
           </li>
         </ul>
@@ -100,7 +122,6 @@ function Orders() {
         </ul>
       ),
     },
-
     {
       title: "Telefon Numarası",
       dataIndex: "shippingAddress",
@@ -159,20 +180,22 @@ function Orders() {
       title: "Durum Güncelle",
       dataIndex: "orderStatus",
       key: "updateOrderStatus",
-      render: (orderStatus, record) => (
-        <Select
-          className="w-full"
-          disabled={orderStatus === "Teslim Edilmiştir."}
-          defaultValue={orderStatus}
-          onChange={(value) => handleStatusChange(value, record._id)}
-        >
-          <Select.Option value="Hazırlanıyor">Hazırlanıyor</Select.Option>
-          <Select.Option value="Kuryemiz Yolda">Kuryemiz Yolda</Select.Option>
-          <Select.Option value="Teslim Edilmiştir.">
-            Teslim Edilmiştir.
-          </Select.Option>
-        </Select>
-      ),
+      render: (orderStatus, record) => {
+        return (
+          <Select
+            className="w-full"
+            disabled={orderStatus === "Teslim Edilmiştir."}
+            defaultValue={orderStatus}
+            onChange={(value) => handleStatusChange(value, record._id)}
+          >
+            <Select.Option value="Hazırlanıyor">Hazırlanıyor</Select.Option>
+            <Select.Option value="Kuryemiz Yolda">Kuryemiz Yolda</Select.Option>
+            <Select.Option value="Teslim Edilmiştir.">
+              Teslim Edilmiştir.
+            </Select.Option>
+          </Select>
+        );
+      },
     },
     {
       title: "Eylemler",
@@ -193,10 +216,11 @@ function Orders() {
   ];
 
   const dataSource =
-    dataSource2?.map((item) => ({
+    localOrders?.map((item, index) => ({
       ...item,
-      key: item._id,
+      key: item._id + index,
     })) || [];
+
   return (
     <div className="min-h-screen">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">

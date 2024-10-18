@@ -4,10 +4,19 @@ import { Link } from "react-router-dom";
 import { PrinterFilled } from "@ant-design/icons";
 import Loading from "../../../components/loading/Loader";
 import { useSelector } from "react-redux";
-
+import { useEffect, useState } from "react";
 const UserOrder = () => {
   const { data, isLoading } = useGetUserOrderQuery();
   const { orders } = useSelector((state) => state.socket);
+  const [localOrders, setLocalOrders] = useState([]);
+  useEffect(() => {
+    setLocalOrders([
+      ...(data?.orders || []),
+      ...orders.filter(
+        (order) => !data?.orders.some((prod) => prod._id === order._id)
+      ),
+    ]);
+  }, [data, orders]);
 
   const columns = [
     {
@@ -75,10 +84,11 @@ const UserOrder = () => {
     },
   ];
 
-  const dataSource = data?.orders?.map((item) => ({
-    ...item,
-    key: item._id,
-  }));
+  const dataSource =
+    localOrders?.map((item, index) => ({
+      ...item,
+      key: item._id + index,
+    })) || [];
 
   if (isLoading) return <Loading />;
 
