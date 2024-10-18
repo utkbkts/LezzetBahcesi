@@ -3,7 +3,7 @@ import { navbarLink } from "./Navigation";
 import { cn } from "../../utils/TailwindMerge";
 import { Avatar, Badge, Button } from "antd";
 import { IoCartOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { FaUserAlt } from "react-icons/fa";
@@ -11,12 +11,14 @@ import { GrUserAdmin } from "react-icons/gr";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useLogoutMutation } from "../../redux/api/AuthApi";
 import PropTypes from "prop-types";
-const MobileHeader = ({ setShowBar, showBar, setShowLogin }) => {
+import { setToggleMenu } from "../../redux/features/userSlice";
+const MobileHeader = ({ setShowBar, showBar }) => {
   const { cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.auth);
   const [openModal, setOpenModal] = useState(false);
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const logoutHandler = async () => {
     await logout();
@@ -98,7 +100,7 @@ const MobileHeader = ({ setShowBar, showBar, setShowLogin }) => {
               <Button
                 type="default"
                 onClick={() => {
-                  setShowLogin(true);
+                  dispatch(setToggleMenu());
                   setShowBar(false);
                 }}
                 className="cursor-pointer mt-1"
@@ -141,6 +143,5 @@ const MobileHeader = ({ setShowBar, showBar, setShowLogin }) => {
 MobileHeader.propTypes = {
   setShowBar: PropTypes.func.isRequired,
   showBar: PropTypes.bool.isRequired,
-  setShowLogin: PropTypes.func.isRequired,
 };
 export default MobileHeader;

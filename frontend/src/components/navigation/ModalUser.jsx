@@ -2,18 +2,19 @@ import { FaUserAlt } from "react-icons/fa";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { GrUserAdmin } from "react-icons/gr";
 import { useLogoutMutation } from "../../redux/api/AuthApi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { Avatar, Badge, Button } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
-const ModalUser = ({ setShowLogin }) => {
+import { setToggleMenu } from "../../redux/features/userSlice";
+const ModalUser = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.socket);
   const outSideRef = useRef();
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const logoutHandler = async () => {
     await logout();
@@ -90,7 +91,7 @@ const ModalUser = ({ setShowLogin }) => {
         <>
           <Button
             type="default"
-            onClick={() => setShowLogin(true)}
+            onClick={() => dispatch(setToggleMenu())}
             className="cursor-pointer mt-1"
           >
             <UserOutlined />
@@ -100,10 +101,6 @@ const ModalUser = ({ setShowLogin }) => {
       )}
     </ul>
   );
-};
-
-ModalUser.propTypes = {
-  setShowLogin: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
 };
 
 export default ModalUser;

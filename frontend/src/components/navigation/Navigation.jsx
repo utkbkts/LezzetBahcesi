@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 
 import { IoCartOutline } from "react-icons/io5";
 import logo from "/logo.png";
-import PropTypes from "prop-types";
 import ModalUser from "./ModalUser";
 import MobileHeader from "./MobileHeader";
 import {
@@ -51,7 +50,7 @@ export const navbarLink = [
   },
 ];
 
-const Navigation = ({ setShowLogin }) => {
+const Navigation = () => {
   const [isScrollingUp, setIsScrollingUp] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(100);
   const [searchTerm, setSearchTerm] = useState("");
@@ -83,15 +82,15 @@ const Navigation = ({ setShowLogin }) => {
     }
   };
 
-  const headerClassNames = `fixed w-full bg-white z-[999] shadow-xl h-20 md:h-32 transition-transform duration-300 ${
-    isScrollingUp ? "navbar-visible" : "navbar-hidden"
-  } ${showBar ? "navbar-visible" : ""} top-0`;
-
   const shouldShowSearchIcon = location !== "/search";
 
   return (
     <>
-      <header className={headerClassNames}>
+      <header
+        className={`fixed w-full bg-white z-[999] shadow-xl h-20 md:h-32 transition-transform duration-300 ${
+          isScrollingUp ? "navbar-visible" : "navbar-hidden"
+        } top-0`}
+      >
         <div className="open-sans flexCenterBetwen container mx-auto h-full relative">
           <Link to={"/"} className="cursor-pointer">
             <img
@@ -127,7 +126,7 @@ const Navigation = ({ setShowLogin }) => {
                 <Heart size={25} className=" cursor-pointer" />
               </Badge>
             </NavLink>
-            <ModalUser setShowLogin={setShowLogin} />
+            <ModalUser />
           </nav>
         </div>
         <div
@@ -141,13 +140,7 @@ const Navigation = ({ setShowLogin }) => {
           <div className="bar"></div>
         </div>
       </header>
-      {showBar && (
-        <MobileHeader
-          showBar={showBar}
-          setShowBar={setShowBar}
-          setShowLogin={setShowLogin}
-        />
-      )}
+      {showBar && <MobileHeader showBar={showBar} setShowBar={setShowBar} />}
 
       <Modal
         title="Yemek Çeşidi Ara"
@@ -167,7 +160,5 @@ const Navigation = ({ setShowLogin }) => {
     </>
   );
 };
-Navigation.propTypes = {
-  setShowLogin: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-};
+
 export default Navigation;

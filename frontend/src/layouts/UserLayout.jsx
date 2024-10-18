@@ -13,14 +13,13 @@ const userMenu = [
 ];
 
 const UserLayout = () => {
-  const [setShowLogin] = useState(false);
   const [showBar, setShowBar] = useState(false);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <div className="w-full text-white h-full mt-[120px]">
-      <Navigation setShowLogin={setShowLogin} />
+      <Navigation />
       <div className={"flex mds:flex-row flex-col"}>
         <div className={`relative mds:min-h-screen w-full mds:w-1/5`}>
           <div

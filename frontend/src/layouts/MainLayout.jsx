@@ -1,15 +1,15 @@
 import { Outlet } from "react-router-dom";
 import Navigation from "../components/navigation/Navigation";
 import Footer from "../components/footer/Footer";
-import { useState } from "react";
 import AuthModal from "../pages/auth/AuthModal";
 import { useGetUserQuery } from "../redux/api/UserApi";
 import Loading from "../components/loading/Loader";
 import UserCountDisplay from "../components/userCount/UserCount";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 const MainLayout = () => {
-  const [showLogin, setShowLogin] = useState(false);
   const { isLoading } = useGetUserQuery();
+  const { toggleMenu } = useSelector((state) => state.auth);
   const pathname = useLocation().pathname;
   if (isLoading) {
     return <Loading />;
@@ -18,10 +18,8 @@ const MainLayout = () => {
 
   return (
     <div className="w-full text-white h-full mt-[120px]">
-      {!starts && <Navigation setShowLogin={setShowLogin} />}
-      {showLogin && (
-        <AuthModal showLogin={showLogin} setShowLogin={setShowLogin} />
-      )}
+      {!starts && <Navigation />}
+      {toggleMenu && <AuthModal />}
       <div className={"w-full flex-grow min-h-screen"}>
         <Outlet />
       </div>

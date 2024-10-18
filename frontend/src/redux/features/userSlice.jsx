@@ -4,6 +4,7 @@ const initialState = {
   user: null,
   isAuthenticated: false,
   loading: false,
+  toggleMenu: false,
 };
 
 export const userSlice = createSlice({
@@ -19,8 +20,12 @@ export const userSlice = createSlice({
     setLoading(state, action) {
       state.loading = action.payload;
     },
+    setToggleMenu(state) {
+      state.toggleMenu = !state.toggleMenu;
+    },
   },
 });
 
 export default userSlice.reducer;
-export const { setUser, setisAuthenticated, setLoading } = userSlice.actions;
+export const { setUser, setisAuthenticated, setLoading, setToggleMenu } =
+  userSlice.actions;

@@ -60,7 +60,6 @@ const cartSlice = createSlice({
     },
     removeFavorite: (state, action) => {
       state.favoriteItems = state.favoriteItems.filter((item) => {
-        console.log(action.payload);
         return item.product !== action.payload;
       });
 
