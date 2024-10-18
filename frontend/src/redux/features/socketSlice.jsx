@@ -12,6 +12,7 @@ const socketSlice = createSlice({
   reducers: {
     setOrders: (state, action) => {
       const updatedOrder = action.payload;
+      console.log("🚀 ~ updatedOrder:", updatedOrder);
       const existingOrderIndex = state.orders.findIndex(
         (order) => order._id === updatedOrder._id
       );

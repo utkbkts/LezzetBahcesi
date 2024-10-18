@@ -74,7 +74,6 @@ const getOrderDetail = catchAsyncError(async (req, res, next) => {
   if (!order) {
     return next(new ErrorHandler("No Order found with this ID", 404));
   }
-
   res.status(200).json({
     order,
   });
@@ -134,9 +133,17 @@ const updateOrderStatus = catchAsyncError(async (req, res, next) => {
   // Durum güncellenince bildirim gönder
 
   const orderSocketID = notifyOrderStatusUpdated(order.user.toString(), order);
+  console.log(order.user.toString(), order);
   if (orderSocketID) {
-    io.to(orderSocketID).emit("orderStatusUpdated", orderSocketID);
+    console.log("Socket ID bulundu, orderStatusUpdated gönderiliyor.");
+    io.to(orderSocketID).emit("orderStatusUpdated", {
+      order,
+      message: "Sipariş durumu güncellendi.",
+    });
+  } else {
+    console.log("Socket ID bulunamadı, bildirim gönderilemedi.");
   }
+
   await order.save();
 
   res.status(200).json({

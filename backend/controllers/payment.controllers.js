@@ -4,6 +4,7 @@ import Order from "../models/order.models.js";
 import { customAlphabet } from "nanoid";
 import ErrorHandler from "../utils/errorHandler.js";
 import moment from "moment";
+import { io } from "../socket/socket.js";
 const iyzico = new Iyzipay({
   apiKey: process.env.IYZIPAY_API_KEY,
   secretKey: process.env.IYZIPAY_SECRET_KEY,
@@ -84,7 +85,6 @@ const paymentCreate = catchAsyncError(async (req, res, next) => {
       price: item.price,
     })),
   };
-  console.log(request);
   const orderData = {
     shippingAddress,
     basketItems,
@@ -106,6 +106,7 @@ const paymentCreate = catchAsyncError(async (req, res, next) => {
       });
     }
   });
+  io.emit("new-order", orderData);
 });
 
 export default {

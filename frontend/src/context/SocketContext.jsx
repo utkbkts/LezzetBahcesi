@@ -24,18 +24,27 @@ export const SocketProvider = ({ children }) => {
     if (user) {
       const newSocket = io(import.meta.env.VITE_REACT_APP_API, {
         query: {
-          userId: user._id,
-          role: user.role,
+          userId: user?._id,
+          role: user?.role,
         },
+        withCredentials: true,
       });
       setSocket(newSocket);
 
-      if (user.role === "admin") {
+      // newSocket.on("connect", () => {
+      //   console.log("connected is success");
+      // });
+      // newSocket.on("connect_error", (err) => {
+      //   console.log("Connection Error:", err);
+      // });
+
+      if (user?.role === "admin") {
         newSocket.on("new-order", (newOrder) => {
           dispatch(setNewOrder(newOrder));
+          dispatch(setOrders(newOrder));
           toast.success("Yeni sipariş var!");
         });
-      } else if (user.role === "user") {
+      } else if (user?.role === "user") {
         newSocket.on("orderStatusUpdated", (data) => {
           const message = data.message;
           const updatedOrder = data.order;

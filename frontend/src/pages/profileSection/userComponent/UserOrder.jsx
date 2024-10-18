@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 const UserOrder = () => {
   const { data, isLoading } = useGetUserOrderQuery();
   const { orders } = useSelector((state) => state.socket);
+  console.log("🚀 ~ UserOrder ~ orders:", orders);
 
   const columns = [
     {

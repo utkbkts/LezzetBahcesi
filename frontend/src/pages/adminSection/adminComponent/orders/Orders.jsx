@@ -8,11 +8,14 @@ import toast from "react-hot-toast";
 import { Button, Select, Table } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
 function Orders() {
   const { data } = useGetAdminOrdersQuery();
   const [deleteOrder] = useDeleteOrdersMutation();
   const [updateOrder, { error, isSuccess }] = useUpdateOrdersMutation();
+  const { orders } = useSelector((state) => state.socket);
+  const dataSource2 = [...(data?.product || []), ...orders];
   const handleRemoveProduct = (id) => {
     if (window.confirm("ürünü iptal etmek istediğine emin misin ?")) {
       deleteOrder(id);
@@ -21,7 +24,6 @@ function Orders() {
 
   useEffect(() => {
     if (error) {
-
       toast.success(error.message);
     }
     if (isSuccess) {
@@ -191,7 +193,7 @@ function Orders() {
   ];
 
   const dataSource =
-    data?.product?.map((item) => ({
+    dataSource2?.map((item) => ({
       ...item,
       key: item._id,
     })) || [];

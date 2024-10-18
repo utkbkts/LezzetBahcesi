@@ -4,15 +4,25 @@ import { Link } from "react-router-dom";
 import Confetti from "react-confetti";
 import { useGetUserOrderQuery } from "../../../redux/api/OrderApi";
 import { useEffect } from "react";
+import Loading from "../../../components/loading/Loader";
 
 const SuccessPage = () => {
   const navigate = useNavigate();
-  const { data } = useGetUserOrderQuery();
+  const { data, isLoading, isFetching } = useGetUserOrderQuery();
+
   useEffect(() => {
-    if (!data) {
-      return navigate("/");
+    if (!isLoading && !isFetching) {
+      if (!data?.orders?.length) {
+        navigate("/");
+      }
     }
-  }, [data]);
+    window.scrollTo(0, 0);
+  }, [data, isLoading, isFetching, navigate]);
+
+  if (isLoading || isFetching) {
+    return <Loading />;
+  }
+
   return (
     <div className="h-screen flex items-center justify-center !overflow-hidden">
       <Confetti
