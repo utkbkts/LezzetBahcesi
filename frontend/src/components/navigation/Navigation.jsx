@@ -130,7 +130,7 @@ const Navigation = () => {
           </nav>
         </div>
         <div
-          className={`hamburger absolute  top-14 mds:hidden block right-6 z-50 ${
+          className={`hamburger absolute  top-8 mds:hidden block right-6 z-50 ${
             showBar ? "active" : ""
           }`}
           onClick={() => setShowBar(!showBar)}

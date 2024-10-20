@@ -17,10 +17,10 @@ const MainLayout = () => {
   const starts = pathname.startsWith("/password/reset");
 
   return (
-    <div className="w-full text-white h-full mt-[120px] ">
+    <div className="w-full text-white h-full ">
       {!starts && <Navigation />}
       {toggleMenu && <AuthModal />}
-      <div className={"w-full flex-grow min-h-screen"}>
+      <div className={"w-full flex-grow min-h-screen "}>
         <Outlet />
       </div>
       <div className="w-full mt-auto">

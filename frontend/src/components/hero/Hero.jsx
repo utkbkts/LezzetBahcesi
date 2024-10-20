@@ -44,7 +44,7 @@ const Hero = ({
             <img
               src={imgHero}
               alt=""
-              className="xl:w-[300px] w-[350px] xl:h-[300px] h-full animate-spin "
+              className="xl:w-[300px] sm:w-[350px] sm:h-[350px] xl:h-[300px] w-[250px]   animate-spin "
             />
           </div>
         )}
