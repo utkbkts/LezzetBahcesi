@@ -2,81 +2,40 @@ import { Outlet } from "react-router-dom";
 import AdminSidebar from "../pages/adminSection/admin/AdminSidebar";
 import Navigation from "../components/navigation/Navigation";
 import { useEffect, useState } from "react";
-
-const adminMenu = [
-  {
-    name: "Ana Sayfa",
-    url: "/admin/dashboard",
-  },
-  {
-    name: "Yeni Ürün Ekle",
-    url: "/admin/addproduct",
-  },
-  {
-    name: "Yeni Kategori Ekle",
-    url: "/admin/newcategory",
-  },
-  { name: "Ürünler", url: "/admin/products" },
-  {
-    name: "Siparişler",
-    url: "/admin/orders",
-  },
-  { name: "Kullanıcılar", url: "/admin/users" },
-  {
-    name: "Yorumlar",
-    url: "/admin/reviews",
-  },
-  {
-    name: "Rezervasyon",
-    url: "/admin/reservation",
-  },
-  {
-    name: "Hakkımızda",
-    url: "/admin/about",
-  },
-  {
-    name: "Menüler",
-    url: "/admin/menu",
-  },
-  {
-    name: "Footer",
-    url: "/admin/footer",
-  },
-];
+import { Button } from "antd";
+import { LeftCircleFilled, RightCircleFilled } from "@ant-design/icons";
+import Sider from "antd/es/layout/Sider";
+import AdminBottomBar from "../pages/adminSection/admin/AdminBottomBar";
 
 const AdminLayout = () => {
-  const [showBar, setShowBar] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="w-full text-white h-full mt-[120px]">
+    <div className="w-full text-white h-full mt-[120px] ">
       <Navigation />
-      <div className="flex mds:flex-row flex-col">
-        <div className={`relative mds:min-h-screen w-full mds:w-1/5`}>
-          <div
-            className={`${
-              showBar ? "" : "hidden"
-            } bg-gray-800 mds:flex flex-col items-center h-full`}
+
+      <div className="flex">
+        <div className={`h-full w-auto relative mds:block hidden`}>
+          <Sider
+            collapsed={collapsed}
+            collapsible
+            className="sidebar"
+            trigger={null}
           >
-            <AdminSidebar
-              adminMenu={adminMenu}
-              showBar={showBar}
-              setShowBar={setShowBar}
+            <AdminSidebar />
+            <Button
+              className="toggle"
+              onClick={() => setCollapsed(!collapsed)}
+              icon={collapsed ? <RightCircleFilled /> : <LeftCircleFilled />}
             />
-          </div>
-          <div
-            className={`hamburger absolute top-4 mds:hidden block right-4 z-50 ${
-              showBar ? "active" : ""
-            }`}
-            onClick={() => setShowBar(!showBar)}
-          >
-            <div className="bar"></div>
-            <div className="bar"></div>
-            <div className="bar"></div>
-          </div>
+          </Sider>
         </div>
-        <div className="w-full text-black mt-12 px-4 ">
+        <div className="mds:hidden block ">
+          <AdminBottomBar />
+        </div>
+        <div className="w-full text-black mt-12 px-4 mb-12">
           <Outlet />
         </div>
       </div>

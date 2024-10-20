@@ -49,20 +49,20 @@ const TableData = ({ data, handleRemoveReview }) => {
     },
   ];
 
+  console.log(data);
   const setReviews = () => {
     const reviewsList = [];
-
     data?.product?.forEach((product) => {
-      product.reviews?.forEach((review) => {
-        reviewsList.push({
-          key: review._id,
+      product?.reviews?.forEach((review) => {
+        reviewsList?.push({
+          key: review?._id,
           image: product.images,
-          userName: review.user.name,
-          comment: review.comment,
-          rating: review.rating,
-          date: review.createdAt,
-          productId: product._id,
-          reviewId: review._id,
+          userName: review?.user?.name,
+          comment: review?.comment,
+          rating: review?.rating,
+          date: review?.createdAt,
+          productId: product?._id,
+          reviewId: review?._id,
         });
       });
     });

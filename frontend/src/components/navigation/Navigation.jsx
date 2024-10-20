@@ -87,11 +87,11 @@ const Navigation = () => {
   return (
     <>
       <header
-        className={`fixed w-full bg-white z-[999] shadow-xl h-20 md:h-32 transition-transform duration-300 ${
+        className={`fixed w-full bg-white  z-[999] shadow-xl h-20 md:h-32 transition-transform duration-300 ${
           isScrollingUp ? "navbar-visible" : "navbar-hidden"
         } top-0`}
       >
-        <div className="open-sans flexCenterBetwen container mx-auto h-full relative">
+        <div className="open-sans flexCenterBetwen container mx-auto px-4 h-full relative">
           <Link to={"/"} className="cursor-pointer">
             <img
               className="w-32 h-32 object-cover rounded-full"

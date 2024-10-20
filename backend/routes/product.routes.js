@@ -36,7 +36,7 @@ router.get(
   ProductControllers.getProducts
 );
 router.get(
-  "/admin/products",
+  "/admin/products/reviews",
   isAuthenticatedUser,
   authorizeRoles("admin"),
   ProductControllers.getProductReview

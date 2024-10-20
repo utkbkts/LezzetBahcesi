@@ -11,7 +11,7 @@ const AboutChefSection = () => {
   return (
     <>
       {" "}
-      <div className="text-center mb-12">
+      <div className="text-center mb-12 ">
         <h2 className="text-4xl font-bold text-[#005C53]  text-center">
           {secondsModal?.title}
         </h2>

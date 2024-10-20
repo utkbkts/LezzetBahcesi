@@ -1,0 +1,31 @@
+.menu-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 1rem;
+  position: relative;
+}
+.toggle {
+  position: absolute;
+  right: -10px;
+  top: 20px;
+  background: black;
+  color: white;
+}
+/* bottom bar */
+.icon {
+  transition: 0.5s ease-in-out;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  justify-content: center;
+  border: 1px solid #eee;
+  cursor: pointer;
+}
+.icon.active {
+  transform: scale(1.25) translateY(-1em);
+  background: linear-gradient(135deg, #23f, #6589ff);
+}

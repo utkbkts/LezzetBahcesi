@@ -18,7 +18,7 @@ const ReservationPage = () => {
           <img src={menu7} alt="image" />
         </div>
       </div>
-      <div className="mt-24">
+      <div className="mt-24  p-6">
         <Reservation />
       </div>
     </Fragment>

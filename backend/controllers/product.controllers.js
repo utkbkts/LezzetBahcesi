@@ -82,7 +82,9 @@ const createProduct = catchAsyncError(async (req, res, next) => {
 });
 
 const getProducts = catchAsyncError(async (req, res, next) => {
-  const product = await Product.find().populate("reviews.user user category");
+  const product = await Product.find()
+    .lean()
+    .populate("reviews.user user category");
 
   res.status(200).json({
     product,

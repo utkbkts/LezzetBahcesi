@@ -16,15 +16,15 @@ const HomePage = () => {
         subTitle={
           " Gurme şeflerimizin özenle hazırladığı yemeklerle damak zevkinizi şımartın. Taze malzemelerle hazırlanan özgün tariflerimizle her lokmada unutulmaz bir deneyim yaşayın."
         }
-        subTitleClass={"custom:text-start text-center"}
+        subTitleClass={"mds:text-start text-center"}
         titleClass={
-          "custom:text-[64px] text-[40px] custom:pt-0 pt-12 custom:text-start text-center"
+          "mds:text-[44px] text-[40px] mds:pt-0 pt-12 mds:text-start text-center"
         }
         titleMainClass={
-          "w-full flex flex-col custom:items-start items-center justify-center"
+          "w-full flex flex-col mds:items-start items-center justify-center"
         }
       />
-      <div className="container mx-auto text-black">
+      <div className="container mx-auto text-black p-6">
         <AboutFeatureSection />
         <PopularMenu />
         <Reservation />
