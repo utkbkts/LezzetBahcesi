@@ -13,7 +13,7 @@ const Hero = ({
   const pathname = useLocation().pathname;
   return (
     <section className={cn("bg-hero", classNameHero)}>
-      <div className="flex items-center justify-center h-full w-full mds:flex-row flex-col">
+      <div className="flex items-center justify-center h-full w-full lg:flex-row flex-col">
         <div
           className={cn(
             "flex-[2] flex flex-col items-start gap-4 justify-center py-4 px-7",
@@ -44,7 +44,7 @@ const Hero = ({
             <img
               src={imgHero}
               alt=""
-              className="xl:w-[300px] sm:w-[350px] sm:h-[350px] xl:h-[300px] w-[250px]   animate-spin "
+              className="xl:w-[400px] xl:h-[400px] sm:w-[350px] sm:h-[350px]  w-[250px]   animate-spin "
             />
           </div>
         )}
