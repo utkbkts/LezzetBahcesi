@@ -13,24 +13,25 @@ const AdminLayout = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="w-full text-white h-full mt-[120px] ">
+    <div className="w-full text-white h-full mt-[120px] overflow-x-hidden">
       <Navigation />
-
-      <div className="flex">
-        <div className={`h-full w-auto relative mds:block hidden`}>
-          <Sider
-            collapsed={collapsed}
-            collapsible
-            className="sidebar"
-            trigger={null}
-          >
-            <AdminSidebar />
-            <Button
-              className="toggle"
-              onClick={() => setCollapsed(!collapsed)}
-              icon={collapsed ? <RightCircleFilled /> : <LeftCircleFilled />}
-            />
-          </Sider>
+      <div className="flex overflow-x-hidden">
+        <div className={`min-h-screen w-auto relative mds:block hidden`}>
+          <div className="h-full">
+            <Sider
+              collapsed={collapsed}
+              collapsible
+              className="sidebar"
+              trigger={null}
+            >
+              <AdminSidebar />
+              <Button
+                className="toggle"
+                onClick={() => setCollapsed(!collapsed)}
+                icon={collapsed ? <RightCircleFilled /> : <LeftCircleFilled />}
+              />
+            </Sider>
+          </div>
         </div>
         <div className="mds:hidden block ">
           <AdminBottomBar />

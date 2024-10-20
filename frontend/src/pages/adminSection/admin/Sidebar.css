@@ -29,3 +29,8 @@
   transform: scale(1.25) translateY(-1em);
   background: linear-gradient(135deg, #23f, #6589ff);
 }
+
+/* aside */
+.ant-layout-sider {
+  height: 100%;
+}

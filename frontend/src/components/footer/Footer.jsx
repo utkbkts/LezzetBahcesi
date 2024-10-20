@@ -37,7 +37,7 @@ const Footer = () => {
   const { data: footerGetData } = useGetFooterQuery();
   return (
     <div className="bg-[#0F172B] w-full h-full">
-      <div className="grid xl:grid-cols-4 mds:grid-cols-3 grid-cols-1 py-8 px-8 mds:gap-0 gap-12">
+      <div className="grid xl:grid-cols-4 mds:grid-cols-3  grid-cols-1 py-8 px-8 mds:gap-0 gap-12">
         <div className="flex flex-col items-center justify-center">
           <h4 className="pacifico-regular text-[23px] font-[400] text-[#fea116]">
             Şirket Hakkında
@@ -86,7 +86,7 @@ const Footer = () => {
           <ul className="flex mds:flex-col flex-row gap-5 pt-6 mds:items-start items-center justify-center">
             <li className="font-[400] transition-all duration-400 text-[15px] flex items-start flex-col gap-2 ">
               {footerGetData?.footer[0]?.workingHours?.map((item) => (
-                <div key={item._id}>
+                <div key={item._id} className="flex flex-col">
                   <span>{item.day}</span>
                   <span>{item.hours}</span>
                 </div>
@@ -94,7 +94,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center xl:pt-0 mds:pt-8">
           <h4 className="pacifico-regular text-[23px] font-[400] text-[#fea116]">
             Sosyal Medya Hesaplarımız
           </h4>
