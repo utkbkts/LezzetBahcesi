@@ -2,50 +2,43 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import UserSidebar from "../pages/profileSection/user/UserSidebar";
 import Navigation from "../components/navigation/Navigation";
-import Footer from "../components/footer/Footer";
-
-const userMenu = [
-  { name: "Profil", url: "/me/profile" },
-  { name: "Profil Güncelle", url: "/me/update" },
-  { name: "Parola Değiştir", url: "/me/update_password" },
-  { name: "Yorumlarım", url: "/me/reviews" },
-  { name: "Siparişlerim", url: "/me/order" },
-];
+import Sider from "antd/es/layout/Sider";
+import { Button } from "antd";
+import { LeftCircleFilled, RightCircleFilled } from "@ant-design/icons";
+import UserBottomBar from "../pages/profileSection/user/UserBottomBar";
 
 const UserLayout = () => {
-  const [showBar, setShowBar] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="w-full text-white h-full mt-[120px]">
+    <div className="w-full text-white h-full mt-[120px] overflow-x-hidden">
       <Navigation />
-      <div className={"flex mds:flex-row flex-col"}>
-        <div className={`relative mds:min-h-screen w-full mds:w-1/5`}>
-          <div
-            className={`${
-              showBar ? "" : " hidden"
-            } bg-gray-800 mds:flex flex-col items-center h-full`}
-          >
-            <UserSidebar userMenu={userMenu} setShowBar={setShowBar} />
-          </div>
-          <div
-            className={`hamburger absolute top-4 mds:hidden block right-4 z-50 ${
-              showBar ? "active" : ""
-            }`}
-            onClick={() => setShowBar(!showBar)}
-          >
-            <div className="bar"></div>
-            <div className="bar"></div>
-            <div className="bar"></div>
+      <div className="flex overflow-x-hidden">
+        <div className={`min-h-screen w-auto relative mds:block hidden`}>
+          <div className="h-full">
+            <Sider
+              collapsed={collapsed}
+              collapsible
+              className="sidebar"
+              trigger={null}
+            >
+              <UserSidebar />
+              <Button
+                className="toggle"
+                onClick={() => setCollapsed(!collapsed)}
+                icon={collapsed ? <RightCircleFilled /> : <LeftCircleFilled />}
+              />
+            </Sider>
           </div>
         </div>
-        <div className={"flex-[4]  min-h-screen text-black"}>
+        <div className="w-full text-black mt-12 px-4 mb-12">
           <Outlet />
         </div>
       </div>
-      <div className="w-full mt-auto">
-        <Footer />
+      <div className="mds:hidden block mt-12">
+        <UserBottomBar />
       </div>
     </div>
   );

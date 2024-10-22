@@ -37,7 +37,7 @@ const Search = () => {
   };
   if (isLoading) return <Loading />;
   return (
-    <div className="min-h-screen w-full overflow-hidden">
+    <div className="min-h-screen w-full overflow-hidden mt-[150px]">
       <div className="flex md:flex-row flex-col p-3 ">
         <div className="md:w-1/4 w-full">
           <CuisineFilter data={data} />

@@ -3,63 +3,46 @@ import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { setMessage } from "../../../redux/features/socketSlice";
+import { Menu } from "antd";
+import { File, Key, ListOrdered, User } from "lucide-react";
+import { GrUpdate } from "react-icons/gr";
+const userMenu = [
+  { name: "Profil", url: "/me/profile", icon: <User /> },
+  { name: "Profil Güncelle", url: "/me/update", icon: <GrUpdate /> },
+  { name: "Parola Değiştir", url: "/me/update_password", icon: <Key /> },
+  { name: "Yorumlarım", url: "/me/reviews", icon: <File /> },
+  { name: "Siparişlerim", url: "/me/order", icon: <ListOrdered /> },
+];
 
-const UserSidebar = ({ userMenu, setShowBar }) => {
-  const location = useLocation();
-  const [activeMenuActive, setActiveMenuActive] = useState(location.pathname);
+const UserSidebar = () => {
   const { message } = useSelector((state) => state.socket);
+  const location = useLocation();
+  const [activeMenuItem, setActiveMenuItem] = useState(location.pathname);
+
   const handleMenuItemClick = (menuItemUrl) => {
-    setActiveMenuActive(menuItemUrl);
+    setActiveMenuItem(menuItemUrl);
   };
+
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(setMessage(null));
   };
+
   return (
-    <div className="w-full h-full  p-5">
-      <h1 className="text-xl font-bold text-white mb-10 text-center">
-        Kullanıcı Paneli
-      </h1>
-      <ul className="space-y-2 mt-[10rem]">
-        {userMenu.map((item, index) => (
-          <li key={index}>
-            {item.name === "Siparişlerim" ? (
-              <Link
-                to={item.url}
-                onClick={() => {
-                  handleMenuItemClick(item.url), handleClick();
-                  setShowBar(false);
-                }}
-                className={`block relative py-2 px-4 rounded-lg transition-colors duration-200 ${
-                  activeMenuActive === item.url
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-700 text-gray-300 hover:bg-blue-500 hover:text-white"
-                }`}
-              >
-                {message && (
-                  <div className="absolute z-50 bg-red-500 w-2 h-2 right-4 top-4 rounded-full "></div>
-                )}
-                {item.name}
-              </Link>
-            ) : (
-              <Link
-                to={item.url}
-                onClick={() => {
-                  handleMenuItemClick(item.url), setShowBar(false);
-                }}
-                className={`block py-2 px-4 rounded-lg transition-colors duration-200 ${
-                  activeMenuActive === item.url
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-700 text-gray-300 hover:bg-blue-500 hover:text-white"
-                }`}
-              >
-                {item.name}
-              </Link>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Menu theme="dark" className="menu-bar min-h-screen" mode="inline">
+      {userMenu.map((item) => (
+        <Menu.Item
+          key={item.url}
+          icon={item.icon ? item.icon : null}
+          onClick={() => {
+            handleMenuItemClick(item.url);
+            handleClick();
+          }}
+        >
+          <Link to={item.url}>{item.name}</Link>
+        </Menu.Item>
+      ))}
+    </Menu>
   );
 };
 
@@ -68,9 +51,9 @@ UserSidebar.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
+      icon: PropTypes.element,
     })
   ).isRequired,
-  setShowBar: PropTypes.func,
 };
 
 export default UserSidebar;
