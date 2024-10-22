@@ -8,18 +8,19 @@ import Loading from "../../../components/loading/Loader";
 
 const SuccessPage = () => {
   const navigate = useNavigate();
-  const { data, isLoading, isFetching } = useGetUserOrderQuery();
+  const { data, isLoading } = useGetUserOrderQuery();
 
   useEffect(() => {
-    if (!isLoading && !isFetching) {
+    if (!isLoading) {
       if (!data?.orders?.length) {
-        navigate("/");
+        navigate("/", { replace: true });
       }
     }
-    window.scrollTo(0, 0);
-  }, [data, isLoading, isFetching, navigate]);
 
-  if (isLoading || isFetching) {
+    window.scrollTo(0, 0);
+  }, [data, isLoading, navigate]);
+
+  if (isLoading) {
     return <Loading />;
   }
 

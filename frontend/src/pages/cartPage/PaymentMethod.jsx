@@ -21,6 +21,7 @@ const PaymentMethod = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  console.log("🚀 ~ PaymentMethod ~ checkoutData:", checkoutData);
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
@@ -29,7 +30,6 @@ const PaymentMethod = () => {
       toast.success("Ödeme işlemi başarılı.yönlendirileceksiniz.");
       setTimeout(() => {
         navigate("/payment/success");
-        navigate(0);
       }, 2000);
       dispatch(clearCartItem());
     } else if (IyzipaySuccess) {
@@ -41,7 +41,7 @@ const PaymentMethod = () => {
     if (checkoutData?.result?.status === "success") {
       toast.success("Ödeme işlemi başarılı.yönlendirileceksiniz.");
       setTimeout(() => {
-        navigate("/payment/success");
+        navigate(`/payment/success`, { replace: true });
       }, 2000);
     }
     if (checkoutData?.result?.status === "failure") {
