@@ -75,6 +75,7 @@ const getOrderDetail = catchAsyncError(async (req, res, next) => {
   if (!order) {
     return next(new ErrorHandler("No Order found with this ID", 404));
   }
+  io.emit("getOrderDetail", order);
   res.status(200).json({
     order,
   });

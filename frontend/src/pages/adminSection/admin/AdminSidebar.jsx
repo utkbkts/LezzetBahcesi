@@ -94,12 +94,15 @@ const AdminSidebar = () => {
   };
 
   return (
-    <Menu theme="dark" className="menu-bar min-h-screen" mode="inline">
+    <Menu theme="dark" className="min-h-screen" mode="inline">
       {adminMenu.map((item) =>
         item.submenu ? (
           <Menu.SubMenu key={item.name} title={item.name} icon={item.icon}>
             {item.submenu.map((subItem) => (
               <Menu.Item
+                className={`${
+                  activeMenuActive === item.url ? "bg-blue-500" : ""
+                }`}
                 key={subItem.url}
                 onClick={() => handleMenuItemClick(subItem.url)}
               >

@@ -16,7 +16,6 @@ function Orders() {
   const [updateOrder, { error, isSuccess }] = useUpdateOrdersMutation();
   const { orders } = useSelector((state) => state.socket);
   const [localOrders, setLocalOrders] = useState([]);
-  console.log("🚀 ~ Orders ~ localOrders:", data);
 
   useEffect(() => {
     const dataFilter = [
