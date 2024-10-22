@@ -1,49 +1,144 @@
-import Invoice from "../components/invoice/Invoice";
-import UserOrderDetail from "../pages/profileSection/userComponent/UserOrderDetail";
+import React, { Suspense } from "react";
+import { UserLoaders } from "../loaders/UserLoaders";
+import Loading from "../components/loading/Loader";
 
-import NotFound from "../components/notFound/NotFound";
+const Invoice = React.lazy(() => import("../components/invoice/Invoice"));
+const UserOrderDetail = React.lazy(() =>
+  import("../pages/profileSection/userComponent/UserOrderDetail")
+);
 
-import Profile from "../pages/profileSection/userComponent/Profile";
-import UpdatePassword from "../pages/profileSection/userComponent/UpdatePassword";
-import UpdateProfile from "../pages/profileSection/userComponent/UpdateProfile";
-import UserReviews from "../pages/profileSection/userComponent/UserReviews";
-import UserOrder from "../pages/profileSection/userComponent/UserOrder";
-import UserLayout from "../layouts/UserLayout.jsx";
-import { UserLoaders } from "../loaders/UserLoaders.jsx";
+const NotFound = React.lazy(() => import("../components/notFound/NotFound"));
+
+const Profile = React.lazy(() =>
+  import("../pages/profileSection/userComponent/Profile")
+);
+const UpdatePassword = React.lazy(() =>
+  import("../pages/profileSection/userComponent/UpdatePassword")
+);
+const UpdateProfile = React.lazy(() =>
+  import("../pages/profileSection/userComponent/UpdateProfile")
+);
+const UserReviews = React.lazy(() =>
+  import("../pages/profileSection/userComponent/UserReviews")
+);
+const UserOrder = React.lazy(() =>
+  import("../pages/profileSection/userComponent/UserOrder")
+);
+const UserLayout = React.lazy(() => import("../layouts/UserLayout"));
 
 export const UserRoutes = {
   path: "/me",
-  element: <UserLayout />,
+  element: (
+    <Suspense
+      fallback={
+        <div>
+          <Loading />
+        </div>
+      }
+    >
+      <UserLayout />
+    </Suspense>
+  ),
   errorElement: <NotFound />,
   loader: () => UserLoaders(),
   children: [
     {
       path: "profile",
-      element: <Profile />,
+      element: (
+        <Suspense
+          fallback={
+            <div>
+              <Loading />
+            </div>
+          }
+        >
+          <Profile />
+        </Suspense>
+      ),
     },
     {
       path: "update_password",
-      element: <UpdatePassword />,
+      element: (
+        <Suspense
+          fallback={
+            <div>
+              <Loading />
+            </div>
+          }
+        >
+          <UpdatePassword />
+        </Suspense>
+      ),
     },
     {
       path: "update",
-      element: <UpdateProfile />,
+      element: (
+        <Suspense
+          fallback={
+            <div>
+              <Loading />
+            </div>
+          }
+        >
+          <UpdateProfile />
+        </Suspense>
+      ),
     },
     {
       path: "reviews",
-      element: <UserReviews />,
+      element: (
+        <Suspense
+          fallback={
+            <div>
+              <Loading />
+            </div>
+          }
+        >
+          <UserReviews />
+        </Suspense>
+      ),
     },
     {
       path: "order",
-      element: <UserOrder />,
+      element: (
+        <Suspense
+          fallback={
+            <div>
+              <Loading />
+            </div>
+          }
+        >
+          <UserOrder />
+        </Suspense>
+      ),
     },
     {
       path: "order/:id",
-      element: <UserOrderDetail />,
+      element: (
+        <Suspense
+          fallback={
+            <div>
+              <Loading />
+            </div>
+          }
+        >
+          <UserOrderDetail />
+        </Suspense>
+      ),
     },
     {
       path: "invoice/order/:id",
-      element: <Invoice />,
+      element: (
+        <Suspense
+          fallback={
+            <div>
+              <Loading />
+            </div>
+          }
+        >
+          <Invoice />
+        </Suspense>
+      ),
     },
   ],
 };

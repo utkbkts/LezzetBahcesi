@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { File, Key, ListOrdered, User } from "lucide-react";
 import { GrUpdate } from "react-icons/gr";
+import "../../adminSection/admin/Sidebar.css";
+
 const userMenu = [
   { name: "Profil", url: "/me/profile", icon: <User /> },
   { name: "Profil Güncelle", url: "/me/update", icon: <GrUpdate /> },

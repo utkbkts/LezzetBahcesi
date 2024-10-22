@@ -3,14 +3,20 @@ import Loading from "../loading/Loader";
 import MenuItem from "../menuItem/MenuItem";
 import Title from "../../ui/Title";
 import { useProductGetCategoryAllQuery } from "../../redux/api/ProductApi";
+import InfiniteScroll from "react-infinite-scroll-component";
+
 import pngwing from "/pngwing.com.png";
 const CatagoriesAndMenu = () => {
   const [category, setCategory] = useState("All");
   const { data, isLoading } = useProductGetCategoryAllQuery();
-
+  const [visibleCount, setVisibleCount] = useState(5);
+  const products = data?.product || [];
   const uniqueCategories = Array.from(
     new Set(data?.product?.map((item) => item.category.name))
   );
+  const fetchMoreData = () => {
+    setVisibleCount((prevCount) => prevCount + 5);
+  };
   if (isLoading) return <Loading />;
   return (
     <React.Fragment>
@@ -66,18 +72,26 @@ const CatagoriesAndMenu = () => {
               </div>
             ))}
           </div>
-          <div
-            className={
-              "grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"
+          <InfiniteScroll
+            dataLength={visibleCount}
+            next={fetchMoreData}
+            hasMore={visibleCount < products.length}
+            loader={<Loading />}
+            endMessage={
+              <p className="mt-12 text-center">
+                <b>Ürünlerimiz bu kadar !!</b>
+              </p>
             }
           >
-            {data?.product?.map((product) => {
-              if (category === "All" || category === product.category.name) {
-                return <MenuItem key={product._id} {...product} />;
-              }
-              return null;
-            })}
-          </div>
+            <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+              {products.slice(0, visibleCount).map((product) => {
+                if (category === "All" || category === product.category.name) {
+                  return <MenuItem key={product._id} {...product} />;
+                }
+                return null;
+              })}
+            </div>
+          </InfiniteScroll>
         </div>
       </section>
     </React.Fragment>
