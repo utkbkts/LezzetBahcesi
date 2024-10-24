@@ -10,7 +10,7 @@ const UserOrderDetail = () => {
   const { id } = params;
   const { data, isLoading } = useGetUserOrderDetailQuery(id);
   const { orders } = useSelector((state) => state.socket);
-  const filtered = orders.filter((item) => item._id === data.order._id);
+  const filtered = orders?.filter((item) => item?._id === data?.order?._id);
 
   if (isLoading) {
     return <Loading />;
