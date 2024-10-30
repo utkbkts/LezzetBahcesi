@@ -96,13 +96,13 @@ const paymentCreate = catchAsyncError(async (req, res, next) => {
     paymentMethod: "Kart",
     user: req.user._id,
   };
-  await Order.create(order);
-  io.emit("new-order", order);
+  const createdOrder = await Order.create(order);
 
   iyzico.payment.create(request, (err, result) => {
     if (err) {
       return next(new ErrorHandler("Ödeme işlemi başarısız", 404));
     } else {
+      io.emit("new-order", createdOrder);
       return res.status(200).json({
         result,
       });

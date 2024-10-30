@@ -21,7 +21,6 @@ const PaymentMethod = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log("🚀 ~ PaymentMethod ~ checkoutData:", checkoutData);
   useEffect(() => {
     if (error) {
       toast.error(error?.data?.message);
