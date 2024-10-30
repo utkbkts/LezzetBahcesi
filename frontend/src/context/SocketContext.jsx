@@ -31,7 +31,9 @@ export const SocketProvider = ({ children }) => {
         withCredentials: true,
       });
       setSocket(newSocket);
-
+      newSocket.on("order-deleted", (orderId) => {
+        dispatch(removeOrder(orderId));
+      });
       // newSocket.on("connect", () => {
       //   console.log("connected is success");
       // });
@@ -56,11 +58,10 @@ export const SocketProvider = ({ children }) => {
           dispatch(setMessage(message));
           toast.success(message);
         });
+        newSocket.on("new-order", (newOrder) => {
+          dispatch(setOrders(newOrder));
+        });
       }
-      newSocket.on("order-deleted", (orderId) => {
-        console.log("🚀 ~ newSocket.on ~ orderId:", orderId);
-        dispatch(removeOrder(orderId));
-      });
 
       return () => {
         newSocket.disconnect();

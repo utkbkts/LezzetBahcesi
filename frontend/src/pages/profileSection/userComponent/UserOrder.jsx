@@ -5,32 +5,19 @@ import { PrinterFilled } from "@ant-design/icons";
 import Loading from "../../../components/loading/Loader";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
 const UserOrder = () => {
   const { data, isLoading } = useGetUserOrderQuery();
   const { orders } = useSelector((state) => state.socket);
   const [localOrders, setLocalOrders] = useState([]);
   useEffect(() => {
-    setLocalOrders([
+    const dataFilter = [
       ...(data?.orders || []),
       ...orders.filter(
-        (order) => !data?.orders.some((prod) => prod._id === order._id)
+        (item) => !data?.orders?.some((prod) => prod?._id === item?._id)
       ),
-    ]);
+    ];
+    setLocalOrders(dataFilter);
   }, [data, orders]);
-
-  useEffect(() => {
-    const newSocket = io(import.meta.env.VITE_REACT_APP_API, {
-      withCredentials: true,
-    });
-    newSocket.on("order-deleted", () => {
-      window.location.reload();
-    });
-
-    return () => {
-      newSocket.disconnect();
-    };
-  }, []);
 
   const columns = [
     {
@@ -97,7 +84,6 @@ const UserOrder = () => {
       ),
     },
   ];
-
   const dataSource =
     localOrders?.map((item, index) => ({
       ...item,

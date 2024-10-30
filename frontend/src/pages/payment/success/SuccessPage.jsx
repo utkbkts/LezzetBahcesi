@@ -1,24 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import { ArrowRight, CheckCircle, HandHeart } from "lucide-react";
 import { Link } from "react-router-dom";
 import Confetti from "react-confetti";
 import { useGetUserOrderQuery } from "../../../redux/api/OrderApi";
-import { useEffect } from "react";
 import Loading from "../../../components/loading/Loader";
 
 const SuccessPage = () => {
-  const navigate = useNavigate();
   const { data, isLoading } = useGetUserOrderQuery();
-
-  useEffect(() => {
-    if (!isLoading) {
-      if (!data?.orders?.length) {
-        navigate("/", { replace: true });
-      }
-    }
-
-    window.scrollTo(0, 0);
-  }, [data, isLoading, navigate]);
 
   if (isLoading) {
     return <Loading />;
