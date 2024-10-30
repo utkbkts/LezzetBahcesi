@@ -33,6 +33,7 @@ export const SocketProvider = ({ children }) => {
       setSocket(newSocket);
       newSocket.on("order-deleted", (orderId) => {
         dispatch(removeOrder(orderId));
+        console.log("Updated orders:", orderId);
       });
       // newSocket.on("connect", () => {
       //   console.log("connected is success");
