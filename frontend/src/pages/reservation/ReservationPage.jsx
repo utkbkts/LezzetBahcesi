@@ -2,10 +2,12 @@ import { Fragment } from "react";
 import Reservation from "../../components/reservation/Reservation";
 import menu7 from "/menuPage/img-def.png";
 import Hero from "../../components/hero/Hero";
+import MetaData from "../../layouts/MetaData";
 
 const ReservationPage = () => {
   return (
     <Fragment>
+      <MetaData title="Rezervasyon" />
       <div className="relative">
         <Hero
           classNameHero={"bg-contact"}

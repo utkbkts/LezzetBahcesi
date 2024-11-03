@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import FavoriteCard from "./partials/FavoriteCard";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import MetaData from "../../layouts/MetaData";
 const FavoritePage = () => {
   const { favoriteItems } = useSelector((state) => state.cart);
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,6 +27,8 @@ const FavoritePage = () => {
   );
   return (
     <div>
+      <MetaData title={`Favorilerim`} />
+
       <div className="relative">
         <Hero
           classNameHero={"bg-favorite"}

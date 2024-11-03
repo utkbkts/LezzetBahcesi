@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import menu7 from "/menuPage/img-def.png";
 
 import { useEffect } from "react";
+import MetaData from "../../layouts/MetaData";
 const ContactPage = () => {
   const [sendMessages, { isSuccess, isLoading, error }] =
     useSendMessageMutation();
@@ -36,6 +37,8 @@ const ContactPage = () => {
   };
   return (
     <div className="h-full">
+      <MetaData title="İletisim" />
+
       {/* Hero Section */}
       <div className="relative">
         <Hero

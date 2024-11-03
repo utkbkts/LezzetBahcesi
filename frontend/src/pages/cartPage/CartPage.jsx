@@ -4,6 +4,7 @@ import { RemoveCartItem } from "../../redux/features/cartSlice";
 import { Link } from "react-router-dom";
 import { calculateOrderCost } from "../../helpers/helpers";
 import { useEffect } from "react";
+import MetaData from "../../layouts/MetaData";
 
 const CartPage = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -105,6 +106,7 @@ const CartPage = () => {
   const { itemsPrice, taxPrice, totalPrice } = calculateOrderCost(cartItems);
   return (
     <div className="p-8 bg-gray-100 h-screen flex justify-center flex-col gap-4">
+      <MetaData title={`Sepetim`} />
       {cartItems.length === 0 ? (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-8">
           <div className="bg-white p-6 rounded-lg shadow-lg text-center w-full max-w-md">

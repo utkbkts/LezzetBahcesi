@@ -9,6 +9,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import SectionOne from "./partials/SectionOne";
 import SectionTwo from "./partials/SectionTwo";
 import SectionThree from "./partials/SectionThree";
+import MetaData from "../../layouts/MetaData";
 
 const MenuPage = () => {
   const [timerDays, setTimerDays] = useState("00");
@@ -53,6 +54,7 @@ const MenuPage = () => {
 
   return (
     <div>
+      <MetaData title="Menüler" />
       <div className="relative ">
         <Hero
           title={"Menüler."}

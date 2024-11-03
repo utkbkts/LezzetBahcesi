@@ -9,6 +9,7 @@ import AboutChefSection from "./partials/AboutChefSection";
 import AboutSocialMediaSection from "./partials/AboutSocialMediaSection";
 import Loading from "../../components/loading/Loader";
 import { useGetAboutQuery } from "../../redux/api/AboutApi";
+import MetaData from "../../layouts/MetaData";
 
 const AboutPage = () => {
   const { data, isLoading } = useGetAboutQuery();
@@ -18,6 +19,8 @@ const AboutPage = () => {
   }
   return (
     <div>
+      <MetaData title="Hakkımızda" />
+
       {/* Hero Section */}
       <div className="relative ">
         <Hero

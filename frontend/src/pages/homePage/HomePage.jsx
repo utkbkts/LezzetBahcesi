@@ -4,6 +4,7 @@ import PopularMenu from "../../components/popularMenu/PopularMenu";
 import Reservation from "../../components/reservation/Reservation";
 import Hero from "../../components/hero/Hero";
 import AboutFeatureSection from "../about/partials/AboutFeatureSection";
+import MetaData from "../../layouts/MetaData";
 
 const HomePage = () => {
   useEffect(() => {
@@ -11,6 +12,7 @@ const HomePage = () => {
   }, []);
   return (
     <React.Fragment>
+      <MetaData title="Ana Sayfa" />
       <Hero
         title={"Lezzetli Yemeklerin Tadını Çıkarın"}
         subTitle={
