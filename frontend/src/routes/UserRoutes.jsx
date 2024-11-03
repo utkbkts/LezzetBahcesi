@@ -45,13 +45,7 @@ export const UserRoutes = {
     {
       path: "profile",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <Profile />
         </Suspense>
       ),
@@ -59,13 +53,7 @@ export const UserRoutes = {
     {
       path: "update_password",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <UpdatePassword />
         </Suspense>
       ),
@@ -73,13 +61,7 @@ export const UserRoutes = {
     {
       path: "update",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <UpdateProfile />
         </Suspense>
       ),
@@ -87,13 +69,7 @@ export const UserRoutes = {
     {
       path: "reviews",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <UserReviews />
         </Suspense>
       ),
@@ -101,13 +77,7 @@ export const UserRoutes = {
     {
       path: "order",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <UserOrder />
         </Suspense>
       ),
@@ -115,13 +85,7 @@ export const UserRoutes = {
     {
       path: "order/:id",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <UserOrderDetail />
         </Suspense>
       ),
@@ -129,13 +93,7 @@ export const UserRoutes = {
     {
       path: "invoice/order/:id",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <Invoice />
         </Suspense>
       ),

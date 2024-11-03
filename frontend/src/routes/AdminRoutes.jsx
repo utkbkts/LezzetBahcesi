@@ -43,13 +43,7 @@ const FooterPage = React.lazy(() =>
 export const AdminRoutes = {
   path: "/admin",
   element: (
-    <Suspense
-      fallback={
-        <div>
-          <Loading />
-        </div>
-      }
-    >
+    <Suspense fallback={<Loading />}>
       <AdminLayout />
     </Suspense>
   ),
@@ -58,13 +52,7 @@ export const AdminRoutes = {
     {
       path: "dashboard",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <Dashboard />
         </Suspense>
       ),
@@ -72,13 +60,7 @@ export const AdminRoutes = {
     {
       path: "orders",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <Orders />
         </Suspense>
       ),
@@ -86,13 +68,7 @@ export const AdminRoutes = {
     {
       path: "products",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <Products />
         </Suspense>
       ),
@@ -100,13 +76,7 @@ export const AdminRoutes = {
     {
       path: "reviews",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <Reviews />
         </Suspense>
       ),
@@ -114,13 +84,7 @@ export const AdminRoutes = {
     {
       path: "addproduct",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <AddProduct />
         </Suspense>
       ),
@@ -128,13 +92,7 @@ export const AdminRoutes = {
     {
       path: "users",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <ListUsers />
         </Suspense>
       ),
@@ -142,13 +100,7 @@ export const AdminRoutes = {
     {
       path: "products/:id",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <UpdateProduct />
         </Suspense>
       ),
@@ -156,13 +108,7 @@ export const AdminRoutes = {
     {
       path: "reservation",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <Reservation />
         </Suspense>
       ),
@@ -170,13 +116,7 @@ export const AdminRoutes = {
     {
       path: "newcategory",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <CategoryProducts />
         </Suspense>
       ),
@@ -184,13 +124,7 @@ export const AdminRoutes = {
     {
       path: "menu",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <MenuPage />
         </Suspense>
       ),
@@ -198,13 +132,7 @@ export const AdminRoutes = {
     {
       path: "about",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <AboutPage />
         </Suspense>
       ),
@@ -212,13 +140,7 @@ export const AdminRoutes = {
     {
       path: "footer",
       element: (
-        <Suspense
-          fallback={
-            <div>
-              <Loading />
-            </div>
-          }
-        >
+        <Suspense fallback={<Loading />}>
           <FooterPage />
         </Suspense>
       ),
