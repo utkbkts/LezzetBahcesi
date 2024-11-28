@@ -110,6 +110,10 @@ export const inputFields = {
       rules: [
         { required: true, message: "Lütfen şifrenizi giriniz." },
         {
+          min: 6, 
+          message: "Şifre en az 6 karakter olmalıdır.",
+        },
+        {
           pattern: /^[a-zA-Z0-9]+$/,
           message: "Şifreniz özel karakter içeremez",
         },
