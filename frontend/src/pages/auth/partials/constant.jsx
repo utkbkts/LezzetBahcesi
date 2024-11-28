@@ -53,6 +53,10 @@ export const inputFields = {
           pattern: /^[a-zA-Z0-9]+$/,
           message: "özel karakter içeremez",
         },
+        {
+          min: 6, 
+          message: "Şifre en az 6 karakter olmalıdır.",
+        },
       ],
       component: <Input.Password placeholder="Password" />,
     },
@@ -63,6 +67,10 @@ export const inputFields = {
       type: "password",
       rules: [
         { required: true, message: "Lütfen şifrenizi doğrulayın." },
+        {
+          min: 6, 
+          message: "Şifre en az 6 karakter olmalıdır.",
+        },
         ({ getFieldValue }) => ({
           validator(_, value) {
             const password = getFieldValue("password");
